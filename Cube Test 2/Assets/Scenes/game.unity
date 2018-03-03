@@ -213,9 +213,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myRigidbody: {fileID: 396444246}
   isJumping: 0
-  isFalling: 0
-  initialGround: 0
-  maxHeight: 0
 --- !u!54 &396444246
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -229,7 +226,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!95 &396444247
 Animator:
@@ -486,7 +483,7 @@ Transform:
   m_GameObject: {fileID: 875056820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.02, z: 5.05}
-  m_LocalScale: {x: 9.19, y: 4.15, z: 1}
+  m_LocalScale: {x: 17.61, y: 4.15, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
