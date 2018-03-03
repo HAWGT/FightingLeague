@@ -10,9 +10,9 @@ public class cubeControl : MonoBehaviour
 
     [SerializeField]
     private bool isJumping = false;
-    public bool isFalling = false;
+    /*public bool isFalling = false;
     public float initialGround;// = transform.position.y;
-    public float maxHeight;// = initialGround + 1;
+    public float maxHeight;// = initialGround + 1;*/
 
     private bool jump = false;
 
@@ -21,8 +21,6 @@ public class cubeControl : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        this.initialGround = transform.position.y;
-        this.maxHeight = this.initialGround + 10;
     }
 
     // Update is called once per frame
