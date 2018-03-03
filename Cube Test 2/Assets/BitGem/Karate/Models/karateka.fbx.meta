@@ -1,0 +1,219 @@
+fileFormatVersion: 2
+guid: be80a17bc2a844f66af00b8467035a07
+timeCreated: 1516189683
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: head1_head
+    100002: head1_neck
+    100004: //RootNode
+    100006: leftArm1_LoResClavical
+    100008: leftArm1_LoResHand
+    100010: leftArm1_LoResLowerArm
+    100012: leftArm1_LoResUpperArm
+    100014: leftLeg1_LoResFoot
+    100016: leftLeg1_LoResLowerLeg
+    100018: leftLeg1_LoResToe
+    100020: leftLeg1_LoResUpperLeg
+    100022: male_calf_left_karateka
+    100024: male_calf_right_karateka
+    100026: male_foot_left_karateka
+    100028: male_foot_right_karateka
+    100030: male_hair_agent
+    100032: male_hand_left_karateka
+    100034: male_hand_right_karateka
+    100036: male_head_karateka1
+    100038: male_hip_karateka
+    100040: male_lowerarm_left_karateka
+    100042: male_lowerarm_right_karateka
+    100044: male_thigh_left_karateka
+    100046: male_thigh_right_karateka
+    100048: male_torso_karateka
+    100050: male_upperarm_left_karateka
+    100052: male_upperarm_right_karateka
+    100054: rightArm1_LoResClavical
+    100056: rightArm1_LoResHand
+    100058: rightArm1_LoResLowerArm
+    100060: rightArm1_LoResUpperArm
+    100062: rightLeg1_LoResFoot
+    100064: rightLeg1_LoResLowerLeg
+    100066: rightLeg1_LoResToe
+    100068: rightLeg1_LoResUpperLeg
+    100070: spine1_loResSpine1
+    100072: spine1_loResSpine2
+    100074: spine1_loResSpine3
+    100076: TSMGWorldJoint
+    400000: head1_head
+    400002: head1_neck
+    400004: //RootNode
+    400006: leftArm1_LoResClavical
+    400008: leftArm1_LoResHand
+    400010: leftArm1_LoResLowerArm
+    400012: leftArm1_LoResUpperArm
+    400014: leftLeg1_LoResFoot
+    400016: leftLeg1_LoResLowerLeg
+    400018: leftLeg1_LoResToe
+    400020: leftLeg1_LoResUpperLeg
+    400022: male_calf_left_karateka
+    400024: male_calf_right_karateka
+    400026: male_foot_left_karateka
+    400028: male_foot_right_karateka
+    400030: male_hair_agent
+    400032: male_hand_left_karateka
+    400034: male_hand_right_karateka
+    400036: male_head_karateka1
+    400038: male_hip_karateka
+    400040: male_lowerarm_left_karateka
+    400042: male_lowerarm_right_karateka
+    400044: male_thigh_left_karateka
+    400046: male_thigh_right_karateka
+    400048: male_torso_karateka
+    400050: male_upperarm_left_karateka
+    400052: male_upperarm_right_karateka
+    400054: rightArm1_LoResClavical
+    400056: rightArm1_LoResHand
+    400058: rightArm1_LoResLowerArm
+    400060: rightArm1_LoResUpperArm
+    400062: rightLeg1_LoResFoot
+    400064: rightLeg1_LoResLowerLeg
+    400066: rightLeg1_LoResToe
+    400068: rightLeg1_LoResUpperLeg
+    400070: spine1_loResSpine1
+    400072: spine1_loResSpine2
+    400074: spine1_loResSpine3
+    400076: TSMGWorldJoint
+    2100000: karateka_mat
+    2300000: male_calf_left_karateka
+    2300002: male_calf_right_karateka
+    2300004: male_foot_left_karateka
+    2300006: male_foot_right_karateka
+    2300008: male_hair_agent
+    2300010: male_hand_left_karateka
+    2300012: male_hand_right_karateka
+    2300014: male_head_karateka1
+    2300016: male_hip_karateka
+    2300018: male_lowerarm_left_karateka
+    2300020: male_lowerarm_right_karateka
+    2300022: male_thigh_left_karateka
+    2300024: male_thigh_right_karateka
+    2300026: male_upperarm_left_karateka
+    2300028: male_upperarm_right_karateka
+    3300000: male_calf_left_karateka
+    3300002: male_calf_right_karateka
+    3300004: male_foot_left_karateka
+    3300006: male_foot_right_karateka
+    3300008: male_hair_agent
+    3300010: male_hand_left_karateka
+    3300012: male_hand_right_karateka
+    3300014: male_head_karateka1
+    3300016: male_hip_karateka
+    3300018: male_lowerarm_left_karateka
+    3300020: male_lowerarm_right_karateka
+    3300022: male_thigh_left_karateka
+    3300024: male_thigh_right_karateka
+    3300026: male_upperarm_left_karateka
+    3300028: male_upperarm_right_karateka
+    4300000: male_torso_karateka
+    4300002: male_head_karateka1
+    4300004: male_hair_agent
+    4300006: male_hand_left_karateka
+    4300008: male_lowerarm_left_karateka
+    4300010: male_upperarm_left_karateka
+    4300012: male_hand_right_karateka
+    4300014: male_lowerarm_right_karateka
+    4300016: male_upperarm_right_karateka
+    4300018: male_foot_left_karateka
+    4300020: male_calf_left_karateka
+    4300022: male_thigh_left_karateka
+    4300024: male_foot_right_karateka
+    4300026: male_calf_right_karateka
+    4300028: male_thigh_right_karateka
+    4300030: male_hip_karateka
+    9500000: //RootNode
+    13700000: male_torso_karateka
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: karateka_mat
+    second: {fileID: 2100000, guid: 59fbbba4caac142d88b6610474f95ff9, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
