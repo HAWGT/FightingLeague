@@ -15,8 +15,11 @@ public class cubeControl : MonoBehaviour
     public float maxHeight;// = initialGround + 1;*/
 
     private bool jump = false;
+    private bool left = false;
+    private bool right = false;
 
     private float jumpForce = 500f;
+    private float speed = 8f;
 
     // Use this for initialization
     private void Start()
@@ -26,6 +29,8 @@ public class cubeControl : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
+        jump = false;
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -70,5 +75,7 @@ public class cubeControl : MonoBehaviour
             myRigidbody.AddForce(Vector3.up * jumpForce);
             jump = false;
         }
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        myRigidbody.velocity = new Vector3(speed * moveHorizontal, 0, 0);
     }
 }
