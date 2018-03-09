@@ -15,8 +15,6 @@ public class cubeControl : MonoBehaviour
     public float maxHeight;// = initialGround + 1;*/
 
     private bool jump = false;
-    private bool left = false;
-    private bool right = false;
 
     private float jumpForce = 500f;
     private float speed = 8f;

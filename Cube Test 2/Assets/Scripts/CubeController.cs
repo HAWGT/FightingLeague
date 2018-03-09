@@ -5,6 +5,7 @@ using UnityEngine;
 public class CubeController : MonoBehaviour {
 
 	private CharacterController controller;
+	private Animator animator;
 
 	private float moveSpeed = 5.0f;
 	private float verticalVelocity;
@@ -16,6 +17,7 @@ public class CubeController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		controller = GetComponent<CharacterController> ();
+		animator = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -31,9 +33,12 @@ public class CubeController : MonoBehaviour {
 		}
 
 		Vector3 moveVector = Vector3.zero;
-		moveVector.x = Input.GetAxis ("Horizontal")*moveSpeed;
+		moveVector.x = Input.GetAxis ("Horizontal") * moveSpeed;
 		moveVector.y = verticalVelocity;
 		moveVector.z = 0f;
-		controller.Move (moveVector * Time.deltaTime);
+		if (moveVector.x != 0 && moveVector.y != 0) {
+			animator.SetBool ("walking", true);
+			controller.Move (moveVector * Time.deltaTime);
 		}
+	}
 }
