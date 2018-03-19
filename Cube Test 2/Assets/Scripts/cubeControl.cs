@@ -16,9 +16,6 @@ public class cubeControl : MonoBehaviour
     private float jumpForce = 10f;
 
 	[SerializeField]
-    private float speed = 4f;
-
-	[SerializeField]
 	private float airSpeed = 2f;
 
     // Use this for initialization
@@ -37,7 +34,7 @@ public class cubeControl : MonoBehaviour
 		}
 		if(moveHorizontal != 0.0f && !(animator.GetBool("airborn"))){
 			animator.SetBool ("walking", true);
-			myRigidbody.velocity = new Vector3(speed * moveHorizontal, myRigidbody.velocity.y, 0);
+			myRigidbody.velocity = new Vector3(moveHorizontal, myRigidbody.velocity.y, 0);
 		}else{
 			animator.SetBool ("walking", false);
 		}
