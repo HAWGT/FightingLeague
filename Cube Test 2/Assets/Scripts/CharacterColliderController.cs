@@ -23,9 +23,13 @@ namespace CharacterControl
 
         }
 
-        void OnControllerColliderHit(ControllerColliderHit hit)
+        void OnCollisionEnter(Collision collision)
         {
-            Rigidbody body = hit.collider.attachedRigidbody;
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                Debug.DrawRay(contact.point, contact.normal, Color.white);
+            }
+            Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;
             if(stateController.charState != CharacterStateController.CharState.attacking && stateController.charState != CharacterStateController.CharState.blocking)
