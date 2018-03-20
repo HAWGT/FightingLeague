@@ -125,13 +125,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 381051709}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46e0a7dee331a3348a5a66844f055c04, type: 3}
+  m_Script: {fileID: 11500000, guid: 9531f3d3affbcf64da7dccf7154ff3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 381051712}
-  jumpForce: 500
-  speed: 4
-  airSpeed: 2
+  healthPoints: 0
+  superBar: 0
+  charState: 0
+  attackState: 0
+  facing: 0
 --- !u!54 &381051711
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -147,11 +148,31 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 120
   m_CollisionDetection: 2
---- !u!95 &381051712 stripped
-Animator:
-  m_PrefabParentObject: {fileID: 9500000, guid: be80a17bc2a844f66af00b8467035a07,
-    type: 3}
-  m_PrefabInternal: {fileID: 498483398}
+--- !u!114 &381051714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381051709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c77805fdb39c934cb647e5726245e52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+--- !u!114 &381051715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381051709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736b7d63f1f4e5d44bd65e00a2629aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 10
+  airSpeed: 2
 --- !u!1001 &498483398
 Prefab:
   m_ObjectHideFlags: 0
