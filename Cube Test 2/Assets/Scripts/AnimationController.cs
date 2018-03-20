@@ -27,9 +27,9 @@ namespace CharacterControl
             animator.SetBool("walkingForward", false);
             animator.SetBool("walkingBackward", false);
             animator.SetBool("crouch", false);
-            animator.SetBool("lightattack", false);
-            animator.SetBool("mediumattack", false);
-            animator.SetBool("heavyattack", false);
+            animator.SetBool("lightAttack", false);
+            animator.SetBool("mediumAttack", false);
+            animator.SetBool("heavyAttack", false);
             animator.SetBool("airborn", false);
             switch (stateController.charState)
             {
@@ -65,13 +65,13 @@ namespace CharacterControl
                 case CharacterStateController.AttackState.none:
                     break;
                 case CharacterStateController.AttackState.light:
-                    animator.SetBool("lightattack", true);
+                    animator.SetBool("lightAttack", true);
                     break;
                 case CharacterStateController.AttackState.medium:
-                    animator.SetBool("mediumattack", false);
+                    animator.SetBool("mediumAttack", false);
                     break;
                 case CharacterStateController.AttackState.heavy:
-                    animator.SetBool("heavyattack", false);
+                    animator.SetBool("heavyAttack", false);
                     break;
             }
         }

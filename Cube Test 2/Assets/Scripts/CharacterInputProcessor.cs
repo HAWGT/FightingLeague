@@ -61,12 +61,15 @@ namespace CharacterControl
                     myRigidbody.velocity = new Vector3(airSpeed * moveHorizontal, myRigidbody.velocity.y, 0);
                 }
 
+            } else if( moveHorizontal == 0 && stateController.charState != CharacterStateController.CharState.airborn)
+            {
+                stateController.charState = CharacterStateController.CharState.standing;
             }
-            else
             {
                 ///ataques
                 if (Input.GetButtonDown("Fire1"))
                 {
+                    stateController.charState = CharacterStateController.CharState.attacking;
                     stateController.attackState = CharacterStateController.AttackState.light;
                 }
             }
