@@ -50,7 +50,7 @@ namespace CharacterControl
                 case CharacterStateController.CharState.blocking:
                     break;
                 case CharacterStateController.CharState.attacking:
-                    attackTrigger();
+                    AttackTrigger();
                     break;
                 case CharacterStateController.CharState.hitstun:
                     break;
@@ -58,7 +58,12 @@ namespace CharacterControl
 
         }
 
-        private void attackTrigger()
+        private void LateUpdate()
+        {
+            stateController.attackState = CharacterStateController.AttackState.none;
+        }
+
+        private void AttackTrigger()
         {
             switch (stateController.attackState)
             {
