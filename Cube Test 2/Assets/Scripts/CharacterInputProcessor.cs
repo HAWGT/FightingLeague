@@ -11,7 +11,7 @@ namespace CharacterControl
         private Rigidbody myRigidbody;
 
         [SerializeField]
-        private float jumpForce = 10f;
+        private float jumpForce = 50f;
 
         [SerializeField]
         private float airSpeed = 2f;
@@ -58,22 +58,29 @@ namespace CharacterControl
                 }
                 else if (stateController.charState == CharacterStateController.CharState.airborn)
                 {
+                    //movimento horizontal aéreo
                     myRigidbody.velocity = new Vector3(airSpeed * moveHorizontal, myRigidbody.velocity.y, 0);
                 }
 
-            } else if( moveHorizontal == 0 && stateController.charState != CharacterStateController.CharState.airborn)
+            } else if( moveHorizontal == 0 && stateController.charState != CharacterStateController.CharState.airborn && stateController.charState != CharacterStateController.CharState.crouching)
             {
+                //default para standing quando parado no chão
                 stateController.charState = CharacterStateController.CharState.standing;
             }
+            //Jump and attacks
+            if(stateController.charState == CharacterStateController.CharState.standing || stateController.charState == CharacterStateController.CharState.walkingB || stateController.charState == CharacterStateController.CharState.walkingF)
             {
-                ///ataques
                 if (Input.GetButtonDown("Fire1"))
                 {
                     stateController.charState = CharacterStateController.CharState.attacking;
                     stateController.attackState = CharacterStateController.AttackState.light;
                 }
+                if (Input.GetButtonDown("Jump"))
+                {
+                    myRigidbody.AddForce(Vector3.up * jumpForce);
+                    stateController.charState = CharacterStateController.CharState.airborn;
+                }
             }
-
         }
     }
 }

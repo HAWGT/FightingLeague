@@ -13,7 +13,7 @@ public class cubeControl : MonoBehaviour
 	private Animator animator;
 
 	[SerializeField]
-    private float jumpForce = 10f;
+    private float jumpForce = 50f;
 
 	[SerializeField]
 	private float airSpeed = 2f;

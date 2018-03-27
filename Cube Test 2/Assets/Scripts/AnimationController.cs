@@ -23,14 +23,6 @@ namespace CharacterControl
         // Update is called once per frame
         void Update()
         {
-            // standing, walkingF, walkingB, crouching, airborn, blocking, attacking, hitstun
-            animator.SetBool("walkingForward", false);
-            animator.SetBool("walkingBackward", false);
-            animator.SetBool("crouch", false);
-            animator.SetBool("lightAttack", false);
-            animator.SetBool("mediumAttack", false);
-            animator.SetBool("heavyAttack", false);
-            animator.SetBool("airborn", false);
             switch (stateController.charState)
             {
                 case CharacterStateController.CharState.standing:
@@ -60,7 +52,10 @@ namespace CharacterControl
 
         private void LateUpdate()
         {
-            stateController.attackState = CharacterStateController.AttackState.none;
+            // standing, walkingF, walkingB, crouching, airborn, blocking, attacking, hitstun
+            animator.SetBool("walkingForward", false);
+            animator.SetBool("walkingBackward", false);
+            animator.SetBool("crouch", false);
         }
 
         private void AttackTrigger()
