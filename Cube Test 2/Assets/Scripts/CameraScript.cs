@@ -14,7 +14,7 @@ public class CameraScript : MonoBehaviour {
 		for (int i = 0; i < allPlayers.Length; i++) {
 			playerTransforms[i] = allPlayers[i].transform;
 		}
-        //print(allPlayers[0].gameObject.GetComponent<CharacterControl>().healthPoints);
+        //print(allPlayers[0].gameObject.GetComponent<CharacterStateController>().healthPoints);
 
     }
 
