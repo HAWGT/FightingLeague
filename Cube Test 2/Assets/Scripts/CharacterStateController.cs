@@ -6,9 +6,10 @@ namespace CharacterControl
 {
     public class CharacterStateController : MonoBehaviour
     {
+        [SerializeField]
+        public float healthPoints = 10000;
 
-        public float healthPoints;
-
+        [SerializeField]
         public float superBar;
 
         public enum CharState

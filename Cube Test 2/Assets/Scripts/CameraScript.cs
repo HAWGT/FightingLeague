@@ -14,7 +14,9 @@ public class CameraScript : MonoBehaviour {
 		for (int i = 0; i < allPlayers.Length; i++) {
 			playerTransforms[i] = allPlayers[i].transform;
 		}
-	}
+        //print(allPlayers[0].gameObject.GetComponent<CharacterControl>().healthPoints);
+
+    }
 
 	public float yOffset = 2.0f;
 	public float minDistance = 15.0f;
