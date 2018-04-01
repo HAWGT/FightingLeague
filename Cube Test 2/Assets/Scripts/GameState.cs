@@ -8,24 +8,29 @@ public class GameState : MonoBehaviour {
     private Transform[] playerTransforms;
     [SerializeField]
     private bool gameEnded = false;
+    private GameObject[] allPlayers;
 
 
     private void Start()
     {
 
-        GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
-        playerTransforms = new Transform[allPlayers.Length];
-        for (int i = 0; i < allPlayers.Length; i++)
-        {
-            playerTransforms[i] = allPlayers[i].transform;
-        }
-        //print(allPlayers[0].gameObject.GetComponent<CharacterStateController>().healthPoints);
+        allPlayers = GameObject.FindGameObjectsWithTag("Player");
 
     }
 
     // Update is called once per frame
-    void Update () {
-        //READ HP
-        //if(player[0].healthPoints <= 0 || player[1].healthPoints <= 0) gameEnded = true;
+    private void Update () {
+        if(allPlayers[0].GetComponent<CharacterControl.CharacterStateController>().healthPoints <= 0 || allPlayers[1].GetComponent<CharacterControl.CharacterStateController>().healthPoints <= 0) gameEnded = true;
     }
+
+    public float[] GetPlayerStatusBar()
+    {
+        float[] bar;
+        bar = new float[4];
+        bar[0] = allPlayers[0].GetComponent<CharacterControl.CharacterStateController>().healthPoints;
+        bar[1] = allPlayers[0].GetComponent<CharacterControl.CharacterStateController>().superBar;
+        bar[2] = allPlayers[1].GetComponent<CharacterControl.CharacterStateController>().healthPoints;
+        bar[3] = allPlayers[1].GetComponent<CharacterControl.CharacterStateController>().superBar;
+        return bar;
+    } 
 }

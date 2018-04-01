@@ -15,6 +15,16 @@ namespace CharacterControl
             myRigidBody = GetComponent<Rigidbody>();
             stateController = GetComponent<CharacterStateController>();
 
+
+            //DISABLE ALL COLLIDERS
+            foreach (Collider c in GetComponents<Collider>())
+            {
+                c.enabled = false;
+            }
+            //DISABLE ALL COLLIDERS
+
+
+
         }
 
         // Update is called once per frame
