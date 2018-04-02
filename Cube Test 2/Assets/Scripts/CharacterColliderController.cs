@@ -16,21 +16,51 @@ namespace CharacterControl
             stateController = GetComponent<CharacterStateController>();
 
 
-            //DISABLE ALL COLLIDERS
-            foreach (Collider c in GetComponents<Collider>())
-            {
-                c.enabled = false;
-            }
-            //DISABLE ALL COLLIDERS
-
-
 
         }
 
         // Update is called once per frame
         void Update()
         {
-
+            foreach (Collider c in GetComponents<Collider>())
+            {
+                c.enabled = false;
+                c.isTrigger = false;
+                print(c);
+            }
+            if(stateController.attackState == CharacterStateController.AttackState.light)
+            {
+                foreach (Collider c in GetComponents<Collider>())
+                {
+                    if (c.name == "leftArm1_LoResClavical" || c.name == "rightArm1_LoResClavical")
+                    {
+                        c.enabled = true;
+                        c.isTrigger = true;
+                    }
+                }
+            }
+            if (stateController.attackState == CharacterStateController.AttackState.medium)
+            {
+                foreach (Collider c in GetComponents<Collider>())
+                {
+                    if (c.name == "leftArm1_LoResClavical" || c.name == "rightArm1_LoResClavical")
+                    {
+                        c.enabled = true;
+                        c.isTrigger = true;
+                    }
+                }
+            }
+            if (stateController.attackState == CharacterStateController.AttackState.heavy)
+            {
+                foreach (Collider c in GetComponents<Collider>())
+                {
+                    if (c.name == "leftLeg1_LoResUpperLeg" || c.name == "rightLeg1_LoResUpperLeg")
+                    {
+                        c.enabled = true;
+                        c.isTrigger = true;
+                    }
+                }
+            }
         }
 
         void OnCollisionEnter(Collision collision)
