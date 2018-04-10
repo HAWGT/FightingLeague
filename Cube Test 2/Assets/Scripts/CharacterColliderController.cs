@@ -74,7 +74,12 @@ namespace CharacterControl
                 return;
             if(stateController.charState != CharacterStateController.CharState.attacking && stateController.charState != CharacterStateController.CharState.blocking)
             {
-                print("hit confirmed");
+                //print("hit confirmed");
+                float dmg = 0;
+                if (CharacterStateController.AttackState.light == stateController.attackState) dmg = 500;
+                if (CharacterStateController.AttackState.medium == stateController.attackState) dmg = 700;
+                if (CharacterStateController.AttackState.heavy == stateController.attackState) dmg = 850;
+                body.GetComponent<CharacterStateController>().takeDamage(dmg);
             }
         }
     }

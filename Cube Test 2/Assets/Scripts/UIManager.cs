@@ -16,9 +16,10 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	private void Update () {
-       
-        float[] bars = game.GetComponent<GameManager>().GetPlayerStatusBar();
-        text.text = bars[0] + "\t" + bars[1] + "\n" + bars[2] + "\t" + bars[3];
+        float[] bars;
+        bars = new float[4];
+        bars = game.GetComponent<GameManager>().GetPlayerStatusBar();
+        text.text = bars[0].ToString() + "\t" + bars[1].ToString() + "\n" + bars[2].ToString() + "\t" + bars[3].ToString();
         
     }
 }

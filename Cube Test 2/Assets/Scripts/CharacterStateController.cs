@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,9 @@ namespace CharacterControl
 
         [SerializeField]
         public float superBar = 0;
+
+        [SerializeField]
+        public float armor = 1;
 
         public enum CharState
         {
@@ -54,6 +58,11 @@ namespace CharacterControl
         void Update()
         {
 
+        }
+
+        internal void takeDamage(float dmg)
+        {
+            healthPoints -= dmg / armor;
         }
     }
 
