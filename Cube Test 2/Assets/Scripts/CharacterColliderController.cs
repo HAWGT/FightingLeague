@@ -28,7 +28,7 @@ namespace CharacterControl
                 c.isTrigger = false;
                 print(c);
             }
-            if(stateController.attackState == CharacterStateController.AttackState.light)
+            if(stateController.GetAttackState() == CharacterStateController.AttackState.light)
             {
                 foreach (Collider c in GetComponents<Collider>())
                 {
@@ -39,7 +39,7 @@ namespace CharacterControl
                     }
                 }
             }
-            if (stateController.attackState == CharacterStateController.AttackState.medium)
+            if (stateController.GetAttackState() == CharacterStateController.AttackState.medium)
             {
                 foreach (Collider c in GetComponents<Collider>())
                 {
@@ -50,7 +50,7 @@ namespace CharacterControl
                     }
                 }
             }
-            if (stateController.attackState == CharacterStateController.AttackState.heavy)
+            if (stateController.GetAttackState() == CharacterStateController.AttackState.heavy)
             {
                 foreach (Collider c in GetComponents<Collider>())
                 {
@@ -72,13 +72,13 @@ namespace CharacterControl
             Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;
-            if(stateController.charState != CharacterStateController.CharState.attacking && stateController.charState != CharacterStateController.CharState.blocking)
+            if(stateController.GetCharState() != CharacterStateController.CharState.attacking && stateController.GetCharState() != CharacterStateController.CharState.blocking)
             {
                 //print("hit confirmed");
                 float dmg = 0;
-                if (CharacterStateController.AttackState.light == stateController.attackState) dmg = 500;
-                if (CharacterStateController.AttackState.medium == stateController.attackState) dmg = 700;
-                if (CharacterStateController.AttackState.heavy == stateController.attackState) dmg = 850;
+                if (CharacterStateController.AttackState.light == stateController.GetAttackState()) dmg = 500;
+                if (CharacterStateController.AttackState.medium == stateController.GetAttackState()) dmg = 700;
+                if (CharacterStateController.AttackState.heavy == stateController.GetAttackState()) dmg = 850;
                 body.GetComponent<CharacterStateController>().takeDamage(dmg);
             }
         }

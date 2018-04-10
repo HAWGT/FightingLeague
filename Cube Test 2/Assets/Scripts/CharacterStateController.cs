@@ -8,13 +8,13 @@ namespace CharacterControl
     public class CharacterStateController : MonoBehaviour
     {
         [SerializeField]
-        public float healthPoints = 10000;
+        private float healthPoints = 10000;
 
         [SerializeField]
-        public float superBar = 0;
+        private float superBar = 0;
 
         [SerializeField]
-        public float armor = 1;
+        private float armor = 1;
 
         public enum CharState
         {
@@ -31,14 +31,42 @@ namespace CharacterControl
             P1, P2
         }
 
-        public CharState charState;
+        [SerializeField]
+        private CharState charState;
 
-        public AttackState attackState;
+        public CharState GetCharState()
+        {
+            return this.charState;
+        }
 
-        public FacingSide facing;
+        public AttackState GetAttackState()
+        {
+            return this.attackState;
+        }
+
+        public float GetHP()
+        {
+            return this.healthPoints;
+        }
+
+        public float GetSB()
+        {
+            return this.superBar;
+        }
+
+        public FacingSide GetFacingSide()
+        {
+            return this.facing;
+        }
+
+        [SerializeField]
+        private AttackState attackState;
+
+        [SerializeField]
+        private FacingSide facing;
 
         // Use this for initialization
-        void Start()
+       private void Start()
         {
             charState = CharState.standing;
             attackState = AttackState.none;
@@ -55,15 +83,16 @@ namespace CharacterControl
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
 
         }
 
-        internal void takeDamage(float dmg)
+        public void takeDamage(float dmg)
         {
             healthPoints -= dmg / armor;
         }
+
     }
 
 
