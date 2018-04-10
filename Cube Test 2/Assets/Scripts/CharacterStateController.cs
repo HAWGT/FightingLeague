@@ -10,7 +10,7 @@ namespace CharacterControl
         public float healthPoints = 10000;
 
         [SerializeField]
-        public float superBar;
+        public float superBar = 0;
 
         public enum CharState
         {
