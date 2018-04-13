@@ -23,7 +23,7 @@ namespace CharacterControl
         // Update is called once per frame
         void Update()
         {
-            switch (stateController.charState)
+            switch (stateController.GetCharState())
             {
                 case CharacterStateController.CharState.standing:
                     break;
@@ -60,7 +60,7 @@ namespace CharacterControl
 
         private void AttackTrigger()
         {
-            switch (stateController.attackState)
+            switch (stateController.GetAttackState())
             {
                 case CharacterStateController.AttackState.none:
                     break;
