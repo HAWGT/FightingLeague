@@ -35,7 +35,27 @@ namespace CharacterControl
         private CharacterStateController stateController;
 
         // Use this for initialization
-        void Start()
+
+        private void toggleLM()
+        {
+            co5.enabled = !co5.enabled;
+            co6.enabled = !co6.enabled;
+            co7.enabled = !co7.enabled;
+            co8.enabled = !co8.enabled;
+            co9.enabled = !co9.enabled;
+            co10.enabled = !co10.enabled;
+            co11.enabled = !co11.enabled;
+            co12.enabled = !co12.enabled;
+        }
+
+        private void toggleH()
+        {
+            co1.enabled = !co1.enabled;
+            co2.enabled = !co2.enabled;
+            co3.enabled = !co3.enabled;
+            co4.enabled = !co4.enabled;
+        }
+        private void Start()
         {
             myRigidBody = GetComponent<Rigidbody>();
             stateController = GetComponent<CharacterStateController>();
@@ -45,47 +65,9 @@ namespace CharacterControl
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            foreach (Collider c in GetComponents<Collider>())
-            {
-                c.enabled = false;
-                c.isTrigger = false;
-                print(c);
-            }
-            if(stateController.GetAttackState() == CharacterStateController.AttackState.light)
-            {
-                foreach (Collider c in GetComponents<Collider>())
-                {
-                    if (c.name == "leftArm1_LoResClavical" || c.name == "rightArm1_LoResClavical")
-                    {
-                        c.enabled = true;
-                        c.isTrigger = true;
-                    }
-                }
-            }
-            if (stateController.GetAttackState() == CharacterStateController.AttackState.medium)
-            {
-                foreach (Collider c in GetComponents<Collider>())
-                {
-                    if (c.name == "leftArm1_LoResClavical" || c.name == "rightArm1_LoResClavical")
-                    {
-                        c.enabled = true;
-                        c.isTrigger = true;
-                    }
-                }
-            }
-            if (stateController.GetAttackState() == CharacterStateController.AttackState.heavy)
-            {
-                foreach (Collider c in GetComponents<Collider>())
-                {
-                    if (c.name == "leftLeg1_LoResUpperLeg" || c.name == "rightLeg1_LoResUpperLeg")
-                    {
-                        c.enabled = true;
-                        c.isTrigger = true;
-                    }
-                }
-            }
+            
         }
 
         void OnCollisionEnter(Collision collision)
