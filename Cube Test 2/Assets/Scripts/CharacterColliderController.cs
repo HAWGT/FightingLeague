@@ -36,7 +36,7 @@ namespace CharacterControl
 
         // Use this for initialization
 
-        private void toggleLM()
+        private void ToggleLM()
         {
             co5.enabled = !co5.enabled;
             co6.enabled = !co6.enabled;
@@ -48,7 +48,7 @@ namespace CharacterControl
             co12.enabled = !co12.enabled;
         }
 
-        private void toggleH()
+        private void ToggleH()
         {
             co1.enabled = !co1.enabled;
             co2.enabled = !co2.enabled;
