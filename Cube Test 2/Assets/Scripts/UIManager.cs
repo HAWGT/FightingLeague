@@ -8,6 +8,22 @@ public class UIManager : MonoBehaviour {
     private Text text;
     private GameObject game;
 
+    private float hp1;
+    private float sb1;
+    private float hp2;
+    private float sb2;
+
+    public void UpdateP1(float a, float b)
+    {
+        hp1 = a;
+        sb1 = b;
+    }
+    public void UpdateP2(float a, float b)
+    {
+        hp2 = a;
+        sb2 = b;
+    }
+
     // Use this for initialization
     private void Start () {
         game = GameObject.Find("Game Manager");
@@ -16,10 +32,7 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	private void Update () {
-        float[] bars;
-        bars = new float[4];
-        bars = game.GetComponent<GameManager>().GetPlayerStatusBar();
-        text.text = bars[0].ToString() + "\t" + bars[2].ToString() + "\n" + bars[1].ToString() + "\t" + bars[3].ToString();
+        text.text = hp1.ToString() + "\t" + hp2.ToString() + "\n" + sb1.ToString() + "\t" + sb2.ToString();
         
     }
 }

@@ -1433,7 +1433,7 @@ MonoBehaviour:
   playerID: 2
   charState: 0
   attackState: 0
-  facing: 0
+  facing: 1
 --- !u!54 &1554113555
 Rigidbody:
   m_ObjectHideFlags: 0

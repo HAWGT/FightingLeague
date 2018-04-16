@@ -10,6 +10,9 @@ namespace CharacterControl
         [SerializeField]
         private int playerID;
 
+        private GameObject game;
+        private GameObject ui;
+
         private float healthPoints = 10000;
 
         private float superBar = 0;
@@ -69,6 +72,10 @@ namespace CharacterControl
             charState = CharState.standing;
             attackState = AttackState.none;
             //update -> ui manager
+            game = GameObject.Find("Game Manager");
+            ui = GameObject.Find("Canvas");
+            if (playerID == 1) ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+            if (playerID == 2) ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
         }
 
         public void SetState(CharState state)
@@ -84,16 +91,16 @@ namespace CharacterControl
         // Update is called once per frame
         private void Update()
         {
-
         }
 
         public void takeDamage(float dmg)
         {
             healthPoints -= dmg;
-            //update -> ui manager
-            if(healthPoints<=0)
+            if (playerID == 1) ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+            if (playerID == 2) ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+            if (healthPoints<=0)
             {
-                //dead -> game manager
+                game.GetComponent<GameManager>().Die(playerID);
             }
         }
 
