@@ -8,13 +8,11 @@ namespace CharacterControl
     public class CharacterStateController : MonoBehaviour
     {
         [SerializeField]
+        private int playerID;
+
         private float healthPoints = 10000;
 
-        [SerializeField]
         private float superBar = 0;
-
-        [SerializeField]
-        private float armor = 1;
 
         public enum CharState
         {
@@ -70,6 +68,7 @@ namespace CharacterControl
         {
             charState = CharState.standing;
             attackState = AttackState.none;
+            //update -> ui manager
         }
 
         public void SetState(CharState state)
@@ -90,7 +89,12 @@ namespace CharacterControl
 
         public void takeDamage(float dmg)
         {
-            healthPoints -= dmg / armor;
+            healthPoints -= dmg;
+            //update -> ui manager
+            if(healthPoints<=0)
+            {
+                //dead -> game manager
+            }
         }
 
     }

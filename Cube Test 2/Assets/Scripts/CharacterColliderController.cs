@@ -6,6 +6,31 @@ namespace CharacterControl
     public class CharacterColliderController : MonoBehaviour
     {
 
+        [SerializeField]
+        private Collider co1;
+        [SerializeField]
+        private Collider co2;
+        [SerializeField]
+        private Collider co3;
+        [SerializeField]
+        private Collider co4;
+        [SerializeField]
+        private Collider co5;
+        [SerializeField]
+        private Collider co6;
+        [SerializeField]
+        private Collider co7;
+        [SerializeField]
+        private Collider co8;
+        [SerializeField]
+        private Collider co9;
+        [SerializeField]
+        private Collider co10;
+        [SerializeField]
+        private Collider co11;
+        [SerializeField]
+        private Collider co12;
+
         private Rigidbody myRigidBody;
         private CharacterStateController stateController;
 

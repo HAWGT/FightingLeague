@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour {
         float[] bars;
         bars = new float[4];
         bars = game.GetComponent<GameManager>().GetPlayerStatusBar();
-        text.text = bars[0].ToString() + "\t" + bars[1].ToString() + "\n" + bars[2].ToString() + "\t" + bars[3].ToString();
+        text.text = bars[0].ToString() + "\t" + bars[2].ToString() + "\n" + bars[1].ToString() + "\t" + bars[3].ToString();
         
     }
 }
