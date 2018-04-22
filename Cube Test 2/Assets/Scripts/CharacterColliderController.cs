@@ -7,29 +7,29 @@ namespace CharacterControl
     {
 
         [SerializeField]
-        private Collider co1;
+        private Collider cleft;
         [SerializeField]
-        private Collider co2;
+        private Collider cright;
         [SerializeField]
-        private Collider co3;
+        private Collider fleft;
         [SerializeField]
-        private Collider co4;
+        private Collider fright;
         [SerializeField]
-        private Collider co5;
+        private Collider tleft;
         [SerializeField]
-        private Collider co6;
+        private Collider tright;
         [SerializeField]
-        private Collider co7;
+        private Collider hleft;
         [SerializeField]
-        private Collider co8;
+        private Collider hright;
         [SerializeField]
-        private Collider co9;
+        private Collider laleft;
         [SerializeField]
-        private Collider co10;
+        private Collider laright;
         [SerializeField]
-        private Collider co11;
+        private Collider ualeft;
         [SerializeField]
-        private Collider co12;
+        private Collider uaright;
 
         private Rigidbody myRigidBody;
         private CharacterStateController stateController;
@@ -38,22 +38,22 @@ namespace CharacterControl
 
         private void ToggleLM()
         {
-            co5.enabled = !co5.enabled;
-            co6.enabled = !co6.enabled;
-            co7.enabled = !co7.enabled;
-            co8.enabled = !co8.enabled;
-            co9.enabled = !co9.enabled;
-            co10.enabled = !co10.enabled;
-            co11.enabled = !co11.enabled;
-            co12.enabled = !co12.enabled;
+            tleft.enabled = !tleft.enabled;
+            tright.enabled = !tright.enabled;
+            hleft.enabled = !hleft.enabled;
+            hright.enabled = !hright.enabled;
+            laleft.enabled = !laleft.enabled;
+            laright.enabled = !laright.enabled;
+            ualeft.enabled = !ualeft.enabled;
+            uaright.enabled = !uaright.enabled;
         }
 
         private void ToggleH()
         {
-            co1.enabled = !co1.enabled;
-            co2.enabled = !co2.enabled;
-            co3.enabled = !co3.enabled;
-            co4.enabled = !co4.enabled;
+            cleft.enabled = !cleft.enabled;
+            cright.enabled = !cright.enabled;
+            fleft.enabled = !fleft.enabled;
+            fright.enabled = !fright.enabled;
         }
         private void Start()
         {
