@@ -34,6 +34,13 @@ namespace CharacterControl
 
         private List<Enums.Inputs> inputList;
 
+        private bool canAttack = true;
+
+        public void ToggleAttack()
+        {
+            this.canAttack = !this.canAttack;
+        }
+
         public Enums.CharState GetCharState()
         {
             return this.charState;
