@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace CharacterControl
 {
     public class CharacterColliderController : MonoBehaviour
@@ -73,13 +74,13 @@ namespace CharacterControl
             Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;
-            if(stateController.GetCharState() != CharacterStateController.CharState.attacking && stateController.GetCharState() != CharacterStateController.CharState.blocking)
+            if(stateController.GetCharState() != Enums.CharState.attacking && stateController.GetCharState() != Enums.CharState.blocking)
             {
                 //print("hit confirmed");
                 float dmg = 0;
-                if (CharacterStateController.AttackState.light == stateController.GetAttackState()) dmg = 500;
-                if (CharacterStateController.AttackState.medium == stateController.GetAttackState()) dmg = 700;
-                if (CharacterStateController.AttackState.heavy == stateController.GetAttackState()) dmg = 850;
+                if (Enums.AttackState.light == stateController.GetAttackState()) dmg = 500;
+                if (Enums.AttackState.medium == stateController.GetAttackState()) dmg = 700;
+                if (Enums.AttackState.heavy == stateController.GetAttackState()) dmg = 850;
                 body.GetComponent<CharacterStateController>().TakeDamage(dmg);
             }
         }
