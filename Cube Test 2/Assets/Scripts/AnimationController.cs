@@ -11,69 +11,75 @@ namespace CharacterControl
         [SerializeField]
         private Animator animator;
 
-        private CharacterStateController stateController;
-
         // Use this for initialization
         void Start()
         {
             animator = GetComponent<Animator>();
-            stateController = GetComponent<CharacterStateController>();
+        }
+        
+        public void WalkFwd()
+        {
+            animator.SetBool("walkingForward", true);
         }
 
-        // Update is called once per frame
-        void Update()
+        public void WalkBwd()
         {
-            switch (stateController.GetCharState())
-            {
-                case CharacterStateController.CharState.standing:
-                    break;
-                case CharacterStateController.CharState.walkingF:
-                    animator.SetBool("walkingForward", true);
-                    break;
-                case CharacterStateController.CharState.walkingB:
-                    animator.SetBool("walkingBackward", true);
-                    break;
-                case CharacterStateController.CharState.crouching:
-                    animator.SetBool("crouch", true);
-                    break;
-                case CharacterStateController.CharState.airborn:
-                    animator.SetBool("airborn", true);
-                    break;
-                case CharacterStateController.CharState.blocking:
-                    break;
-                case CharacterStateController.CharState.attacking:
-                    AttackTrigger();
-                    break;
-                case CharacterStateController.CharState.hitstun:
-                    break;
-            }
-
+            animator.SetBool("walkingBackward", true);
         }
 
-        private void LateUpdate()
+        public void Crouch()
         {
-            // standing, walkingF, walkingB, crouching, airborn, blocking, attacking, hitstun
-            animator.SetBool("walkingForward", false);
-            animator.SetBool("walkingBackward", false);
-            animator.SetBool("crouch", false);
+            animator.SetBool("crouch", true);
         }
 
-        private void AttackTrigger()
+        public void Jump()
         {
-            switch (stateController.GetAttackState())
-            {
-                case CharacterStateController.AttackState.none:
-                    break;
-                case CharacterStateController.AttackState.light:
-                    animator.SetBool("lightAttack", true);
-                    break;
-                case CharacterStateController.AttackState.medium:
-                    animator.SetBool("mediumAttack", false);
-                    break;
-                case CharacterStateController.AttackState.heavy:
-                    animator.SetBool("heavyAttack", false);
-                    break;
-            }
+            animator.SetBool("airborn", true);
+        }
+
+        public void Hitstun()
+        {
+            animator.SetBool("hitstun", true);
+        }
+
+        public void Block()
+        {
+            animator.SetBool("blocking", true);
+        }
+
+        public void CrouchBlock()
+        {
+            animator.SetBool("crouchBlock", true);
+        }
+
+        public void LightAtk()
+        {
+            animator.SetBool("lightAttack", true);
+        }
+
+        public void MediumAtk()
+        {
+            animator.SetBool("mediumAttack", true);
+        }
+
+        public void HeavyAtk()
+        {
+            animator.SetBool("heavyAttack", true);
+        }
+
+        public void Special1()
+        {
+            animator.SetBool("special1", true);
+        }
+
+        public void Special2()
+        {
+            animator.SetBool("special2", true);
+        }
+
+        public void Super()
+        {
+            animator.SetBool("super", true);
         }
     }
 

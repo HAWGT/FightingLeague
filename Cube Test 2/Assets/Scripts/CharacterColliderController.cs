@@ -5,6 +5,8 @@ namespace CharacterControl
 {
     public class CharacterColliderController : MonoBehaviour
     {
+        [SerializeField]
+        private Collider[] colliders;
 
         [SerializeField]
         private Collider co1;
@@ -64,13 +66,7 @@ namespace CharacterControl
 
         }
 
-        // Update is called once per frame
-        private void Update()
-        {
-            
-        }
-
-        void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision collision)
         {
             foreach (ContactPoint contact in collision.contacts)
             {
@@ -86,7 +82,7 @@ namespace CharacterControl
                 if (CharacterStateController.AttackState.light == stateController.GetAttackState()) dmg = 500;
                 if (CharacterStateController.AttackState.medium == stateController.GetAttackState()) dmg = 700;
                 if (CharacterStateController.AttackState.heavy == stateController.GetAttackState()) dmg = 850;
-                body.GetComponent<CharacterStateController>().takeDamage(dmg);
+                body.GetComponent<CharacterStateController>().TakeDamage(dmg);
             }
         }
     }

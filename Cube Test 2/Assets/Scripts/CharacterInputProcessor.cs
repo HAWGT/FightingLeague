@@ -10,11 +10,15 @@ namespace CharacterControl
 
         private Rigidbody myRigidbody;
 
-        [SerializeField]
+        private float horizontalInput;
+
+        private float verticalInput;
+
+        /*[SerializeField]
         private float jumpForce = 50f;
 
         [SerializeField]
-        private float airSpeed = 2f;
+        private float airSpeed = 2f;*/
 
         // Use this for initialization
         void Start()
@@ -26,60 +30,74 @@ namespace CharacterControl
         // Update is called once per frame
         void Update()
         {
-            float moveHorizontal = Input.GetAxisRaw("Horizontal");
-            //movimento direita.
-            if (moveHorizontal > 0)
-            {
-                if(stateController.GetCharState() == CharacterStateController.CharState.standing){
-                    if(stateController.GetFacingSide() == CharacterStateController.FacingSide.P1)
-                    {
-                        stateController.SetState(CharacterStateController.CharState.walkingF);
-                    }
-                    else
-                    {
-                        stateController.SetState(CharacterStateController.CharState.walkingB);
-                    }
-                }else if(stateController.GetCharState() == CharacterStateController.CharState.airborn)
-                {
-                    myRigidbody.velocity = new Vector3(airSpeed * moveHorizontal, myRigidbody.velocity.y, 0);
-                }
-            }else if (moveHorizontal < 0){
-                //movimento esquerda
-                if (stateController.GetCharState() == CharacterStateController.CharState.standing)
-                {
-                    if (stateController.GetFacingSide() == CharacterStateController.FacingSide.P1)
-                    {
-                        stateController.SetState(CharacterStateController.CharState.walkingB);
-                    }
-                    else
-                    {
-                        stateController.SetState(CharacterStateController.CharState.walkingF);
-                    }
-                }
-                else if (stateController.GetCharState() == CharacterStateController.CharState.airborn)
-                {
-                    //movimento horizontal aéreo
-                    myRigidbody.velocity = new Vector3(airSpeed * moveHorizontal, myRigidbody.velocity.y, 0);
-                }
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            verticalInput = Input.GetAxisRaw("Vertical");
 
-            } else if( moveHorizontal == 0 && stateController.GetCharState() != CharacterStateController.CharState.airborn && stateController.GetCharState() != CharacterStateController.CharState.crouching)
+            switch ((int)horizontalInput)
             {
-                //default para standing quando parado no chão
-                stateController.SetState(CharacterStateController.CharState.standing);
+                case 1:
+                    if (verticalInput > 0)
+                    {
+                        stateController.TranslateDirectionalInput(Enums.NumPad.Right, Enums.NumPad.Up);
+                    }
+                    else if (verticalInput == 0)
+                    {
+                        stateController.TranslateDirectionalInput(Enums.NumPad.Right, Enums.NumPad.Neutral);
+                    }
+                    else if (verticalInput < 0)
+                    {
+                        stateController.TranslateDirectionalInput(Enums.NumPad.Right, Enums.NumPad.Down);
+                    }
+                    break;
+
+                case 0:
+                    if (verticalInput > 0)
+                    {
+                        stateController.TranslateDirectionalInput(Enums.NumPad.Neutral, Enums.NumPad.Up);
+                    }
+                    else if (verticalInput == 0)
+                    {
+                        stateController.TranslateDirectionalInput(Enums.NumPad.Neutral, Enums.NumPad.Neutral);
+                    }
+                    else if (verticalInput < 0)
+                    {
+                        stateController.TranslateDirectionalInput(Enums.NumPad.Neutral, Enums.NumPad.Down);
+                    }
+                    break;
+
+                case -1:
+                    if (verticalInput > 0)
+                    {
+                        stateController.TranslateDirectionalInput(Enums.NumPad.Left, Enums.NumPad.Up);
+                    }
+                    else if (verticalInput == 0)
+                    {
+                        stateController.TranslateDirectionalInput(Enums.NumPad.Left, Enums.NumPad.Neutral);
+                    }
+                    else if (verticalInput < 0)
+                    {
+                        stateController.TranslateDirectionalInput(Enums.NumPad.Left, Enums.NumPad.Down);
+                    }
+                    break;
+
             }
-            //Jump and attacks
-            if(stateController.GetCharState() == CharacterStateController.CharState.standing || stateController.GetCharState() == CharacterStateController.CharState.walkingB || stateController.GetCharState() == CharacterStateController.CharState.walkingF)
+
+
+            //Attacks
+            if (Input.GetButtonDown("Fire1"))
             {
-                if (Input.GetButtonDown("Fire1"))
-                {
-                    stateController.SetState(CharacterStateController.CharState.attacking);
-                    stateController.SetAttackState(CharacterStateController.AttackState.light);
-                }
-                if (Input.GetButtonDown("Jump"))
-                {
-                    myRigidbody.AddForce(Vector3.up * jumpForce);
-                    stateController.SetState(CharacterStateController.CharState.airborn);
-                }
+                stateController.SetState(Enums.CharState.attacking);
+                stateController.SetAttackState(Enums.AttackState.light);
+            }
+            if (Input.GetButtonDown("Fire2"))
+            {
+                stateController.SetState(Enums.CharState.attacking);
+                stateController.SetAttackState(Enums.AttackState.medium);
+            }
+            if (Input.GetButtonDown("Fire3"))
+            {
+                stateController.SetState(Enums.CharState.attacking);
+                stateController.SetAttackState(Enums.AttackState.heavy);
             }
         }
     }
