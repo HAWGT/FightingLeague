@@ -78,7 +78,7 @@ namespace CharacterControl
 
             //update -> ui manager
             game = GameObject.Find("Game Manager");
-            ui = GameObject.Find("Canvas");
+            ui = GameObject.Find("UI Manager");
             if (playerID == 1) ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
             if (playerID == 2) ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
         }
