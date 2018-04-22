@@ -5,8 +5,6 @@ namespace CharacterControl
 {
     public class CharacterColliderController : MonoBehaviour
     {
-        [SerializeField]
-        private Collider[] colliders;
 
         [SerializeField]
         private Collider cleft;
