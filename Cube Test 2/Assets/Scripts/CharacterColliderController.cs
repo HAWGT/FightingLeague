@@ -61,8 +61,19 @@ namespace CharacterControl
             myRigidBody = GetComponent<Rigidbody>();
             stateController = GetComponent<CharacterStateController>();
 
+            cleft.enabled = false;
+            cright.enabled = false;
+            fleft.enabled = false;
+            fright.enabled = false;
 
-
+            tleft.enabled = false;
+            tright.enabled = false;
+            hleft.enabled = false;
+            hright.enabled = false;
+            laleft.enabled = false;
+            laright.enabled = false;
+            ualeft.enabled = false;
+            uaright.enabled = false;
         }
 
         private void OnCollisionEnter(Collision collision)
