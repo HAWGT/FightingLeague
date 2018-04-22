@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Resource
+namespace CharacterControl
 {
-    class Enums
+    public class Enums
     {
         public enum CharState
         {
-            standing, walkingF, walkingB, crouching, airborn, blocking, attacking, hitstun
+            standing, walkingF, walkingB, crouching, airborn, blocking, attacking, hitstun, crouchBlock
         }
 
         public enum AttackState
         {
             none, light, medium, heavy, special1, special2
-		}
+        }
 
         public enum Inputs
         {
@@ -25,6 +25,11 @@ namespace Resource
         public enum FacingSide
         {
             P1, P2
+        }
+
+        public enum NumPad
+        {
+            Left, Down, Right, Up, Neutral
         }
     }
 }

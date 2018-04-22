@@ -17,11 +17,13 @@ public class UIManager : MonoBehaviour {
     {
         hp1 = a;
         sb1 = b;
+		text.text = hp1.ToString() + "\t" + hp2.ToString() + "\n" + sb1.ToString() + "\t" + sb2.ToString();
     }
     public void UpdateP2(float a, float b)
     {
         hp2 = a;
         sb2 = b;
+		text.text = hp1.ToString() + "\t" + hp2.ToString() + "\n" + sb1.ToString() + "\t" + sb2.ToString();
     }
 
     // Use this for initialization
@@ -29,10 +31,5 @@ public class UIManager : MonoBehaviour {
         game = GameObject.Find("Game Manager");
         text = GetComponent<Text>();
     }
-	
-	// Update is called once per frame
-	private void Update () {
-        text.text = hp1.ToString() + "\t" + hp2.ToString() + "\n" + sb1.ToString() + "\t" + sb2.ToString();
-        
-    }
+
 }
