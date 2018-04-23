@@ -30,16 +30,7 @@ namespace CharacterControl
 
         private float superBar = 0;
         
-        private Stopwatch sw;
-
         private List<Enums.Inputs> inputList;
-
-        private bool canAttack = true;
-
-        public void ToggleAttack()
-        {
-            this.canAttack = !this.canAttack;
-        }
 
         public Enums.CharState GetCharState()
         {
@@ -72,8 +63,6 @@ namespace CharacterControl
             charState = Enums.CharState.standing;
             attackState = Enums.AttackState.none;
             inputList = new List<Enums.Inputs>(20);
-            sw = new Stopwatch();
-            sw.Start();
             animControl = GetComponent<AnimationController>();
 
             //update -> ui manager
