@@ -37,35 +37,28 @@ namespace CharacterControl
 
         // Use this for initialization
 
-        private void ToggleLM()
+        private void EnableLM()
         {
-            tleft.enabled = !tleft.enabled;
-            tright.enabled = !tright.enabled;
-            hleft.enabled = !hleft.enabled;
-            hright.enabled = !hright.enabled;
-            laleft.enabled = !laleft.enabled;
-            laright.enabled = !laright.enabled;
-            ualeft.enabled = !ualeft.enabled;
-            uaright.enabled = !uaright.enabled;
+            tleft.enabled = true;
+            tright.enabled = true;
+            hleft.enabled = true;
+            hright.enabled = true;
+            laleft.enabled = true;
+            laright.enabled = true;
+            ualeft.enabled = true;
+            uaright.enabled = true;
         }
 
-        private void ToggleH()
+        private void EnableH()
         {
-            cleft.enabled = !cleft.enabled;
-            cright.enabled = !cright.enabled;
-            fleft.enabled = !fleft.enabled;
-            fright.enabled = !fright.enabled;
+            cleft.enabled = true;
+            cright.enabled = true;
+            fleft.enabled = true;
+            fright.enabled = true;
         }
-        private void Start()
+
+        private void DisableLM()
         {
-            myRigidBody = GetComponent<Rigidbody>();
-            stateController = GetComponent<CharacterStateController>();
-
-            cleft.enabled = false;
-            cright.enabled = false;
-            fleft.enabled = false;
-            fright.enabled = false;
-
             tleft.enabled = false;
             tright.enabled = false;
             hleft.enabled = false;
@@ -74,6 +67,23 @@ namespace CharacterControl
             laright.enabled = false;
             ualeft.enabled = false;
             uaright.enabled = false;
+        }
+
+        private void DisableH()
+        {
+            cleft.enabled = false;
+            cright.enabled = false;
+            fleft.enabled = false;
+            fright.enabled = false;
+        }
+
+        private void Start()
+        {
+            myRigidBody = GetComponent<Rigidbody>();
+            stateController = GetComponent<CharacterStateController>();
+
+            DisableLM();
+            DisableLM();
         }
 
         private void OnCollisionEnter(Collision collision)
