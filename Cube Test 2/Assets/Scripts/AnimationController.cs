@@ -81,6 +81,71 @@ namespace CharacterControl
         {
             animator.SetBool("super", true);
         }
+
+        public void StopWalkFwd()
+        {
+            animator.SetBool("walkingForward", false);
+        }
+
+        public void StopWalkBwd()
+        {
+            animator.SetBool("walkingBackward", false);
+        }
+
+        public void StopCrouch()
+        {
+            animator.SetBool("crouch", false);
+        }
+
+        public void StopAirborn()
+        {
+            animator.SetBool("airborn", false);
+        }
+
+        public void StopHitstun()
+        {
+            animator.SetBool("hitstun", false);
+        }
+
+        public void StopBlock()
+        {
+            animator.SetBool("blocking", false);
+        }
+
+        public void StopCrouchBlock()
+        {
+            animator.SetBool("crouchBlock", false);
+        }
+
+        public void StopLightAtk()
+        {
+            animator.SetBool("lightAttack", false);
+        }
+
+        public void StopMediumAtk()
+        {
+            animator.SetBool("mediumAttack", false);
+        }
+
+        public void StopHeavyAtk()
+        {
+            animator.SetBool("heavyAttack", false);
+        }
+
+        public void StopSpecial1()
+        {
+            animator.SetBool("special1", false);
+        }
+
+        public void StopSpecial2()
+        {
+            animator.SetBool("special2", false);
+        }
+
+        public void StopSuper()
+        {
+            animator.SetBool("super", false);
+        }
     }
 
 }

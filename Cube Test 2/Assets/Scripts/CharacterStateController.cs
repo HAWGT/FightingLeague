@@ -15,6 +15,9 @@ namespace CharacterControl
         private AnimationController animControl;
 
         [SerializeField]
+        private Animator motionControl;
+
+        [SerializeField]
         private Enums.AttackState attackState;
 
         [SerializeField]
@@ -29,8 +32,10 @@ namespace CharacterControl
         private float healthPoints = 10000;
 
         private float superBar = 0;
-        
-        private List<Enums.Inputs> inputList;
+
+        private Enums.Inputs lastInput;
+
+        private Enums.Inputs latestDirection;
 
         public Enums.CharState GetCharState()
         {
@@ -62,8 +67,9 @@ namespace CharacterControl
         {
             charState = Enums.CharState.standing;
             attackState = Enums.AttackState.none;
-            inputList = new List<Enums.Inputs>(20);
             animControl = GetComponent<AnimationController>();
+            motionControl = GetComponent<Animator>();
+            latestDirection = Enums.Inputs.Neutral;
 
             //update -> ui manager
             game = GameObject.Find("Game Manager");
@@ -97,123 +103,191 @@ namespace CharacterControl
             }
         }
 
-        // Update is called once per frame
-        private void Update()
-        {
-            /*if (CheckMotion())
-            {
-
-            }
-            else
-            {*/
-
-            if (attackState == Enums.AttackState.none)
-            {
-                TranslateInputToState(inputList[inputList.Count - 1]);
-            }
-            // }
-        }
-
         public void TranslateDirectionalInput(Enums.NumPad xAxis, Enums.NumPad yAxis)
         {
-            if (inputList.Count == 20)
+
+            if (facing == Enums.FacingSide.P1)
             {
-                inputList.Clear();
-            }
-
-            if (xAxis == Enums.NumPad.Neutral)
-            {
-                if (yAxis == Enums.NumPad.Up)
-                {
-                    inputList.Add(Enums.Inputs.Up);
-                }
-
-                if (yAxis == Enums.NumPad.Neutral)
-                {
-                    inputList.Add(Enums.Inputs.Neutral);
-                }
-
                 if (yAxis == Enums.NumPad.Down)
                 {
-                    inputList.Add(Enums.Inputs.Down);
-                }
+                    if (xAxis == Enums.NumPad.Left)
+                    {
+                        lastInput = Enums.Inputs.DownBack;
 
-            }
-            else if (xAxis == Enums.NumPad.Right)
+                    }
+                    else if (xAxis == Enums.NumPad.Right)
+                    {
+                        lastInput = Enums.Inputs.DownForward;
+
+                    }
+                    else if (xAxis == Enums.NumPad.Neutral)
+                    {
+                        lastInput = Enums.Inputs.Down;
+                    }
+                }
+                else if (yAxis == Enums.NumPad.Neutral)
+                {
+
+                    if (xAxis == Enums.NumPad.Left)
+                    {
+                        lastInput = Enums.Inputs.Backward;
+
+                    }
+                    else if (xAxis == Enums.NumPad.Right)
+                    {
+                        lastInput = Enums.Inputs.Forward;
+
+                    }
+                    else if (xAxis == Enums.NumPad.Neutral)
+                    {
+                        lastInput = Enums.Inputs.Neutral;
+                    }
+                }
+            }else if (facing == Enums.FacingSide.P2)
             {
-                if (facing == Enums.FacingSide.P1)
+                if (yAxis == Enums.NumPad.Down)
                 {
-                    if (yAxis == Enums.NumPad.Up)
+                    if (xAxis == Enums.NumPad.Left)
                     {
-                        inputList.Add(Enums.Inputs.Up);
+                        lastInput = Enums.Inputs.DownForward;
                     }
-
-                    if (yAxis == Enums.NumPad.Neutral)
+                    else if (xAxis == Enums.NumPad.Right)
                     {
-                        inputList.Add(Enums.Inputs.Forward);
+                        lastInput = Enums.Inputs.DownBack;
                     }
-
-                    if (yAxis == Enums.NumPad.Down)
+                    else if (xAxis == Enums.NumPad.Neutral)
                     {
-                        inputList.Add(Enums.Inputs.DownForward);
+                        lastInput = Enums.Inputs.Down;
                     }
                 }
-                else
+                else if (yAxis == Enums.NumPad.Neutral)
                 {
-                    if (yAxis == Enums.NumPad.Up)
+                    if (xAxis == Enums.NumPad.Left)
                     {
-                        inputList.Add(Enums.Inputs.Up);
+                        lastInput = Enums.Inputs.Forward;
                     }
-
-                    if (yAxis == Enums.NumPad.Neutral)
+                    else if (xAxis == Enums.NumPad.Right)
                     {
-                        inputList.Add(Enums.Inputs.Backward);
+                        lastInput = Enums.Inputs.Backward;
                     }
-
-                    if (yAxis == Enums.NumPad.Down)
+                    else if (xAxis == Enums.NumPad.Neutral)
                     {
-                        inputList.Add(Enums.Inputs.DownBack);
+                        lastInput = Enums.Inputs.Neutral;
                     }
                 }
-
             }
-            else if (xAxis == Enums.NumPad.Left)
+
+            if(yAxis == Enums.NumPad.Up)
             {
-                if (facing == Enums.FacingSide.P1)
+                lastInput = Enums.Inputs.Up;
+            }
+
+            SetInputBool(lastInput);
+
+            if (attackState != Enums.AttackState.none)
+            {
+                //TODO
+                //diferenciar Special de Super
+                //reset states to neutral
+            }
+            else
+            {
+                switch (lastInput)
                 {
-                    if (yAxis == Enums.NumPad.Up)
-                    {
-                        inputList.Add(Enums.Inputs.Up);
-                    }
+                    case Enums.Inputs.Backward:
+                        animControl.WalkBwd();
+                        break;
 
-                    if (yAxis == Enums.NumPad.Neutral)
-                    {
-                        inputList.Add(Enums.Inputs.Backward);
-                    }
+                    case Enums.Inputs.DownBack:
+                        animControl.CrouchBlock();
+                        break;
 
-                    if (yAxis == Enums.NumPad.Down)
-                    {
-                        inputList.Add(Enums.Inputs.DownBack);
-                    }
-                }
-                else
-                {
-                    if (yAxis == Enums.NumPad.Up)
-                    {
-                        inputList.Add(Enums.Inputs.Up);
-                    }
+                    case Enums.Inputs.Down:
+                        animControl.Crouch();
+                        break;
 
-                    if (yAxis == Enums.NumPad.Neutral)
-                    {
-                        inputList.Add(Enums.Inputs.Forward);
-                    }
+                    case Enums.Inputs.DownForward:
+                        animControl.Crouch();
+                        break;
 
-                    if (yAxis == Enums.NumPad.Down)
-                    {
-                        inputList.Add(Enums.Inputs.DownForward);
-                    }
+                    case Enums.Inputs.Forward:
+                        animControl.WalkFwd();
+                        break;
+
+                    case Enums.Inputs.Up:
+                        animControl.Jump();
+                        //TODO
+                        //Verificação para aterrar
+                        //saber se faço disable à root motion para adicionar força ao salto
+                        break;
+
+                    case Enums.Inputs.Neutral:
+                        SetAllInputBoolFalse();
+                        break;
                 }
             }
+        }
+
+        private void SetInputBool(Enums.Inputs input)
+        {
+            if (input != latestDirection)
+            {
+
+                switch (input)
+                {
+                    case Enums.Inputs.Backward:
+                        motionControl.SetBool("4", true);
+                        break;
+
+                    case Enums.Inputs.DownBack:
+                        motionControl.SetBool("1", true);
+                        break;
+
+                    case Enums.Inputs.Down:
+                        motionControl.SetBool("2", true);
+                        break;
+
+                    case Enums.Inputs.DownForward:
+                        motionControl.SetBool("3", true);
+                        break;
+
+                    case Enums.Inputs.Forward:
+                        motionControl.SetBool("6", true);
+                        break;
+
+                    case Enums.Inputs.Neutral:
+                        SetAllInputBoolFalse();
+                        break;
+                }
+            }
+        }
+
+        private void SetAllInputBoolFalse()
+        {
+            motionControl.SetBool("4", false);
+            motionControl.SetBool("1", false);
+            motionControl.SetBool("2", false);
+            motionControl.SetBool("3", false);
+            motionControl.SetBool("6", false);
+            motionControl.SetBool("5", true);
+
+            StopAllAnimations();
+        }
+
+        private void StopAllAnimations()
+        {
+            animControl.StopBlock();
+            animControl.StopCrouch();
+            animControl.StopCrouchBlock();
+            animControl.StopHeavyAtk();
+            animControl.StopHitstun();
+            animControl.StopLightAtk();
+            animControl.StopMediumAtk();
+            animControl.StopSpecial1();
+            animControl.StopSpecial2();
+            animControl.StopSuper();
+            animControl.StopWalkBwd();
+            animControl.StopWalkFwd();
         }
 
         private void TranslateInputToState(Enums.Inputs input)
@@ -245,7 +319,7 @@ namespace CharacterControl
                     break;
             }
         }
-        
+
 
         private bool CheckMotion()
         {
