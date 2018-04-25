@@ -13,6 +13,10 @@ namespace CharacterControl
 
         [SerializeField]
         private AnimationController animControl;
+        /// <summary>
+        /// fazer disable a root motion ao saltar
+        /// fazer enable ao aterrar no ontriggerenter no colider dos pés
+        /// </summary>
 
         [SerializeField]
         private Animator motionControl;
@@ -218,6 +222,7 @@ namespace CharacterControl
                         animControl.Jump();
                         //TODO
                         //Verificação para aterrar
+                        //>escrever no gameObject groundCheck
                         //saber se faço disable à root motion para adicionar força ao salto
                         break;
 
