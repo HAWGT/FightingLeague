@@ -12,6 +12,9 @@ namespace CharacterControl
         private int playerID;
 
         [SerializeField]
+        private SphereCollider groundCheck;
+
+        [SerializeField]
         private AnimationController animControl;
         /// <summary>
         /// fazer disable a root motion ao saltar
@@ -40,6 +43,8 @@ namespace CharacterControl
         private Enums.Inputs lastInput;
 
         private Enums.Inputs latestDirection;
+
+        private bool airborn;
 
         public Enums.CharState GetCharState()
         {
@@ -74,6 +79,8 @@ namespace CharacterControl
             animControl = GetComponent<AnimationController>();
             motionControl = GetComponent<Animator>();
             latestDirection = Enums.Inputs.Neutral;
+            airborn = false;
+            groundCheck = GetComponent<SphereCollider>();
 
             //update -> ui manager
             game = GameObject.Find("Game Manager");
@@ -91,7 +98,6 @@ namespace CharacterControl
         {
             attackState = state;
         }
-
 
         public void TakeDamage(float dmg)
         {
@@ -203,7 +209,7 @@ namespace CharacterControl
                         break;
 
                     case Enums.Inputs.DownBack:
-                        animControl.CrouchBlock();
+                        animControl.Crouch();
                         break;
 
                     case Enums.Inputs.Down:

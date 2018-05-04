@@ -109,7 +109,7 @@ namespace CharacterControl
 
         public void StopBlock()
         {
-            animator.SetBool("blocking", false);
+            animator.SetBool("standblock", false);
         }
 
         public void StopCrouchBlock()

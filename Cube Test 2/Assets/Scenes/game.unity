@@ -129,8 +129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 1
-  animControl: {fileID: 0}
-  motionControl: {fileID: 0}
+  groundCheck: {fileID: 2015723168}
+  animControl: {fileID: 381051714}
+  motionControl: {fileID: 498483431}
   attackState: 0
   facing: 0
   charState: 0
@@ -276,7 +277,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400004, guid: be80a17bc2a844f66af00b8467035a07, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: be80a17bc2a844f66af00b8467035a07, type: 3}
       propertyPath: m_LocalPosition.y
@@ -581,6 +582,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.46507928, y: 0.4972903, z: 0.33810484}
   m_Center: {x: -0.0001547337, y: 0.20926416, z: -0.0059008785}
+--- !u!95 &498483431 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 9500000, guid: be80a17bc2a844f66af00b8467035a07,
+    type: 3}
+  m_PrefabInternal: {fileID: 498483398}
 --- !u!1 &515407920
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,7 +679,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1258,7 +1264,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400004, guid: be80a17bc2a844f66af00b8467035a07, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: be80a17bc2a844f66af00b8467035a07, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1605,7 +1611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9531f3d3affbcf64da7dccf7154ff3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 1
+  playerID: 2
+  groundCheck: {fileID: 0}
   animControl: {fileID: 0}
   motionControl: {fileID: 0}
   attackState: 0
@@ -1744,6 +1751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2015723167}
   - component: {fileID: 2015723168}
+  - component: {fileID: 2015723169}
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -1776,6 +1784,17 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2015723169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2015723166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fcbaa9430eb35f419f63bfd6d1eea80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2068435217
 GameObject:
   m_ObjectHideFlags: 0
