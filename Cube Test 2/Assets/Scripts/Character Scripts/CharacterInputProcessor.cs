@@ -82,7 +82,6 @@ namespace CharacterControl
 
             }
 
-
             //Attacks
             if (Input.GetButtonDown("Fire1"))
             {

@@ -21,8 +21,8 @@ public class cubeControl : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-		myRigidbody = GetComponent<Rigidbody> ();
-		animator = GetComponent<Animator> ();
+		myRigidbody = GetComponent<Rigidbody>();
+		animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
