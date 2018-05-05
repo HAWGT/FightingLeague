@@ -203,6 +203,22 @@ namespace CharacterControl
                 //TODO
                 //diferenciar Special de Super
                 //reset states to neutral
+                switch(attackState)
+                {
+                    case Enums.AttackState.light:
+                        animControl.LightAtk();
+                        break;
+                    case Enums.AttackState.medium:
+                        //check sp1
+                        //check sp2
+                        animControl.MediumAtk();
+                        break;
+                    case Enums.AttackState.heavy:
+                        //check super
+                        animControl.HeavyAtk();
+                        break;
+
+                }
             }
             else
             {
