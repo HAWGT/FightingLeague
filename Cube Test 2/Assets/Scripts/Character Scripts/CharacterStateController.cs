@@ -84,6 +84,7 @@ namespace CharacterControl
             airborn = false;
             groundCheck = GetComponent<SphereCollider>();
             myRigidbody = GetComponent<Rigidbody>();
+            animControl.SetRigidBody(myRigidbody);
 
             //update -> ui manager
             game = GameObject.Find("Game Manager");

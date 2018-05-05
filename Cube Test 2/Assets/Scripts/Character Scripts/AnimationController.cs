@@ -11,7 +11,9 @@ namespace CharacterControl
         [SerializeField]
         private Animator animator;
 
-        private Rigidbody rigidbody;
+        private new Rigidbody rigidbody;
+
+        private Vector3 airMovement = new Vector3 (5f, 0, 0);
 
         // Use this for initialization
         void Start()
@@ -19,19 +21,34 @@ namespace CharacterControl
             animator = GetComponent<Animator>();
         }
 
-        public void SetRigidBody()
+        public void SetRigidBody(Rigidbody rb)
         {
-            
+            rigidbody = rb;
         }
         
         public void WalkFwd()
         {
-            animator.SetBool("walkingForward", true);
+            if (animator.GetBool("airborn"))
+            {
+                rigidbody.velocity = rigidbody.velocity + airMovement;
+            }
+            else
+            {
+                animator.SetBool("walkingForward", true);
+            }
         }
 
         public void WalkBwd()
         {
-            animator.SetBool("walkingBackward", true);
+            if (animator.GetBool("airborn"))
+            {
+                rigidbody.velocity = rigidbody.velocity - airMovement;
+            }
+            else
+            {
+                animator.SetBool("walkingBackward", true);
+            }
+            
         }
 
         public void Crouch()
