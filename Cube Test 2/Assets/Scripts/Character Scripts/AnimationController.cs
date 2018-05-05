@@ -11,10 +11,17 @@ namespace CharacterControl
         [SerializeField]
         private Animator animator;
 
+        private Rigidbody rigidbody;
+
         // Use this for initialization
         void Start()
         {
             animator = GetComponent<Animator>();
+        }
+
+        public void SetRigidBody()
+        {
+            
         }
         
         public void WalkFwd()
@@ -34,6 +41,7 @@ namespace CharacterControl
 
         public void Jump()
         {
+            animator.applyRootMotion = false;
             animator.SetBool("airborn", true);
         }
 
@@ -99,6 +107,7 @@ namespace CharacterControl
 
         public void StopAirborn()
         {
+            animator.applyRootMotion = true;
             animator.SetBool("airborn", false);
         }
 

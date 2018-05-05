@@ -36,6 +36,8 @@ namespace CharacterControl
         private GameObject game;
         private GameObject ui;
 
+        private Rigidbody myRigidbody;
+
         private float healthPoints = 10000;
 
         private float superBar = 0;
@@ -81,6 +83,7 @@ namespace CharacterControl
             latestDirection = Enums.Inputs.Neutral;
             airborn = false;
             groundCheck = GetComponent<SphereCollider>();
+            myRigidbody = GetComponent<Rigidbody>();
 
             //update -> ui manager
             game = GameObject.Find("Game Manager");
@@ -332,10 +335,7 @@ namespace CharacterControl
         }
 
 
-        private bool CheckMotion()
-        {
-            throw new NotImplementedException();
-        }
+        
 
     }
 
