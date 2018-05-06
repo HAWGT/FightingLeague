@@ -13,7 +13,9 @@ namespace CharacterControl
 
         private new Rigidbody rigidbody;
 
-        private Vector3 airMovement = new Vector3 (5f, 0, 0);
+        private float maxAirSpeed = 5f;
+
+        private Vector3 airMovement = new Vector3 (1f, 0, 0);
 
         // Use this for initialization
         void Start()
@@ -25,12 +27,35 @@ namespace CharacterControl
         {
             rigidbody = rb;
         }
+
+        private void addAirSpeed(Vector3 speed)
+        {
+            if(rigidbody.velocity.x > -maxAirSpeed && speed.x < 0)
+            {
+                rigidbody.velocity = rigidbody.velocity + speed;
+            }else if(rigidbody.velocity.x < maxAirSpeed && speed.x > 0)
+            {
+                rigidbody.velocity = rigidbody.velocity + speed;
+            }else if(rigidbody.velocity.x > 5f)
+            {
+                rigidbody.velocity = new Vector3(5f, rigidbody.velocity.y);
+            }else if (rigidbody.velocity.x < -5f)
+            {
+                rigidbody.velocity = new Vector3(-5f, rigidbody.velocity.y);
+            }
+            else
+            {
+                rigidbody.velocity = rigidbody.velocity + speed;
+            }
+
+        }
         
         public void WalkFwd()
         {
             if (animator.GetBool("airborn"))
             {
-                rigidbody.velocity = rigidbody.velocity + airMovement;
+                addAirSpeed(airMovement);
+                //rigidbody.velocity = new Vector3(2f, rigidbody.velocity.y);
             }
             else
             {
@@ -42,7 +67,8 @@ namespace CharacterControl
         {
             if (animator.GetBool("airborn"))
             {
-                rigidbody.velocity = rigidbody.velocity - airMovement;
+                //rigidbody.velocity = new Vector3(-2f, rigidbody.velocity.y);
+                addAirSpeed(-airMovement);
             }
             else
             {
