@@ -55,7 +55,6 @@ namespace CharacterControl
             if (animator.GetBool("airborn"))
             {
                 addAirSpeed(airMovement);
-                //rigidbody.velocity = new Vector3(2f, rigidbody.velocity.y);
             }
             else
             {
@@ -67,7 +66,6 @@ namespace CharacterControl
         {
             if (animator.GetBool("airborn"))
             {
-                //rigidbody.velocity = new Vector3(-2f, rigidbody.velocity.y);
                 addAirSpeed(-airMovement);
             }
             else
@@ -75,6 +73,16 @@ namespace CharacterControl
                 animator.SetBool("walkingBackward", true);
             }
             
+        }
+
+        public void TurnOnRootMotion()
+        {
+            animator.applyRootMotion = true;
+        }
+
+        public void TurnOffRootMotion()
+        {
+            animator.applyRootMotion = false;
         }
 
         public void Crouch()
