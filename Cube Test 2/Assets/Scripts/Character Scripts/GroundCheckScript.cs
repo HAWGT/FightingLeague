@@ -10,9 +10,4 @@ public class GroundCheckScript : MonoBehaviour {
     {
        
     }
- 
-    void OnTriggerEnter()
-    {
-
-    }
 }

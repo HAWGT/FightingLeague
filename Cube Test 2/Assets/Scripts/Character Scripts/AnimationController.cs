@@ -28,33 +28,41 @@ namespace CharacterControl
             rigidbody = rb;
         }
 
-        private void addAirSpeed(Vector3 speed)
+        public List<AnimatorControllerParameter> GetAllBoolAnimatorParameters()
         {
-            if(rigidbody.velocity.x > -maxAirSpeed && speed.x < 0)
+            List<AnimatorControllerParameter> list = new List<AnimatorControllerParameter>();
+            foreach (AnimatorControllerParameter parameter in animator.parameters)
             {
-                rigidbody.velocity = rigidbody.velocity + speed;
-            }else if(rigidbody.velocity.x < maxAirSpeed && speed.x > 0)
-            {
-                rigidbody.velocity = rigidbody.velocity + speed;
-            }else if(rigidbody.velocity.x > 5f)
-            {
-                rigidbody.velocity = new Vector3(5f, rigidbody.velocity.y);
-            }else if (rigidbody.velocity.x < -5f)
-            {
-                rigidbody.velocity = new Vector3(-5f, rigidbody.velocity.y);
+                if (parameter.type == AnimatorControllerParameterType.Bool)
+                {
+                    list.Add(parameter);
+                }
             }
-            else
-            {
-                rigidbody.velocity = rigidbody.velocity + speed;
-            }
-
+            return list;
         }
+
+        public void TurnAnimatorParametersOff(List<AnimatorControllerParameter> list)
+        {
+            foreach(AnimatorControllerParameter parameter in list)
+            {
+                animator.SetBool(parameter.name, false);
+            }
+        }
+
+        public void TurnAnimatorParametersOn(List<AnimatorControllerParameter> list)
+        {
+            foreach (AnimatorControllerParameter parameter in list)
+            {
+                animator.SetBool(parameter.name, true);
+            }
+        }
+
         
         public void WalkFwd()
         {
             if (animator.GetBool("airborn"))
             {
-                addAirSpeed(airMovement);
+                AddAirSpeed(airMovement);
             }
             else
             {
@@ -66,7 +74,7 @@ namespace CharacterControl
         {
             if (animator.GetBool("airborn"))
             {
-                addAirSpeed(-airMovement);
+                AddAirSpeed(-airMovement);
             }
             else
             {
@@ -84,127 +92,35 @@ namespace CharacterControl
         {
             animator.applyRootMotion = false;
         }
-
-        public void Crouch()
-        {
-            animator.SetBool("crouch", true);
-        }
-
         public void Jump()
         {
             animator.applyRootMotion = false;
             animator.SetBool("airborn", true);
         }
 
-        public void Hitstun()
+        private void AddAirSpeed(Vector3 speed)
         {
-            animator.SetBool("hitstun", true);
-        }
+            if (rigidbody.velocity.x > -maxAirSpeed && speed.x < 0)
+            {
+                rigidbody.velocity = rigidbody.velocity + speed;
+            }
+            else if (rigidbody.velocity.x < maxAirSpeed && speed.x > 0)
+            {
+                rigidbody.velocity = rigidbody.velocity + speed;
+            }
+            else if (rigidbody.velocity.x > 5f)
+            {
+                rigidbody.velocity = new Vector3(5f, rigidbody.velocity.y);
+            }
+            else if (rigidbody.velocity.x < -5f)
+            {
+                rigidbody.velocity = new Vector3(-5f, rigidbody.velocity.y);
+            }
+            else
+            {
+                rigidbody.velocity = rigidbody.velocity + speed;
+            }
 
-        public void Block()
-        {
-            animator.SetBool("blocking", true);
-        }
-
-        public void CrouchBlock()
-        {
-            animator.SetBool("crouchBlock", true);
-        }
-
-        public void LightAtk()
-        {
-            animator.SetBool("lightAttack", true);
-        }
-
-        public void MediumAtk()
-        {
-            animator.SetBool("mediumAttack", true);
-        }
-
-        public void HeavyAtk()
-        {
-            animator.SetBool("heavyAttack", true);
-        }
-
-        public void Special1()
-        {
-            animator.SetBool("special1", true);
-        }
-
-        public void Special2()
-        {
-            animator.SetBool("special2", true);
-        }
-
-        public void Super()
-        {
-            animator.SetBool("super", true);
-        }
-
-        public void StopWalkFwd()
-        {
-            animator.SetBool("walkingForward", false);
-        }
-
-        public void StopWalkBwd()
-        {
-            animator.SetBool("walkingBackward", false);
-        }
-
-        public void StopCrouch()
-        {
-            animator.SetBool("crouch", false);
-        }
-
-        public void StopAirborn()
-        {
-            animator.applyRootMotion = true;
-            animator.SetBool("airborn", false);
-        }
-
-        public void StopHitstun()
-        {
-            animator.SetBool("hitstun", false);
-        }
-
-        public void StopBlock()
-        {
-            animator.SetBool("standblock", false);
-        }
-
-        public void StopCrouchBlock()
-        {
-            animator.SetBool("crouchBlock", false);
-        }
-
-        public void StopLightAtk()
-        {
-            animator.SetBool("lightAttack", false);
-        }
-
-        public void StopMediumAtk()
-        {
-            animator.SetBool("mediumAttack", false);
-        }
-
-        public void StopHeavyAtk()
-        {
-            animator.SetBool("heavyAttack", false);
-        }
-
-        public void StopSpecial1()
-        {
-            animator.SetBool("special1", false);
-        }
-
-        public void StopSpecial2()
-        {
-            animator.SetBool("special2", false);
-        }
-
-        public void StopSuper()
-        {
-            animator.SetBool("super", false);
         }
     }
 
