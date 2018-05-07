@@ -131,7 +131,6 @@ MonoBehaviour:
   playerID: 1
   groundCheck: {fileID: 2015723168}
   animControl: {fileID: 381051714}
-  motionControl: {fileID: 498483431}
   attackState: 0
   facing: 0
   charState: 0
@@ -165,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c77805fdb39c934cb647e5726245e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 498483431}
 --- !u!114 &381051715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1614,7 +1613,6 @@ MonoBehaviour:
   playerID: 2
   groundCheck: {fileID: 0}
   animControl: {fileID: 0}
-  motionControl: {fileID: 0}
   attackState: 0
   facing: 1
   charState: 0
