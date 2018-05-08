@@ -43,17 +43,23 @@ namespace CharacterControl
 
         public void TurnAnimatorParametersOff(List<AnimatorControllerParameter> list)
         {
-            foreach(AnimatorControllerParameter parameter in list)
+            if(list.Count != 0)
             {
-                animator.SetBool(parameter.name, false);
+                foreach (AnimatorControllerParameter parameter in list)
+                {
+                    animator.SetBool(parameter.name, false);
+                }
             }
         }
 
         public void TurnAnimatorParametersOn(List<AnimatorControllerParameter> list)
         {
-            foreach (AnimatorControllerParameter parameter in list)
+            if (list.Count != 0)
             {
-                animator.SetBool(parameter.name, true);
+                foreach (AnimatorControllerParameter parameter in list)
+                {
+                    animator.SetBool(parameter.name, true);
+                }
             }
         }
 

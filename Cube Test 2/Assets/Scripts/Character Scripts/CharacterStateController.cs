@@ -112,7 +112,9 @@ namespace CharacterControl
 
             if (healthPoints <= 0)
             {
+                animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "KO" }));
                 game.GetComponent<GameManager>().Die(playerID);
+
             }
         }
 
@@ -122,7 +124,7 @@ namespace CharacterControl
 
             foreach (String name in names)
             {
-                animatorParameters.Find(parameter => parameter.name == name);
+               list.Add(animatorParameters.Find(parameter => parameter.name == name));
             }
 
             return list;
@@ -294,9 +296,24 @@ namespace CharacterControl
 
         private void SetAllInputBoolFalse()
         {
-            animControl.TurnAnimatorParametersOff(animatorParameters);
+            animControl.TurnAnimatorParametersOff(FindAnimatorParameter(new string[] { "1", "2", "3", "4", "6"}));
 
             animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "5" }));
+        }
+
+        private void ResetStateParameters()
+        {
+            List<AnimatorControllerParameter> list = new List<AnimatorControllerParameter>();
+
+            foreach (AnimatorControllerParameter parameter in animatorParameters)
+            {
+                if(parameter.name != "airborn" && parameter.name != "1" && parameter.name != "2" && parameter.name != "3"
+                    && parameter.name != "4" && parameter.name != "5" || parameter.name != "6")
+                {
+                    list.Add(parameter);
+                }
+            }
+            animControl.TurnAnimatorParametersOff(list);
         }
 
         private void TranslateInputToState(Enums.Inputs input)
