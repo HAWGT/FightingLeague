@@ -53,7 +53,6 @@ namespace CharacterControl
                     }
 
                 }
-                ResetStateParameters();
             }
         }
 
@@ -69,7 +68,6 @@ namespace CharacterControl
                     }
 
                 }
-                ResetStateParameters();
             }
         }
 
@@ -83,7 +81,6 @@ namespace CharacterControl
             else
             {
                 animator.SetBool("walkingForward", true);
-                ResetStateParameters();
             }
         }
 
@@ -96,7 +93,6 @@ namespace CharacterControl
             else
             {
                 animator.SetBool("walkingBackward", true);
-                ResetStateParameters();
             }
             
         }
@@ -113,12 +109,11 @@ namespace CharacterControl
 
         public void Jump()
         {
-            if (!animator.GetBool("airborn"))
+            if (!animator.GetBool("airborn") && !animator.GetBool("crouch"))
             {
                 animator.applyRootMotion = false;
                 animator.SetBool("jump", true);
-                rigidbody.velocity = rigidbody.velocity + new Vector3(0, 5f);
-                ResetStateParameters();
+                rigidbody.velocity = rigidbody.velocity + new Vector3(0, 2f);
             }
         }
 
