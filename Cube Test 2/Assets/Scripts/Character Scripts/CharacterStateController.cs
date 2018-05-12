@@ -85,6 +85,7 @@ namespace CharacterControl
             animControl.SetRigidBody(myRigidbody);
             animatorParameters = animControl.GetAllBoolAnimatorParameters();
 
+
             //update -> ui manager
             game = GameObject.Find("Game Manager");
             ui = GameObject.Find("UI Manager");
@@ -108,7 +109,9 @@ namespace CharacterControl
             if (playerID == 1) ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
             if (playerID == 2) ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
 
-            animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] {"hitstun"}));
+            List<AnimatorControllerParameter> parameter = FindAnimatorParameter(new string[] { "hitstun" });
+
+            animControl.TurnAnimatorParametersOn(parameter);
 
             if (healthPoints <= 0)
             {
@@ -121,10 +124,12 @@ namespace CharacterControl
         public List<AnimatorControllerParameter> FindAnimatorParameter(String[] names)
         {
             List<AnimatorControllerParameter> list = new List<AnimatorControllerParameter>();
+            AnimatorControllerParameter parametro;
 
             foreach (String name in names)
             {
-               list.Add(animatorParameters.Find(parameter => parameter.name == name));
+                parametro = animatorParameters.Find(parameter => parameter.name == name);
+                list.Add(parametro);
             }
 
             return list;
@@ -275,13 +280,16 @@ namespace CharacterControl
                         break;
 
                     case Enums.Inputs.DownBack:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "1" })); break;
+                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "4", "2" }));
+                        break;
 
                     case Enums.Inputs.Down:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "2" })); break;
+                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "2" }));
+                        break;
 
                     case Enums.Inputs.DownForward:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "3" })); break;
+                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "2", "6" }));
+                        break;
 
                     case Enums.Inputs.Forward:
                         animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "6" }));
@@ -296,24 +304,9 @@ namespace CharacterControl
 
         private void SetAllInputBoolFalse()
         {
-            animControl.TurnAnimatorParametersOff(FindAnimatorParameter(new string[] { "1", "2", "3", "4", "6"}));
+            animControl.TurnAnimatorParametersOff(FindAnimatorParameter(new string[] { "2", "4", "6" }));
 
             animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "5" }));
-        }
-
-        private void ResetStateParameters()
-        {
-            List<AnimatorControllerParameter> list = new List<AnimatorControllerParameter>();
-
-            foreach (AnimatorControllerParameter parameter in animatorParameters)
-            {
-                if(parameter.name != "airborn" && parameter.name != "1" && parameter.name != "2" && parameter.name != "3"
-                    && parameter.name != "4" && parameter.name != "5" || parameter.name != "6")
-                {
-                    list.Add(parameter);
-                }
-            }
-            animControl.TurnAnimatorParametersOff(list);
         }
 
         private void TranslateInputToState(Enums.Inputs input)

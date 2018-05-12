@@ -47,8 +47,13 @@ namespace CharacterControl
             {
                 foreach (AnimatorControllerParameter parameter in list)
                 {
-                    animator.SetBool(parameter.name, false);
+                    if(parameter!= null)
+                    {
+                        animator.SetBool(parameter.name, false);
+                    }
+
                 }
+                ResetStateParameters();
             }
         }
 
@@ -58,8 +63,13 @@ namespace CharacterControl
             {
                 foreach (AnimatorControllerParameter parameter in list)
                 {
-                    animator.SetBool(parameter.name, true);
+                    if (parameter != null)
+                    {
+                        animator.SetBool(parameter.name, true);
+                    }
+
                 }
+                ResetStateParameters();
             }
         }
 
@@ -73,6 +83,7 @@ namespace CharacterControl
             else
             {
                 animator.SetBool("walkingForward", true);
+                ResetStateParameters();
             }
         }
 
@@ -85,23 +96,30 @@ namespace CharacterControl
             else
             {
                 animator.SetBool("walkingBackward", true);
+                ResetStateParameters();
             }
             
         }
 
-        public void TurnOnRootMotion()
+        private void TurnOnRootMotion()
         {
             animator.applyRootMotion = true;
         }
 
-        public void TurnOffRootMotion()
+        private void TurnOffRootMotion()
         {
             animator.applyRootMotion = false;
         }
+
         public void Jump()
         {
-            animator.applyRootMotion = false;
-            animator.SetBool("airborn", true);
+            if (!animator.GetBool("airborn"))
+            {
+                animator.applyRootMotion = false;
+                animator.SetBool("jump", true);
+                rigidbody.velocity = rigidbody.velocity + new Vector3(0, 5f);
+                ResetStateParameters();
+            }
         }
 
         private void AddAirSpeed(Vector3 speed)
@@ -127,6 +145,21 @@ namespace CharacterControl
                 rigidbody.velocity = rigidbody.velocity + speed;
             }
 
+        }
+
+        private void ResetStateParameters()
+        {
+            List<AnimatorControllerParameter> list = new List<AnimatorControllerParameter>();
+
+            foreach (AnimatorControllerParameter parameter in animator.parameters)
+            {
+                if (parameter.name != "airborn" && parameter.name != "2"
+                    && parameter.name != "4" && parameter.name != "5" && parameter.name != "6")
+                {
+                    list.Add(parameter);
+                }
+            }
+            TurnAnimatorParametersOff(list);
         }
     }
 

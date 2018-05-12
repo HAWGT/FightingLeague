@@ -2,12 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundCheckScript : MonoBehaviour {
-
-
-
-	void OnTriggerExit()
+namespace AnimatorGeneric
+{
+    public class GroundCheckScript : MonoBehaviour
     {
-       
+        [SerializeField]
+        Animator animator;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            animator.applyRootMotion = true;
+            animator.SetBool("airborn", false);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            //animator.applyRootMotion = false;
+        }
     }
+    
 }
