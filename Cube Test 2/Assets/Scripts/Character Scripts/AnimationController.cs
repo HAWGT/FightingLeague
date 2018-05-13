@@ -13,7 +13,7 @@ namespace CharacterControl
 
         private new Rigidbody rigidbody;
 
-        private float maxAirSpeed = 5f;
+        private float maxAirSpeed = 1.5f;
 
         private Vector3 airMovement = new Vector3 (1f, 0, 0);
 
