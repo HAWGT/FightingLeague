@@ -32,6 +32,15 @@ namespace CharacterControl
         [SerializeField]
         private Collider uaright;
 
+        [SerializeField]
+        private Collider h1;
+        [SerializeField]
+        private Collider h2;
+        [SerializeField]
+        private Collider b1;
+        [SerializeField]
+        private Collider b2;
+
         private Rigidbody myRigidBody;
         private CharacterStateController stateController;
 
@@ -84,6 +93,10 @@ namespace CharacterControl
 
             DisableLM();
             DisableLM();
+            h1.enabled = false;
+            h2.enabled = false;
+            b1.enabled = false;
+            b2.enabled = false;
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -95,7 +108,7 @@ namespace CharacterControl
             Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;
-            if(stateController.GetCharState() != Enums.CharState.attacking && stateController.GetCharState() != Enums.CharState.blocking)
+            if(stateController.GetCharState() == Enums.CharState.attacking && body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
             {
                 //print("hit confirmed");
                 float dmg = 0;
