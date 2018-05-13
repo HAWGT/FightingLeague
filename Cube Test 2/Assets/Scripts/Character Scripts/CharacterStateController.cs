@@ -105,11 +105,19 @@ namespace CharacterControl
 
         public void TakeDamage(float dmg)
         {
+            List<AnimatorControllerParameter> parameter = new List<AnimatorControllerParameter>();
             healthPoints -= dmg;
             if (playerID == 1) ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
             if (playerID == 2) ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
 
-            List<AnimatorControllerParameter> parameter = FindAnimatorParameter(new string[] { "hitstun" });
+            if(healthPoints > 0)
+            {
+                parameter = FindAnimatorParameter(new string[] { "hitstun" });
+            }
+            else
+            {
+                parameter = FindAnimatorParameter(new string[] { "KO" });
+            }
 
             animControl.TurnAnimatorParametersOn(parameter);
 
@@ -266,6 +274,7 @@ namespace CharacterControl
                         break;
                 }
             }
+            ResetStateEnums();
         }
 
         private void SetInputBool(Enums.Inputs input)
@@ -337,8 +346,12 @@ namespace CharacterControl
             }
         }
 
+        private void ResetStateEnums()
+        {
+            charState = Enums.CharState.standing;
+            attackState = Enums.AttackState.none;
+        }
 
-        
 
     }
 

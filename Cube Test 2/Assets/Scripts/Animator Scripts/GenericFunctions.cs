@@ -41,7 +41,6 @@ namespace AnimatorGeneric
 
             return parameters[0];
         }
-
     }
 }
 
