@@ -109,12 +109,11 @@ namespace CharacterControl
 
         public void Jump()
         {
-            if (!animator.GetBool("airborn") && !animator.GetBool("crouch") && animator.GetBool("grounded"))
+            if (!animator.GetBool("airborn") && !animator.GetBool("crouch"))
             {
                 animator.applyRootMotion = false;
                 animator.SetBool("jump", true);
-                animator.SetBool("grounded", false);
-                rigidbody.velocity = rigidbody.velocity + new Vector3(0, 7f);
+                rigidbody.velocity = rigidbody.velocity + new Vector3(0, 2f);
             }
         }
 

@@ -13,7 +13,11 @@ namespace AnimatorGeneric
         {
             animator.applyRootMotion = true;
             animator.SetBool("airborn", false);
-            animator.SetBool("grounded", true);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            //animator.applyRootMotion = false;
         }
     }
     
