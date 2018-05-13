@@ -199,10 +199,6 @@ MonoBehaviour:
   laright: {fileID: 498483416}
   ualeft: {fileID: 498483418}
   uaright: {fileID: 498483417}
-  h1: {fileID: 498483422}
-  h2: {fileID: 498483421}
-  b1: {fileID: 498483430}
-  b2: {fileID: 498483426}
 --- !u!1 &381099537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1411,10 +1407,6 @@ MonoBehaviour:
   laright: {fileID: 1405563302}
   ualeft: {fileID: 1405563301}
   uaright: {fileID: 1405563296}
-  h1: {fileID: 1405563300}
-  h2: {fileID: 1405563299}
-  b1: {fileID: 1405563315}
-  b2: {fileID: 1405563297}
 --- !u!135 &1405563296
 SphereCollider:
   m_ObjectHideFlags: 0

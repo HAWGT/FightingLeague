@@ -93,7 +93,10 @@ namespace CharacterControl
 
             DisableLM();
             DisableLM();
-
+            h1.enabled = false;
+            h2.enabled = false;
+            b1.enabled = false;
+            b2.enabled = false;
         }
 
         private void OnCollisionEnter(Collision collision)
