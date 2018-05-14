@@ -7,6 +7,8 @@ namespace CharacterControl
     public class CharacterColliderController : MonoBehaviour
     {
 
+        private bool attacking;
+
         [SerializeField]
         private Collider cleft;
         [SerializeField]
@@ -56,6 +58,7 @@ namespace CharacterControl
             laright.enabled = true;
             ualeft.enabled = true;
             uaright.enabled = true;
+            attacking = true;
         }
 
         private void EnableH()
@@ -64,6 +67,7 @@ namespace CharacterControl
             cright.enabled = true;
             fleft.enabled = true;
             fright.enabled = true;
+            attacking = true;
         }
 
         private void DisableLM()
@@ -76,6 +80,7 @@ namespace CharacterControl
             laright.enabled = false;
             ualeft.enabled = false;
             uaright.enabled = false;
+            attacking = false;
         }
 
         private void DisableH()
@@ -84,6 +89,7 @@ namespace CharacterControl
             cright.enabled = false;
             fleft.enabled = false;
             fright.enabled = false;
+            attacking = false;
         }
 
         private void Start()
@@ -105,7 +111,7 @@ namespace CharacterControl
             Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;
-            if(stateController.GetCharState() == Enums.CharState.attacking && body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
+            if(attacking == true && body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
             {
                 //print("hit confirmed");
                 float dmg = 0;
