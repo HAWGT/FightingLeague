@@ -149,7 +149,11 @@ namespace CharacterControl
             foreach (AnimatorControllerParameter parameter in animator.parameters)
             {
                 if (parameter.name != "airborn" && parameter.name != "2"
-                    && parameter.name != "4" && parameter.name != "5" && parameter.name != "6")
+                    && parameter.name != "4" && parameter.name != "5" && parameter.name != "6" 
+                    && parameter.name != "mirrorAnimation" && parameter.name != "grounded"
+                    && parameter.name != "hitstun" && parameter.name != "KO"
+                    && parameter.name != "blockStun" && parameter.name != "standBlock"
+                    && parameter.name != "crouchBlock")
                 {
                     list.Add(parameter);
                 }

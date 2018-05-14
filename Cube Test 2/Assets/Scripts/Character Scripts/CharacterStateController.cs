@@ -266,6 +266,7 @@ namespace CharacterControl
                         break;
                 }
             }
+
         }
 
         private void SetInputBool(Enums.Inputs input)
@@ -335,10 +336,17 @@ namespace CharacterControl
                     animControl.Jump();
                     break;
             }
+
+            ResetEnumState();
         }
 
 
-        
+        private void ResetEnumState()
+        {
+            SetAttackState(Enums.AttackState.none);
+            SetState(Enums.CharState.standing);
+
+        }
 
     }
 
