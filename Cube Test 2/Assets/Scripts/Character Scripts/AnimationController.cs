@@ -71,6 +71,12 @@ namespace CharacterControl
             }
         }
 
+        public void UpdateSuperBar(int ammount)
+        {
+
+            animator.SetInteger("superBar", ammount);
+        }
+
         
         public void WalkFwd()
         {

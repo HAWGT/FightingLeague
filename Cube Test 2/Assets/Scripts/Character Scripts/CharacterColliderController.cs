@@ -98,7 +98,7 @@ namespace CharacterControl
             stateController = GetComponent<CharacterStateController>();
 
             DisableLM();
-            DisableLM();
+            DisableH();
 
         }
 
@@ -119,6 +119,8 @@ namespace CharacterControl
                 if (Enums.AttackState.medium == stateController.GetAttackState()) dmg = 700;
                 if (Enums.AttackState.heavy == stateController.GetAttackState()) dmg = 850;
                 body.GetComponent<CharacterStateController>().TakeDamage(dmg);
+                DisableLM();
+                DisableH();
             }
         }
     }

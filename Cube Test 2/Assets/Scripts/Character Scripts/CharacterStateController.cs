@@ -37,7 +37,7 @@ namespace CharacterControl
 
         private float healthPoints = 10000;
 
-        private float superBar = 0;
+        private int superBar = 0;
 
         private Enums.Inputs lastInput;
 
@@ -89,8 +89,16 @@ namespace CharacterControl
             //update -> ui manager
             game = GameObject.Find("Game Manager");
             ui = GameObject.Find("UI Manager");
-            if (playerID == 1) ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
-            if (playerID == 2) ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+            if (playerID == 1)
+            {
+                ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+                animControl.TurnAnimatorParametersOff(FindAnimatorParameter(new string[] { "mirrorAnimation" }));
+            }
+            if (playerID == 2)
+            {
+                ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+                animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "mirrorAnimation" }));
+            }
         }
 
         public void SetState(Enums.CharState state)
@@ -109,9 +117,9 @@ namespace CharacterControl
             if (playerID == 1) ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
             if (playerID == 2) ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
 
-            List<AnimatorControllerParameter> parameter = FindAnimatorParameter(new string[] { "hitstun" });
+            //List<AnimatorControllerParameter> parameter = ;
 
-            animControl.TurnAnimatorParametersOn(parameter);
+            animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "hitstun" }));
 
             if (healthPoints <= 0)
             {
@@ -224,7 +232,14 @@ namespace CharacterControl
                         animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] {"lightAttack"}));
                         break;
                     case Enums.AttackState.medium:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] {"mediumAttack"}));
+                        if (lastInput == Enums.Inputs.Forward)
+                        {
+
+                        }
+                        else
+                        {
+                            animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "mediumAttack" }));
+                        }
                         break;
                     case Enums.AttackState.heavy:
                         animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] {"heavyAttack"}));
@@ -266,7 +281,7 @@ namespace CharacterControl
                         break;
                 }
             }
-
+            ResetEnumState();
         }
 
         private void SetInputBool(Enums.Inputs input)
@@ -281,7 +296,7 @@ namespace CharacterControl
                         break;
 
                     case Enums.Inputs.DownBack:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "4", "2" }));
+                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "1" }));
                         break;
 
                     case Enums.Inputs.Down:
@@ -289,7 +304,7 @@ namespace CharacterControl
                         break;
 
                     case Enums.Inputs.DownForward:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "2", "6" }));
+                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "3" }));
                         break;
 
                     case Enums.Inputs.Forward:
@@ -337,7 +352,7 @@ namespace CharacterControl
                     break;
             }
 
-            ResetEnumState();
+            //ResetEnumState();
         }
 
 
