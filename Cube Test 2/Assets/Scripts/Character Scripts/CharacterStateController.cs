@@ -120,6 +120,7 @@ namespace CharacterControl
             //List<AnimatorControllerParameter> parameter = ;
 
             animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "hitstun" }));
+            animControl.Knock(dmg);
 
             if (healthPoints <= 0)
             {

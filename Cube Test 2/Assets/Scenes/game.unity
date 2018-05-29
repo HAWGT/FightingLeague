@@ -187,6 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5717607be4253b74ca295e0e94905249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireBallPrefab: {fileID: 1728083492888628, guid: d7a54093b11d33044a7d8e43713fba45,
+    type: 2}
   cleft: {fileID: 498483428}
   cright: {fileID: 498483424}
   fleft: {fileID: 498483423}
@@ -1403,6 +1405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5717607be4253b74ca295e0e94905249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireBallPrefab: {fileID: 1728083492888628, guid: d7a54093b11d33044a7d8e43713fba45,
+    type: 2}
   cleft: {fileID: 1405563310}
   cright: {fileID: 1405563309}
   fleft: {fileID: 1405563308}

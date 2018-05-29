@@ -10,6 +10,11 @@ namespace CharacterControl
         private bool attacking;
 
         [SerializeField]
+        private GameObject fireBallPrefab;
+
+        private Transform fireBallSpawn;
+
+        [SerializeField]
         private Collider cleft;
         [SerializeField]
         private Collider cright;
@@ -48,9 +53,17 @@ namespace CharacterControl
 
         // Use this for initialization
 
-        private void SpawnFire()
+        private void SpawnFireBall()
         {
+            var fireBall = (GameObject)Instantiate(
+            fireBallPrefab,
+            fireBallSpawn.position,
+            fireBallSpawn.rotation);
 
+            fireBall.GetComponent<Rigidbody>().velocity = fireBall.transform.forward * 6;
+
+            // Destroy the bullet after 2 seconds
+            Destroy(fireBall, 1.0f);
         }
 
         private void EnableLM()
