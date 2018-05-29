@@ -48,6 +48,11 @@ namespace CharacterControl
 
         // Use this for initialization
 
+        private void SpawnFire()
+        {
+
+        }
+
         private void EnableLM()
         {
             tleft.enabled = true;
