@@ -235,14 +235,7 @@ namespace CharacterControl
                         animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] {"lightAttack"}));
                         break;
                     case Enums.AttackState.medium:
-                        if (lastInput == Enums.Inputs.Forward)
-                        {
-
-                        }
-                        else
-                        {
                             animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "mediumAttack" }));
-                        }
                         break;
                     case Enums.AttackState.heavy:
                         animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] {"heavyAttack"}));

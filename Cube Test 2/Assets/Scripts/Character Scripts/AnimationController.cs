@@ -15,7 +15,7 @@ namespace CharacterControl
 
         private float maxAirSpeed = 5f;
 
-        private Vector3 airMovement = new Vector3 (1f, 0, 0);
+        private Vector3 airMovement = new Vector3 (3f, 0, 0);
 
         // Use this for initialization
         void Start()
@@ -119,7 +119,8 @@ namespace CharacterControl
             {
                 animator.applyRootMotion = false;
                 animator.SetBool("jump", true);
-                rigidbody.velocity = rigidbody.velocity + new Vector3(0, 2f);
+                if(rigidbody.velocity.y < 5f)
+                    rigidbody.velocity = rigidbody.velocity + new Vector3(0, 2f);
             }
         }
 
@@ -134,7 +135,7 @@ namespace CharacterControl
 
         private void AddAirSpeed(Vector3 speed)
         {
-            if (rigidbody.velocity.x > -maxAirSpeed && speed.x < 0)
+            /*if (rigidbody.velocity.x > -maxAirSpeed && speed.x < 0)
             {
                 rigidbody.velocity = rigidbody.velocity + speed;
             }
@@ -153,7 +154,9 @@ namespace CharacterControl
             else
             {
                 rigidbody.velocity = rigidbody.velocity + speed;
-            }
+            }*/
+
+            rigidbody.velocity = new Vector3(0, rigidbody.velocity.y) + speed;
 
         }
 
