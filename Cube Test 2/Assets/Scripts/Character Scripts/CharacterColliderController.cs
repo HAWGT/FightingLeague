@@ -7,12 +7,14 @@ namespace CharacterControl
     public class CharacterColliderController : MonoBehaviour
     {
 
-        private bool attacking;
-
         [SerializeField]
         private GameObject fireBallPrefab;
 
         private Transform fireBallSpawn;
+
+        private bool attackingL = false;
+        private bool attackingM = false;
+        private bool attackingH = false;
 
         [SerializeField]
         private Collider cleft;
@@ -66,7 +68,7 @@ namespace CharacterControl
             Destroy(fireBall, 1.0f);
         }
 
-        private void EnableLM()
+        private void EnableL()
         {
             tleft.enabled = true;
             tright.enabled = true;
@@ -76,7 +78,20 @@ namespace CharacterControl
             laright.enabled = true;
             ualeft.enabled = true;
             uaright.enabled = true;
-            attacking = true;
+            attackingL = true;
+        }
+
+        private void EnableM()
+        {
+            tleft.enabled = true;
+            tright.enabled = true;
+            hleft.enabled = true;
+            hright.enabled = true;
+            laleft.enabled = true;
+            laright.enabled = true;
+            ualeft.enabled = true;
+            uaright.enabled = true;
+            attackingM = true;
         }
 
         private void EnableH()
@@ -85,10 +100,10 @@ namespace CharacterControl
             cright.enabled = true;
             fleft.enabled = true;
             fright.enabled = true;
-            attacking = true;
+            attackingH = true;
         }
 
-        private void DisableLM()
+        private void DisableL()
         {
             tleft.enabled = false;
             tright.enabled = false;
@@ -98,7 +113,20 @@ namespace CharacterControl
             laright.enabled = false;
             ualeft.enabled = false;
             uaright.enabled = false;
-            attacking = false;
+            attackingL = false;
+        }
+
+        private void DisableM()
+        {
+            tleft.enabled = false;
+            tright.enabled = false;
+            hleft.enabled = false;
+            hright.enabled = false;
+            laleft.enabled = false;
+            laright.enabled = false;
+            ualeft.enabled = false;
+            uaright.enabled = false;
+            attackingM = false;
         }
 
         private void DisableH()
@@ -107,7 +135,7 @@ namespace CharacterControl
             cright.enabled = false;
             fleft.enabled = false;
             fright.enabled = false;
-            attacking = false;
+            attackingH = false;
         }
 
         private void Start()
@@ -115,7 +143,8 @@ namespace CharacterControl
             myRigidBody = GetComponent<Rigidbody>();
             stateController = GetComponent<CharacterStateController>();
 
-            DisableLM();
+            DisableL();
+            DisableM();
             DisableH();
 
         }
@@ -129,15 +158,16 @@ namespace CharacterControl
             Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;
-            if(attacking == true && body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
+            if((attackingL || attackingM || attackingH) && body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
             {
                 //print("hit confirmed");
                 float dmg = 0;
-                if (Enums.AttackState.light == stateController.GetAttackState()) dmg = 500;
-                if (Enums.AttackState.medium == stateController.GetAttackState()) dmg = 700;
-                if (Enums.AttackState.heavy == stateController.GetAttackState()) dmg = 850;
+                if (attackingL) dmg = 500f;
+                if (attackingM) dmg = 700f;
+                if (attackingH) dmg = 850f;
                 body.GetComponent<CharacterStateController>().TakeDamage(dmg);
-                DisableLM();
+                DisableL();
+                DisableM();
                 DisableH();
             }
         }

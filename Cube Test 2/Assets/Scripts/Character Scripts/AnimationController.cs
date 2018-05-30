@@ -128,7 +128,7 @@ namespace CharacterControl
            if(animator.GetBool("hitstun"))
            {
                 animator.applyRootMotion = false;
-                rigidbody.velocity = rigidbody.velocity + new Vector3(dmg / 100, 1.0f);
+                rigidbody.velocity = rigidbody.velocity + new Vector3(dmg / 100, dmg / 100);
            }
         }
 

@@ -186,7 +186,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: EnableLM
+        functionName: EnableM
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 5717607be4253b74ca295e0e94905249,
           type: 3}
@@ -194,7 +194,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.89244187
-        functionName: DisableLM
+        functionName: DisableM
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 5717607be4253b74ca295e0e94905249,
           type: 3}
