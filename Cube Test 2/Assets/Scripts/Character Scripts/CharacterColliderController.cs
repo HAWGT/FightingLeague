@@ -48,6 +48,8 @@ namespace CharacterControl
         [SerializeField]
         private Collider b2;
 
+        private Animator myAnimator;
+
         private Rigidbody myRigidBody;
         private CharacterStateController stateController;
 
@@ -119,7 +121,8 @@ namespace CharacterControl
             ualeft.enabled = false;
             uaright.enabled = false;
             attackingL = false;
-        }
+            myAnimator.applyRootMotion = true;
+    }
 
         private void DisableM()
         {
@@ -132,6 +135,7 @@ namespace CharacterControl
             ualeft.enabled = false;
             uaright.enabled = false;
             attackingM = false;
+            myAnimator.applyRootMotion = true;
         }
 
         private void DisableH()
@@ -141,10 +145,12 @@ namespace CharacterControl
             fleft.enabled = false;
             fright.enabled = false;
             attackingH = false;
-        }
+            myAnimator.applyRootMotion = true;
+    }
 
         private void Start()
         {
+            myAnimator = GetComponent<AnimationController>().GetAnimator();
             myRigidBody = GetComponent<Rigidbody>();
             stateController = GetComponent<CharacterStateController>();
 
@@ -167,9 +173,20 @@ namespace CharacterControl
             {
                 //print("hit confirmed");
                 float dmg = 0;
-                if (attackingL) dmg = 500f;
-                if (attackingM) dmg = 700f;
-                if (attackingH) dmg = 850f;
+                if (attackingL)
+                {
+                    dmg = 500f;
+                }
+                if (attackingM)
+                {
+                    dmg = 700f;
+                    myRigidBody.GetComponent<AnimationController>().Push(dmg);
+                }
+                if (attackingH)
+                {
+                    dmg = 850f;
+                    myRigidBody.GetComponent<AnimationController>().Push(dmg);
+                }
                 body.GetComponent<CharacterStateController>().TakeDamage(dmg);
                 DisableL();
                 DisableM();
