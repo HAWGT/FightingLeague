@@ -10,8 +10,6 @@ namespace CharacterControl
         [SerializeField]
         private GameObject fireBallPrefab;
 
-        private Transform fireBallSpawn;
-
         private bool attackingL = false;
         private bool attackingM = false;
         private bool attackingH = false;
@@ -57,15 +55,22 @@ namespace CharacterControl
 
         private void SpawnFireBall()
         {
+            Vector3 temp = myRigidBody.position;
+            temp.y = temp.y + 0.7f;
+            float xPos = 0f;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1) xPos = 0.7f;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2) xPos = -0.7f;
+            temp.x = temp.x + xPos;
             var fireBall = (GameObject)Instantiate(
             fireBallPrefab,
-            fireBallSpawn.position,
-            fireBallSpawn.rotation);
+            temp,
+            myRigidBody.rotation);
 
-            fireBall.GetComponent<Rigidbody>().velocity = fireBall.transform.forward * 6;
+            fireBall.GetComponent<Rigidbody>().velocity = fireBall.transform.forward * 20;
+            fireBall.GetComponent<FireballScript>().SetCreator(myRigidBody);
 
             // Destroy the bullet after 2 seconds
-            Destroy(fireBall, 1.0f);
+            Destroy(fireBall, 2.0f);
         }
 
         private void EnableL()
