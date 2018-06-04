@@ -412,6 +412,14 @@ Prefab:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400048, guid: be80a17bc2a844f66af00b8467035a07, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 400048, guid: be80a17bc2a844f66af00b8467035a07, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be80a17bc2a844f66af00b8467035a07, type: 3}
   m_IsPrefabParent: 0
@@ -489,7 +497,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1220283
+  m_Radius: 0.5
   m_Center: {x: 0.10264421, y: 0.0010232502, z: 0.007917062}
 --- !u!135 &498483416
 SphereCollider:
@@ -549,7 +557,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1220283
+  m_Radius: 0.5
   m_Center: {x: -0.10264445, y: 0.0010232502, z: 0.007917298}
 --- !u!135 &498483421
 SphereCollider:
@@ -1697,7 +1705,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1220283
+  m_Radius: 0.5
   m_Center: {x: 0.10264421, y: 0.0010232502, z: 0.007917062}
 --- !u!135 &1405563305
 SphereCollider:
@@ -1709,7 +1717,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1220283
+  m_Radius: 0.5
   m_Center: {x: -0.10264445, y: 0.0010232502, z: 0.007917298}
 --- !u!65 &1405563306
 BoxCollider:
