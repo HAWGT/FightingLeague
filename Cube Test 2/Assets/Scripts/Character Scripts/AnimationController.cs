@@ -126,11 +126,27 @@ namespace CharacterControl
 
         public void Knock(float dmg)
         {
-           if(animator.GetBool("hitstun"))
-           {
                 animator.applyRootMotion = false;
-                rigidbody.velocity = rigidbody.velocity + new Vector3(dmg / 1000, dmg / 1000);
-           }
+                if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+                {
+                rigidbody.AddForce( new Vector3(- dmg / 1000, dmg / 1000));
+            } else if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+            {
+                    rigidbody.AddForce(new Vector3(dmg / 1000, dmg / 1000));
+                }
+        }
+
+        public void Push(float dmg)
+        {
+            animator.applyRootMotion = false;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+            {
+                rigidbody.AddForce(new Vector3(-dmg / 1000, 0));
+            }
+            else if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+            {
+                rigidbody.AddForce(new Vector3(dmg / 1000, 0));
+            }
         }
 
         private void AddAirSpeed(Vector3 speed)
@@ -158,6 +174,11 @@ namespace CharacterControl
 
             rigidbody.velocity = new Vector3(0, rigidbody.velocity.y) + speed;
 
+        }
+
+        public Animator GetAnimator()
+        {
+            return animator;
         }
 
         private void ResetStateParameters()
