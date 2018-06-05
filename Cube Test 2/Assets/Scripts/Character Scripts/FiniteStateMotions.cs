@@ -36,42 +36,28 @@ public class FiniteStateMachineSystem : MonoBehaviour{
     {
         map = new Dictionary<Transition, StateID>();
         frameWindow = 0;
-        StartCoroutine(CheckAction());
-    }
-
-    private IEnumerator CheckAction()
-    {
-        while (true)
-        {
-            if (stateID == StateID.Special1 || stateID == StateID.Special2 || stateID == StateID.Super)
-            {
-                //send start flag to animation
-                ResetMachine();
-            }
-            else if (frameWindow >= 1000)
-            {
-                ResetMachine();
-            }
-        }
+        StartCoroutine(CountTime());
     }
 
     private void ResetMachine()
     {
         frameWindow = 0;
         map = new Dictionary<Transition, StateID>();
+        StopAllCoroutines();
     }
 
-        private IEnumerator CountTime()
+
+    private IEnumerator CountTime()
+    {
+        yield return new WaitForSeconds(1f);
+        if (stateID == StateID.Special1 || stateID == StateID.Special2 || stateID == StateID.Super)
         {
-            while (true)
-            {
-                yield return new WaitForSeconds(.001f);
-                frameWindow++;
-            }
-            
+            //send start flag to animation
+        }
+        ResetMachine();
     }
 
-        public void AddTransition(Transition trans, StateID id)
+    public void AddTransition(Transition trans, StateID id)
     {
         //checks for invalid arguments
         if (trans == Transition.NullTransition)
