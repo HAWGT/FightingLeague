@@ -184,7 +184,7 @@ namespace CharacterControl
 
         public Animator GetAnimator()
         {
-            return animator;
+            return GetComponent<Animator>();
         }
 
         private void ResetStateParameters()
