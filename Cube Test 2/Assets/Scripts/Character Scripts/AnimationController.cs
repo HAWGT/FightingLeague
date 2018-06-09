@@ -28,6 +28,12 @@ namespace CharacterControl
             rigidbody = rb;
         }
 
+        public void Mirror()
+        {
+            bool state = animator.GetBool("mirrorAnimation");
+            animator.SetBool("mirrorAnimation", !state);
+        }
+
         public List<AnimatorControllerParameter> GetAllBoolAnimatorParameters()
         {
             List<AnimatorControllerParameter> list = new List<AnimatorControllerParameter>();
