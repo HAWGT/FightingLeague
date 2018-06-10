@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeavyAttackScript : StateMachineBehaviour
+public class NumPadSpecial1 : StateMachineBehaviour
 {
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBool("heavyAttack", false);
+        animator.SetBool("special1", true);
+        animator.SetBool("Reset", true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -17,8 +19,6 @@ public class HeavyAttackScript : StateMachineBehaviour
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-    // chamado no fim ou quando é interrompido
-    // desligar hitboxes
     //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
@@ -29,5 +29,5 @@ public class HeavyAttackScript : StateMachineBehaviour
     // OnStateIK is called right after Animator.OnAnimatorIK(). Code that sets up animation IK (inverse kinematics) should be implemented here.
     //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
     //
-    //}	
+    //}
 }

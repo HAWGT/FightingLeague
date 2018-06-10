@@ -7,7 +7,12 @@ namespace CharacterControl
     public class CharacterColliderController : MonoBehaviour
     {
 
-        private bool attacking;
+        [SerializeField]
+        private GameObject fireBallPrefab;
+
+        private bool attackingL = false;
+        private bool attackingM = false;
+        private bool attackingH = false;
 
         [SerializeField]
         private Collider cleft;
@@ -43,12 +48,34 @@ namespace CharacterControl
         [SerializeField]
         private Collider b2;
 
+        private Animator myAnimator;
+
         private Rigidbody myRigidBody;
         private CharacterStateController stateController;
 
         // Use this for initialization
 
-        private void EnableLM()
+        private void SpawnFireBall()
+        {
+            Vector3 temp = myRigidBody.position;
+            temp.y = temp.y + 0.7f;
+            float xPos = 0f;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1) xPos = 0.7f;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2) xPos = -0.7f;
+            temp.x = temp.x + xPos;
+            var fireBall = (GameObject)Instantiate(
+            fireBallPrefab,
+            temp,
+            myRigidBody.rotation);
+
+            fireBall.GetComponent<Rigidbody>().velocity = fireBall.transform.forward * 20;
+            fireBall.GetComponent<FireballScript>().SetCreator(myRigidBody);
+
+            // Destroy the bullet after 2 seconds
+            Destroy(fireBall, 2.0f);
+        }
+
+        private void EnableL()
         {
             tleft.enabled = true;
             tright.enabled = true;
@@ -58,7 +85,20 @@ namespace CharacterControl
             laright.enabled = true;
             ualeft.enabled = true;
             uaright.enabled = true;
-            attacking = true;
+            attackingL = true;
+        }
+
+        private void EnableM()
+        {
+            tleft.enabled = true;
+            tright.enabled = true;
+            hleft.enabled = true;
+            hright.enabled = true;
+            laleft.enabled = true;
+            laright.enabled = true;
+            ualeft.enabled = true;
+            uaright.enabled = true;
+            attackingM = true;
         }
 
         private void EnableH()
@@ -67,10 +107,10 @@ namespace CharacterControl
             cright.enabled = true;
             fleft.enabled = true;
             fright.enabled = true;
-            attacking = true;
+            attackingH = true;
         }
 
-        private void DisableLM()
+        private void DisableL()
         {
             tleft.enabled = false;
             tright.enabled = false;
@@ -80,7 +120,22 @@ namespace CharacterControl
             laright.enabled = false;
             ualeft.enabled = false;
             uaright.enabled = false;
-            attacking = false;
+            attackingL = false;
+            myAnimator.applyRootMotion = true;
+    }
+
+        private void DisableM()
+        {
+            tleft.enabled = false;
+            tright.enabled = false;
+            hleft.enabled = false;
+            hright.enabled = false;
+            laleft.enabled = false;
+            laright.enabled = false;
+            ualeft.enabled = false;
+            uaright.enabled = false;
+            attackingM = false;
+            myAnimator.applyRootMotion = true;
         }
 
         private void DisableH()
@@ -89,16 +144,19 @@ namespace CharacterControl
             cright.enabled = false;
             fleft.enabled = false;
             fright.enabled = false;
-            attacking = false;
-        }
+            attackingH = false;
+            myAnimator.applyRootMotion = true;
+    }
 
         private void Start()
         {
+            myAnimator = GetComponent<AnimationController>().GetAnimator();
             myRigidBody = GetComponent<Rigidbody>();
             stateController = GetComponent<CharacterStateController>();
 
-            DisableLM();
-            DisableLM();
+            DisableL();
+            DisableM();
+            DisableH();
 
         }
 
@@ -111,14 +169,28 @@ namespace CharacterControl
             Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;
-            if(attacking == true && body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
+            if((attackingL || attackingM || attackingH) && body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
             {
                 //print("hit confirmed");
                 float dmg = 0;
-                if (Enums.AttackState.light == stateController.GetAttackState()) dmg = 500;
-                if (Enums.AttackState.medium == stateController.GetAttackState()) dmg = 700;
-                if (Enums.AttackState.heavy == stateController.GetAttackState()) dmg = 850;
+                if (attackingL)
+                {
+                    dmg = 500f;
+                }
+                if (attackingM)
+                {
+                    dmg = 700f;
+                    myRigidBody.GetComponent<AnimationController>().Push(dmg);
+                }
+                if (attackingH)
+                {
+                    dmg = 850f;
+                    myRigidBody.GetComponent<AnimationController>().Push(dmg);
+                }
                 body.GetComponent<CharacterStateController>().TakeDamage(dmg);
+                DisableL();
+                DisableM();
+                DisableH();
             }
         }
     }
