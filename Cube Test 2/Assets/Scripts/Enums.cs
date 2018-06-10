@@ -19,7 +19,9 @@ namespace CharacterControl
 
         public enum Inputs
         {
-            Neutral, Forward, Backward, Up, Down, DownBack, DownForward, Attack
+            //this ID represents non-existant state in system
+            NullStateID = 0, Up,
+            Neutral, Down, DownBack, Back, DownFront, Front, Light, Medium, Heavy, Special1, Special2, Super
         }
 
         public enum FacingSide
@@ -30,6 +32,14 @@ namespace CharacterControl
         public enum NumPad
         {
             Left, Down, Right, Up, Neutral
+        }
+
+        public enum Transition
+        {
+            //represents non-existing transition in system
+            NullTransition = 0,
+            ResetToNeutral, NeutralDown, DownToDB, DBToBack, BackToMedium, DownToDF,
+            DFToFront, FrontToMedium, FrontToHeavy, DownDown, BDBD, BackBack, DFDF, FrontFront
         }
     }
 }
