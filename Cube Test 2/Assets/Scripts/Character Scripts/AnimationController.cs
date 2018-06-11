@@ -88,7 +88,13 @@ namespace CharacterControl
         {
             if (animator.GetBool("airborn"))
             {
-                AddAirSpeed(airMovement);
+                if (rigidbody.GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+                {
+                    AddAirSpeed(airMovement);
+                } else
+                {
+                    AddAirSpeed(-airMovement);
+                }
             }
             else
             {
@@ -100,7 +106,14 @@ namespace CharacterControl
         {
             if (animator.GetBool("airborn"))
             {
-                AddAirSpeed(-airMovement);
+                if (rigidbody.GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+                {
+                    AddAirSpeed(airMovement);
+                }
+                else
+                {
+                    AddAirSpeed(-airMovement);
+                }
             }
             else
             {
@@ -155,6 +168,10 @@ namespace CharacterControl
             }
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e115b5b03b20b57808ba7f68870d06d07ad40851
         private void AddAirSpeed(Vector3 speed)
         {
             /*if (rigidbody.velocity.x > -maxAirSpeed && speed.x < 0)

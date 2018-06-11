@@ -79,8 +79,8 @@ namespace CharacterControl
         public void SetFacingSide(Enums.FacingSide face)
         {
             this.facing = face;
-            //GetComponent<AnimationController>().Mirror();
-            myRigidbody.transform.Rotate(new Vector3(0, 0, 0), 180);
+            GetComponent<AnimationController>().Mirror();
+            myRigidbody.transform.Rotate(new Vector3(0, 180.0f, 0));
         }
 
         // Use this for initialization
