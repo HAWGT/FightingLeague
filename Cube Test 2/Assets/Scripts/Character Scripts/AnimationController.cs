@@ -88,7 +88,13 @@ namespace CharacterControl
         {
             if (animator.GetBool("airborn"))
             {
-                AddAirSpeed(airMovement);
+                if (rigidbody.GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+                {
+                    AddAirSpeed(airMovement);
+                } else
+                {
+                    AddAirSpeed(-airMovement);
+                }
             }
             else
             {
@@ -100,7 +106,14 @@ namespace CharacterControl
         {
             if (animator.GetBool("airborn"))
             {
-                AddAirSpeed(-airMovement);
+                if (rigidbody.GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+                {
+                    AddAirSpeed(airMovement);
+                }
+                else
+                {
+                    AddAirSpeed(-airMovement);
+                }
             }
             else
             {
@@ -155,14 +168,6 @@ namespace CharacterControl
             }
         }
 
-        public void Knock(float dmg)
-        {
-            if(animator.GetBool("hitstun"))
-            {
-                animator.applyRootMotion = false;
-                rigidbody.velocity = rigidbody.velocity + new Vector3(dmg / 1000, dmg / 1000);
-            }
-        }
 
         private void AddAirSpeed(Vector3 speed)
         {

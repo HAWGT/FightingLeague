@@ -79,8 +79,8 @@ namespace CharacterControl
         public void SetFacingSide(Enums.FacingSide face)
         {
             this.facing = face;
-            //GetComponent<AnimationController>().Mirror();
-            myRigidbody.transform.Rotate(new Vector3(0, 0, 0), 180);
+            GetComponent<AnimationController>().Mirror();
+            myRigidbody.transform.Rotate(new Vector3(0, 180.0f, 0));
         }
 
         // Use this for initialization
@@ -137,14 +137,6 @@ namespace CharacterControl
             if (playerID == 1) ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
             if (playerID == 2) ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
 
-<<<<<<< HEAD
-            List<AnimatorControllerParameter> parameter = FindAnimatorParameter(new string[] { "hitstun" });
-
-            animControl.TurnAnimatorParametersOn(parameter);
-            animControl.Knock(dmg);
-
-=======
->>>>>>> Mirror_Movement&MotionControls
             if (healthPoints <= 0)
             {
                 animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "KO" }));
