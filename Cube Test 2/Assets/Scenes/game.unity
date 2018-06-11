@@ -218,7 +218,7 @@ MonoBehaviour:
   attackState: 0
   facing: 0
   charState: 0
-  motionStateMachine: {fileID: 381051712}
+  motionStateMachine: {fileID: 0}
 --- !u!54 &381051711
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2082,7 +2082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fcbaa9430eb35f419f63bfd6d1eea80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 498483431}
+  cchar: {fileID: 381051709}
   p1: {fileID: 381051709}
   p2: {fileID: 1405563278}
 --- !u!1 &2068435217
