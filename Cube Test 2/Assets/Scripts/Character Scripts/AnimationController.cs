@@ -155,15 +155,6 @@ namespace CharacterControl
             }
         }
 
-        public void Knock(float dmg)
-        {
-            if(animator.GetBool("hitstun"))
-            {
-                animator.applyRootMotion = false;
-                rigidbody.velocity = rigidbody.velocity + new Vector3(dmg / 1000, dmg / 1000);
-            }
-        }
-
         private void AddAirSpeed(Vector3 speed)
         {
             /*if (rigidbody.velocity.x > -maxAirSpeed && speed.x < 0)
