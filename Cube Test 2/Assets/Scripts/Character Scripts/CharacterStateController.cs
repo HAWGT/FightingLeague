@@ -142,6 +142,7 @@ namespace CharacterControl
             animControl.TurnAnimatorParametersOn(parameter);
             animControl.Knock(dmg);
 
+
             if (healthPoints <= 0)
             {
                 animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "KO" }));

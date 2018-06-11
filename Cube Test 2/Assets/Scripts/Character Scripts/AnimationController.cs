@@ -168,10 +168,8 @@ namespace CharacterControl
             }
         }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> e115b5b03b20b57808ba7f68870d06d07ad40851
+
         private void AddAirSpeed(Vector3 speed)
         {
             /*if (rigidbody.velocity.x > -maxAirSpeed && speed.x < 0)
