@@ -15,6 +15,9 @@ namespace CharacterControl
         [SerializeField]
         private GameObject spinKickPrefab;
 
+        [SerializeField]
+        private GameObject guardBreakPrefab;
+
         private bool attackingL = false;
         private bool attackingM = false;
         private bool attackingH = false;
@@ -43,15 +46,6 @@ namespace CharacterControl
         private Collider ualeft;
         [SerializeField]
         private Collider uaright;
-
-        [SerializeField]
-        private Collider h1;
-        [SerializeField]
-        private Collider h2;
-        [SerializeField]
-        private Collider b1;
-        [SerializeField]
-        private Collider b2;
 
         private Animator myAnimator;
 
@@ -90,6 +84,29 @@ namespace CharacterControl
            Quaternion.Euler(new Vector3(0,0,0)) );
             spinKick.GetComponent<SpinKickScript>().SetCreator(myRigidBody);
            Destroy(spinKick, 0.33f);
+        }
+
+        private void GuardBreak()
+        {
+            Vector3 temp = myRigidBody.position;
+            temp.y = temp.y + 1;
+            Quaternion rot = Quaternion.Euler(new Vector3(0, 0, 0));
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+            {
+                temp.x += 1.25f;
+                //rot = Quaternion.Euler(new Vector3(0, 90, 0));
+            }
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+            {
+                temp.x -= 1.25f;
+                //rot = Quaternion.Euler(new Vector3(0, 270, 0));
+            }
+            var guardBreak = (GameObject)Instantiate(
+           guardBreakPrefab,
+           temp,
+           rot);
+            guardBreak.GetComponent<FlurryScript>().SetCreator(myRigidBody);
+            Destroy(guardBreak, 0.75f);
         }
 
         private void EnableL()
@@ -166,7 +183,7 @@ namespace CharacterControl
             fright.enabled = false;
             attackingH = false;
             myAnimator.applyRootMotion = true;
-    }
+        }
 
         private void Start()
         {
@@ -177,7 +194,6 @@ namespace CharacterControl
             DisableL();
             DisableM();
             DisableH();
-
         }
 
         private void OnCollisionEnter(Collision collision)

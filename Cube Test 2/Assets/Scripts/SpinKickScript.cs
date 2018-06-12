@@ -24,10 +24,6 @@ namespace CharacterControl
         }
         private void OnCollisionEnter(Collision collision)
         {
-            foreach (ContactPoint contact in collision.contacts)
-            {
-                Debug.DrawRay(contact.point, contact.normal, Color.white);
-            }
             Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
             {
