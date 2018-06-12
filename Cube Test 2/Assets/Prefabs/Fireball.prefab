@@ -58,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7e9852481d493384fb2f82376c0b77d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,7 +98,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 124
+  m_Constraints: 12
   m_CollisionDetection: 0
 --- !u!114 &114505188761100562
 MonoBehaviour:
@@ -111,6 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a12be02564e694289ccb1d43db2646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 1576722933527192, guid: c29f7ec302c89394080966767d27bcb9,
+    type: 2}
+  ownCollider: {fileID: 135461811983215492}
 --- !u!135 &135461811983215492
 SphereCollider:
   m_ObjectHideFlags: 1
