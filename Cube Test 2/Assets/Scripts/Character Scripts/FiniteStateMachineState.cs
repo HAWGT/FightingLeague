@@ -52,8 +52,25 @@ namespace CharacterControl
         }
 
 
-        public Enums.Inputs PerformTransition(Enums.Inputs input)
+        public Enums.Inputs PerformTransition(Enums.Inputs input, Enums.AttackState attack)
         {
+            if (attack != Enums.AttackState.none)
+            {
+                switch (attack)
+                {
+                    case Enums.AttackState.light:
+                        input = Enums.Inputs.Light;
+                        break;
+                    case Enums.AttackState.medium:
+                        input = Enums.Inputs.Medium;
+                        break;
+                    case Enums.AttackState.heavy:
+                        input = Enums.Inputs.Heavy;
+                        break;
+                    default:
+                        break;
+                }
+            }
             switch (currentState)
             {
                 case Enums.Inputs.Neutral:
@@ -117,6 +134,9 @@ namespace CharacterControl
                         case Enums.Inputs.Back:
                             break;
 
+                        case Enums.Inputs.Neutral:
+                            break;
+
                         default:
                             ResetMachine();
                             break;
@@ -153,6 +173,9 @@ namespace CharacterControl
                             break;
 
                         case Enums.Inputs.Front:
+                            break;
+
+                        case Enums.Inputs.Neutral:
                             break;
 
                         default:
