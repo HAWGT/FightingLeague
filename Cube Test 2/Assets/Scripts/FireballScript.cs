@@ -21,10 +21,7 @@ namespace CharacterControl
 
         private void OnCollisionEnter(Collision collision)
         {
-            foreach (ContactPoint contact in collision.contacts)
-            {
-                Debug.DrawRay(contact.point, contact.normal, Color.white);
-            }
+
             Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
             {
@@ -34,6 +31,7 @@ namespace CharacterControl
             else if (body != creator)
             {
                 ownCollider.enabled = false;
+                print("Hit on " + collision.collider.ToString());
                 Destroy(gameObject);
                 if (body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
                 {
