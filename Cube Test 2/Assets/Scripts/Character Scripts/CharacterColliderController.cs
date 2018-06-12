@@ -7,6 +7,8 @@ namespace CharacterControl
     public class CharacterColliderController : MonoBehaviour
     {
 
+        private bool flaggedAtk = false;
+
         [SerializeField]
         private GameObject fireBallPrefab;
 
@@ -101,6 +103,7 @@ namespace CharacterControl
             ualeft.enabled = true;
             uaright.enabled = true;
             attackingL = true;
+            flaggedAtk = false;
         }
 
         private void EnableM()
@@ -114,6 +117,7 @@ namespace CharacterControl
             ualeft.enabled = true;
             uaright.enabled = true;
             attackingM = true;
+            flaggedAtk = false;
         }
 
         private void EnableH()
@@ -123,6 +127,7 @@ namespace CharacterControl
             fleft.enabled = true;
             fright.enabled = true;
             attackingH = true;
+            flaggedAtk = false;
         }
 
         private void DisableL()
@@ -184,7 +189,7 @@ namespace CharacterControl
             Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;
-            if((attackingL || attackingM || attackingH) && body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
+            if((attackingL || attackingM || attackingH) && body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking && !flaggedAtk)
             {
                 //print("hit confirmed");
                 float dmg = 0;
@@ -206,6 +211,7 @@ namespace CharacterControl
                 DisableL();
                 DisableM();
                 DisableH();
+                flaggedAtk = true;
             }
         }
     }

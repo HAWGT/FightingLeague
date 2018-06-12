@@ -10,6 +10,8 @@ namespace CharacterControl
 
         private Rigidbody creator;
 
+        private bool flagged = false;
+
         [SerializeField]
         private GameObject explosionPrefab;
 
@@ -36,16 +38,16 @@ namespace CharacterControl
             {
                 ownCollider.enabled = false;
                 Destroy(gameObject);
-                if (body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
+                if (body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking && !flagged)
                 {
                     body.GetComponent<CharacterStateController>().TakeDamage(1500);
+                    ContactPoint contact = collision.contacts[0];
+                    Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+                    Vector3 pos = body.position;
+                    var explosion = (GameObject)Instantiate(explosionPrefab, pos, rot);
+                    Destroy(explosion, 0.25f);
+                    flagged = true;
                 }
-                ContactPoint contact = collision.contacts[0];
-                Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-                Vector3 pos = contact.point;
-                var explosion = (GameObject)Instantiate(explosionPrefab, pos, rot);
-                
-                Destroy(explosion, 0.25f);
             }
         }
     }
