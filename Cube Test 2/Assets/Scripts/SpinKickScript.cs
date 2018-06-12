@@ -1,18 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace CharacterControl
 {
-    public class FireballScript : MonoBehaviour
+    public class SpinKickScript : MonoBehaviour
     {
+
         private Rigidbody creator;
 
         public void SetCreator(Rigidbody rb)
         {
             this.creator = rb;
         }
-
         private void OnCollisionEnter(Collision collision)
         {
             foreach (ContactPoint contact in collision.contacts)
@@ -34,6 +35,5 @@ namespace CharacterControl
                 }
             }
         }
-
     }
 }

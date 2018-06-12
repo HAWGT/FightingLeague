@@ -10,6 +10,9 @@ namespace CharacterControl
         [SerializeField]
         private GameObject fireBallPrefab;
 
+        [SerializeField]
+        private GameObject spinKickPrefab;
+
         private bool attackingL = false;
         private bool attackingM = false;
         private bool attackingH = false;
@@ -59,10 +62,8 @@ namespace CharacterControl
         {
             Vector3 temp = myRigidBody.position;
             temp.y = temp.y + 0.7f;
-            float xPos = 0f;
-            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1) xPos = 0.7f;
-            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2) xPos = -0.7f;
-            temp.x = temp.x + xPos;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1) temp.x += 0.7f;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2) temp.x -= 0.7f;
             var fireBall = (GameObject)Instantiate(
             fireBallPrefab,
             temp,
@@ -73,6 +74,20 @@ namespace CharacterControl
 
             // Destroy the bullet after 2 seconds
             Destroy(fireBall, 2.0f);
+        }
+
+        private void SpinKick()
+        {
+            Vector3 temp = myRigidBody.position;
+            temp.y = temp.y + 1;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1) temp.x += 1;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2) temp.x -= 1;
+            var spinKick = (GameObject)Instantiate(
+           spinKickPrefab,
+           temp,
+           Quaternion.Euler(new Vector3(0,0,0)) );
+            spinKick.GetComponent<SpinKickScript>().SetCreator(myRigidBody);
+           Destroy(spinKick, 0.33f);
         }
 
         private void EnableL()
