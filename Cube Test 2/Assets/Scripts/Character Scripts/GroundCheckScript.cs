@@ -18,16 +18,6 @@ namespace AnimatorGeneric
 
         private void OnTriggerEnter(Collider other)
         {
-            bool wf, wb;
-            wf = cchar.GetComponent<Animator>().GetBool("walkingForward");
-            wb = cchar.GetComponent<Animator>().GetBool("walkingBackward");
-            if(wf==true &&wb==true)
-            {
-                print("Here");
-
-                cchar.GetComponent<Animator>().SetBool("walkingForward", false);
-                cchar.GetComponent<Animator>().SetBool("walkingBackward", false);
-            }
             if ((p1.transform.position.x < p2.transform.position.x) && p1.GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2 && p2.GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1) {
                 p1.GetComponent<CharacterStateController>().SetFacingSide(Enums.FacingSide.P1);
                 p2.GetComponent<CharacterStateController>().SetFacingSide(Enums.FacingSide.P2);
@@ -39,6 +29,18 @@ namespace AnimatorGeneric
             cchar.GetComponent<Animator>().applyRootMotion = true;
             cchar.GetComponent<Animator>().SetBool("airborn", false);
             
+        }
+
+        private void Update()
+        {
+            bool wf, wb;
+            wf = cchar.GetComponent<Animator>().GetBool("walkingForward");
+            wb = cchar.GetComponent<Animator>().GetBool("walkingBackward");
+            if (wf == true && wb == true)
+            {
+                cchar.GetComponent<Animator>().SetBool("walkingForward", false);
+                cchar.GetComponent<Animator>().SetBool("walkingBackward", false);
+            }
         }
     }
     
