@@ -127,9 +127,6 @@ namespace CharacterControl
 
         public void TakeDamage(float dmg)
         {
-            motionStateMachine.ResetMachine();
-
-
             animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "hitstun" }));
             animControl.Knock(dmg);
 
@@ -244,9 +241,8 @@ namespace CharacterControl
                 lastInput = Enums.Inputs.Up;
             }
 
-            lastInput = motionStateMachine.PerformTransition(lastInput);
-            //não está a devolver attackstates
-            Console.WriteLine(lastInput.ToString());
+            lastInput = motionStateMachine.PerformTransition(lastInput, attackState);
+            
 
             if (attackState != Enums.AttackState.none)
             {

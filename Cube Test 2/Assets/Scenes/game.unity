@@ -1820,11 +1820,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 2
   groundCheck: {fileID: 1952957822}
+<<<<<<< HEAD
+  animControl: {fileID: 381051714}
+=======
   animControl: {fileID: 1405563312}
+>>>>>>> 00e9b19c78a59801bc4628bd4f16c0260809efcd
   attackState: 0
   facing: 1
   charState: 0
-  motionStateMachine: {fileID: 0}
+  motionStateMachine: {fileID: 381051712}
 --- !u!54 &1405563314
 Rigidbody:
   m_ObjectHideFlags: 0
