@@ -191,7 +191,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 292168431}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -9.05, y: 6, z: 2.14}
+  m_LocalPosition: {x: -8.73, y: 6, z: 2.14}
   m_LocalScale: {x: 17.61, y: 12, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -284,6 +284,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireBallPrefab: {fileID: 1728083492888628, guid: d7a54093b11d33044a7d8e43713fba45,
+    type: 2}
+  spinKickPrefab: {fileID: 1902222701713442, guid: fc680133376f18248a3bb34edbee0b42,
     type: 2}
   cleft: {fileID: 498483428}
   cright: {fileID: 498483424}
@@ -1171,7 +1173,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 805092843}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 8.97, y: 6, z: 2.14}
+  m_LocalPosition: {x: 8.67, y: 6, z: 2.14}
   m_LocalScale: {x: 17.61, y: 12, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1595,6 +1597,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireBallPrefab: {fileID: 1728083492888628, guid: d7a54093b11d33044a7d8e43713fba45,
     type: 2}
+  spinKickPrefab: {fileID: 1902222701713442, guid: fc680133376f18248a3bb34edbee0b42,
+    type: 2}
   cleft: {fileID: 1405563310}
   cright: {fileID: 1405563309}
   fleft: {fileID: 1405563308}
@@ -1802,7 +1806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c77805fdb39c934cb647e5726245e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 1405563362}
 --- !u!114 &1405563313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1816,7 +1820,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 2
   groundCheck: {fileID: 1952957822}
+<<<<<<< HEAD
   animControl: {fileID: 381051714}
+=======
+  animControl: {fileID: 1405563312}
+>>>>>>> 00e9b19c78a59801bc4628bd4f16c0260809efcd
   attackState: 0
   facing: 1
   charState: 0
@@ -1848,6 +1856,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.46507928, y: 0.4972903, z: 0.33810484}
   m_Center: {x: -0.0001547337, y: 0.20926416, z: -0.0059008785}
+--- !u!95 &1405563362 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 9500000, guid: be80a17bc2a844f66af00b8467035a07,
+    type: 3}
+  m_PrefabInternal: {fileID: 1405563277}
 --- !u!4 &1405563363 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: be80a17bc2a844f66af00b8467035a07, type: 3}
