@@ -10,6 +10,7 @@ public class HeavyAttackScript : StateMachineBehaviour
         animator.SetBool("heavyAttack", false);
     }
 
+
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
     //

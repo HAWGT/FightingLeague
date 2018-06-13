@@ -160,11 +160,11 @@ namespace CharacterControl
             animator.applyRootMotion = false;
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
             {
-                rigidbody.AddForce(new Vector3(-dmg / 1000, 0));
+                rigidbody.AddForce(new Vector3(dmg / 1000, 0));
             }
             else if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
             {
-                rigidbody.AddForce(new Vector3(dmg / 1000, 0));
+                rigidbody.AddForce(new Vector3(-dmg / 1000, 0));
             }
         }
 
