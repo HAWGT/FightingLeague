@@ -186,7 +186,7 @@ namespace CharacterControl
            temp,
            rot);
             beam.GetComponent<SuperBeamScript>().SetCreator(myRigidBody);
-            Destroy(beam, 1.74f);
+            Destroy(beam, 1f);
 
             myRigidBody.constraints = RigidbodyConstraints.FreezeAll;
             StartCoroutine(FinishBeam()); //por alguma razão o 2º evento na animação não é ativado
@@ -194,7 +194,7 @@ namespace CharacterControl
 
         IEnumerator FinishBeam()
         {
-            yield return new WaitForSeconds(1.74f);
+            yield return new WaitForSeconds(1f);
             myRigidBody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         }
 

@@ -41,7 +41,7 @@ namespace CharacterControl
             {
                 if (body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
                 {
-                    body.GetComponent<CharacterStateController>().TakeDamage(10);
+                    body.GetComponent<CharacterStateController>().TakeDamage(15);
                 }
             }
         }
