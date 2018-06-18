@@ -10,6 +10,7 @@ namespace CharacterControl
         private Rigidbody creator;
 
         private bool flagged = false;
+        private Rigidbody target;
         public void SetCreator(Rigidbody rb)
         {
             this.creator = rb;
@@ -30,7 +31,7 @@ namespace CharacterControl
                 }
             }
         }*/
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             Rigidbody body = other.attachedRigidbody;
             if (body == null || body.isKinematic)
@@ -39,10 +40,15 @@ namespace CharacterControl
             }
             else if (body != creator)
             {
-                if (body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
-                {
-                    body.GetComponent<CharacterStateController>().TakeDamage(15);
-                }
+                target = body;
+                InvokeRepeating("RemoveHP", 0.0f, 0.02f);
+            }
+        }
+        private void RemoveHP()
+        {
+            if (target.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
+            {
+                target.GetComponent<CharacterStateController>().TakeDamage(17);
             }
         }
     }
