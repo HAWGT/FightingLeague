@@ -42,7 +42,7 @@ namespace CharacterControl
 
         private float healthPoints = 10000;
 
-        private int superBar = 0;
+        private float superBar = 0;
 
         private Enums.Inputs lastInput;
 

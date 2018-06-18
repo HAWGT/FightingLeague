@@ -15,9 +15,6 @@ namespace CharacterControl
         [SerializeField]
         private GameObject explosionPrefab;
 
-        [SerializeField]
-        private Collider ownCollider;
-
         public void SetCreator(Rigidbody rb)
         {
             this.creator = rb;
@@ -32,7 +29,6 @@ namespace CharacterControl
             }
             else if (body != creator)
             {
-                ownCollider.enabled = false;
                 Destroy(gameObject);
                 if (body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking && !flagged)
                 {

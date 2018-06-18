@@ -18,6 +18,18 @@ namespace CharacterControl
         [SerializeField]
         private GameObject guardBreakPrefab;
 
+        [SerializeField]
+        private GameObject reflectPrefab;
+
+        [SerializeField]
+        private GameObject beamPrefab;
+
+        [SerializeField]
+        private GameObject teleportPrefab;
+
+        [SerializeField]
+        private GameObject otherPlayer;
+
         private bool attackingL = false;
         private bool attackingM = false;
         private bool attackingH = false;
@@ -65,7 +77,7 @@ namespace CharacterControl
             temp,
             myRigidBody.rotation);
 
-            fireBall.GetComponent<Rigidbody>().velocity = fireBall.transform.forward * 20;
+            fireBall.GetComponent<Rigidbody>().velocity = fireBall.transform.forward * 30;
             fireBall.GetComponent<FireballScript>().SetCreator(myRigidBody);
 
             // Destroy the bullet after 2 seconds
@@ -107,6 +119,116 @@ namespace CharacterControl
            rot);
             guardBreak.GetComponent<FlurryScript>().SetCreator(myRigidBody);
             Destroy(guardBreak, 0.75f);
+        }
+
+        private void MidDash()
+        {
+            float x = 7f;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+            {
+                if (myRigidBody.transform.position.x + x > 7f)
+                {
+                    x = 7f - myRigidBody.transform.position.x;
+                    if(otherPlayer.transform.position.x > 5.5f) otherPlayer.transform.position = new Vector3(5.5f, otherPlayer.transform.position.y, otherPlayer.transform.position.z);
+                }
+                myRigidBody.transform.position += new Vector3(x, 0.33f, 0.0f);
+            }
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+            {
+                if (myRigidBody.transform.position.x - x < -7f)
+                {
+                    x = 7f + myRigidBody.transform.position.x;
+                    if (otherPlayer.transform.position.x < -5.5f) otherPlayer.transform.position = new Vector3(-5.5f, otherPlayer.transform.position.y, otherPlayer.transform.position.z);
+                } 
+                myRigidBody.transform.position += new Vector3(-x, 0.33f, 0.0f);
+            }
+        }
+
+        private void Reflect()
+        {
+            Vector3 temp = myRigidBody.position;
+            temp.y = temp.y + 1;
+            Quaternion rot = Quaternion.Euler(new Vector3(0, 0, 0));
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+            {
+                temp.x += 0.7f;
+                //rot = Quaternion.Euler(new Vector3(0, 90, 0));
+            }
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+            {
+                temp.x -= 0.7f;
+                //rot = Quaternion.Euler(new Vector3(0, 270, 0));
+            }
+            var reflect = (GameObject)Instantiate(
+           reflectPrefab,
+           temp,
+           rot);
+            Destroy(reflect, 0.35f);
+        }
+
+        private void Beam()
+        {
+            Vector3 temp = myRigidBody.position;
+            temp.y = temp.y + 1;
+            Quaternion rot = Quaternion.Euler(new Vector3(90, 0, 90));
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+            {
+                temp.x += 15.5f;
+                //rot = Quaternion.Euler(new Vector3(0, 90, 0));
+            }
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+            {
+                temp.x -= 15.5f;
+                //rot = Quaternion.Euler(new Vector3(0, 270, 0));
+            }
+            var beam = (GameObject)Instantiate(
+           beamPrefab,
+           temp,
+           rot);
+            beam.GetComponent<SuperBeamScript>().SetCreator(myRigidBody);
+            Destroy(beam, 1.74f);
+
+            myRigidBody.constraints = RigidbodyConstraints.FreezeAll;
+            StartCoroutine(FinishBeam()); //por alguma razão o 2º evento na animação não é ativado
+        }
+
+        IEnumerator FinishBeam()
+        {
+            yield return new WaitForSeconds(1.74f);
+            myRigidBody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        }
+
+        private void Teleport()
+        {
+            float x = 1.5f;
+            Quaternion rot = Quaternion.Euler(new Vector3(0, 0, 0));
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+            {
+                if (otherPlayer.transform.position.x + x > 7f)
+                {
+                    x = 0f;
+                    if (otherPlayer.transform.position.x > 5.5f) otherPlayer.transform.position = new Vector3(5.5f, otherPlayer.transform.position.y, otherPlayer.transform.position.z);
+                }
+                myRigidBody.transform.position = new Vector3(otherPlayer.transform.position.x + x, myRigidBody.transform.position.y + 1.83f, myRigidBody.transform.position.z);
+            }
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+            {
+                if (otherPlayer.transform.position.x - x < -7f)
+                {
+                    x = 0f;
+                    if (otherPlayer.transform.position.x < -5.5f) otherPlayer.transform.position = new Vector3(-5.5f, otherPlayer.transform.position.y, otherPlayer.transform.position.z);
+                }
+                myRigidBody.transform.position = new Vector3(otherPlayer.transform.position.x - x, myRigidBody.transform.position.y + 1.83f, myRigidBody.transform.position.z);
+            }
+
+            Vector3 temp = new Vector3(myRigidBody.transform.position.x, 0.8f, myRigidBody.transform.position.z);
+            var stand = (GameObject)Instantiate(
+           teleportPrefab,
+           temp,
+           rot);
+
+            Destroy(stand, 0.5f);
+
         }
 
         private void EnableL()
