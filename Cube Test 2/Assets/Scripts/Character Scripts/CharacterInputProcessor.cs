@@ -86,17 +86,17 @@ namespace CharacterControl
             if (Input.GetButtonDown("Fire1"))
             {
                 stateController.SetCharState(Enums.CharState.attacking);
-                stateController.SetAttackState(Enums.AttackState.light);
+                stateController.AddAttackState(Enums.AttackState.light);
             }
             if (Input.GetButtonDown("Fire2"))
             {
                 stateController.SetCharState(Enums.CharState.attacking);
-                stateController.SetAttackState(Enums.AttackState.medium);
+                stateController.AddAttackState(Enums.AttackState.medium);
             }
             if (Input.GetButtonDown("Fire3"))
             {
                 stateController.SetCharState(Enums.CharState.attacking);
-                stateController.SetAttackState(Enums.AttackState.heavy);
+                stateController.AddAttackState(Enums.AttackState.heavy);
             }
         }
     }

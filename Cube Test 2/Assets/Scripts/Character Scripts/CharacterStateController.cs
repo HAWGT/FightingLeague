@@ -22,7 +22,7 @@ namespace CharacterControl
         /// </summary>
 
         [SerializeField]
-        private Enums.AttackState attackState;
+        private List<Enums.AttackState> attackStates;
 
         [SerializeField]
         private Enums.FacingSide facing;
@@ -56,9 +56,9 @@ namespace CharacterControl
             return this.charState;
         }
 
-        public Enums.AttackState GetAttackState()
+        public List<Enums.AttackState> GetAttackState()
         {
-            return this.attackState;
+            return this.attackStates;
         }
 
         public float GetHP()
@@ -87,7 +87,7 @@ namespace CharacterControl
         private void Start()
         {
             charState = Enums.CharState.standing;
-            attackState = Enums.AttackState.none;
+            attackStates = new List<Enums.AttackState>();
             animControl = GetComponent<AnimationController>();
             latestDirection = Enums.Inputs.Neutral;
             airborn = false;
@@ -120,14 +120,19 @@ namespace CharacterControl
             charState = state;
         }
 
-        public void SetAttackState(Enums.AttackState state)
+        public void AddAttackState(Enums.AttackState state)
         {
-            attackState = state;
+            attackStates.Add(state);
         }
 
         public void TakeDamage(float dmg)
         {
-            animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "hitstun" }));
+            ///<summary>
+            ///Falar com o rui sobre este código de parameter e knockback repetido
+            ///</summary>
+
+
+            animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "hitstun" }));
             animControl.Knock(dmg);
 
             healthPoints -= dmg;
@@ -136,7 +141,7 @@ namespace CharacterControl
 
             List<AnimatorControllerParameter> parameter = FindAnimatorParameter(new string[] { "hitstun" });
 
-            animControl.TurnAnimatorParametersOn(parameter);
+            animControl.TriggerAnimatorParameters(parameter);
             animControl.Knock(dmg);
 
 
@@ -166,7 +171,7 @@ namespace CharacterControl
         {
 
             if (facing == Enums.FacingSide.P1)
-            {
+            {   
                 if (yAxis == Enums.NumPad.Down)
                 {
                     if (xAxis == Enums.NumPad.Left)
@@ -241,42 +246,42 @@ namespace CharacterControl
                 lastInput = Enums.Inputs.Up;
             }
 
-            lastInput = motionStateMachine.PerformTransition(lastInput, attackState);
+            lastInput = motionStateMachine.PerformTransition(lastInput, attackStates);
             
 
-            if (attackState != Enums.AttackState.none)
+            if (attackStates.Count != 0)
             {
                 switch(lastInput)
                 {
                     case Enums.Inputs.Light:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] {"lightAttack"}));
+                        animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] {"lightAttack"}));
                         break;
 
                     case Enums.Inputs.Medium:
-                            animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "mediumAttack" }));
+                            animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "mediumAttack" }));
                         break;
 
                     case Enums.Inputs.Heavy:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] {"heavyAttack"}));
+                        animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] {"heavyAttack"}));
                         break;
 
                     case Enums.Inputs.Special1:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "special1" }));
+                        animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special1" }));
                         break;
 
                     case Enums.Inputs.Special2:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "special2" }));
+                        animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special2" }));
                         break;
 
                     case Enums.Inputs.Super:
                         if(superBar > 49)
                         {
                             superBar = superBar - 50;
-                            animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "super" }));
+                            animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "super" }));
                         }
                         else
                         {
-                            animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "special1" }));
+                            animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special1" }));
                         }
                         break;
                 }
@@ -290,15 +295,15 @@ namespace CharacterControl
                         break;
 
                     case Enums.Inputs.DownBack:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] {"crouch"}));
+                        animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] {"crouch"}));
                         break;
 
                     case Enums.Inputs.Down:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "crouch" }));
+                        animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "crouch" }));
                         break;
 
                     case Enums.Inputs.DownFront:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "crouch" }));
+                        animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "crouch" }));
                         break;
 
                     case Enums.Inputs.Front:
@@ -319,7 +324,7 @@ namespace CharacterControl
 
         private void ResetEnumState()
         {
-            SetAttackState(Enums.AttackState.none);
+            attackStates.Clear();
             SetCharState(Enums.CharState.standing);
 
         }
