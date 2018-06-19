@@ -57,6 +57,7 @@ namespace CharacterControl
                     {
                         animator.SetBool(parameter.name, false);
                     }
+
                 }
             }
         }
@@ -70,21 +71,6 @@ namespace CharacterControl
                     if (parameter != null)
                     {
                         animator.SetBool(parameter.name, true);
-                    }
-
-                }
-            }
-        }
-
-        public void TriggerAnimatorParameters(List<AnimatorControllerParameter> list)
-        {
-            if (list.Count != 0)
-            {
-                foreach (AnimatorControllerParameter parameter in list)
-                {
-                    if (parameter != null)
-                    {
-                        animator.SetTrigger(parameter.name);
                     }
 
                 }
@@ -150,12 +136,10 @@ namespace CharacterControl
         {
             if (!animator.GetBool("airborn") && !animator.GetBool("crouch"))
             {
-                //animator.applyRootMotion = false;
-                animator.SetTrigger("jump");
-                if(rigidbody.velocity.y < 5f) {
-                    //rigidbody.velocity = rigidbody.velocity + new Vector3(0, 2f);
-                    rigidbody.AddForce(new Vector3(0, 2f));
-                }
+                animator.applyRootMotion = false;
+                animator.SetBool("jump", true);
+                if(rigidbody.velocity.y < 5f)
+                    rigidbody.velocity = rigidbody.velocity + new Vector3(0, 2f);
             }
         }
 
@@ -224,7 +208,8 @@ namespace CharacterControl
 
             foreach (AnimatorControllerParameter parameter in animator.parameters)
             {
-                if (parameter.name != "airborn"
+                if (parameter.name != "airborn" && parameter.name != "2"
+                    && parameter.name != "4" && parameter.name != "5" && parameter.name != "6" 
                     && parameter.name != "mirrorAnimation" && parameter.name != "grounded"
                     && parameter.name != "hitstun" && parameter.name != "KO"
                     && parameter.name != "blockStun" && parameter.name != "standBlock"
