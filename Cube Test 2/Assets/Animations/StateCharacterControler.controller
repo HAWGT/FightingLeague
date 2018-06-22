@@ -14,48 +14,6 @@ AnimatorController:
     m_DefaultInt: 50
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: airborn
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: lightAttack
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: mediumAttack
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: heavyAttack
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: special1
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: special2
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: super
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: walkingForward
     m_Type: 4
     m_DefaultFloat: 0
@@ -68,25 +26,19 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: airborn
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: grounded
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 1
+    m_Controller: {fileID: 0}
   - m_Name: crouch
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: standBlock
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: blockStun
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: crouchBlock
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -104,44 +56,80 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: hitstun
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: jump
-    m_Type: 4
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: grounded
-    m_Type: 4
+  - m_Name: lightAttack
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: mediumAttack
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: heavyAttack
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: special1
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: special2
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: super
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: blockStun
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: hitStun
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: guardBreak
-    m_Type: 4
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: midDash
-    m_Type: 4
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: reflect
-    m_Type: 4
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: vanish
-    m_Type: 4
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -1802,9 +1790,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: walkingBackward
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: heavyAttack
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102838312729802816}
   m_Solo: 0
@@ -2104,9 +2089,6 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: walkingBackward
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: heavyAttack
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: walkingForward
@@ -2444,9 +2426,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: walkingForward
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: super
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102205401010635106}
   m_Solo: 0
@@ -2768,12 +2747,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: walkingBackward
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: lightAttack
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: mediumAttack
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102503696105735122}
   m_Solo: 0
@@ -2799,13 +2772,7 @@ AnimatorStateTransition:
     m_ConditionEvent: walkingBackward
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: lightAttack
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
     m_ConditionEvent: walkingForward
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: mediumAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102205401010635106}
@@ -3434,9 +3401,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: walkingBackward
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: super
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102838312729802816}
   m_Solo: 0
@@ -3744,7 +3708,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: hitstun
+    m_ConditionEvent: hitStun
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: KO
@@ -4081,9 +4045,6 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: walkingBackward
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: heavyAttack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102503696105735122}
@@ -4867,25 +4828,25 @@ AnimatorStateMachine:
     m_Position: {x: 216, y: -96, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102306551737270850}
-    m_Position: {x: 180, y: 384, z: 0}
+    m_Position: {x: 84, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102928602707787856}
-    m_Position: {x: 456, y: 384, z: 0}
+    m_Position: {x: 408, y: 432, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102653262789397824}
     m_Position: {x: 852, y: 108, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102791172997138082}
-    m_Position: {x: 744, y: 276, z: 0}
+    m_Position: {x: 1020, y: 408, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102367950313915170}
-    m_Position: {x: 780, y: 468, z: 0}
+    m_Position: {x: 660, y: 528, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102518137419306862}
-    m_Position: {x: 1104, y: 240, z: 0}
+    m_Position: {x: 1128, y: 264, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102729702056113926}
-    m_Position: {x: 1008, y: 408, z: 0}
+    m_Position: {x: 996, y: 528, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -4894,7 +4855,7 @@ AnimatorStateMachine:
   m_AnyStatePosition: {x: -156, y: -204, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: -264, y: 0, z: 0}
-  m_ParentStateMachinePosition: {x: 444, y: 168, z: 0}
+  m_ParentStateMachinePosition: {x: 432, y: 180, z: 0}
   m_DefaultState: {fileID: 1102774817709598590}
 --- !u!1107 &1107688358982614872
 AnimatorStateMachine:
