@@ -16,13 +16,10 @@ namespace CharacterControl
 
         [SerializeField]
         private AnimationController animControl;
-        /// <summary>
-        /// fazer disable a root motion ao saltar
-        /// fazer enable ao aterrar no ontriggerenter no colider dos pés
-        /// </summary>
+
 
         [SerializeField]
-        private Enums.AttackState attackState;
+        private List<Enums.AttackState> attackStates;
 
         [SerializeField]
         private Enums.FacingSide facing;
@@ -56,9 +53,9 @@ namespace CharacterControl
             return this.charState;
         }
 
-        public Enums.AttackState GetAttackState()
+        public List<Enums.AttackState> GetAttackState()
         {
-            return this.attackState;
+            return this.attackStates;
         }
 
         public float GetHP()
@@ -80,21 +77,25 @@ namespace CharacterControl
         {
             this.facing = face;
             GetComponent<AnimationController>().Mirror();
-            myRigidbody.transform.Rotate(new Vector3(0, 180.0f, 0));
+			Vector3 change = myRigidbody.rotation.eulerAngles;
+			change.y = -change.y;
+			Quaternion newQuart = new Quaternion();
+			newQuart.eulerAngles = change;
+			myRigidbody.transform.rotation = newQuart;
         }
 
         // Use this for initialization
         private void Start()
         {
             charState = Enums.CharState.standing;
-            attackState = Enums.AttackState.none;
-            animControl = GetComponent<AnimationController>();
+			attackStates = new List<Enums.AttackState>();
+			animControl = GetComponent<AnimationController>();
             latestDirection = Enums.Inputs.Neutral;
             airborn = false;
             groundCheck = GetComponent<SphereCollider>();
             myRigidbody = GetComponent<Rigidbody>();
             animControl.SetRigidBody(myRigidbody);
-            animatorParameters = animControl.GetAllBoolAnimatorParameters();
+            animatorParameters = animControl.GetAllBoolTriggerAnimatorParameters();
             motionStateMachine = GetComponent<FiniteStateMachineState>();
 
 
@@ -120,12 +121,12 @@ namespace CharacterControl
             charState = state;
         }
 
-        public void SetAttackState(Enums.AttackState state)
+        public void AddAttackState(Enums.AttackState state)
         {
-            attackState = state;
-        }
+			attackStates.Add(state);
+		}
 
-        public void TakeDamage(float dmg)
+		public void TakeDamage(float dmg)
         {
             animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "hitstun" }));
             animControl.Knock(dmg);
@@ -165,161 +166,162 @@ namespace CharacterControl
         public void TranslateDirectionalInput(Enums.NumPad xAxis, Enums.NumPad yAxis)
         {
 
-            if (facing == Enums.FacingSide.P1)
-            {
-                if (yAxis == Enums.NumPad.Down)
-                {
-                    if (xAxis == Enums.NumPad.Left)
-                    {
-                        lastInput = Enums.Inputs.DownBack;
+			if (facing == Enums.FacingSide.P1)
+			{
+				if (yAxis == Enums.NumPad.Down)
+				{
+					if (xAxis == Enums.NumPad.Left)
+					{
+						lastInput = Enums.Inputs.DownBack;
 
-                    }
-                    else if (xAxis == Enums.NumPad.Right)
-                    {
-                        lastInput = Enums.Inputs.DownFront;
+					}
+					else if (xAxis == Enums.NumPad.Right)
+					{
+						lastInput = Enums.Inputs.DownFront;
 
-                    }
-                    else if (xAxis == Enums.NumPad.Neutral)
-                    {
-                        lastInput = Enums.Inputs.Down;
-                    }
-                }
-                else if (yAxis == Enums.NumPad.Neutral)
-                {
+					}
+					else if (xAxis == Enums.NumPad.Neutral)
+					{
+						lastInput = Enums.Inputs.Down;
+					}
+				}
+				else if (yAxis == Enums.NumPad.Neutral)
+				{
 
-                    if (xAxis == Enums.NumPad.Left)
-                    {
-                        lastInput = Enums.Inputs.Back;
+					if (xAxis == Enums.NumPad.Left)
+					{
+						lastInput = Enums.Inputs.Back;
 
-                    }
-                    else if (xAxis == Enums.NumPad.Right)
-                    {
-                        lastInput = Enums.Inputs.Front;
+					}
+					else if (xAxis == Enums.NumPad.Right)
+					{
+						lastInput = Enums.Inputs.Front;
 
-                    }
-                    else if (xAxis == Enums.NumPad.Neutral)
-                    {
-                        lastInput = Enums.Inputs.Neutral;
-                    }
-                }
-            }else if (facing == Enums.FacingSide.P2)
-            {
-                if (yAxis == Enums.NumPad.Down)
-                {
-                    if (xAxis == Enums.NumPad.Left)
-                    {
-                        lastInput = Enums.Inputs.DownFront;
-                    }
-                    else if (xAxis == Enums.NumPad.Right)
-                    {
-                        lastInput = Enums.Inputs.DownBack;
-                    }
-                    else if (xAxis == Enums.NumPad.Neutral)
-                    {
-                        lastInput = Enums.Inputs.Down;
-                    }
-                }
-                else if (yAxis == Enums.NumPad.Neutral)
-                {
-                    if (xAxis == Enums.NumPad.Left)
-                    {
-                        lastInput = Enums.Inputs.Front;
-                    }
-                    else if (xAxis == Enums.NumPad.Right)
-                    {
-                        lastInput = Enums.Inputs.Back;
-                    }
-                    else if (xAxis == Enums.NumPad.Neutral)
-                    {
-                        lastInput = Enums.Inputs.Neutral;
-                    }
-                }
-            }
+					}
+					else if (xAxis == Enums.NumPad.Neutral)
+					{
+						lastInput = Enums.Inputs.Neutral;
+					}
+				}
+			}
+			else if (facing == Enums.FacingSide.P2)
+			{
+				if (yAxis == Enums.NumPad.Down)
+				{
+					if (xAxis == Enums.NumPad.Left)
+					{
+						lastInput = Enums.Inputs.DownFront;
+					}
+					else if (xAxis == Enums.NumPad.Right)
+					{
+						lastInput = Enums.Inputs.DownBack;
+					}
+					else if (xAxis == Enums.NumPad.Neutral)
+					{
+						lastInput = Enums.Inputs.Down;
+					}
+				}
+				else if (yAxis == Enums.NumPad.Neutral)
+				{
+					if (xAxis == Enums.NumPad.Left)
+					{
+						lastInput = Enums.Inputs.Front;
+					}
+					else if (xAxis == Enums.NumPad.Right)
+					{
+						lastInput = Enums.Inputs.Back;
+					}
+					else if (xAxis == Enums.NumPad.Neutral)
+					{
+						lastInput = Enums.Inputs.Neutral;
+					}
+				}
+			}
 
-            if(yAxis == Enums.NumPad.Up)
-            {
-                lastInput = Enums.Inputs.Up;
-            }
+			if (yAxis == Enums.NumPad.Up)
+			{
+				lastInput = Enums.Inputs.Up;
+			}
 
-            lastInput = motionStateMachine.PerformTransition(lastInput, attackState);
-            
+			lastInput = motionStateMachine.PerformTransition(lastInput, attackStates);
 
-            if (attackState != Enums.AttackState.none)
-            {
-                switch(lastInput)
-                {
-                    case Enums.Inputs.Light:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] {"lightAttack"}));
-                        break;
 
-                    case Enums.Inputs.Medium:
-                            animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "mediumAttack" }));
-                        break;
+			if (attackStates.Count != 0)
+			{
+				switch (lastInput)
+				{
+					case Enums.Inputs.Light:
+						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "lightAttack" }));
+						break;
 
-                    case Enums.Inputs.Heavy:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] {"heavyAttack"}));
-                        break;
+					case Enums.Inputs.Medium:
+						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "mediumAttack" }));
+						break;
 
-                    case Enums.Inputs.Special1:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "special1" }));
-                        break;
+					case Enums.Inputs.Heavy:
+						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "heavyAttack" }));
+						break;
 
-                    case Enums.Inputs.Special2:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "special2" }));
-                        break;
+					case Enums.Inputs.Special1:
+						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special1" }));
+						break;
 
-                    case Enums.Inputs.Super:
-                        if(superBar > 49)
-                        {
-                            superBar = superBar - 50;
-                            animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "super" }));
-                        }
-                        else
-                        {
-                            animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "special1" }));
-                        }
-                        break;
-                }
-            }
-            else
-            {
-                switch (lastInput)
-                {
-                    case Enums.Inputs.Back:
-                        animControl.WalkBwd();
-                        break;
+					case Enums.Inputs.Special2:
+						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special2" }));
+						break;
 
-                    case Enums.Inputs.DownBack:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] {"crouch"}));
-                        break;
+					case Enums.Inputs.Super:
+						if (superBar > 49)
+						{
+							superBar = superBar - 50;
+							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "super" }));
+						}
+						else
+						{
+							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special1" }));
+						}
+						break;
+				}
+			}
+			else
+			{
+				switch (lastInput)
+				{
+					case Enums.Inputs.Back:
+						animControl.WalkBwd();
+						break;
 
-                    case Enums.Inputs.Down:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "crouch" }));
-                        break;
+					case Enums.Inputs.DownBack:
+						animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "crouch" }));
+						break;
 
-                    case Enums.Inputs.DownFront:
-                        animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "crouch" }));
-                        break;
+					case Enums.Inputs.Down:
+						animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "crouch" }));
+						break;
 
-                    case Enums.Inputs.Front:
-                        animControl.WalkFwd();
-                        break;
+					case Enums.Inputs.DownFront:
+						animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "crouch" }));
+						break;
 
-                    case Enums.Inputs.Up:
-                        animControl.Jump();
-                        break;
+					case Enums.Inputs.Front:
+						animControl.WalkFwd();
+						break;
 
-                    case Enums.Inputs.Neutral:
+					case Enums.Inputs.Up:
+						animControl.Jump();
+						break;
 
-                        break;
-                }
-            }
-            ResetEnumState();
-        }
+					case Enums.Inputs.Neutral:
+
+						break;
+				}
+			}
+			ResetEnumState();
+		}
 
         private void ResetEnumState()
         {
-            SetAttackState(Enums.AttackState.none);
+			attackStates = new List<Enums.AttackState>();
             SetCharState(Enums.CharState.standing);
 
         }

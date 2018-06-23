@@ -19,7 +19,8 @@ public class CameraScript : MonoBehaviour {
     }
 
 	public float yOffset = 2.0f;
-	public float minDistance = 15.0f;
+	public float minDistance = 10.0f;
+	public float maxDistance = 5.0f;
 
 	private float xMin, xMax, yMin, yMax;
 
@@ -32,33 +33,41 @@ public class CameraScript : MonoBehaviour {
 
 		xMin = xMax = playerTransforms[0].position.x;
 		yMin = yMax = playerTransforms[0].position.y;
-
-		for (int i = 1; i < playerTransforms.Length; i++) {
-
-			if (playerTransforms[i].position.x < xMin) {
-				xMin = playerTransforms[i].position.x;
+		
+		foreach(Transform player in playerTransforms)
+		{
+			if (player.position.x < xMin)
+			{
+				xMin = player.position.x;
 			}
 
-			if (playerTransforms[i].position.x > xMax) {
-				xMax = playerTransforms[i].position.x;
+			if (player.position.x > xMax)
+			{
+				xMax = player.position.x;
 			}
 
-			if (playerTransforms[i].position.y < yMin) {
-				yMin = playerTransforms[i].position.y;
+			if (player.position.y < yMin)
+			{
+				yMin = player.position.y;
 			}
 
-			if (playerTransforms[i].position.y > yMax) {
-				yMax = playerTransforms[i].position.y;
+			if (player.position.y > yMax)
+			{
+				yMax = player.position.y;
 			}
 		}
 
+
 		float xMiddle = (xMin + xMax) / 2;
 		float yMiddle = ((yMin + yMax) / 2) + (float) 1.5;
-		float distance = xMax - xMin;
+		float distance = xMin + xMax;
 
 		if (distance < minDistance) {
 			distance = minDistance;
 		}
-		transform.position = new Vector3 (xMiddle, yMiddle, -distance);
+		else if (distance > maxDistance){
+			distance = maxDistance;
+		}
+		transform.position = new Vector3 (xMiddle, yMiddle, -distance/2);
 	}
 }

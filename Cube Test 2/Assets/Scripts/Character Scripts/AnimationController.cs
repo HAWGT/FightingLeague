@@ -34,16 +34,17 @@ namespace CharacterControl
             animator.SetBool("mirrorAnimation", !state);
         }
 
-        public List<AnimatorControllerParameter> GetAllBoolAnimatorParameters()
+        public List<AnimatorControllerParameter> GetAllBoolTriggerAnimatorParameters()
         {
             List<AnimatorControllerParameter> list = new List<AnimatorControllerParameter>();
             foreach (AnimatorControllerParameter parameter in animator.parameters)
             {
-                if (parameter.type == AnimatorControllerParameterType.Bool)
+                if (parameter.type == AnimatorControllerParameterType.Bool || parameter.type == AnimatorControllerParameterType.Trigger)
                 {
                     list.Add(parameter);
                 }
             }
+			print(list.ToArray());
             return list;
         }
 
@@ -77,7 +78,22 @@ namespace CharacterControl
             }
         }
 
-        public void UpdateSuperBar(int ammount)
+		public void TriggerAnimatorParameters(List<AnimatorControllerParameter> list)
+		{
+			if (list.Count != 0)
+			{
+				foreach (AnimatorControllerParameter parameter in list)
+				{
+					if (parameter != null)
+					{
+						animator.SetTrigger(parameter.name);
+					}
+
+				}
+			}
+		}
+
+		public void UpdateSuperBar(int ammount)
         {
 
             animator.SetInteger("superBar", ammount);
@@ -137,9 +153,10 @@ namespace CharacterControl
             if (!animator.GetBool("airborn") && !animator.GetBool("crouch"))
             {
                 animator.applyRootMotion = false;
-                animator.SetBool("jump", true);
-                if(rigidbody.velocity.y < 5f)
-                    rigidbody.velocity = rigidbody.velocity + new Vector3(0, 2f);
+				animator.SetBool("airborn", true);
+				animator.SetTrigger("jump");
+				if (rigidbody.velocity.y < 5f)
+                    rigidbody.AddForce(new Vector3(0, 6.5f), ForceMode.VelocityChange);
             }
         }
 
@@ -206,20 +223,15 @@ namespace CharacterControl
         {
             List<AnimatorControllerParameter> list = new List<AnimatorControllerParameter>();
 
-            foreach (AnimatorControllerParameter parameter in animator.parameters)
-            {
-                if (parameter.name != "airborn" && parameter.name != "2"
-                    && parameter.name != "4" && parameter.name != "5" && parameter.name != "6" 
-                    && parameter.name != "mirrorAnimation" && parameter.name != "grounded"
-                    && parameter.name != "hitstun" && parameter.name != "KO"
-                    && parameter.name != "blockStun" && parameter.name != "standBlock"
-                    && parameter.name != "crouchBlock")
-                {
-                    list.Add(parameter);
-                }
-            }
-            TurnAnimatorParametersOff(list);
-        }
+			foreach (AnimatorControllerParameter parameter in animator.parameters)
+			{
+				if (parameter.name == "walkingForward" || parameter.name == "walkingBackward")
+				{
+					list.Add(parameter);
+				}
+			}
+			TurnAnimatorParametersOff(list);
+		}
     }
 
 }

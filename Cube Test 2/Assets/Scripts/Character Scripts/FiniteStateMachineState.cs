@@ -52,169 +52,205 @@ namespace CharacterControl
         }
 
 
-        public Enums.Inputs PerformTransition(Enums.Inputs input, Enums.AttackState attack)
+        public Enums.Inputs PerformTransition(Enums.Inputs input, List<Enums.AttackState> attacks)
         {
-            if (attack != Enums.AttackState.none)
-            {
-                switch (attack)
-                {
-                    case Enums.AttackState.light:
-                        input = Enums.Inputs.Light;
-                        break;
-                    case Enums.AttackState.medium:
-                        input = Enums.Inputs.Medium;
-                        break;
-                    case Enums.AttackState.heavy:
-                        input = Enums.Inputs.Heavy;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            switch (currentState)
-            {
-                case Enums.Inputs.Neutral:
-                    switch (input)
-                    {
-                        case Enums.Inputs.Down:
-                            map.Add(Enums.Transition.NeutralDown, input);
-                            StartCoroutine(CountTime());
-                            break;
-
-                        default:
-                            ResetMachine();
-                            break;
-                    }
-                    break;
-
-                case Enums.Inputs.Down:
-                    switch (input)
-                    {
-                        case Enums.Inputs.DownBack:
-                            map.Add(Enums.Transition.DownToDB, input);
-                            break;
-
-                        case Enums.Inputs.DownFront:
-                            map.Add(Enums.Transition.DownToDF, input);
-                            break;
-
-                        case Enums.Inputs.Down:
-                            break;
-
-                        default:
-                            ResetMachine();
-                            break;
-                    }
-                    break;
-
-                case Enums.Inputs.DownBack:
-                    switch (input)
-                    {
-                        case Enums.Inputs.Back:
-                            map.Add(Enums.Transition.DBToBack, input);
-                            break;
-
-                        case Enums.Inputs.DownBack:
-                            break;
-
-                        default:
-                            ResetMachine();
-                            break;
-                    }
-                    break;
-
-                case Enums.Inputs.Back:
-                    switch (input)
-                    {
-                        case Enums.Inputs.Medium:
-                            map.Add(Enums.Transition.BackToMedium, input);
-                            StopAllCoroutines();
-                            break;
-
-                        case Enums.Inputs.Back:
-                            break;
-
-                        case Enums.Inputs.Neutral:
-                            break;
-
-                        default:
-                            ResetMachine();
-                            break;
-                    }
-                    break;
-
-                case Enums.Inputs.DownFront:
-                    switch (input)
-                    {
-                        case Enums.Inputs.Front:
-                            map.Add(Enums.Transition.DFToFront, input);
-                            break;
-
-                        case Enums.Inputs.DownFront:
-                            break;
-
-                        default:
-                            ResetMachine();
-                            break;
-                    }
-                    break;
-
-                case Enums.Inputs.Front:
-                    switch (input)
-                    {
-                        case Enums.Inputs.Medium:
-                            map.Add(Enums.Transition.FrontToMedium, input);
-                            StopAllCoroutines();
-                            break;
-
-                        case Enums.Inputs.Heavy:
-                            map.Add(Enums.Transition.FrontToHeavy, input);
-                            StopAllCoroutines();
-                            break;
-
-                        case Enums.Inputs.Front:
-                            break;
-
-                        case Enums.Inputs.Neutral:
-                            break;
-
-                        default:
-                            ResetMachine();
-                            break;
-                    }
-                    break;
-            }
-
-            currentState = input;
-
-            if (map.ContainsKey(Enums.Transition.FrontToHeavy))
-            {
-                ResetMachine();
-                return Enums.Inputs.Super;
-            }else if (map.ContainsKey(Enums.Transition.FrontToMedium))
-            {
-                ResetMachine();
-                return Enums.Inputs.Special1;
-            }else if (map.ContainsKey(Enums.Transition.BackToMedium))
-            {
-                ResetMachine();
-                return Enums.Inputs.Special2;
-            }
-            else
-            {
-                return input;
-            }
-        }
+			List<Enums.Inputs> localParse = new List<Enums.Inputs>();
 
 
-        public Enums.Inputs GetOutputState(Enums.Transition trans)
+			switch (currentState)
+			{
+				case Enums.Inputs.Neutral:
+					switch (input)
+					{
+						case Enums.Inputs.Down:
+								map.Add(Enums.Transition.NeutralDown, input);
+								currentState = Enums.Inputs.Down;
+								StartCoroutine(CountTime());
+							break;
+
+						default:
+							ResetMachine();
+							break;
+					}
+					break;
+
+				case Enums.Inputs.Down:
+					switch (input)
+					{
+						case Enums.Inputs.DownBack:
+							map.Add(Enums.Transition.DownToDB, input);
+							currentState = Enums.Inputs.DownBack;
+							break;
+
+						case Enums.Inputs.DownFront:
+							map.Add(Enums.Transition.DownToDF, input);
+							currentState = Enums.Inputs.DownFront;
+							break;
+
+						case Enums.Inputs.Down:
+							break;
+
+						default:
+							ResetMachine();
+							break;
+					}
+					break;
+
+				case Enums.Inputs.DownBack:
+					switch (input)
+					{
+						case Enums.Inputs.Back:
+							map.Add(Enums.Transition.DBToBack, input);
+							currentState = Enums.Inputs.Back;
+							break;
+
+						case Enums.Inputs.DownBack:
+							break;
+
+						default:
+							ResetMachine();
+							break;
+					}
+					break;
+
+				case Enums.Inputs.Back:
+					break;
+
+				case Enums.Inputs.DownFront:
+					switch (input)
+					{
+						case Enums.Inputs.Front:
+							map.Add(Enums.Transition.DFToFront, input);
+							currentState = Enums.Inputs.Front;
+							break;
+
+						case Enums.Inputs.DownFront:
+							break;
+
+						default:
+							ResetMachine();
+							break;
+					}
+					break;
+
+				case Enums.Inputs.Front:
+					break;
+
+				default:
+					ResetMachine();
+					break;
+			}
+
+			//cycle attacks for decision
+			foreach (Enums.AttackState attack in attacks)
+			{
+				if (attack != Enums.AttackState.none)
+				{
+					switch (attack)
+					{
+						case Enums.AttackState.light:
+							localParse.Add(Enums.Inputs.Light);
+							break;
+						case Enums.AttackState.medium:
+							localParse.Add(Enums.Inputs.Medium);
+							break;
+						case Enums.AttackState.heavy:
+							localParse.Add(Enums.Inputs.Heavy);
+							break;
+						default:
+							break;
+					}
+				}
+			}
+
+			foreach (Enums.Inputs attack in localParse)
+			{
+				switch (currentState)
+				{
+					case Enums.Inputs.Back:
+						switch (attack)
+						{
+							case Enums.Inputs.Medium:
+								map.Add(Enums.Transition.BackToMedium, input);
+								currentState = Enums.Inputs.Special2;
+								StopAllCoroutines();
+								break;
+
+							case Enums.Inputs.Back:
+								break;
+
+							case Enums.Inputs.Neutral:
+								break;
+
+							default:
+								ResetMachine();
+								break;
+						}
+						break;
+
+					case Enums.Inputs.Front:
+						switch (input)
+						{
+							case Enums.Inputs.Medium:
+								map.Add(Enums.Transition.FrontToMedium, input);
+								currentState = Enums.Inputs.Special1;
+								StopAllCoroutines();
+								break;
+
+							case Enums.Inputs.Heavy:
+								map.Add(Enums.Transition.FrontToHeavy, input);
+								currentState = Enums.Inputs.Super;
+								StopAllCoroutines();
+								break;
+
+							case Enums.Inputs.Front:
+								break;
+
+							case Enums.Inputs.Neutral:
+								break;
+
+							default:
+								ResetMachine();
+								break;
+						}
+						break;
+
+					default:
+						ResetMachine();
+						break;
+				}
+			}
+
+			if (map.ContainsKey(Enums.Transition.FrontToHeavy))
+			{
+				ResetMachine();
+				return Enums.Inputs.Super;
+			}
+			else if (map.ContainsKey(Enums.Transition.FrontToMedium))
+			{
+				ResetMachine();
+				return Enums.Inputs.Special1;
+			}
+			else if (map.ContainsKey(Enums.Transition.BackToMedium))
+			{
+				ResetMachine();
+				return Enums.Inputs.Special2;
+			}
+			else
+			{
+				return input;
+			}
+		}
+
+
+        public Boolean GetOutputState(Enums.Transition trans)
         {
             //check if map has transition
             if (map.ContainsKey(trans))
             {
-                return map[trans];
+                return true;
             }
-            return Enums.Inputs.NullStateID;
+            return false;
         }
 
         ///<summary> A happy little tree

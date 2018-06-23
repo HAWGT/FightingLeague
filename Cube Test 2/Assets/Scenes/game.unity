@@ -213,9 +213,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 1
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 2015723168}
   animControl: {fileID: 381051714}
-  attackState: 0
+  attackStates: 
   facing: 0
   charState: 0
   motionStateMachine: {fileID: 381051712}
@@ -392,7 +392,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: be80a17bc2a844f66af00b8467035a07, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: be80a17bc2a844f66af00b8467035a07, type: 3}
       propertyPath: m_LocalRotation.x
@@ -819,7 +819,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 533824457}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.41, z: -9.67}
+  m_LocalPosition: {x: 0, y: 2.12, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -850,6 +850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yOffset: 2
   minDistance: 15
+  maxDistance: 20
 --- !u!1 &597841298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,7 +1548,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: be80a17bc2a844f66af00b8467035a07, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: be80a17bc2a844f66af00b8467035a07, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1905,7 +1906,7 @@ MonoBehaviour:
   playerID: 2
   groundCheck: {fileID: 0}
   animControl: {fileID: 1405563312}
-  attackState: 0
+  attackStates: 
   facing: 1
   charState: 0
   motionStateMachine: {fileID: 381051712}
