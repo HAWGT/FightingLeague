@@ -90,6 +90,9 @@ namespace CharacterControl
 						case Enums.Inputs.Down:
 							break;
 
+						case Enums.Inputs.Neutral:
+							break;
+
 						default:
 							ResetMachine();
 							break;
@@ -105,6 +108,9 @@ namespace CharacterControl
 							break;
 
 						case Enums.Inputs.DownBack:
+							break;
+
+						case Enums.Inputs.Neutral:
 							break;
 
 						default:
@@ -125,6 +131,9 @@ namespace CharacterControl
 							break;
 
 						case Enums.Inputs.DownFront:
+							break;
+
+						case Enums.Inputs.Neutral:
 							break;
 
 						default:
@@ -221,25 +230,61 @@ namespace CharacterControl
 				}
 			}
 
-			if (map.ContainsKey(Enums.Transition.FrontToHeavy))
+			if (attacks.Count > 0)
 			{
-				ResetMachine();
-				return Enums.Inputs.Super;
-			}
-			else if (map.ContainsKey(Enums.Transition.FrontToMedium))
-			{
-				ResetMachine();
-				return Enums.Inputs.Special1;
-			}
-			else if (map.ContainsKey(Enums.Transition.BackToMedium))
-			{
-				ResetMachine();
-				return Enums.Inputs.Special2;
+				Enums.Inputs biggestestTack = Enums.Inputs.NullStateID;
+
+				foreach(Enums.Inputs tack in localParse)
+				{
+					if(biggestestTack == Enums.Inputs.NullStateID)
+					{
+						biggestestTack = tack;
+					}
+					else
+					{
+						switch (biggestestTack)
+						{
+							case Enums.Inputs.Medium:
+								if (tack == Enums.Inputs.Heavy)
+									biggestestTack = tack;
+								break;
+							case Enums.Inputs.Light:
+								biggestestTack = tack;
+								break;
+							default:
+								break;
+						}
+					}
+				}
+
+				if (map.ContainsKey(Enums.Transition.FrontToHeavy))
+				{
+					ResetMachine();
+					return Enums.Inputs.Super;
+				}
+				else if (map.ContainsKey(Enums.Transition.FrontToMedium))
+				{
+					ResetMachine();
+					return Enums.Inputs.Special1;
+				}
+				else if (map.ContainsKey(Enums.Transition.BackToMedium))
+				{
+					ResetMachine();
+					return Enums.Inputs.Special2;
+				}
+				else
+				{
+					ResetMachine();
+					return biggestestTack;
+				}
 			}
 			else
 			{
+				ResetMachine();
 				return input;
 			}
+
+
 		}
 
 

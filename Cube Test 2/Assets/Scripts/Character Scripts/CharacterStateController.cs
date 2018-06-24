@@ -95,7 +95,7 @@ namespace CharacterControl
             groundCheck = GetComponent<SphereCollider>();
             myRigidbody = GetComponent<Rigidbody>();
             animControl.SetRigidBody(myRigidbody);
-            animatorParameters = animControl.GetAllBoolTriggerAnimatorParameters();
+            animatorParameters = animControl.GetAllBoolTriggerAnimatorParameters("PORQUE É QUE ESTA COISA ESTÁ A CORRER DUAS VEZES???????????");
             motionStateMachine = GetComponent<FiniteStateMachineState>();
 
 
@@ -128,7 +128,7 @@ namespace CharacterControl
 
 		public void TakeDamage(float dmg)
         {
-            animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "hitstun" }));
+            animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "hitstun" }));
             animControl.Knock(dmg);
 
             healthPoints -= dmg;
@@ -137,13 +137,13 @@ namespace CharacterControl
 
             List<AnimatorControllerParameter> parameter = FindAnimatorParameter(new string[] { "hitstun" });
 
-            animControl.TurnAnimatorParametersOn(parameter);
+            animControl.TriggerAnimatorParameters(parameter);
             animControl.Knock(dmg);
 
 
             if (healthPoints <= 0)
             {
-                animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "KO" }));
+                animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "death" }));
                 game.GetComponent<GameManager>().Die(playerID);
 
             }

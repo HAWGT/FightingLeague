@@ -31,7 +31,7 @@ namespace AnimatorGeneric
             
         }
 
-        private void Update()
+        /*private void Update()
         {
             bool wf, wb;
             wf = cchar.GetComponent<Animator>().GetBool("walkingForward");
@@ -41,7 +41,7 @@ namespace AnimatorGeneric
                 cchar.GetComponent<Animator>().SetBool("walkingForward", false);
                 cchar.GetComponent<Animator>().SetBool("walkingBackward", false);
             }
-        }
+        }*/
     }
     
 }
