@@ -30,6 +30,9 @@ namespace CharacterControl
         [SerializeField]
         private GameObject otherPlayer;
 
+        [SerializeField]
+        private GameObject groundCheck;
+
         private bool attackingL = false;
         private bool attackingM = false;
         private bool attackingH = false;
@@ -221,14 +224,22 @@ namespace CharacterControl
                 myRigidBody.transform.position = new Vector3(otherPlayer.transform.position.x - x, myRigidBody.transform.position.y + 1.83f, myRigidBody.transform.position.z);
             }
 
-            Vector3 temp = new Vector3(myRigidBody.transform.position.x, 0.8f, myRigidBody.transform.position.z);
+            /*Vector3 temp = new Vector3(myRigidBody.transform.position.x, 0.8f, myRigidBody.transform.position.z);
             var stand = (GameObject)Instantiate(
            teleportPrefab,
            temp,
            rot);
 
-            Destroy(stand, 0.5f);
+            Destroy(stand, 0.3f);*/
+            StartCoroutine(UpdateTeleport());
+            
 
+        }
+
+        IEnumerator UpdateTeleport()
+        {
+            yield return new WaitForSeconds(0.1f);
+            groundCheck.GetComponent<GroundCheckScript>().UpdateSide();
         }
 
         private void EnableL()

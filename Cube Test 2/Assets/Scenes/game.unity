@@ -295,6 +295,7 @@ MonoBehaviour:
   teleportPrefab: {fileID: 1780850057600474, guid: 4fecfc76959a0a24f8a180535038a0a7,
     type: 2}
   otherPlayer: {fileID: 1405563278}
+  groundCheck: {fileID: 2015723166}
   cleft: {fileID: 498483428}
   cright: {fileID: 498483424}
   fleft: {fileID: 498483429}
@@ -1688,6 +1689,7 @@ MonoBehaviour:
   teleportPrefab: {fileID: 1780850057600474, guid: 4fecfc76959a0a24f8a180535038a0a7,
     type: 2}
   otherPlayer: {fileID: 381051709}
+  groundCheck: {fileID: 1952957819}
   cleft: {fileID: 1405563310}
   cright: {fileID: 1405563309}
   fleft: {fileID: 1405563298}
