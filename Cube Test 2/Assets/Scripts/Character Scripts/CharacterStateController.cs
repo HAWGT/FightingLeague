@@ -95,7 +95,7 @@ namespace CharacterControl
             groundCheck = GetComponent<SphereCollider>();
             myRigidbody = GetComponent<Rigidbody>();
             animControl.SetRigidBody(myRigidbody);
-            animatorParameters = animControl.GetAllBoolTriggerAnimatorParameters("PORQUE É QUE ESTA COISA ESTÁ A CORRER DUAS VEZES???????????");
+            animatorParameters = animControl.GetAllBoolTriggerAnimatorParameters();
             motionStateMachine = GetComponent<FiniteStateMachineState>();
 
 

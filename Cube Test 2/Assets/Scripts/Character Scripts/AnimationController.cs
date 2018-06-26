@@ -34,7 +34,7 @@ namespace CharacterControl
             animator.SetBool("mirrorAnimation", !state);
         }
 
-        public List<AnimatorControllerParameter> GetAllBoolTriggerAnimatorParameters(String area = ":D?")
+        public List<AnimatorControllerParameter> GetAllBoolTriggerAnimatorParameters()
         {
             List<AnimatorControllerParameter> list = new List<AnimatorControllerParameter>();
             foreach (AnimatorControllerParameter parameter in animator.parameters)
@@ -43,13 +43,7 @@ namespace CharacterControl
                 {
                     list.Add(parameter);
                 }
-            }
-			print(area);
-			//foreach (AnimatorControllerParameter para in list)
-			//{
-			//	print(para.name);
-			//}
-			
+            }			
             return list;
         }
 

@@ -8,11 +8,12 @@ namespace CharacterControl
 
     public class FiniteStateMachineState : MonoBehaviour
     {
-        protected static Dictionary<Enums.Transition, Enums.Inputs> map = new Dictionary<Enums.Transition, Enums.Inputs>();
+        protected Dictionary<Enums.Transition, Enums.Inputs> map = new Dictionary<Enums.Transition, Enums.Inputs>();
         protected Enums.Inputs currentState;
         public Enums.Inputs ID { get { return currentState; } }
+		private List<Enums.Inputs> localParse;
 
-        protected static Dictionary<Enums.Transition, Enums.Inputs> refMap = new Dictionary<Enums.Transition, Enums.Inputs>()
+		protected static Dictionary<Enums.Transition, Enums.Inputs> refMap = new Dictionary<Enums.Transition, Enums.Inputs>()
         {
             {Enums.Transition.NeutralDown, Enums.Inputs.Down },
             {Enums.Transition.DownDown, Enums.Inputs.Down },
@@ -30,33 +31,29 @@ namespace CharacterControl
         public void Start()
         {
             currentState = Enums.Inputs.Neutral;
-            StartCoroutine(CountTime());
+			StartCoroutine(CountTime());
         }
 
         public void ResetMachine()
         {
             currentState = Enums.Inputs.Neutral;
-            map.Clear();
-            if (IsInvoking("CountTime"))
-            {
+			map.Clear();
                 StopAllCoroutines();
-            }
             StartCoroutine(CountTime());
         }
 
 
         private IEnumerator CountTime()
         {
-            yield return new WaitForSeconds(1f);
+			
+			yield return new WaitForSeconds(1f);
             ResetMachine();
         }
 
 
         public Enums.Inputs PerformTransition(Enums.Inputs input, List<Enums.AttackState> attacks)
         {
-			List<Enums.Inputs> localParse = new List<Enums.Inputs>();
-
-
+			localParse = new List<Enums.Inputs>();
 			switch (currentState)
 			{
 				case Enums.Inputs.Neutral:
@@ -65,7 +62,7 @@ namespace CharacterControl
 						case Enums.Inputs.Down:
 								map.Add(Enums.Transition.NeutralDown, input);
 								currentState = Enums.Inputs.Down;
-								StartCoroutine(CountTime());
+								print(currentState.ToString());
 							break;
 
 						default:
@@ -75,16 +72,20 @@ namespace CharacterControl
 					break;
 
 				case Enums.Inputs.Down:
+					int a = 19;
 					switch (input)
 					{
 						case Enums.Inputs.DownBack:
 							map.Add(Enums.Transition.DownToDB, input);
 							currentState = Enums.Inputs.DownBack;
+							print(currentState.ToString());
+
 							break;
 
 						case Enums.Inputs.DownFront:
 							map.Add(Enums.Transition.DownToDF, input);
 							currentState = Enums.Inputs.DownFront;
+							print(currentState.ToString());
 							break;
 
 						case Enums.Inputs.Down:
@@ -105,6 +106,7 @@ namespace CharacterControl
 						case Enums.Inputs.Back:
 							map.Add(Enums.Transition.DBToBack, input);
 							currentState = Enums.Inputs.Back;
+							print(currentState.ToString());
 							break;
 
 						case Enums.Inputs.DownBack:
@@ -128,6 +130,7 @@ namespace CharacterControl
 						case Enums.Inputs.Front:
 							map.Add(Enums.Transition.DFToFront, input);
 							currentState = Enums.Inputs.Front;
+							print(currentState.ToString());
 							break;
 
 						case Enums.Inputs.DownFront:
@@ -182,7 +185,8 @@ namespace CharacterControl
 							case Enums.Inputs.Medium:
 								map.Add(Enums.Transition.BackToMedium, input);
 								currentState = Enums.Inputs.Special2;
-								StopAllCoroutines();
+								print("SP2");
+								ResetMachine();
 								break;
 
 							case Enums.Inputs.Back:
@@ -203,13 +207,15 @@ namespace CharacterControl
 							case Enums.Inputs.Medium:
 								map.Add(Enums.Transition.FrontToMedium, input);
 								currentState = Enums.Inputs.Special1;
-								StopAllCoroutines();
+								print("SP1");
+								ResetMachine();
 								break;
 
 							case Enums.Inputs.Heavy:
 								map.Add(Enums.Transition.FrontToHeavy, input);
 								currentState = Enums.Inputs.Super;
-								StopAllCoroutines();
+								print("SUPER");
+								ResetMachine();
 								break;
 
 							case Enums.Inputs.Front:
@@ -280,7 +286,6 @@ namespace CharacterControl
 			}
 			else
 			{
-				ResetMachine();
 				return input;
 			}
 
