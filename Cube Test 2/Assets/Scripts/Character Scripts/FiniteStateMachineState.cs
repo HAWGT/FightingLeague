@@ -72,7 +72,6 @@ namespace CharacterControl
 					break;
 
 				case Enums.Inputs.Down:
-					int a = 19;
 					switch (input)
 					{
 						case Enums.Inputs.DownBack:
@@ -186,13 +185,6 @@ namespace CharacterControl
 								map.Add(Enums.Transition.BackToMedium, input);
 								currentState = Enums.Inputs.Special2;
 								print("SP2");
-								ResetMachine();
-								break;
-
-							case Enums.Inputs.Back:
-								break;
-
-							case Enums.Inputs.Neutral:
 								break;
 
 							default:
@@ -208,20 +200,12 @@ namespace CharacterControl
 								map.Add(Enums.Transition.FrontToMedium, input);
 								currentState = Enums.Inputs.Special1;
 								print("SP1");
-								ResetMachine();
 								break;
 
 							case Enums.Inputs.Heavy:
 								map.Add(Enums.Transition.FrontToHeavy, input);
 								currentState = Enums.Inputs.Super;
 								print("SUPER");
-								ResetMachine();
-								break;
-
-							case Enums.Inputs.Front:
-								break;
-
-							case Enums.Inputs.Neutral:
 								break;
 
 							default:
@@ -266,15 +250,18 @@ namespace CharacterControl
 				if (map.ContainsKey(Enums.Transition.FrontToHeavy))
 				{
 					ResetMachine();
+					print("Activate Super");
 					return Enums.Inputs.Super;
 				}
 				else if (map.ContainsKey(Enums.Transition.FrontToMedium))
 				{
+					print("Activate Special1");
 					ResetMachine();
 					return Enums.Inputs.Special1;
 				}
 				else if (map.ContainsKey(Enums.Transition.BackToMedium))
 				{
+					print("Activate Special2");
 					ResetMachine();
 					return Enums.Inputs.Special2;
 				}
