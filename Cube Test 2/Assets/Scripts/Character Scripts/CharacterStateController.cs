@@ -133,6 +133,7 @@ namespace CharacterControl
             animControl.Knock(dmg);
 
             healthPoints -= dmg;
+            superBar += dmg / 200;
             if (playerID == 1) ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
             if (playerID == 2) ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
 
@@ -328,6 +329,10 @@ namespace CharacterControl
 
         }
 
+        internal void AddSuperBar(float bar)
+        {
+            superBar += bar;
+        }
     }
 
 }

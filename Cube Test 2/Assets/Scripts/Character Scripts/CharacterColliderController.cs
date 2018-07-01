@@ -342,19 +342,24 @@ namespace CharacterControl
             {
                 //print("hit confirmed");
                 float dmg = 0;
+                float bar = 0;
                 if (attackingL)
                 {
                     dmg = 500f;
+                    bar = 5f;
                 }
                 if (attackingM)
                 {
                     dmg = 700f;
+                    bar = 7f;
                 }
                 if (attackingH)
                 {
                     dmg = 850f;
+                    bar = 8.5f;
                     myRigidBody.GetComponent<AnimationController>().Push(dmg);
                 }
+                stateController.AddSuperBar(bar);
                 body.GetComponent<CharacterStateController>().TakeDamage(dmg);
                 DisableL();
                 DisableM();
