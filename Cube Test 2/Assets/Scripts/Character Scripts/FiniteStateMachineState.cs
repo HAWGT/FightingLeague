@@ -120,9 +120,6 @@ namespace CharacterControl
 					}
 					break;
 
-				case Enums.Inputs.Back:
-					break;
-
 				case Enums.Inputs.DownFront:
 					switch (input)
 					{
@@ -145,6 +142,9 @@ namespace CharacterControl
 					break;
 
 				case Enums.Inputs.Front:
+					break;
+
+				case Enums.Inputs.Back:
 					break;
 
 				default:
@@ -194,7 +194,7 @@ namespace CharacterControl
 						break;
 
 					case Enums.Inputs.Front:
-						switch (input)
+						switch (attack)
 						{
 							case Enums.Inputs.Medium:
 								map.Add(Enums.Transition.FrontToMedium, input);

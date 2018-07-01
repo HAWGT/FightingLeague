@@ -39,7 +39,7 @@ namespace CharacterControl
 
         private float healthPoints = 10000;
 
-        private float superBar = 0;
+        private float superBar;
 
         private Enums.Inputs lastInput;
 
@@ -97,6 +97,7 @@ namespace CharacterControl
             animControl.SetRigidBody(myRigidbody);
             animatorParameters = animControl.GetAllBoolTriggerAnimatorParameters();
             motionStateMachine = GetComponent<FiniteStateMachineState>();
+			superBar = 0;
 
 
             //update -> ui manager
