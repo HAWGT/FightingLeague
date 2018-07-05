@@ -193,6 +193,7 @@ namespace CharacterControl
 
             myRigidBody.constraints = RigidbodyConstraints.FreezeAll;
             stateController.SetRotLockState(true);
+            StopAllCoroutines();
             StartCoroutine(FinishBeam()); //por alguma razão o 2º evento na animação não é ativado
         }
 
