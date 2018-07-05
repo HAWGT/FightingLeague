@@ -21,7 +21,8 @@ namespace CharacterControl
         {
             //this ID represents non-existant state in system
             NullStateID = 0, Up,
-            Neutral, Down, DownBack, Back, DownFront, Front, Light, Medium, Heavy, Special1, Special2, Super
+            Neutral, Down, DownBack, Back, DownFront, Front, Light, Medium, Heavy, Special1, Special2, Super,
+			Vanish, GuardBreak, Dash
         }
 
         public enum FacingSide
@@ -38,8 +39,10 @@ namespace CharacterControl
         {
             //represents non-existing transition in system
             NullTransition = 0,
-            ResetToNeutral, NeutralDown, DownToDB, DBToBack, BackToMedium, DownToDF,
-            DFToFront, FrontToMedium, FrontToHeavy, DownDown, BDBD, BackBack, DFDF, FrontFront
-        }
+            ResetToNeutral, NeutralDown, DownToDB, DBToBack, BackToMedium, DownToDF, DownToNeutral,
+            DFToFront, FrontToMedium, FrontToHeavy, DownDown, BDBD, BackBack, DFDF, FrontFront,
+			DoubleToDown, DDownToLight,
+			DDownToMedium
+		}
     }
 }
