@@ -192,6 +192,7 @@ namespace CharacterControl
             Destroy(beam, 1f);
 
             myRigidBody.constraints = RigidbodyConstraints.FreezeAll;
+            stateController.SetRotLockState(true);
             StartCoroutine(FinishBeam()); //por alguma razão o 2º evento na animação não é ativado
         }
 
@@ -199,6 +200,11 @@ namespace CharacterControl
         {
             yield return new WaitForSeconds(1f);
             myRigidBody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            stateController.SetRotLockState(false);
+            if (stateController.GetQueueRotate())
+            {
+                stateController.SetFacingSide(stateController.GetNextFace());
+            }
         }
 
         private void Teleport()

@@ -45,7 +45,13 @@ namespace CharacterControl
 
         private Enums.Inputs latestDirection;
 
+        private Enums.FacingSide nextFace;
+
         private bool airborn;
+
+        private bool lockRotate = false;
+
+        private bool queueRotate = false;
 
 
         public Enums.CharState GetCharState()
@@ -75,13 +81,36 @@ namespace CharacterControl
 
         public void SetFacingSide(Enums.FacingSide face)
         {
-            this.facing = face;
-            GetComponent<AnimationController>().Mirror();
-			Vector3 change = myRigidbody.rotation.eulerAngles;
-			change.y = -change.y;
-			Quaternion newQuart = new Quaternion();
-			newQuart.eulerAngles = change;
-			myRigidbody.transform.rotation = newQuart;
+            if (!lockRotate)
+            {
+                this.facing = face;
+                GetComponent<AnimationController>().Mirror();
+                Vector3 change = myRigidbody.rotation.eulerAngles;
+                change.y = -change.y;
+                Quaternion newQuart = new Quaternion();
+                newQuart.eulerAngles = change;
+                myRigidbody.transform.rotation = newQuart;
+                queueRotate = false;
+            } else
+            {
+                queueRotate = true;
+                nextFace = face;
+            }
+        }
+
+        public void SetRotLockState(bool state)
+        {
+            lockRotate = state;
+        }
+
+        public bool GetQueueRotate()
+        {
+            return queueRotate;
+        }
+
+        public Enums.FacingSide GetNextFace()
+        {
+            return nextFace;
         }
 
         // Use this for initialization
