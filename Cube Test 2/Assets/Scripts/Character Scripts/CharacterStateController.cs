@@ -345,6 +345,18 @@ namespace CharacterControl
 							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special1" }));
 						}
 						break;
+
+					case Enums.Inputs.Vanish:
+						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "vanish" }));
+						break;
+
+					case Enums.Inputs.GuardBreak:
+						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "guardBreak" }));
+						break;
+
+					case Enums.Inputs.Dash:
+						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "midDash" }));
+						break;
 				}
 				animControl.TurnAnimatorParametersOff(FindAnimatorParameter(new string[] { "walkingForward", "walkingBackward", "crouch" }));
 			}
