@@ -20,6 +20,10 @@ namespace CharacterControl
 
         private void Update()
         {
+            enemyAttacking = false;
+            enemyBlocking = false;
+            enemyClose = false;
+            enemyJumping = false;
             float dist = System.Math.Abs(GetComponent<Rigidbody>().position.x - GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.x);
             Enums.CharState enemyState = GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetCharState();
             if (GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.y > 0.26f) enemyJumping = true;
