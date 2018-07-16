@@ -1882,6 +1882,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1524924, y: 0.2644616, z: 0.15249228}
   m_Center: {x: -0.0022145254, y: -0.12560059, z: -0.021730315}
+--- !u!114 &1405563311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1405563278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85dc5c5234846bc438538815f8a454e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1405563312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1939,6 +1950,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.46507928, y: 0.4972903, z: 0.33810484}
   m_Center: {x: -0.0001547337, y: 0.20926416, z: -0.0059008785}
+--- !u!114 &1405563316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1405563278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e43e7170fb45b4b81dcd16d0ff55d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: 4900000, guid: 6215c78fc92f6b04691bce4f7c831803, type: 3}
+  autoReset: 1
+  tickOn: 0
+  sourceInfos:
+  - isFoldout: 1
+    breakPoints: 
+    breakPointStatuses: 
+    collapsedLines: 
+    btScript: 
 --- !u!95 &1405563362 stripped
 Animator:
   m_PrefabParentObject: {fileID: 9500000, guid: be80a17bc2a844f66af00b8467035a07,

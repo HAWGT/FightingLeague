@@ -67,6 +67,11 @@ namespace CharacterControl
         private Rigidbody myRigidBody;
         private CharacterStateController stateController;
 
+        public GameObject GetOtherPlayer()
+        {
+            return otherPlayer;
+        }
+
         // Use this for initialization
 
         private void SpawnFireBall()

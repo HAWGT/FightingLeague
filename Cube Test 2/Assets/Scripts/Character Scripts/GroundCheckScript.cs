@@ -46,7 +46,7 @@ namespace CharacterControl
             cchar.GetComponent<Animator>().applyRootMotion = true;
         }
 
-        /*private void Update()
+        private void Update()
         {
             bool wf, wb;
             wf = cchar.GetComponent<Animator>().GetBool("walkingForward");
@@ -56,7 +56,8 @@ namespace CharacterControl
                 cchar.GetComponent<Animator>().SetBool("walkingForward", false);
                 cchar.GetComponent<Animator>().SetBool("walkingBackward", false);
             }
-        }*/
+        }
     }
+
     
 }
