@@ -150,6 +150,8 @@ namespace CharacterControl
                 } 
                 myRigidBody.transform.position += new Vector3(-x, 0.33f, 0.0f);
             }
+
+            StartCoroutine(UpdateTeleport());
         }
 
         private void Reflect()

@@ -1,3 +1,22 @@
 tree("Root")
-	WalkForward
-    
+    fallback
+        While not enemyClose
+            Random 0.94 0.01 0.01 0.02 0.01 0.01
+                WalkForward
+                Dash
+                Vanish
+                Sequence
+                    Jump
+                    WalkForward
+                Super
+                Crouch
+        While enemyClose
+            Random 0.25 0.25 0.25 0.08 0.08 0.07 0.01 0.01 
+                AttackL
+                AttackM
+                AttackH
+                Special1
+                Special2
+                Super
+                Dash
+                Vanish
