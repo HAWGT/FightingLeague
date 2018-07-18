@@ -19,6 +19,10 @@ namespace CharacterControl
         private float currentSuperBar;
         [Task]
         private bool isJumping;
+        [Task]
+        private bool grab;
+        [Task]
+        private bool defend;
 
         private AnimationController animControl;
 
@@ -34,6 +38,8 @@ namespace CharacterControl
             enemyClose = false;
             enemyJumping = false;
             isJumping = false;
+            grab = false;
+            defend = false;
             float dist = System.Math.Abs(GetComponent<Rigidbody>().position.x - GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.x);
             Enums.CharState enemyState = GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetCharState();
             if (GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.y > 0.26f) enemyJumping = true;
@@ -42,6 +48,8 @@ namespace CharacterControl
             if (enemyState == Enums.CharState.attacking) enemyAttacking = true;
             if (enemyState == Enums.CharState.blocking) enemyBlocking = true;
             currentSuperBar = GetComponent<CharacterStateController>().GetSB();
+            if (enemyClose && enemyState == Enums.CharState.blocking) grab = true;
+            if (enemyClose && enemyState == Enums.CharState.attacking) defend = true;
         }
 
         [Task]
