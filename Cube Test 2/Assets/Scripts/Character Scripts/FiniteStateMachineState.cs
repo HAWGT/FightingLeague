@@ -64,7 +64,6 @@ namespace CharacterControl
 							{
 								map.Add(Enums.Transition.DoubleToDown, input);
 								currentState = Enums.Inputs.Down;
-								print(currentState.ToString() + " - Double Tap");
 							}
 							else if(map.ContainsKey(Enums.Transition.DownToNeutral) && map.ContainsKey(Enums.Transition.DoubleToDown))
 							{
@@ -74,7 +73,6 @@ namespace CharacterControl
 							{
 								map.Add(Enums.Transition.NeutralDown, input);
 								currentState = Enums.Inputs.Down;
-								print(currentState.ToString());
 							}
 								
 							break;
@@ -94,14 +92,12 @@ namespace CharacterControl
 						case Enums.Inputs.DownBack:
 							map.Add(Enums.Transition.DownToDB, input);
 							currentState = Enums.Inputs.DownBack;
-							print(currentState.ToString());
 
 							break;
 
 						case Enums.Inputs.DownFront:
 							map.Add(Enums.Transition.DownToDF, input);
 							currentState = Enums.Inputs.DownFront;
-							print(currentState.ToString());
 							break;
 
 						case Enums.Inputs.Down:
@@ -112,7 +108,6 @@ namespace CharacterControl
 							{
 								map.Add(Enums.Transition.DownToNeutral, input);
 								currentState = Enums.Inputs.Neutral;
-								print(currentState.ToString());
 							}
 							
 							break;
@@ -129,7 +124,6 @@ namespace CharacterControl
 						case Enums.Inputs.Back:
 							map.Add(Enums.Transition.DBToBack, input);
 							currentState = Enums.Inputs.Back;
-							print(currentState.ToString());
 							break;
 
 						case Enums.Inputs.DownBack:
@@ -150,7 +144,6 @@ namespace CharacterControl
 						case Enums.Inputs.Front:
 							map.Add(Enums.Transition.DFToFront, input);
 							currentState = Enums.Inputs.Front;
-							print(currentState.ToString());
 							break;
 
 						case Enums.Inputs.DownFront:
@@ -208,7 +201,6 @@ namespace CharacterControl
 							case Enums.Inputs.Medium:
 								map.Add(Enums.Transition.BackToMedium, attack);
 								currentState = Enums.Inputs.Special2;
-								print("SP2");
 								break;
 
 							default:
@@ -223,13 +215,11 @@ namespace CharacterControl
 							case Enums.Inputs.Medium:
 								map.Add(Enums.Transition.FrontToMedium, attack);
 								currentState = Enums.Inputs.Special1;
-								print("SP1");
 								break;
 
 							case Enums.Inputs.Heavy:
 								map.Add(Enums.Transition.FrontToHeavy, attack);
 								currentState = Enums.Inputs.Super;
-								print("SUPER");
 								break;
 
 							default:
@@ -246,7 +236,6 @@ namespace CharacterControl
 								{
 									map.Add(Enums.Transition.DDownToLight, attack);
 									currentState = Enums.Inputs.Vanish;
-									print("Vanish");
 								}
 								break;
 
@@ -255,7 +244,6 @@ namespace CharacterControl
 								{
 									map.Add(Enums.Transition.DDownToMedium, attack);
 									currentState = Enums.Inputs.Dash;
-									print("Dash");
 								}
 								break;
 						}
@@ -297,37 +285,31 @@ namespace CharacterControl
 				if(attacks.Contains(Enums.AttackState.heavy) && attacks.Contains(Enums.AttackState.medium))
 				{
 					ResetMachine();
-					print("Activate GuardBreak");
 					return Enums.Inputs.GuardBreak;
 				}
 
 				if (map.ContainsKey(Enums.Transition.FrontToHeavy))
 				{
 					ResetMachine();
-					print("Activate Super");
 					return Enums.Inputs.Super;
 				}
 				else if (map.ContainsKey(Enums.Transition.FrontToMedium))
 				{
-					print("Activate Special1");
 					ResetMachine();
 					return Enums.Inputs.Special1;
 				}
 				else if (map.ContainsKey(Enums.Transition.BackToMedium))
 				{
-					print("Activate Special2");
 					ResetMachine();
 					return Enums.Inputs.Special2;
 				}
 				else if (map.ContainsKey(Enums.Transition.DDownToLight))
 				{
-					print("Activate Vanish");
 					ResetMachine();
 					return Enums.Inputs.Vanish;
 				}
 				else if (map.ContainsKey(Enums.Transition.DDownToMedium))
 				{
-					print("Activate Dash");
 					ResetMachine();
 					return Enums.Inputs.Dash;
 				}

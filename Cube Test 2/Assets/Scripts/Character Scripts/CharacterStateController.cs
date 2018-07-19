@@ -175,7 +175,7 @@ namespace CharacterControl
             if (healthPoints <= 0)
             {
                 animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "death" }));
-                game.GetComponent<GameManager>().Die(playerID);
+                game.GetComponent<GameManager>().GameEnd(playerID);
 
             }
         }

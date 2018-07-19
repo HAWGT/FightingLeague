@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour {
     private float sb1;
     private float hp2;
     private float sb2;
+	private int timer;
 
     public void UpdateP1(float a, float b)
     {
@@ -33,6 +34,8 @@ public class UIManager : MonoBehaviour {
     // Use this for initialization
     private void Start () {
         game = GameObject.Find("Game Manager");
+
+		timer = PlayerPrefs.GetInt("Round Time", 60);
     }
 
 }

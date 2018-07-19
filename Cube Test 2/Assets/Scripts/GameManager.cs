@@ -10,8 +10,7 @@ public class GameManager : MonoBehaviour
     private bool gameEnded = false;
     //public static GameManager instance = null;
 
-
-    internal void Die(int playerID)
+    internal void GameEnd(int playerID)
     {
         gameEnded = true;
     }
