@@ -155,7 +155,7 @@ namespace CharacterControl
 				animator.SetBool("airborn", true);
 				animator.SetTrigger("jump");
 				if (rigidbody.velocity.y < 5f)
-                    rigidbody.AddForce(new Vector3(0, 6.5f), ForceMode.VelocityChange);
+                    rigidbody.AddForce(new Vector3(0, 10f), ForceMode.VelocityChange);
             }
         }
 

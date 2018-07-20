@@ -10,8 +10,13 @@ public class GameManager : MonoBehaviour
     private bool gameEnded = false;
     //public static GameManager instance = null;
 
-    internal void GameEnd(int playerID)
+    public void GameEnd(int playerID)
     {
         gameEnded = true;
+    }
+
+    public bool isGameOver()
+    {
+        return gameEnded;
     }
 }

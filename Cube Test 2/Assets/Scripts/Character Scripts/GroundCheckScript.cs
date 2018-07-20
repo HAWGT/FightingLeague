@@ -28,7 +28,32 @@ namespace CharacterControl
             }
             cchar.GetComponent<Animator>().applyRootMotion = true;
             cchar.GetComponent<Animator>().SetBool("airborn", false);
-            
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            Animator animator = cchar.GetComponent<Animator>();
+            Rigidbody rigidbody = cchar.GetComponent<Rigidbody>();
+            if (cchar.transform.position.y > 0.26)
+            {
+                if (cchar.GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+                {
+                    animator.applyRootMotion = false;
+                    rigidbody.AddForce(new Vector3(-0.5f, 0), ForceMode.VelocityChange);
+                    //cchar.transform.position = new Vector3(cchar.transform.position.x - 0.25f, cchar.transform.position.y, cchar.transform.position.z);
+                }
+
+                if (cchar.GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+                {
+                    animator.applyRootMotion = false;
+                    rigidbody.AddForce(new Vector3(0.5f, 0), ForceMode.VelocityChange);
+                    //cchar.transform.position = new Vector3(cchar.transform.position.x + 0.25f, cchar.transform.position.y, cchar.transform.position.z);
+                }
+
+                //if (cchar.transform.position.x < -7f) cchar.transform.position = new Vector3(-7f, cchar.transform.position.y, cchar.transform.position.z);
+                //if (cchar.transform.position.x > 7f) cchar.transform.position = new Vector3(7f, cchar.transform.position.y, cchar.transform.position.z);
+            }
+
         }
 
         public void UpdateSide()
@@ -56,6 +81,7 @@ namespace CharacterControl
                 cchar.GetComponent<Animator>().SetBool("walkingForward", false);
                 cchar.GetComponent<Animator>().SetBool("walkingBackward", false);
             }
+            if (cchar.transform.position.y > 5f) cchar.transform.position = new Vector3(cchar.transform.position.x, 5f, cchar.transform.position.z);
         }
     }
 

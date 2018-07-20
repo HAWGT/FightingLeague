@@ -27,6 +27,10 @@ namespace CharacterControl
         private bool counteredBeam = true;
         [Task]
         private bool canChallenge = false;
+        [Task]
+        private bool gameEnded = false;
+
+        private GameObject game;
 
         private Enums.AttackState lastAttack = Enums.AttackState.none;
 
@@ -37,10 +41,12 @@ namespace CharacterControl
         private void Start()
         {
             animControl = GetComponent<AnimationController>();
+            game = GameObject.Find("Game Manager");
         }
 
         private void Update()
         {
+            gameEnded = game.GetComponent<GameManager>().isGameOver();
             canChallenge = false;
             enemyAttacking = false;
             enemyBlocking = false;
