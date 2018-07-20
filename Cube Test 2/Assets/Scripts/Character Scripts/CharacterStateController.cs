@@ -59,6 +59,12 @@ namespace CharacterControl
             return this.charState;
         }
 
+        public Enums.AttackState GetTypeOfAtk()
+        {
+            if (this.attackStates.Count == 0) return Enums.AttackState.none;
+            return this.attackStates[this.attackStates.Count - 1];
+        }
+
         public List<Enums.AttackState> GetAttackState()
         {
             return this.attackStates;
@@ -347,8 +353,15 @@ namespace CharacterControl
 						break;
 
 					case Enums.Inputs.Vanish:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "vanish" }));
-						break;
+                        if (superBar > 9)
+                        {
+                            animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "vanish" }));
+                        }
+                        else
+                        {
+                            animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "midDash" }));
+                        }
+                        break;
 
 					case Enums.Inputs.GuardBreak:
 						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "guardBreak" }));
@@ -370,9 +383,10 @@ namespace CharacterControl
 
         }
 
-        internal void AddSuperBar(float bar)
+        public void AddSuperBar(float bar)
         {
             superBar += bar;
+            if (superBar > 50f) superBar = 50f;
         }
     }
 

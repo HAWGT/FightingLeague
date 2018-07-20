@@ -1,5 +1,41 @@
 tree("Root")
     fallback
+        While canChallenge
+            Sequence
+                Super
+                Wait 2.24
+        While not counteredBeam
+            Random
+                Sequence
+                    Dash
+                    Wait 0.59
+                Sequence
+                    Vanish
+                    Wait 0.63
+        While not counteredProjectile
+            Random
+                Jump
+                Sequence
+                    Reflect
+                    Wait 0.66
+                Sequence
+                    Special1
+                    Wait 0.59
+                Sequence
+                    Special2
+                    Wait 0.75
+                Sequence
+                    Super
+                    Wait 2.24
+                Sequence
+                    Dash
+                    Wait 0.59
+                Sequence
+                    Vanish
+                    Wait 0.63
+                Sequence
+                    Grab
+                    Wait 1.2
         While not enemyClose
             Random 0.92 0.01 0.01 0.02 0.02 0.02
                 WalkForward
@@ -12,7 +48,6 @@ tree("Root")
                 Sequence
                     Jump
                     WalkForward
-                    Wait 1
                 Sequence
                     Special1
                     Wait 0.59
@@ -55,9 +90,6 @@ tree("Root")
                 Sequence
                     Jump
                     WalkBackward
-                    Wait 1
                 Sequence
                     Reflect
                     Wait 0.66
-                    
-                    

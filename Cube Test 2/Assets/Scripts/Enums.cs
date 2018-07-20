@@ -14,7 +14,7 @@ namespace CharacterControl
 
         public enum AttackState
         {
-            none, light, medium, heavy, special1, special2
+            none, light, medium, heavy, special1, special2, super
         }
 
         public enum Inputs
