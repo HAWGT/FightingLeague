@@ -389,13 +389,13 @@ namespace CharacterControl
             if (GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetHP() <= 0) return;
             superBar += bar;
             GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().AddPassiveSuperBar(bar);
-            if (superBar > 50f) superBar = 50f;
+            if (superBar > 100f) superBar = 100f;
         }
 
         public void AddPassiveSuperBar(float bar)
         {
             superBar += bar / 2;
-            if (superBar > 50f) superBar = 50f;
+            if (superBar > 100f) superBar = 100f;
         }
     }
 
