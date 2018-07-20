@@ -49,6 +49,7 @@ namespace CharacterControl
             if (target.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
             {
                 target.GetComponent<CharacterStateController>().TakeDamage(17);
+                creator.GetComponent<CharacterStateController>().AddSuperBar(0.34f);
             }
         }
     }

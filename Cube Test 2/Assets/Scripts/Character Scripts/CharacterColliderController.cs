@@ -360,17 +360,17 @@ namespace CharacterControl
                 if (attackingL)
                 {
                     dmg = 500f;
-                    bar = 5f;
+                    bar = 10f;
                 }
                 if (attackingM)
                 {
                     dmg = 700f;
-                    bar = 7f;
+                    bar = 14f;
                 }
                 if (attackingH)
                 {
                     dmg = 850f;
-                    bar = 8.5f;
+                    bar = 17f;
                     myRigidBody.GetComponent<AnimationController>().Push(dmg);
                 }
                 stateController.AddSuperBar(bar);

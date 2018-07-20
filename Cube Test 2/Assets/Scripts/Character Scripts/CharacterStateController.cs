@@ -39,7 +39,7 @@ namespace CharacterControl
 
         private float healthPoints = 10000;
 
-        private float superBar;
+        private float superBar = 0;
 
         private Enums.Inputs lastInput;
 
@@ -355,6 +355,7 @@ namespace CharacterControl
 					case Enums.Inputs.Vanish:
                         if (superBar > 9)
                         {
+                            superBar = superBar - 10;
                             animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "vanish" }));
                         }
                         else
@@ -385,7 +386,15 @@ namespace CharacterControl
 
         public void AddSuperBar(float bar)
         {
+            if (GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetHP() <= 0) return;
             superBar += bar;
+            GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().AddPassiveSuperBar(bar);
+            if (superBar > 50f) superBar = 50f;
+        }
+
+        public void AddPassiveSuperBar(float bar)
+        {
+            superBar += bar / 2;
             if (superBar > 50f) superBar = 50f;
         }
     }

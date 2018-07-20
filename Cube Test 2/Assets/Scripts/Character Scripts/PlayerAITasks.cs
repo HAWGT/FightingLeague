@@ -107,7 +107,6 @@ namespace CharacterControl
             else
             {
                 animControl.Jump();
-                counteredProjectile = true;
                 if (Task.current != null) Task.current.Succeed();
             }
             
