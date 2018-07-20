@@ -95,25 +95,25 @@ namespace CharacterControl
         public void WalkForward()
         {
             animControl.WalkFwd();
-            if (Task.current != null) Task.current.Succeed();
+            Task.current.Succeed();
         }
         [Task]
         public void WalkBackward()
         {
             animControl.WalkBwd();
-            if (Task.current != null) Task.current.Succeed();
+            Task.current.Succeed();
         }
         [Task]
         public void Jump()
         {
             if (isJumping)
             {
-                if (Task.current != null) Task.current.Fail();
+                Task.current.Fail();
             }
             else
             {
                 animControl.Jump();
-                if (Task.current != null) Task.current.Succeed();
+                Task.current.Succeed();
             }
             
         }
@@ -121,35 +121,35 @@ namespace CharacterControl
         public void Crouch()
         {
             animControl.TurnAnimatorParametersOn(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "crouch" }));
-            if (Task.current != null) Task.current.Succeed();
+            Task.current.Succeed();
         }
         [Task]
         public void Reflect()
         {
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "reflect" }));
             counteredProjectile = true;
-            if (Task.current != null) Task.current.Succeed();
+            Task.current.Succeed();
         }
         [Task]
         public void Grab()
         {
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "guardBreak" }));
             counteredProjectile = true;
-            if (Task.current != null) Task.current.Succeed();
+            Task.current.Succeed();
         }
         [Task]
         public void Special1()
         {
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "special1" }));
             counteredProjectile = true;
-            if (Task.current != null) Task.current.Succeed();
+            Task.current.Succeed();
         }
         [Task]
         public void Special2()
         {
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "special2" }));
             counteredProjectile = true;
-            if (Task.current != null) Task.current.Succeed();
+            Task.current.Succeed();
         }
         [Task]
         public void Super()
@@ -158,11 +158,11 @@ namespace CharacterControl
             {
                 animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "super" }));
                 counteredProjectile = true;
-                if (Task.current != null) Task.current.Succeed();
+                Task.current.Succeed();
             }
             else
             {
-                if (Task.current != null) Task.current.Fail();
+                Task.current.Fail();
             }
         }
         [Task]
@@ -170,7 +170,7 @@ namespace CharacterControl
         {
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "midDash" }));
             counteredBeam = true;
-            if (Task.current != null) Task.current.Succeed();
+            Task.current.Succeed();
         }
         [Task]
         public void Vanish()
@@ -179,11 +179,11 @@ namespace CharacterControl
             {
                 animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "vanish" }));
                 counteredBeam = true;
-                if (Task.current != null) Task.current.Succeed();
+                Task.current.Succeed();
             }
             else
             {
-                if (Task.current != null) Task.current.Fail();
+                Task.current.Fail();
             }
         }
         [Task]
@@ -191,13 +191,13 @@ namespace CharacterControl
         {
             if (isJumping)
             {
-                if (Task.current != null) Task.current.Fail();
+                Task.current.Fail();
             }
             else
             {
                 counteredProjectile = true;
                 animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "lightAttack" }));
-                if (Task.current != null) Task.current.Succeed();
+                Task.current.Succeed();
             }
         }
         [Task]
@@ -205,12 +205,12 @@ namespace CharacterControl
         {
             if (isJumping)
             {
-                if (Task.current != null) Task.current.Fail();
+                Task.current.Fail();
             }
             else
             {
                 animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "mediumAttack" }));
-                if (Task.current != null) Task.current.Succeed();
+                Task.current.Succeed();
             }
         }
         [Task]
@@ -218,12 +218,12 @@ namespace CharacterControl
         {
             if (isJumping)
             {
-                if (Task.current != null) Task.current.Fail();
+                Task.current.Fail();
             }
             else
             {
                 animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "heavyAttack" }));
-                if (Task.current != null) Task.current.Succeed();
+                Task.current.Succeed();
             }
         }
     }
