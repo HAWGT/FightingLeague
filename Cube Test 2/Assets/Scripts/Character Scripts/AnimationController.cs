@@ -133,6 +133,7 @@ namespace CharacterControl
             else
             {
                 animator.SetBool("walkingBackward", true);
+                GetComponent<CharacterStateController>().SetCharState(Enums.CharState.blocking);
             }
             
         }

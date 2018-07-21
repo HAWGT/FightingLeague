@@ -29,6 +29,10 @@ namespace CharacterControl
         private bool canChallenge = false;
         [Task]
         private bool gameEnded = false;
+        [Task]
+        private bool canAtk = false;
+        [Task]
+        private bool canApproach = false;
 
         private GameObject game;
 
@@ -38,15 +42,20 @@ namespace CharacterControl
 
         private AnimationController animControl;
 
+        private CharacterStateController stateController;
+
         private void Start()
         {
             animControl = GetComponent<AnimationController>();
+            stateController = GetComponent<CharacterStateController>();
             game = GameObject.Find("Game Manager");
         }
 
         private void Update()
         {
             gameEnded = game.GetComponent<GameManager>().isGameOver();
+            canApproach = false;
+            canAtk = false;
             canChallenge = false;
             enemyAttacking = false;
             enemyBlocking = false;
@@ -55,6 +64,11 @@ namespace CharacterControl
             isJumping = false;
             grab = false;
             defend = false;
+            if (!isJumping)
+            {
+                stateController.SetLastAtk(Enums.AttackState.none);
+                stateController.SetCharState(Enums.CharState.standing);
+            }
             float currentSuperBar = GetComponent<CharacterStateController>().GetSB();
 
             if (lastHP != GetComponent<CharacterStateController>().GetHP())
@@ -84,11 +98,13 @@ namespace CharacterControl
 
             if (GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.y > 0.26f) enemyJumping = true;
             if (GetComponent<Rigidbody>().position.y > 0.26f) isJumping = true;
-            if (dist < 1.3f) enemyClose = true;
+            if (dist < 1.5f) enemyClose = true;
             if (enemyState == Enums.CharState.attacking) enemyAttacking = true;
             if (enemyState == Enums.CharState.blocking) enemyBlocking = true;
             if (enemyClose && enemyState == Enums.CharState.blocking) grab = true;
             if (enemyClose && enemyState == Enums.CharState.attacking) defend = true;
+            if (enemyClose && !defend) canAtk = true;
+            canApproach = counteredBeam && counteredProjectile;
         }
 
         [Task]
@@ -141,6 +157,8 @@ namespace CharacterControl
         public void Special1()
         {
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "special1" }));
+            stateController.SetLastAtk(Enums.AttackState.special1);
+            stateController.SetCharState(Enums.CharState.attacking);
             counteredProjectile = true;
             Task.current.Succeed();
         }
@@ -148,6 +166,8 @@ namespace CharacterControl
         public void Special2()
         {
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "special2" }));
+            stateController.SetLastAtk(Enums.AttackState.special2);
+            stateController.SetCharState(Enums.CharState.attacking);
             counteredProjectile = true;
             Task.current.Succeed();
         }
@@ -157,6 +177,8 @@ namespace CharacterControl
             if (GetComponent<CharacterStateController>().GetSB() >= 50f)
             {
                 animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "super" }));
+                stateController.SetLastAtk(Enums.AttackState.super);
+                stateController.SetCharState(Enums.CharState.attacking);
                 counteredProjectile = true;
                 Task.current.Succeed();
             }
@@ -195,7 +217,8 @@ namespace CharacterControl
             }
             else
             {
-                counteredProjectile = true;
+                stateController.SetLastAtk(Enums.AttackState.light);
+                stateController.SetCharState(Enums.CharState.attacking);
                 animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "lightAttack" }));
                 Task.current.Succeed();
             }
@@ -209,6 +232,8 @@ namespace CharacterControl
             }
             else
             {
+                stateController.SetLastAtk(Enums.AttackState.medium);
+                stateController.SetCharState(Enums.CharState.attacking);
                 animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "mediumAttack" }));
                 Task.current.Succeed();
             }
@@ -222,6 +247,8 @@ namespace CharacterControl
             }
             else
             {
+                stateController.SetLastAtk(Enums.AttackState.heavy);
+                stateController.SetCharState(Enums.CharState.attacking);
                 animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "heavyAttack" }));
                 Task.current.Succeed();
             }

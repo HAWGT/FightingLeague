@@ -53,6 +53,7 @@ namespace CharacterControl
 
         private bool queueRotate = false;
 
+        private Enums.AttackState lastAtk = Enums.AttackState.none;
 
         public Enums.CharState GetCharState()
         {
@@ -61,8 +62,7 @@ namespace CharacterControl
 
         public Enums.AttackState GetTypeOfAtk()
         {
-            if (this.attackStates.Count == 0) return Enums.AttackState.none;
-            return this.attackStates[this.attackStates.Count - 1];
+            return lastAtk;
         }
 
         public List<Enums.AttackState> GetAttackState()
@@ -334,18 +334,24 @@ namespace CharacterControl
 
 					case Enums.Inputs.Special1:
 						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special1" }));
-						break;
+                        SetLastAtk(Enums.AttackState.special1);
+                        SetCharState(Enums.CharState.attacking);
+                        break;
 
 					case Enums.Inputs.Special2:
 						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special2" }));
-						break;
+                        SetLastAtk(Enums.AttackState.special2);
+                        SetCharState(Enums.CharState.attacking);
+                        break;
 
 					case Enums.Inputs.Super:
 						if (superBar > 49)
 						{
 							superBar = superBar - 50;
 							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "super" }));
-						}
+                            SetLastAtk(Enums.AttackState.super);
+                            SetCharState(Enums.CharState.attacking);
+                        }
 						else
 						{
 							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special1" }));
@@ -377,10 +383,16 @@ namespace CharacterControl
 			ResetEnumState();
 		}
 
+        public void SetLastAtk(Enums.AttackState atk)
+        {
+            lastAtk = atk;
+        }
+
         private void ResetEnumState()
         {
 			attackStates = new List<Enums.AttackState>();
             SetCharState(Enums.CharState.standing);
+            SetLastAtk(Enums.AttackState.none);
 
         }
 
