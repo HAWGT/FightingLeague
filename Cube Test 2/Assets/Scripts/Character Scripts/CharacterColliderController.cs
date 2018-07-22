@@ -183,12 +183,12 @@ namespace CharacterControl
             Quaternion rot = Quaternion.Euler(new Vector3(90, 0, 90));
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
             {
-                temp.x += 15.5f;
+                temp.x += beamPrefab.transform.localScale.y+.5f;
                 //rot = Quaternion.Euler(new Vector3(0, 90, 0));
             }
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
             {
-                temp.x -= 15.5f;
+                temp.x -= beamPrefab.transform.localScale.y + .5f;
                 //rot = Quaternion.Euler(new Vector3(0, 270, 0));
             }
             var beam = (GameObject)Instantiate(

@@ -292,15 +292,14 @@ namespace CharacterControl
 						break;
 
 					case Enums.Inputs.DownBack:
-						animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "crouch" }));
+						animControl.WalkBwd();
 						break;
 
 					case Enums.Inputs.Down:
-						animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "crouch" }));
 						break;
 
 					case Enums.Inputs.DownFront:
-						animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "crouch" }));
+						animControl.WalkFwd();
 						break;
 
 					case Enums.Inputs.Front:
@@ -348,6 +347,16 @@ namespace CharacterControl
 						if (superBar > 49)
 						{
 							superBar = superBar - 50;
+
+							if (playerID == 1)
+							{
+								ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+							}
+							if (playerID == 2)
+							{
+								ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+							}
+
 							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "super" }));
                             SetLastAtk(Enums.AttackState.super);
                             SetCharState(Enums.CharState.attacking);
@@ -362,7 +371,19 @@ namespace CharacterControl
                         if (superBar > 9)
                         {
                             superBar = superBar - 10;
-                            animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "vanish" }));
+
+							if (playerID == 1)
+							{
+								ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+								animControl.TurnAnimatorParametersOff(FindAnimatorParameter(new string[] { "mirrorAnimation" }));
+							}
+							if (playerID == 2)
+							{
+								ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+								animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "mirrorAnimation" }));
+							}
+
+							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "vanish" }));
                         }
                         else
                         {
@@ -402,13 +423,32 @@ namespace CharacterControl
             superBar += bar;
             GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().AddPassiveSuperBar(bar);
             if (superBar > 100f) superBar = 100f;
-        }
 
-        public void AddPassiveSuperBar(float bar)
+			if (playerID == 1)
+			{
+				ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+			}
+			if (playerID == 2)
+			{
+				ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+			}
+		}
+
+		public void AddPassiveSuperBar(float bar)
         {
             superBar += bar / 2;
             if (superBar > 100f) superBar = 100f;
-        }
-    }
+
+			if (playerID == 1)
+			{
+				ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+			}
+			if (playerID == 2)
+			{
+				ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+			}
+
+		}
+	}
 
 }

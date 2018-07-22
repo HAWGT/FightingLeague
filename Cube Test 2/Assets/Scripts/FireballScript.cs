@@ -33,7 +33,7 @@ namespace CharacterControl
                 if (body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking &&!flagged)
                 {
                     body.GetComponent<CharacterStateController>().TakeDamage(1500);
-                    creator.GetComponent<CharacterStateController>().AddSuperBar(30f);
+                    creator.GetComponent<CharacterStateController>().AddSuperBar(10f);
                     Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
                     Vector3 pos = body.position;
                     var explosion = (GameObject)Instantiate(explosionPrefab, pos, rot);

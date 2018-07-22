@@ -12,7 +12,12 @@ public class UIManager : MonoBehaviour {
     [SerializeField]
     private Image hpBar2;
 
-    private float hp1;
+	[SerializeField]
+	private Image superBar1;
+	[SerializeField]
+	private Image superBar2;
+
+	private float hp1;
     private float sb1;
     private float hp2;
     private float sb2;
@@ -23,13 +28,15 @@ public class UIManager : MonoBehaviour {
         hp1 = a;
         sb1 = b;
         hpBar1.fillAmount = a / 10000;
+		superBar1.fillAmount = b / 100;
     }
     public void UpdateP2(float a, float b)
     {
         hp2 = a;
         sb2 = b;
         hpBar2.fillAmount = a / 10000;
-    }
+		superBar2.fillAmount = b / 100;
+	}
 
     // Use this for initialization
     private void Start () {

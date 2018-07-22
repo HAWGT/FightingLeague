@@ -33,7 +33,7 @@ namespace CharacterControl
                 if (body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking && !flagged)
                 {
                     body.GetComponent<CharacterStateController>().TakeDamage(1500);
-                    creator.GetComponent<CharacterStateController>().AddSuperBar(30f);
+                    creator.GetComponent<CharacterStateController>().AddSuperBar(15f);
                     ContactPoint contact = collision.contacts[0];
                     Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
                     Vector3 pos = body.position;
