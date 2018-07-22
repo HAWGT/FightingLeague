@@ -150,7 +150,7 @@ namespace CharacterControl
 
         public void Jump()
         {
-            if (!animator.GetBool("airborn") && !animator.GetBool("crouch"))
+            if (!animator.GetBool("airborn"))
             {
                 animator.applyRootMotion = false;
 				animator.SetBool("airborn", true);
