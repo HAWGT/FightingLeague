@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Panda;
+using BackGame;
 
 namespace CharacterControl
 {
@@ -53,7 +54,7 @@ namespace CharacterControl
 
         private void Update()
         {
-            gameEnded = game.GetComponent<GameManager>().isGameOver();
+            gameEnded = game.GetComponent<GameManager>().IsGameOver();
             canApproach = false;
             canAtk = false;
             canChallenge = false;

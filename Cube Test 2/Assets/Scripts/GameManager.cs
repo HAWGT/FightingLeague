@@ -3,20 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace BackGame
 {
+	public class GameManager : MonoBehaviour
+	{
 
-    // Use this for initialization
-    private bool gameEnded = false;
-    //public static GameManager instance = null;
+		// Use this for initialization
+		private bool gameEnded = false;
 
-    public void GameEnd(int playerID)
-    {
-        gameEnded = true;
-    }
+		//public static GameManager instance = null;
 
-    public bool isGameOver()
-    {
-        return gameEnded;
-    }
+		public void GameEnd(int playerID)
+		{
+			gameEnded = true;
+			
+		}
+
+		public bool IsGameOver()
+		{
+			return gameEnded;
+		}
+	}
+
 }
