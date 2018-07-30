@@ -154,7 +154,7 @@ namespace CharacterControl
             StartCoroutine(UpdateTeleport());
         }
 
-        private void Reflect()
+        private void ReflectBarrier()
         {
             Vector3 temp = myRigidBody.position;
             temp.y = temp.y + 1;
