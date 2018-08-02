@@ -46,7 +46,7 @@ namespace CharacterControl
         }
         private void RemoveHP()
         {
-            if (target.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking)
+            if (StateHelper.GetState(target) != Enums.AnimState.walkingB)
             {
                 target.GetComponent<CharacterStateController>().TakeDamage(8);
                 //creator.GetComponent<CharacterStateController>().AddSuperBar(0.08f);

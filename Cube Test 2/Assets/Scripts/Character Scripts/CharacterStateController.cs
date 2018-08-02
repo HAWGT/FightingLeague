@@ -404,6 +404,20 @@ namespace CharacterControl
 			ResetEnumState();
 		}
 
+        public void Vanish()
+        {
+            if (superBar < 10f) return;
+            superBar -= 10f;
+            animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "vanish" }));
+        }
+
+        public void Super()
+        {
+            if (superBar < 50f) return;
+            superBar -= 50f;
+            animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "super" }));
+        }
+
         public void SetLastAtk(Enums.AttackState atk)
         {
             lastAtk = atk;

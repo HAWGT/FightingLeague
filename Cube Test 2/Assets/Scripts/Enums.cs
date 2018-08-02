@@ -7,6 +7,14 @@ namespace CharacterControl
 {
     public class Enums
     {
+        public enum AnimState
+        {
+            standing, walkingF, walkingB, crouching, airborn, blocking, hitstun, crouchBlock, none, light, medium, heavy, special1, special2, super,
+            reflect,
+            dash,
+            vanish,
+            grab
+        }
         public enum CharState
         {
             standing, walkingF, walkingB, crouching, airborn, blocking, attacking, hitstun, crouchBlock

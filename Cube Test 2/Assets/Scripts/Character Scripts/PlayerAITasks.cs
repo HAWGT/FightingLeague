@@ -36,7 +36,7 @@ namespace CharacterControl
 
         private GameObject game;
 
-        private Enums.AttackState lastAttack = Enums.AttackState.none;
+        private Enums.AnimState lastState = Enums.AnimState.none;
 
         private float lastHP = 10000;
 
@@ -79,19 +79,18 @@ namespace CharacterControl
             }
 
             float dist = System.Math.Abs(GetComponent<Rigidbody>().position.x - GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.x);
-            Enums.CharState enemyState = GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetCharState();
-            Enums.AttackState attackState = GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetTypeOfAtk();
+            Enums.AnimState enemyState = StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>());
 
-            if (attackState == Enums.AttackState.special1 && attackState == lastAttack)
+            if (StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.special1 && enemyState == lastState)
             {
                 counteredProjectile = false;
-            } else if (attackState == Enums.AttackState.super && attackState == lastAttack)
+            } else if (enemyState == Enums.AnimState.super && enemyState == lastState)
             {
                 counteredBeam = false;
-                if (currentSuperBar >= 50f && lastHP > GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetHP() && attackState == Enums.AttackState.super) canChallenge = true;
+                if (currentSuperBar >= 50f && lastHP > GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetHP() && enemyState == Enums.AnimState.super) canChallenge = true;
             } else
             {
-                lastAttack = Enums.AttackState.none;
+                lastState = Enums.AnimState.none;
                 counteredBeam = true;
                 counteredProjectile = true;
             }
@@ -99,10 +98,10 @@ namespace CharacterControl
             if (GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.y > 0.26f) enemyJumping = true;
             if (GetComponent<Rigidbody>().position.y > 0.26f) isJumping = true;
             if (dist < 1.5f) enemyClose = true;
-            if (enemyState == Enums.CharState.attacking) enemyAttacking = true;
-            if (enemyState == Enums.CharState.blocking) enemyBlocking = true;
-            if (enemyClose && enemyState == Enums.CharState.blocking) grab = true;
-            if (enemyClose && enemyState == Enums.CharState.attacking) defend = true;
+            if (StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.light || StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.medium || StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.heavy || StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.special1 || StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.special2 || StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.super) enemyAttacking = true;
+            if (StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.walkingB) enemyBlocking = true;
+            if (enemyClose && enemyBlocking) grab = true;
+            if (enemyClose && enemyAttacking) defend = true;
             if (enemyClose && !defend) canAtk = true;
             canApproach = counteredBeam && counteredProjectile;
         }
@@ -110,18 +109,21 @@ namespace CharacterControl
         [Task]
         public void WalkForward()
         {
+            if (Task.current == null) return;
             animControl.WalkFwd();
             Task.current.Succeed();
         }
         [Task]
         public void WalkBackward()
         {
+            if (Task.current == null) return;
             animControl.WalkBwd();
             Task.current.Succeed();
         }
         [Task]
         public void Jump()
         {
+            if (Task.current == null) return;
             if (isJumping)
             {
                 Task.current.Fail();
@@ -134,14 +136,9 @@ namespace CharacterControl
             
         }
         [Task]
-        public void Crouch()
-        {
-            animControl.TurnAnimatorParametersOn(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "crouch" }));
-            Task.current.Succeed();
-        }
-        [Task]
         public void Reflect()
         {
+            if (Task.current == null) return;
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "reflect" }));
             counteredProjectile = true;
             Task.current.Succeed();
@@ -149,6 +146,7 @@ namespace CharacterControl
         [Task]
         public void Grab()
         {
+            if (Task.current == null) return;
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "guardBreak" }));
             counteredProjectile = true;
             Task.current.Succeed();
@@ -156,6 +154,7 @@ namespace CharacterControl
         [Task]
         public void Special1()
         {
+            if (Task.current == null) return;
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "special1" }));
             stateController.SetLastAtk(Enums.AttackState.special1);
             stateController.SetCharState(Enums.CharState.attacking);
@@ -165,6 +164,7 @@ namespace CharacterControl
         [Task]
         public void Special2()
         {
+            if (Task.current == null) return;
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "special2" }));
             stateController.SetLastAtk(Enums.AttackState.special2);
             stateController.SetCharState(Enums.CharState.attacking);
@@ -174,11 +174,10 @@ namespace CharacterControl
         [Task]
         public void Super()
         {
+            if (Task.current == null) return;
             if (GetComponent<CharacterStateController>().GetSB() >= 50f)
             {
-                animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "super" }));
-                stateController.SetLastAtk(Enums.AttackState.super);
-                stateController.SetCharState(Enums.CharState.attacking);
+                GetComponent<CharacterStateController>().Super();
                 counteredProjectile = true;
                 Task.current.Succeed();
             }
@@ -190,6 +189,7 @@ namespace CharacterControl
         [Task]
         public void Dash()
         {
+            if (Task.current == null) return;
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "midDash" }));
             counteredBeam = true;
             Task.current.Succeed();
@@ -197,9 +197,10 @@ namespace CharacterControl
         [Task]
         public void Vanish()
         {
+            if (Task.current == null) return;
             if (GetComponent<CharacterStateController>().GetSB() >= 10f)
             {
-                animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "vanish" }));
+                GetComponent<CharacterStateController>().Vanish();
                 counteredBeam = true;
                 Task.current.Succeed();
             }
@@ -211,6 +212,7 @@ namespace CharacterControl
         [Task]
         public void AttackL()
         {
+            if (Task.current == null) return;
             if (isJumping)
             {
                 Task.current.Fail();
@@ -226,6 +228,7 @@ namespace CharacterControl
         [Task]
         public void AttackM()
         {
+            if (Task.current == null) return;
             if (isJumping)
             {
                 Task.current.Fail();
@@ -241,6 +244,7 @@ namespace CharacterControl
         [Task]
         public void AttackH()
         {
+            if (Task.current == null) return;
             if (isJumping)
             {
                 Task.current.Fail();
