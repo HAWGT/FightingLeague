@@ -29,9 +29,6 @@ namespace CharacterControl
 
         private List<AnimatorControllerParameter> animatorParameters;
 
-        [SerializeField]
-        private FiniteStateMachineState motionStateMachine;
-
         private GameObject game;
         private GameObject ui;
         
@@ -39,7 +36,7 @@ namespace CharacterControl
 
         private float healthPoints = 10000;
 
-        private float superBar = 0;
+        private int superBar;
 
         private Enums.Inputs lastInput;
 
@@ -131,7 +128,6 @@ namespace CharacterControl
             myRigidbody = GetComponent<Rigidbody>();
             animControl.SetRigidBody(myRigidbody);
             animatorParameters = animControl.GetAllBoolTriggerAnimatorParameters();
-            motionStateMachine = GetComponent<FiniteStateMachineState>();
 			superBar = 0;
 
 
@@ -150,7 +146,35 @@ namespace CharacterControl
             }
         }
 
-        
+        public int GetSuperBar()
+		{
+			return superBar;
+		}
+
+		public void ReduceSuperBar(int reduction)
+		{
+			superBar -= reduction;
+		}
+
+		public void UpdateUI(bool changeSides)
+		{
+			if (playerID == 1)
+			{
+				ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+				if (changeSides)
+				{
+					animControl.TurnAnimatorParametersOff(FindAnimatorParameter(new string[] { "mirrorAnimation" }));
+				}
+			}
+			if (playerID == 2)
+			{
+				ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+				if (changeSides)
+				{
+					animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "mirrorAnimation" }));
+				}
+			}
+		}
 
         public void SetCharState(Enums.CharState state)
         {
@@ -168,7 +192,7 @@ namespace CharacterControl
             animControl.Knock(dmg);
 
             healthPoints -= dmg;
-            superBar += dmg / 200;
+            superBar += (int) dmg / 200;
             if (playerID == 1) ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
             if (playerID == 2) ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
 
@@ -200,221 +224,19 @@ namespace CharacterControl
             return list;
         }
 
-        public void TranslateDirectionalInput(Enums.NumPad xAxis, Enums.NumPad yAxis)
-        {
-
-			if (facing == Enums.FacingSide.P1)
-			{
-				if (yAxis == Enums.NumPad.Down)
-				{
-					if (xAxis == Enums.NumPad.Left)
-					{
-						lastInput = Enums.Inputs.DownBack;
-
-					}
-					else if (xAxis == Enums.NumPad.Right)
-					{
-						lastInput = Enums.Inputs.DownFront;
-
-					}
-					else if (xAxis == Enums.NumPad.Neutral)
-					{
-						lastInput = Enums.Inputs.Down;
-					}
-				}
-				else if (yAxis == Enums.NumPad.Neutral)
-				{
-
-					if (xAxis == Enums.NumPad.Left)
-					{
-						lastInput = Enums.Inputs.Back;
-
-					}
-					else if (xAxis == Enums.NumPad.Right)
-					{
-						lastInput = Enums.Inputs.Front;
-
-					}
-					else if (xAxis == Enums.NumPad.Neutral)
-					{
-						lastInput = Enums.Inputs.Neutral;
-					}
-				}
-			}
-			else if (facing == Enums.FacingSide.P2)
-			{
-				if (yAxis == Enums.NumPad.Down)
-				{
-					if (xAxis == Enums.NumPad.Left)
-					{
-						lastInput = Enums.Inputs.DownFront;
-					}
-					else if (xAxis == Enums.NumPad.Right)
-					{
-						lastInput = Enums.Inputs.DownBack;
-					}
-					else if (xAxis == Enums.NumPad.Neutral)
-					{
-						lastInput = Enums.Inputs.Down;
-					}
-				}
-				else if (yAxis == Enums.NumPad.Neutral)
-				{
-					if (xAxis == Enums.NumPad.Left)
-					{
-						lastInput = Enums.Inputs.Front;
-					}
-					else if (xAxis == Enums.NumPad.Right)
-					{
-						lastInput = Enums.Inputs.Back;
-					}
-					else if (xAxis == Enums.NumPad.Neutral)
-					{
-						lastInput = Enums.Inputs.Neutral;
-					}
-				}
-			}
-
-			if (yAxis == Enums.NumPad.Up)
-			{
-				lastInput = Enums.Inputs.Up;
-			}
-
-			lastInput = motionStateMachine.PerformTransition(lastInput, attackStates);
-
-
-			if (attackStates.Count == 0)
-			{
-				switch (lastInput)
-				{
-					case Enums.Inputs.Back:
-						animControl.WalkBwd();
-						break;
-
-					case Enums.Inputs.DownBack:
-						animControl.WalkBwd();
-						break;
-
-					case Enums.Inputs.Down:
-						break;
-
-					case Enums.Inputs.DownFront:
-						animControl.WalkFwd();
-						break;
-
-					case Enums.Inputs.Front:
-						animControl.WalkFwd();
-						break;
-
-					case Enums.Inputs.Up:
-						animControl.Jump();
-						break;
-
-					case Enums.Inputs.Neutral:
-
-						break;
-				}
-			}
-			else
-			{
-				switch (lastInput)
-				{
-					case Enums.Inputs.Light:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "lightAttack" }));
-						break;
-
-					case Enums.Inputs.Medium:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "mediumAttack" }));
-						break;
-
-					case Enums.Inputs.Heavy:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "heavyAttack" }));
-						break;
-
-					case Enums.Inputs.Special1:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special1" }));
-                        SetLastAtk(Enums.AttackState.special1);
-                        SetCharState(Enums.CharState.attacking);
-                        break;
-
-					case Enums.Inputs.Special2:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special2" }));
-                        SetLastAtk(Enums.AttackState.special2);
-                        SetCharState(Enums.CharState.attacking);
-                        break;
-
-					case Enums.Inputs.Super:
-						if (superBar > 49)
-						{
-							superBar = superBar - 50;
-
-							if (playerID == 1)
-							{
-								ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
-							}
-							if (playerID == 2)
-							{
-								ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
-							}
-
-							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "super" }));
-                            SetLastAtk(Enums.AttackState.super);
-                            SetCharState(Enums.CharState.attacking);
-                        }
-						else
-						{
-							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special1" }));
-						}
-						break;
-
-					case Enums.Inputs.Vanish:
-                        if (superBar > 9)
-                        {
-                            superBar = superBar - 10;
-
-							if (playerID == 1)
-							{
-								ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
-								animControl.TurnAnimatorParametersOff(FindAnimatorParameter(new string[] { "mirrorAnimation" }));
-							}
-							if (playerID == 2)
-							{
-								ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
-								animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "mirrorAnimation" }));
-							}
-
-							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "vanish" }));
-                        }
-                        else
-                        {
-                            animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "midDash" }));
-                        }
-                        break;
-
-					case Enums.Inputs.GuardBreak:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "guardBreak" }));
-						break;
-
-					case Enums.Inputs.Dash:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "midDash" }));
-						break;
-				}
-				animControl.TurnAnimatorParametersOff(FindAnimatorParameter(new string[] { "walkingForward", "walkingBackward", "crouch" }));
-			}
-			ResetEnumState();
-		}
+        
 
         public void Vanish()
         {
-            if (superBar < 10f) return;
-            superBar -= 10f;
+            if (superBar < 10) return;
+            superBar -= 10;
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "vanish" }));
         }
 
         public void Super()
         {
-            if (superBar < 50f) return;
-            superBar -= 50f;
+            if (superBar < 50) return;
+            superBar -= 50;
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "super" }));
         }
 
@@ -434,9 +256,9 @@ namespace CharacterControl
         public void AddSuperBar(float bar)
         {
             if (GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetHP() <= 0) return;
-            superBar += bar;
+            superBar += (int) bar;
             GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().AddPassiveSuperBar(bar);
-            if (superBar > 100f) superBar = 100f;
+            if (superBar > 100) superBar = 100;
 
 			if (playerID == 1)
 			{
@@ -450,8 +272,8 @@ namespace CharacterControl
 
 		public void AddPassiveSuperBar(float bar)
         {
-            superBar += bar / 2;
-            if (superBar > 100f) superBar = 100f;
+            superBar += (int) bar / 2;
+            if (superBar > 100f) superBar = 100;
 
 			if (playerID == 1)
 			{
