@@ -46,6 +46,7 @@ namespace CharacterControl
         }
         private void RemoveHP()
         {
+            if (target.GetComponent<CharacterColliderController>() == null) return;
             if (StateHelper.GetState(target) != Enums.AnimState.walkingB)
             {
                 target.GetComponent<CharacterStateController>().TakeDamage(8);

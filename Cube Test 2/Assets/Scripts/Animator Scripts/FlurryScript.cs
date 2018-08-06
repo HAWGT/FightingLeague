@@ -24,6 +24,7 @@ namespace CharacterControl
             else if (body != creator)
             {
                 Destroy(gameObject);
+                if (body.GetComponent<CharacterColliderController>() == null) return;
                 if (!flagged)
                 {
                     body.GetComponent<CharacterStateController>().TakeDamage(1000);

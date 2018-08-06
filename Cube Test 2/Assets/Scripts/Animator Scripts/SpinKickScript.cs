@@ -30,6 +30,7 @@ namespace CharacterControl
             else if (body != creator)
             {
                 Destroy(gameObject);
+                if (body.GetComponent<CharacterColliderController>() == null) return;
                 if (StateHelper.GetState(body) != Enums.AnimState.walkingB && !flagged)
                 {
                     body.GetComponent<CharacterStateController>().TakeDamage(1500);
