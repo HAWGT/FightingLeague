@@ -53,7 +53,7 @@ namespace CharacterControl
 
         private void Update()
         {
-            gameEnded = game.GetComponent<GameManager>().isGameOver();
+            gameEnded = game.GetComponent<MatchManager>().IsMatchOver();
             canApproach = false;
             canAtk = false;
             canChallenge = false;

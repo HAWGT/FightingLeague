@@ -3,20 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class MatchManager : MonoBehaviour
 {
 
     // Use this for initialization
-    private bool gameEnded = false;
+    private bool matchEnded = false;
     //public static GameManager instance = null;
 
-    public void GameEnd(int playerID)
+    public void MatchEnd(int playerID)
     {
-        gameEnded = true;
+        matchEnded = true;
     }
 
-    public bool isGameOver()
+    public bool IsMatchOver()
     {
-        return gameEnded;
+        return matchEnded;
     }
 }
