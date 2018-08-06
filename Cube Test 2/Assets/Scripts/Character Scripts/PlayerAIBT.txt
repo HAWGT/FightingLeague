@@ -13,7 +13,8 @@ tree("Root")
                                 Vanish
                                 Wait 0.63
                             Sequence
-                                Jump
+                                UpJump
+                                Wait 0.34
                                 WalkForward
                             Sequence
                                 Special1
@@ -35,7 +36,9 @@ tree("Root")
                                 Wait 0.63
                     While not counteredProjectile
                         Random
-                            Jump
+                            Sequence
+                                UpJump
+                                Wait 0.34
                             Sequence
                                 Reflect
                                 Wait 0.66
@@ -93,7 +96,8 @@ tree("Root")
                         Random 0.75 0.05 0.20
                             WalkBackward
                             Sequence
-                                Jump
+                                UpJump
+                                Wait 0.34
                                 WalkBackward
                             Sequence
                                 Reflect

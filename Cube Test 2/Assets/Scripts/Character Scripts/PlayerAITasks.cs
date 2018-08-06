@@ -97,7 +97,7 @@ namespace CharacterControl
 
             if (GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.y > 0.26f) enemyJumping = true;
             if (GetComponent<Rigidbody>().position.y > 0.26f) isJumping = true;
-            if (dist < 1.5f) enemyClose = true;
+            if (dist < 1f) enemyClose = true;
             if (StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.light || StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.medium || StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.heavy || StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.special1 || StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.special2 || StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.super) enemyAttacking = true;
             if (StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.walkingB) enemyBlocking = true;
             if (enemyClose && enemyBlocking) grab = true;
@@ -121,7 +121,7 @@ namespace CharacterControl
             Task.current.Succeed();
         }
         [Task]
-        public void Jump()
+        public void UpJump()
         {
             if (Task.current == null) return;
             if (isJumping)
