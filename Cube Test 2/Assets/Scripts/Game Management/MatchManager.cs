@@ -8,9 +8,11 @@ public class MatchManager : MonoBehaviour
 
     // Use this for initialization
     private bool matchEnded = false;
-    //public static GameManager instance = null;
+	//public static GameManager instance = null;
 
-    public void MatchEnd(int playerID)
+	
+
+	public void MatchEnd(int playerID)
     {
         matchEnded = true;
     }

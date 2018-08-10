@@ -90,9 +90,11 @@ namespace CharacterControl
                 GetComponent<AnimationController>().Mirror();
                 Vector3 change = myRigidbody.rotation.eulerAngles;
                 change.y = -change.y;
-                Quaternion newQuart = new Quaternion();
-                newQuart.eulerAngles = change;
-                myRigidbody.transform.rotation = newQuart;
+				Quaternion newQuart = new Quaternion
+				{
+					eulerAngles = change
+				};
+				myRigidbody.transform.rotation = newQuart;
                 queueRotate = false;
             } else
             {

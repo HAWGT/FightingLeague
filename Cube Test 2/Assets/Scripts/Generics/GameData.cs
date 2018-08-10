@@ -7,7 +7,8 @@ namespace GameData
 {
 	public class Player
 	{
-		private int type;
+		private int type =0;
+
 
 		public int Gettype()
 		{
