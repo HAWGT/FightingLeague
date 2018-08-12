@@ -57,12 +57,16 @@ public class SceneTransitionManager : MonoBehaviour {
 
 	public void RoundChange()
 	{
-		PlayerPrefs.SetInt("GameRounds", int.Parse(roundsInputField.text));
+        int i;
+        int.TryParse(roundsInputField.text, out i);
+        PlayerPrefs.SetInt("GameRounds", i);
 	}
 
 	public void TimerChange()
 	{
-		PlayerPrefs.SetInt("RoundTime", int.Parse(timerDropdown.itemText.text));
+        int i;
+        int.TryParse(timerDropdown.itemText.text, out i);
+        PlayerPrefs.SetInt("RoundTime", i);
 		print(timerDropdown.itemText.text);
 	}
 
