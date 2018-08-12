@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour {
     private void Start () {
         game = GameObject.Find("Game Manager");
 
-		timer = PlayerPrefs.GetInt("Round Time", 60);
+		timer = PlayerPrefs.GetInt("RoundTime");
     }
 
 }
