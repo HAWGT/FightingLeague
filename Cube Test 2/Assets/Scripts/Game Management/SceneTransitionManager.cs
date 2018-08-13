@@ -10,15 +10,6 @@ using UnityEngine.UI;
 
 public class SceneTransitionManager : MonoBehaviour {
 
-	InputField roundsInputField;
-	Dropdown timerDropdown;
-
-	private void Start()
-	{
-		roundsInputField = GameObject.Find("RoundsInputField").GetComponent<InputField>();
-		timerDropdown = GameObject.Find("TimerDropdown").GetComponent<Dropdown>();
-	}
-
 	public void ManTree()
 	{
 		PlayerPrefs.SetInt("Player1", 0);
@@ -55,19 +46,16 @@ public class SceneTransitionManager : MonoBehaviour {
 		PlayerPrefs.SetInt("Player2", 0);
 	}
 
-	public void RoundChange()
+	public void RoundChange(InputField input)
 	{
-        int i;
-        int.TryParse(roundsInputField.text, out i);
-        PlayerPrefs.SetInt("GameRounds", i);
+        PlayerPrefs.SetInt("GameRounds", int.Parse(input.text));
+		print(input.text);
 	}
 
-	public void TimerChange()
+	public void TimerChange(Slider a)
 	{
-        int i;
-        int.TryParse(timerDropdown.itemText.text, out i);
-        PlayerPrefs.SetInt("RoundTime", i);
-		print(timerDropdown.itemText.text);
+        PlayerPrefs.SetInt("RoundTime", (int) a.value);
+		print("RoundTime: " + a.value);
 	}
 
 	public void StartGame()
