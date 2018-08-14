@@ -45,7 +45,7 @@ namespace CharacterControl
         }
         private void RemoveHPTick()
         {
-            //if (target.GetComponent<CharacterStateController>() == null) return;
+            if (target.GetComponent<CharacterStateController>() == null) return;
             if (StateHelper.GetState(target) != Enums.AnimState.walkingB)
             {
                 target.GetComponent<CharacterStateController>().TakeDamage(8);
