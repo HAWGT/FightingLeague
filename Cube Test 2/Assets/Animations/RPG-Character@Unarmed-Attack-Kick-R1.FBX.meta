@@ -207,6 +207,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.504298
+        functionName: HeavyAtk
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 5717607be4253b74ca295e0e94905249,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

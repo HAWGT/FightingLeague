@@ -22,10 +22,10 @@ namespace CharacterControl
         private GameObject reflectPrefab;
 
         [SerializeField]
-        private GameObject beamPrefab;
+        private GameObject heavyPrefab;
 
         [SerializeField]
-        private GameObject teleportPrefab;
+        private GameObject beamPrefab;
 
         [SerializeField]
         private GameObject otherPlayer;
@@ -176,6 +176,29 @@ namespace CharacterControl
             Destroy(reflect, 0.35f);
         }
 
+        private void HeavyAtk()
+        {
+            Vector3 temp = myRigidBody.position;
+            temp.y = temp.y + 1;
+            Quaternion rot = Quaternion.Euler(new Vector3(0, 0, 0));
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+            {
+                temp.x += 0.7f;
+                //rot = Quaternion.Euler(new Vector3(0, 90, 0));
+            }
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+            {
+                temp.x -= 0.7f;
+                //rot = Quaternion.Euler(new Vector3(0, 270, 0));
+            }
+            var heavy = (GameObject)Instantiate(
+           heavyPrefab,
+           temp,
+           rot);
+            heavy.GetComponent<HeavyScript>().SetCreator(myRigidBody);
+            Destroy(heavy, 0.15f);
+        }
+
         private void Beam()
         {
             Vector3 temp = myRigidBody.position;
@@ -201,7 +224,7 @@ namespace CharacterControl
             myRigidBody.constraints = RigidbodyConstraints.FreezeAll;
             stateController.SetRotLockState(true);
             StopAllCoroutines();
-            StartCoroutine(FinishBeam()); //por alguma razão o 2º evento na animação não é ativado
+            StartCoroutine(FinishBeam());
         }
 
         IEnumerator FinishBeam()
@@ -370,13 +393,14 @@ namespace CharacterControl
                 }
                 if (attackingH)
                 {
-                    dmg = 850f;
-                    bar = 17f;
+                    dmg = 400f;
+                    bar = 10f;
                     myRigidBody.GetComponent<AnimationController>().Push(dmg);
                 }
                 stateController.AddSuperBar(bar);
                 body.GetComponent<CharacterStateController>().TakeDamage(dmg);
-                DisableL();
+                body.GetComponent<CharacterStateController>().AddSuperBar(bar / 2);
+               DisableL();
                 DisableM();
                 DisableH();
                 flaggedAtk = true;

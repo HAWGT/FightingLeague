@@ -259,7 +259,6 @@ namespace CharacterControl
         {
             if (GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetHP() <= 0) return;
             superBar += (int) bar;
-            GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().AddPassiveSuperBar(bar);
             if (superBar > 100) superBar = 100;
 
 			if (playerID == 1)
@@ -270,22 +269,6 @@ namespace CharacterControl
 			{
 				ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
 			}
-		}
-
-		public void AddPassiveSuperBar(float bar)
-        {
-            superBar += (int) bar / 2;
-            if (superBar > 100f) superBar = 100;
-
-			if (playerID == 1)
-			{
-				ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
-			}
-			if (playerID == 2)
-			{
-				ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
-			}
-
 		}
 	}
 

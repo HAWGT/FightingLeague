@@ -232,6 +232,16 @@ namespace CharacterControl
 			}
 			TurnAnimatorParametersOff(list);
 		}
+
+        private void ResetAnim()
+        {
+            bool state1 = animator.GetBool("mirrorAnimation");
+            bool state2 = animator.GetBool("airborn");
+            GetAnimator().Rebind();
+            animator.SetBool("mirrorAnimation", state1);
+            animator.SetBool("airborn", state2);
+
+        }
     }
 
 }

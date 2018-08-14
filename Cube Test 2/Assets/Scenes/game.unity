@@ -239,7 +239,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 381051709}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaee4a4b18b5f2743b7f3ace0cc1c352, type: 3}
   m_Name: 
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 381051709}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 736b7d63f1f4e5d44bd65e00a2629aa5, type: 3}
   m_Name: 
@@ -293,9 +293,9 @@ MonoBehaviour:
     type: 2}
   reflectPrefab: {fileID: 1966688392694240, guid: 6405adb6b3bb1e944aeaf7f8e006428d,
     type: 2}
-  beamPrefab: {fileID: 1756856858513756, guid: 96549e25e3297fc4c91517bd1282b968, type: 2}
-  teleportPrefab: {fileID: 1780850057600474, guid: 4fecfc76959a0a24f8a180535038a0a7,
+  heavyPrefab: {fileID: 1966688392694240, guid: af5d7dacbb581de4081b7c124522966d,
     type: 2}
+  beamPrefab: {fileID: 1756856858513756, guid: 96549e25e3297fc4c91517bd1282b968, type: 2}
   otherPlayer: {fileID: 1405563278}
   groundCheck: {fileID: 2015723166}
   cleft: {fileID: 498483428}
@@ -1961,9 +1961,9 @@ MonoBehaviour:
     type: 2}
   reflectPrefab: {fileID: 1966688392694240, guid: 6405adb6b3bb1e944aeaf7f8e006428d,
     type: 2}
-  beamPrefab: {fileID: 1756856858513756, guid: 96549e25e3297fc4c91517bd1282b968, type: 2}
-  teleportPrefab: {fileID: 1780850057600474, guid: 4fecfc76959a0a24f8a180535038a0a7,
+  heavyPrefab: {fileID: 1966688392694240, guid: af5d7dacbb581de4081b7c124522966d,
     type: 2}
+  beamPrefab: {fileID: 1756856858513756, guid: 96549e25e3297fc4c91517bd1282b968, type: 2}
   otherPlayer: {fileID: 381051709}
   groundCheck: {fileID: 1952957819}
   cleft: {fileID: 1405563310}

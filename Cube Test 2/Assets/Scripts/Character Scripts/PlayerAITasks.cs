@@ -254,6 +254,7 @@ namespace CharacterControl
                 stateController.SetLastAtk(Enums.AttackState.heavy);
                 stateController.SetCharState(Enums.CharState.attacking);
                 animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "heavyAttack" }));
+                counteredProjectile = true;
                 Task.current.Succeed();
             }
         }

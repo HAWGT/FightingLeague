@@ -38,12 +38,12 @@ public class MatchManager : MonoBehaviour
         matchEnded = true;
         if (currentMatch == maxMatches)
         {
-            //return to menu
+            SceneManager.LoadScene("MainMenu");
         }
         if (currentMatch < maxMatches)
         {
             currentMatch++;
-            //loadlevel
+            SceneManager.LoadScene("game");
         }
 
     }
