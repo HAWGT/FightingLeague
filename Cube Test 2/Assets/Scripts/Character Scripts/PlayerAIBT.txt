@@ -59,7 +59,10 @@ tree("Root")
                                 Wait 0.63
                             Sequence
                                 Grab
-                                Wait 1.2       
+                                Wait 1.2
+                            Sequence
+                                AttackH
+                                Wait 0.34
             While enemyClose
                 race
                     While canAtk

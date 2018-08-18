@@ -294,9 +294,9 @@ MonoBehaviour:
     type: 2}
   reflectPrefab: {fileID: 1966688392694240, guid: 6405adb6b3bb1e944aeaf7f8e006428d,
     type: 2}
-  beamPrefab: {fileID: 1756856858513756, guid: 96549e25e3297fc4c91517bd1282b968, type: 2}
-  teleportPrefab: {fileID: 1780850057600474, guid: 4fecfc76959a0a24f8a180535038a0a7,
+  heavyPrefab: {fileID: 1966688392694240, guid: af5d7dacbb581de4081b7c124522966d,
     type: 2}
+  beamPrefab: {fileID: 1756856858513756, guid: 96549e25e3297fc4c91517bd1282b968, type: 2}
   otherPlayer: {fileID: 1405563278}
   groundCheck: {fileID: 2015723166}
   cleft: {fileID: 498483428}
@@ -1975,9 +1975,9 @@ MonoBehaviour:
     type: 2}
   reflectPrefab: {fileID: 1966688392694240, guid: 6405adb6b3bb1e944aeaf7f8e006428d,
     type: 2}
-  beamPrefab: {fileID: 1756856858513756, guid: 96549e25e3297fc4c91517bd1282b968, type: 2}
-  teleportPrefab: {fileID: 1780850057600474, guid: 4fecfc76959a0a24f8a180535038a0a7,
+  heavyPrefab: {fileID: 1966688392694240, guid: af5d7dacbb581de4081b7c124522966d,
     type: 2}
+  beamPrefab: {fileID: 1756856858513756, guid: 96549e25e3297fc4c91517bd1282b968, type: 2}
   otherPlayer: {fileID: 381051709}
   groundCheck: {fileID: 1952957819}
   cleft: {fileID: 1405563310}

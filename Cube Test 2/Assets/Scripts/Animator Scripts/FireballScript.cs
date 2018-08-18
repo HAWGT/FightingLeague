@@ -30,10 +30,12 @@ namespace CharacterControl
             else if (body != creator)
             {
                 Destroy(gameObject);
+                if (body == null) return;
                 if (body.GetComponent<CharacterColliderController>() == null) return;
                 if (StateHelper.GetState(body) != Enums.AnimState.walkingB && !flagged)
                 {
                     body.GetComponent<CharacterStateController>().TakeDamage(1500);
+                    body.GetComponent<CharacterStateController>().AddSuperBar(5f);
                     creator.GetComponent<CharacterStateController>().AddSuperBar(10f);
                     Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
                     Vector3 pos = body.position;

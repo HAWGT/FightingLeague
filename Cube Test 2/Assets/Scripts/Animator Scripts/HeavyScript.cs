@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CharacterControl
 {
-    public class FlurryScript : MonoBehaviour
+    public class HeavyScript : MonoBehaviour
     {
         private Rigidbody creator;
 
@@ -26,11 +26,11 @@ namespace CharacterControl
                 Destroy(gameObject);
                 if (body == null) return;
                 if (body.GetComponent<CharacterColliderController>() == null) return;
-                if (!flagged)
+                if (StateHelper.GetState(body) != Enums.AnimState.walkingB && !flagged)
                 {
-                    body.GetComponent<CharacterStateController>().TakeDamage(1000);
-                    body.GetComponent<CharacterStateController>().AddSuperBar(10f);
-                    creator.GetComponent<CharacterStateController>().AddSuperBar(20f);
+                    body.GetComponent<CharacterStateController>().TakeDamage(800);
+                    body.GetComponent<CharacterStateController>().AddSuperBar(3f);
+                    creator.GetComponent<CharacterStateController>().AddSuperBar(6f);
                     flagged = true;
                 }
             }

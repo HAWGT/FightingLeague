@@ -18,7 +18,7 @@ public class MatchManager : MonoBehaviour
 	private GameObject player2;
 
 
-	private int currentMatch=0;
+	private int currentMatch = 0;
 	private int maxMatches = 0;
 
 	private void Awake()
@@ -43,6 +43,16 @@ public class MatchManager : MonoBehaviour
 	public void MatchEnd(int playerID)
     {
         matchEnded = true;
+        if (currentMatch == maxMatches)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+        if (currentMatch < maxMatches)
+        {
+            currentMatch++;
+            SceneManager.LoadScene("game");
+        }
+
     }
 
     public bool IsMatchOver()

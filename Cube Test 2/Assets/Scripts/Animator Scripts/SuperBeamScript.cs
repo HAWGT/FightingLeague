@@ -9,7 +9,6 @@ namespace CharacterControl
 
         private Rigidbody creator;
 
-        private bool flagged = false;
         private Rigidbody target;
         public void SetCreator(Rigidbody rb)
         {
@@ -41,12 +40,13 @@ namespace CharacterControl
             else if (body != creator)
             {
                 target = body;
-                InvokeRepeating("RemoveHP", 0.0f, 0.02f);
+                InvokeRepeating("RemoveHPTick", 0.0f, 0.02f);
             }
         }
-        private void RemoveHP()
+        private void RemoveHPTick()
         {
-            if (target.GetComponent<CharacterColliderController>() == null) return;
+            if (target == null) return;
+            if (target.GetComponent<CharacterStateController>() == null) return;
             if (StateHelper.GetState(target) != Enums.AnimState.walkingB)
             {
                 target.GetComponent<CharacterStateController>().TakeDamage(8);
