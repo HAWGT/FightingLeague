@@ -21,7 +21,7 @@ namespace CharacterControl
 		[SerializeField]
 		private List<Enums.AttackState> attackStates;
 
-		private List<AnimatorControllerParameter> animatorParameters;
+		private AnimatorParameters animatorParameters;
 
 		[SerializeField]
 		private FiniteStateMachineState motionStateMachine;
@@ -42,11 +42,10 @@ namespace CharacterControl
             myRigidbody = GetComponent<Rigidbody>();
             stateController = GetComponent<CharacterStateController>();
 			animControl = GetComponent<AnimationController>();
-			animControl = GetComponent<AnimationController>();
 			latestDirection = Enums.Inputs.Neutral;
 			airborn = false;
 			animControl.SetRigidBody(myRigidbody);
-			animatorParameters = animControl.GetAllBoolTriggerAnimatorParameters();
+			animatorParameters = new AnimatorParameters(animControl.GetAllBoolTriggerAnimatorParameters());
 			motionStateMachine = GetComponent<FiniteStateMachineState>();
 			attackStates = new List<Enums.AttackState>();
 
@@ -245,25 +244,25 @@ namespace CharacterControl
 				switch (lastInput)
 				{
 					case Enums.Inputs.Light:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "lightAttack" }));
+						animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "lightAttack" }));
 						break;
 
 					case Enums.Inputs.Medium:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "mediumAttack" }));
+						animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "mediumAttack" }));
 						break;
 
 					case Enums.Inputs.Heavy:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "heavyAttack" }));
+						animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "heavyAttack" }));
 						break;
 
 					case Enums.Inputs.Special1:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special1" }));
+						animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "special1" }));
 						SetLastAtk(Enums.AttackState.special1);
 						stateController.SetCharState(Enums.CharState.attacking);
 						break;
 
 					case Enums.Inputs.Special2:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special2" }));
+						animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "special2" }));
 						SetLastAtk(Enums.AttackState.special2);
 						stateController.SetCharState(Enums.CharState.attacking);
 						break;
@@ -275,13 +274,13 @@ namespace CharacterControl
 
 							stateController.UpdateUI(false);
 
-							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "super" }));
+							animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "super" }));
 							stateController.SetLastAtk(Enums.AttackState.super);
 							stateController.SetCharState(Enums.CharState.attacking);
 						}
 						else
 						{
-							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "special1" }));
+							animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "special1" }));
 						}
 						break;
 
@@ -290,39 +289,25 @@ namespace CharacterControl
 						{
 							stateController.ReduceSuperBar(10);
 
-							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "vanish" }));
+							animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "vanish" }));
 						}
 						else
 						{
-							animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "midDash" }));
+							animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "midDash" }));
 						}
 						break;
 
 					case Enums.Inputs.GuardBreak:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "guardBreak" }));
+						animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "guardBreak" }));
 						break;
 
 					case Enums.Inputs.Dash:
-						animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "midDash" }));
+						animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "midDash" }));
 						break;
 				}
-				animControl.TurnAnimatorParametersOff(FindAnimatorParameter(new string[] { "walkingForward", "walkingBackward", "crouch" }));
+				animControl.TurnAnimatorParametersOff(animatorParameters.FindAnimatorParameter(new string[] { "walkingForward", "walkingBackward", "crouch" }));
 			}
 			ResetEnumState();
-		}
-
-		public List<AnimatorControllerParameter> FindAnimatorParameter(String[] names)
-		{
-			List<AnimatorControllerParameter> list = new List<AnimatorControllerParameter>();
-			AnimatorControllerParameter parametro;
-
-			foreach (String name in names)
-			{
-				parametro = animatorParameters.Find(parameter => parameter.name == name);
-				list.Add(parametro);
-			}
-
-			return list;
 		}
 
 		public void SetLastAtk(Enums.AttackState atk)

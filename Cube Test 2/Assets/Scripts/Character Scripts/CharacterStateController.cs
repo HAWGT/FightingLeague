@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeuralNetwork;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,6 +27,9 @@ namespace CharacterControl
 
         [SerializeField]
         private Enums.CharState charState;
+
+		[SerializeField]
+		private GameObject matchManager;
 
         private List<AnimatorControllerParameter> animatorParameters;
 
@@ -163,6 +167,7 @@ namespace CharacterControl
 			if (playerID == 1)
 			{
 				ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+
 				if (changeSides)
 				{
 					animControl.TurnAnimatorParametersOff(FindAnimatorParameter(new string[] { "mirrorAnimation" }));
@@ -195,8 +200,29 @@ namespace CharacterControl
 
             healthPoints -= dmg;
             superBar += (int) dmg / 200;
-            if (playerID == 1) ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
-            if (playerID == 2) ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+			if (playerID == 1)
+			{
+				if (PlayerPrefs.GetInt("Player1") == 2)
+				{
+					GetComponent<NetworkInterface>().ChangeHP(playerID, (int) healthPoints);
+				}
+				if(PlayerPrefs.GetInt("Player2") == 2)
+				{
+					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int) healthPoints);
+				}
+				ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+			}
+			if (playerID == 2) {
+				if (PlayerPrefs.GetInt("Player1") == 2)
+				{
+					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int)healthPoints);
+				}
+				if (PlayerPrefs.GetInt("Player2") == 2)
+				{
+					GetComponent<NetworkInterface>().ChangeHP(playerID, (int)healthPoints);
+				}
+				ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+			}
 
            // List<AnimatorControllerParameter> parameter = FindAnimatorParameter(new string[] { "hitstun" });
 
@@ -286,6 +312,11 @@ namespace CharacterControl
 				ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
 			}
 
+		}
+
+		public int GetPlayerID()
+		{
+			return playerID;
 		}
 	}
 

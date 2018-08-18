@@ -218,6 +218,7 @@ MonoBehaviour:
   attackStates: 
   facing: 0
   charState: 0
+  matchManager: {fileID: 515407920}
 --- !u!54 &381051711
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -351,6 +352,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 943791df89b66064eb6d60f621704dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &381051720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381051709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64e15035f4ba6345a69746b6f702386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &381099537
@@ -799,6 +811,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6fce55ef4df3440a5e01fcec2fe6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 381051709}
+  player2: {fileID: 1405563278}
 --- !u!1 &533824457
 GameObject:
   m_ObjectHideFlags: 0
@@ -2198,6 +2212,7 @@ MonoBehaviour:
   attackStates: 
   facing: 1
   charState: 0
+  matchManager: {fileID: 0}
 --- !u!54 &1405563314
 Rigidbody:
   m_ObjectHideFlags: 0

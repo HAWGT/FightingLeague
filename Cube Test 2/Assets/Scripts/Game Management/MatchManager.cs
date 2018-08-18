@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeuralNetwork;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,12 @@ public class MatchManager : MonoBehaviour
     // Use this for initialization
     private bool matchEnded = false;
 	//public static GameManager instance = null;
+	[SerializeField]
+	private GameObject player1;
+
+	[SerializeField]
+	private GameObject player2;
+
 
 	private int currentMatch=0;
 	private int maxMatches = 0;
@@ -42,4 +49,18 @@ public class MatchManager : MonoBehaviour
     {
         return matchEnded;
     }
+
+	public void ChangeAIValue(int playerID, int playerHP)
+	{
+		switch (playerID)
+		{
+			case 1:
+				player2.GetComponent<NetworkInterface>().ChangeHP(playerID, playerHP);
+				break;
+			case 2:
+				player1.GetComponent<NetworkInterface>().ChangeHP(playerID, playerHP);
+				break;
+		}
+	}
+
 }
