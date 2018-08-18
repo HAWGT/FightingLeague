@@ -1,4 +1,5 @@
-﻿using NeuralNetwork;
+﻿using CharacterControl;
+using NeuralNetwork;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -43,16 +44,15 @@ public class MatchManager : MonoBehaviour
 	public void MatchEnd(int playerID)
     {
         matchEnded = true;
-        if (currentMatch == maxMatches)
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-        if (currentMatch < maxMatches)
-        {
-            currentMatch++;
-            SceneManager.LoadScene("game");
-        }
+        currentMatch++;
+        StartCoroutine(ResetPlayers());
+    }
 
+    IEnumerator ResetPlayers()
+    {
+        yield return new WaitForSeconds(5f);
+        player1.GetComponent<CharacterStateController>().ResetP();
+        player2.GetComponent<CharacterStateController>().ResetP();
     }
 
     public bool IsMatchOver()

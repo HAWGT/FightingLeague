@@ -130,7 +130,7 @@ namespace NeuralNetwork
 			double soma;
 
 			//calculo do erro para as unidades de saida
-			erroSaida = SigmoidFn.Derivative(activationHidden) * (exemplo.GetSaida() - activationHidden);
+			//erroSaida = SigmoidFn.Derivative(activationHidden) * (exemplo.GetSaida() - activationHidden);
 
 			//calculo do erro para as unidades da camada escondida
 			for (int i = 0; i < tamanhoCamada1; i++)

@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-
 namespace CharacterControl
 {
     public class CharacterStateController : MonoBehaviour
@@ -37,6 +36,17 @@ namespace CharacterControl
         private GameObject ui;
 
         private Rigidbody myRigidbody;
+
+        private Vector3 startPosition;
+
+        public void ResetP()
+        {
+            healthPoints = 10000;
+            superBar = 0;
+            myRigidbody.transform.position = startPosition;
+            UpdateUI(false);
+            animControl.ResetAnim();
+        }
 
         private float healthPoints = 10000;
 
@@ -125,6 +135,7 @@ namespace CharacterControl
         // Use this for initialization
         private void Start()
         {
+            UnityEngine.Debug.Log("test");
             charState = Enums.CharState.standing;
 			attackStates = new List<Enums.AttackState>();
 			animControl = GetComponent<AnimationController>();
@@ -133,6 +144,7 @@ namespace CharacterControl
             groundCheck = GetComponent<SphereCollider>();
             myRigidbody = GetComponent<Rigidbody>();
             animControl.SetRigidBody(myRigidbody);
+            startPosition = myRigidbody.transform.position;
             animatorParameters = animControl.GetAllBoolTriggerAnimatorParameters();
 			superBar = 0;
 
@@ -150,6 +162,7 @@ namespace CharacterControl
                 ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
                 animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "mirrorAnimation" }));
             }
+
         }
 
         public int GetSuperBar()

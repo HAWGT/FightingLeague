@@ -28,8 +28,6 @@ namespace CharacterControl
         [Task]
         private bool canChallenge = false;
         [Task]
-        private bool gameEnded = false;
-        [Task]
         private bool canAtk = false;
         [Task]
         private bool canApproach = false;
@@ -53,7 +51,6 @@ namespace CharacterControl
 
         private void Update()
         {
-            gameEnded = game.GetComponent<MatchManager>().IsMatchOver();
             canApproach = false;
             canAtk = false;
             canChallenge = false;

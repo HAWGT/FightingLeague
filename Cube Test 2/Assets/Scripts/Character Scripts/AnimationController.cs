@@ -162,26 +162,24 @@ namespace CharacterControl
 
         public void Knock(float dmg)
         {
-                animator.applyRootMotion = false;
                 if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
                 {
-                rigidbody.AddForce( new Vector3(- dmg / 1000, dmg / 1000));
+                rigidbody.transform.position += new Vector3(-0.13f * (dmg / 1000), 0);
             } else if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
             {
-                    rigidbody.AddForce(new Vector3(dmg / 1000, dmg / 1000));
-                }
+                rigidbody.transform.position += new Vector3(0.13f * (dmg / 1000), 0);
+            }
         }
 
         public void Push(float dmg)
         {
-            animator.applyRootMotion = false;
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
             {
-                rigidbody.AddForce(new Vector3(dmg / 1000, 0));
+                rigidbody.transform.position += new Vector3(-0.13f * (dmg / 1000), 0);
             }
             else if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
             {
-                rigidbody.AddForce(new Vector3(-dmg / 1000, 0));
+                rigidbody.transform.position += new Vector3(0.13f * (dmg / 1000), 0);
             }
         }
 
@@ -233,7 +231,7 @@ namespace CharacterControl
 			TurnAnimatorParametersOff(list);
 		}
 
-        private void ResetAnim()
+        public void ResetAnim()
         {
             bool state1 = animator.GetBool("mirrorAnimation");
             bool state2 = animator.GetBool("airborn");
