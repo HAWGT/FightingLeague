@@ -11,6 +11,15 @@ namespace CharacterControl
         [SerializeField]
         private Animator animator;
 
+        [SerializeField]
+        private GameObject flarePrefab;
+
+        [SerializeField]
+        private GameObject smokePrefab;
+
+        [SerializeField]
+        private GameObject steamPrefab;
+
         private new Rigidbody rigidbody;
 
         private float maxAirSpeed = 5f;
@@ -162,13 +171,43 @@ namespace CharacterControl
 
         public void Knock(float dmg)
         {
-                if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
-                {
-                rigidbody.transform.position += new Vector3(-0.13f * (dmg / 1000), 0);
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
+            Vector3 pos = rigidbody.transform.position;
+            float side = 0;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+            {
+                    rigidbody.transform.position += new Vector3(-0.13f * (dmg / 1000), 0);
+                    side = 0.5f;
             } else if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
             {
-                rigidbody.transform.position += new Vector3(0.13f * (dmg / 1000), 0);
+                    rigidbody.transform.position += new Vector3(0.13f * (dmg / 1000), 0);
+                    side = -0.5f;
             }
+            if ((rigidbody.transform.position.x < -7 || rigidbody.transform.position.x > 7) && dmg > 100)
+            {
+                rigidbody.transform.position += new Vector3(0, 2.25f);
+                var smoke = (GameObject)Instantiate(smokePrefab, pos + new Vector3(side, 0.6f, 0), rot);
+                Destroy(smoke, 1f);
+            }
+            var flare = (GameObject)Instantiate(flarePrefab, pos + new Vector3(side , 0.6f, 0), rot);
+            Destroy(flare, 0.25f);
+        }
+
+        public void Block()
+        {
+            float side = 0;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+            {
+                side = 0.5f;
+            }
+            else if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+            {
+                side = -0.5f;
+            }
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
+            Vector3 pos = rigidbody.transform.position;
+            var steam = (GameObject)Instantiate(steamPrefab, pos + new Vector3(side, 0.6f, 0), rot);
+            Destroy(steam, 0.5f);
         }
 
         public void Push(float dmg)

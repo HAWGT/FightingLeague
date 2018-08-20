@@ -135,7 +135,6 @@ namespace CharacterControl
         // Use this for initialization
         private void Start()
         {
-            UnityEngine.Debug.Log("test");
             charState = Enums.CharState.standing;
 			attackStates = new List<Enums.AttackState>();
 			animControl = GetComponent<AnimationController>();

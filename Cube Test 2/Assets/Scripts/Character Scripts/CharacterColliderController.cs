@@ -291,6 +291,15 @@ namespace CharacterControl
             uaright.enabled = true;
             attackingL = true;
             flaggedAtk = false;
+            StartCoroutine(ForceNoAtk());
+        }
+
+        IEnumerator ForceNoAtk()
+        {
+            yield return new WaitForSeconds(0.33f);
+            DisableL();
+            attackingL = false;
+            flaggedAtk = true;
         }
 
         private void EnableM()
@@ -328,6 +337,7 @@ namespace CharacterControl
             ualeft.enabled = false;
             uaright.enabled = false;
             attackingL = false;
+            flaggedAtk = true;
             myAnimator.applyRootMotion = true;
     }
 
@@ -342,6 +352,7 @@ namespace CharacterControl
             ualeft.enabled = false;
             uaright.enabled = false;
             attackingM = false;
+            flaggedAtk = true;
             myAnimator.applyRootMotion = true;
         }
 
@@ -352,6 +363,7 @@ namespace CharacterControl
             fleft.enabled = false;
             fright.enabled = false;
             attackingH = false;
+            flaggedAtk = true;
             myAnimator.applyRootMotion = true;
         }
 
@@ -378,6 +390,7 @@ namespace CharacterControl
             //if((attackingL || attackingM || attackingH) && body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking && !flaggedAtk)
             if((attackingL || attackingM || attackingH) && StateHelper.GetState(body) != Enums.AnimState.walkingB && !flaggedAtk)
             {
+                print(attackingL);
                 //print("hit confirmed");
                 float dmg = 0;
                 float bar = 0;
@@ -400,7 +413,7 @@ namespace CharacterControl
                 stateController.AddSuperBar(bar);
                 body.GetComponent<CharacterStateController>().TakeDamage(dmg);
                 body.GetComponent<CharacterStateController>().AddSuperBar(bar / 2);
-               DisableL();
+                DisableL();
                 DisableM();
                 DisableH();
                 flaggedAtk = true;

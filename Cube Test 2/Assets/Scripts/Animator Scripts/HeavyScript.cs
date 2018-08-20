@@ -33,6 +33,10 @@ namespace CharacterControl
                     creator.GetComponent<CharacterStateController>().AddSuperBar(6f);
                     flagged = true;
                 }
+                else if (StateHelper.GetState(body) == Enums.AnimState.walkingB)
+                {
+                    body.GetComponent<AnimationController>().Block();
+                }
             }
         }
     }

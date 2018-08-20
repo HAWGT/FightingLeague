@@ -44,6 +44,10 @@ namespace CharacterControl
                     Destroy(explosion, 0.25f);
                     flagged = true;
                 }
+                else if (StateHelper.GetState(body) == Enums.AnimState.walkingB)
+                {
+                    body.GetComponent<AnimationController>().Block();
+                }
             }
         }
     }

@@ -49,8 +49,12 @@ namespace CharacterControl
             if (target.GetComponent<CharacterStateController>() == null) return;
             if (StateHelper.GetState(target) != Enums.AnimState.walkingB)
             {
-                target.GetComponent<CharacterStateController>().TakeDamage(8);
+                target.GetComponent<CharacterStateController>().TakeDamage(9);
                 //creator.GetComponent<CharacterStateController>().AddSuperBar(0.08f);
+            }
+            else if (StateHelper.GetState(target) == Enums.AnimState.walkingB)
+            {
+                target.GetComponent<AnimationController>().Block();
             }
         }
     }
