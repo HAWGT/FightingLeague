@@ -417,6 +417,9 @@ namespace CharacterControl
                 DisableM();
                 DisableH();
                 flaggedAtk = true;
+            }  else if (StateHelper.GetState(body) == Enums.AnimState.walkingB)
+            {
+                body.GetComponent<AnimationController>().Block();
             }
         }
     }

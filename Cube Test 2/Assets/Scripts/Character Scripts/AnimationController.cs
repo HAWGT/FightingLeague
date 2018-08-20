@@ -186,7 +186,7 @@ namespace CharacterControl
             if ((rigidbody.transform.position.x < -7 || rigidbody.transform.position.x > 7) && dmg > 100)
             {
                 rigidbody.transform.position += new Vector3(0, 2.25f);
-                var smoke = (GameObject)Instantiate(smokePrefab, pos + new Vector3(side, 0.6f, 0), rot);
+                var smoke = (GameObject)Instantiate(smokePrefab, pos + new Vector3(side, 1.25f, 0), rot);
                 Destroy(smoke, 1f);
             }
             var flare = (GameObject)Instantiate(flarePrefab, pos + new Vector3(side , 0.6f, 0), rot);
@@ -206,7 +206,7 @@ namespace CharacterControl
             }
             Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
             Vector3 pos = rigidbody.transform.position;
-            var steam = (GameObject)Instantiate(steamPrefab, pos + new Vector3(side, 0.6f, 0), rot);
+            var steam = (GameObject)Instantiate(steamPrefab, pos + new Vector3(side, 0), Quaternion.Euler(-90, 0, 0 ));
             Destroy(steam, 0.5f);
         }
 
