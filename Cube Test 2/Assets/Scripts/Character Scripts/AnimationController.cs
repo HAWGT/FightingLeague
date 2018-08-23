@@ -191,7 +191,7 @@ namespace CharacterControl
             }
             if ((rigidbody.transform.position.x < -7 || rigidbody.transform.position.x > 7) && dmg > 100)
             {
-                rigidbody.transform.position += new Vector3(0, 2.25f);
+                rigidbody.transform.position += new Vector3(side * 4, 3f);
                 var smoke = (GameObject)Instantiate(smokePrefab, pos + new Vector3(side, 1.25f, 0), rot);
                 Destroy(smoke, 2f);
             }
