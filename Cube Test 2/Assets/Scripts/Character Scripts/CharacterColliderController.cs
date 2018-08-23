@@ -385,11 +385,8 @@ namespace CharacterControl
             Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;
-            //if((attackingL || attackingM || attackingH) && body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking && !flaggedAtk)
             if((attackingL || attackingM || attackingH) && StateHelper.GetState(body) != Enums.AnimState.walkingB && !flaggedAtk)
             {
-                print(attackingL);
-                //print("hit confirmed");
                 float dmg = 0;
                 float bar = 0;
                 if (attackingL)
