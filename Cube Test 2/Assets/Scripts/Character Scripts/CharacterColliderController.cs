@@ -289,16 +289,18 @@ namespace CharacterControl
             uaright.enabled = true;
             attackingL = true;
             flaggedAtk = false;
-            StartCoroutine(ForceNoAtk());
+            StartCoroutine(ForceNoAtkL());
         }
 
-        IEnumerator ForceNoAtk()
+        IEnumerator ForceNoAtkL()
         {
-            yield return new WaitForSeconds(0.33f);
+            yield return new WaitForSeconds(0.34f);
             DisableL();
             attackingL = false;
             flaggedAtk = true;
         }
+
+
 
         private void EnableM()
         {
@@ -312,6 +314,15 @@ namespace CharacterControl
             uaright.enabled = true;
             attackingM = true;
             flaggedAtk = false;
+            StartCoroutine(ForceNoAtkM());
+        }
+
+        IEnumerator ForceNoAtkM()
+        {
+            yield return new WaitForSeconds(0.4f);
+            DisableL();
+            attackingM = false;
+            flaggedAtk = true;
         }
 
         private void EnableH()
@@ -322,6 +333,15 @@ namespace CharacterControl
             fright.enabled = true;
             attackingH = true;
             flaggedAtk = false;
+            StartCoroutine(ForceNoAtkH());
+        }
+
+        IEnumerator ForceNoAtkH()
+        {
+            yield return new WaitForSeconds(0.34f);
+            DisableL();
+            attackingM = false;
+            flaggedAtk = true;
         }
 
         private void DisableL()
