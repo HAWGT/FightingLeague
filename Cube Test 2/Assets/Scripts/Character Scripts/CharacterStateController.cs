@@ -207,7 +207,7 @@ namespace CharacterControl
 
 		public void TakeDamage(float dmg)
         {
-            if (StateHelper.GetState(rigidbody) == Enums.AnimState.super) return;
+            if (StateHelper.GetState(myRigidbody) == Enums.AnimState.super) return;
             animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "hitstun" }));
             animControl.Knock(dmg);
 
