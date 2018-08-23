@@ -177,7 +177,6 @@ namespace CharacterControl
 
         public void Knock(float dmg)
         {
-            if (StateHelper.GetState(rigidbody) == Enums.AnimState.super) return;
             Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
             Vector3 pos = rigidbody.transform.position;
             float side = 0;
