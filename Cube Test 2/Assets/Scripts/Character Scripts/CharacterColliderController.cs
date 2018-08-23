@@ -88,7 +88,6 @@ namespace CharacterControl
             fireBall.GetComponent<Rigidbody>().velocity = fireBall.transform.forward * 30;
             fireBall.GetComponent<FireballScript>().SetCreator(myRigidBody);
 
-            // Destroy the bullet after 2 seconds
             Destroy(fireBall, 2.0f);
         }
 
@@ -131,6 +130,7 @@ namespace CharacterControl
 
         private void MidDash()
         {
+
             float x = 7f;
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
             {
@@ -150,6 +150,8 @@ namespace CharacterControl
                 } 
                 myRigidBody.transform.position += new Vector3(-x, 0.33f, 0.0f);
             }
+
+            GetComponent<AnimationController>().HorizontalTeleportFX();
 
             StartCoroutine(UpdateTeleport());
         }
@@ -173,6 +175,7 @@ namespace CharacterControl
            reflectPrefab,
            temp,
            rot);
+            GetComponent<AnimationController>().Shockwave();
             Destroy(reflect, 0.35f);
         }
 
@@ -238,8 +241,10 @@ namespace CharacterControl
             }
         }
 
-        private void Teleport()
+        private void VanishTP()
         {
+
+            GetComponent<AnimationController>().VerticalTeleportFX();
             float x = 1.5f;
             Quaternion rot = Quaternion.Euler(new Vector3(0, 0, 0));
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
@@ -261,13 +266,6 @@ namespace CharacterControl
                 myRigidBody.transform.position = new Vector3(otherPlayer.transform.position.x - x, myRigidBody.transform.position.y + 1.83f, myRigidBody.transform.position.z);
             }
 
-            /*Vector3 temp = new Vector3(myRigidBody.transform.position.x, 0.8f, myRigidBody.transform.position.z);
-            var stand = (GameObject)Instantiate(
-           teleportPrefab,
-           temp,
-           rot);
-
-            Destroy(stand, 0.3f);*/
             StartCoroutine(UpdateTeleport());
             
 
@@ -419,7 +417,7 @@ namespace CharacterControl
                 flaggedAtk = true;
             }  else if (StateHelper.GetState(body) == Enums.AnimState.walkingB)
             {
-                body.GetComponent<AnimationController>().Block();
+                body.GetComponent<AnimationController>().BlockFX();
             }
         }
     }

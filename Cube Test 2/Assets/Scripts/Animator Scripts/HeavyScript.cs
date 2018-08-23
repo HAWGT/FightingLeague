@@ -35,7 +35,7 @@ namespace CharacterControl
                 }
                 else if (StateHelper.GetState(body) == Enums.AnimState.walkingB)
                 {
-                    body.GetComponent<AnimationController>().Block();
+                    body.GetComponent<AnimationController>().BlockFX();
                 }
             }
         }

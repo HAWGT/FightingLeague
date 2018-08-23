@@ -205,7 +205,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.9883721
-        functionName: Teleport
+        functionName: VanishTP
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 5717607be4253b74ca295e0e94905249,
           type: 3}
