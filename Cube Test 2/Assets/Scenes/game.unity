@@ -913,7 +913,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 515407920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 533824461}
@@ -1030,7 +1030,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 533824457}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: -11}
+  m_LocalPosition: {x: 0, y: 0, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 515407921}
@@ -1059,9 +1059,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614281bf5da9c4a45913d7f4becd1348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yOffset: 2
+  yOffset: 4
   minDistance: 15
-  maxDistance: 20
+  maxDistance: 25
 --- !u!1001 &549704204
 Prefab:
   m_ObjectHideFlags: 0
@@ -3172,7 +3172,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4095760785769940, guid: 106ac8642461c40f5b2ac2107df03980, type: 2}
       propertyPath: m_LocalScale.x
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4095760785769940, guid: 106ac8642461c40f5b2ac2107df03980, type: 2}
       propertyPath: m_LocalScale.y
@@ -3180,7 +3180,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4095760785769940, guid: 106ac8642461c40f5b2ac2107df03980, type: 2}
       propertyPath: m_LocalScale.z
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 106ac8642461c40f5b2ac2107df03980, type: 2}

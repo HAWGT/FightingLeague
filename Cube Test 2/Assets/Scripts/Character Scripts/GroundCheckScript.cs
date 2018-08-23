@@ -83,11 +83,13 @@ namespace CharacterControl
             }
             if (cchar.transform.position.y > 5f) cchar.transform.position = new Vector3(cchar.transform.position.x, 5f, cchar.transform.position.z);
 
-            if (cchar.transform.position.y < 0f) cchar.transform.position = new Vector3 (cchar.transform.position.x, 0.25f);
+            if (cchar.transform.position.y < 0f) cchar.transform.position = new Vector3 (cchar.transform.position.x, 0.3f);
             if (cchar.transform.position.y > 15f) cchar.transform.position = new Vector3(cchar.transform.position.x, 14f);
 
             if (cchar.transform.position.x < -8f) cchar.transform.position = new Vector3(-8f, cchar.transform.position.y);
             if(cchar.transform.position.x > 8f) cchar.transform.position = new Vector3(8f, cchar.transform.position.y);
+
+            cchar.transform.position = new Vector3(cchar.transform.position.x, cchar.transform.position.y, -7.5f);
         }
     }
 
