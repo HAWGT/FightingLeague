@@ -18,12 +18,17 @@ public class MatchManager : MonoBehaviour
 	[SerializeField]
 	private GameObject player2;
 
+    private int secondsLeft = 300;
+    private int initTime;
 
 	private int currentMatch = 0;
 	private int maxMatches = 0;
 
     [SerializeField]
     private AudioClip[] musics;
+
+    [SerializeField]
+    private GameObject ui;
 
     private int selectedMusic = 1;
 
@@ -34,6 +39,9 @@ public class MatchManager : MonoBehaviour
 
 	private void Start()
 	{
+        //secondsLeft = PlayerPrefs.GetInt("RoundTime");
+        initTime = secondsLeft;
+
 		if(maxMatches != PlayerPrefs.GetInt("GameRounds"))
 		{
 			maxMatches = PlayerPrefs.GetInt("GameRounds");
@@ -45,21 +53,37 @@ public class MatchManager : MonoBehaviour
 		}
         selectedMusic = PlayerPrefs.GetInt("Music");
         GetComponent<AudioSource>().clip = musics[selectedMusic];
+        GetComponent<AudioSource>().clip = musics[1];
         GetComponent<AudioSource>().Play();
+        ui.GetComponent<UIManager>().SetTime(secondsLeft);
+        InvokeRepeating("TimeTick", 1, 1);
 
+    }
 
+    private void TimeTick()
+    {
+        secondsLeft--;
+        ui.GetComponent<UIManager>().SetTime(secondsLeft);
+        if (secondsLeft <= 0) MatchEnd(3);
     }
 
 	public void MatchEnd(int playerID)
     {
         matchEnded = true;
         currentMatch++;
+        if(playerID == 3)
+        {
+            //TIMEOUT
+        }
         StartCoroutine(ResetPlayers());
     }
 
     IEnumerator ResetPlayers()
     {
         yield return new WaitForSeconds(5f);
+        secondsLeft = initTime;
+        Debug.Log("reset");
+        matchEnded = false;
         player1.GetComponent<CharacterStateController>().ResetP();
         player2.GetComponent<CharacterStateController>().ResetP();
     }

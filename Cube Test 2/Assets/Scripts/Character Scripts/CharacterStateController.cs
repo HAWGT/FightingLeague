@@ -221,7 +221,7 @@ namespace CharacterControl
 
 		public void TakeDamage(float dmg)
         {
-            if (StateHelper.GetState(myRigidbody) == Enums.AnimState.super) return;
+            if (StateHelper.GetState(myRigidbody) == Enums.AnimState.super || StateHelper.GetState(myRigidbody) == Enums.AnimState.reflect) return;
             audioSource.PlayOneShot(hit);
             animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "hitstun" }));
             animControl.Knock(dmg);
@@ -258,7 +258,7 @@ namespace CharacterControl
             //animControl.Knock(dmg);
 
 
-            if (healthPoints <= 0)
+            if (healthPoints <= 0 && game.GetComponent<MatchManager>().IsMatchOver() == false)
             {
                 animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "death" }));
                 game.GetComponent<MatchManager>().MatchEnd(playerID);

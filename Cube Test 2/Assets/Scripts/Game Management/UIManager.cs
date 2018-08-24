@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour {
 	private Image superBar1;
 	[SerializeField]
 	private Image superBar2;
+    [SerializeField]
+    private GameObject timerTxt;
 
 	private float hp1;
     private float sb1;
@@ -38,6 +40,11 @@ public class UIManager : MonoBehaviour {
 		superBar2.fillAmount = b / 100;
 	}
 
+    public void SetTime(int time)
+    {
+        timer = time;
+        timerTxt.GetComponent<Text>().text = timer.ToString();
+    }
     // Use this for initialization
     private void Start () {
         game = GameObject.Find("Game Manager");

@@ -59,7 +59,7 @@ public class SceneTransitionManager : MonoBehaviour {
 
 	public void StartGame()
 	{
-		SceneManager.LoadSceneAsync("game");
+		SceneManager.LoadScene("game");
 	}
 	
 }

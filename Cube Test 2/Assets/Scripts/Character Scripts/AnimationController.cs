@@ -26,6 +26,9 @@ namespace CharacterControl
         [SerializeField]
         private GameObject shockPrefab;
 
+        [SerializeField]
+        private AudioClip blockSnd;
+
         private new Rigidbody rigidbody;
 
         private float maxAirSpeed = 5f;
@@ -213,7 +216,8 @@ namespace CharacterControl
             Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
             Vector3 pos = rigidbody.transform.position;
             var steam = (GameObject)Instantiate(steamPrefab, pos + new Vector3(side, 0), Quaternion.Euler(-90, 0, 0 ));
-            Destroy(steam, 0.5f);
+            GetComponent<AudioSource>().PlayOneShot(blockSnd);
+            Destroy(steam, 1f);
         }
 
         public void VerticalTeleportFX()
