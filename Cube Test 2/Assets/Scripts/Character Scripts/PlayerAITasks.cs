@@ -84,7 +84,7 @@ namespace CharacterControl
             } else if (enemyState == Enums.AnimState.super && enemyState == lastState)
             {
                 counteredBeam = false;
-                if (currentSuperBar >= 50f && lastHP > GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetHP() && enemyState == Enums.AnimState.super) canChallenge = true;
+                if (currentSuperBar >= 50f && enemyState == Enums.AnimState.super) canChallenge = true;
             } else
             {
                 lastState = Enums.AnimState.none;
@@ -176,6 +176,7 @@ namespace CharacterControl
             {
                 GetComponent<CharacterStateController>().Super();
                 counteredProjectile = true;
+                counteredBeam = true;
                 Task.current.Succeed();
             }
             else
