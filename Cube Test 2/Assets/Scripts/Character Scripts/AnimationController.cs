@@ -218,6 +218,7 @@ namespace CharacterControl
 
         public void VerticalTeleportFX()
         {
+            GetComponent<CharacterStateController>().TeleportSFX();
             float side = 0;
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
             {
@@ -235,6 +236,7 @@ namespace CharacterControl
 
         public void HorizontalTeleportFX()
         {
+            GetComponent<CharacterStateController>().TeleportSFX();
             float side = 0;
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
             {

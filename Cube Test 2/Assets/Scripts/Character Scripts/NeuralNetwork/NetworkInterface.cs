@@ -121,7 +121,7 @@ namespace NeuralNetwork{
 
 		private int OptimalResult(int selfHP, int enemyHP, int selfBar, int enemyBar, float distanceX, int selfHeight, int enemyHeight, bool selfBusy, bool enemyBusy, bool enemyIsAttacking, int time)
 		{
-
+            
 			if (selfBusy)
 			{
 				return 0;
@@ -134,11 +134,12 @@ namespace NeuralNetwork{
 				return 2;
 			}else
 			{
-				//diferencial vida, timer grande
+                //diferencial vida, timer grande
 
-				//diferencial vida, timer pequeno
-				//vida distancia
-				//selfheight enemyHeight
+                //diferencial vida, timer pequeno
+                //vida distancia
+                //selfheight enemyHeight
+                return 0;
 			}
 		}
 	}

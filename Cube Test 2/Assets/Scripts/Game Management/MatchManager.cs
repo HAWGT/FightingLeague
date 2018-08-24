@@ -22,6 +22,11 @@ public class MatchManager : MonoBehaviour
 	private int currentMatch = 0;
 	private int maxMatches = 0;
 
+    [SerializeField]
+    private AudioClip[] musics;
+
+    private int selectedMusic = 1;
+
 	private void Awake()
 	{
 		DontDestroyOnLoad(this);
@@ -38,8 +43,12 @@ public class MatchManager : MonoBehaviour
 		{
 			currentMatch++;
 		}
-		
-	}
+        selectedMusic = PlayerPrefs.GetInt("Music");
+        GetComponent<AudioSource>().clip = musics[selectedMusic];
+        GetComponent<AudioSource>().Play();
+
+
+    }
 
 	public void MatchEnd(int playerID)
     {

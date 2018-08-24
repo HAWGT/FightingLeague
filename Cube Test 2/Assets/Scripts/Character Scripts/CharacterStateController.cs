@@ -39,6 +39,14 @@ namespace CharacterControl
 
         private Vector3 startPosition;
 
+        private AudioSource audioSource;
+
+        [SerializeField]
+        private AudioClip hit;
+
+        [SerializeField]
+        private AudioClip teleport;
+
         public void ResetP()
         {
             healthPoints = 10000;
@@ -135,6 +143,7 @@ namespace CharacterControl
         // Use this for initialization
         private void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             charState = Enums.CharState.standing;
 			attackStates = new List<Enums.AttackState>();
 			animControl = GetComponent<AnimationController>();
@@ -162,6 +171,11 @@ namespace CharacterControl
                 animControl.TurnAnimatorParametersOn(FindAnimatorParameter(new string[] { "mirrorAnimation" }));
             }
 
+        }
+
+        public void TeleportSFX()
+        {
+            audioSource.PlayOneShot(teleport);
         }
 
         public int GetSuperBar()
@@ -208,6 +222,7 @@ namespace CharacterControl
 		public void TakeDamage(float dmg)
         {
             if (StateHelper.GetState(myRigidbody) == Enums.AnimState.super) return;
+            audioSource.PlayOneShot(hit);
             animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "hitstun" }));
             animControl.Knock(dmg);
 

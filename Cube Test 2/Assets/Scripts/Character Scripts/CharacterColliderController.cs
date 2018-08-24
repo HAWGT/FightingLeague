@@ -101,7 +101,8 @@ namespace CharacterControl
            spinKickPrefab,
            temp,
            Quaternion.Euler(new Vector3(0,0,0)) );
-            spinKick.GetComponent<SpinKickScript>().SetCreator(myRigidBody);
+           spinKick.GetComponent<SpinKickScript>().SetCreator(myRigidBody);
+           GetComponent<AnimationController>().Shockwave();
            Destroy(spinKick, 0.33f);
         }
 
@@ -125,6 +126,7 @@ namespace CharacterControl
            temp,
            rot);
             guardBreak.GetComponent<FlurryScript>().SetCreator(myRigidBody);
+            GetComponent<AnimationController>().Shockwave();
             Destroy(guardBreak, 0.75f);
         }
 
@@ -150,7 +152,6 @@ namespace CharacterControl
                 } 
                 myRigidBody.transform.position += new Vector3(-x, 0.33f, 0.0f);
             }
-
             GetComponent<AnimationController>().HorizontalTeleportFX();
 
             StartCoroutine(UpdateTeleport());
@@ -333,6 +334,7 @@ namespace CharacterControl
             fright.enabled = true;
             attackingH = true;
             flaggedAtk = false;
+            GetComponent<AnimationController>().Shockwave();
             StartCoroutine(ForceNoAtkH());
         }
 
