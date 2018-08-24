@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using CharacterControl;
 using UnityEngine;
+using System;
 
 namespace NeuralNetwork{
 
 	public class NetworkInterface : MonoBehaviour
 	{
 		//general interface
-		// self -> x,y, life, super, airborn, busy(bool), attack(bool)
-		private int numEntradas = 12;
+		// self -> x,y, life, super, airborn, busy(bool), attack(bool), tempo
+		private int numEntradas = 13;
 		private int numSaidas = 1;
 		private int mode;
 		private AnimationController animationController;
@@ -22,9 +23,13 @@ namespace NeuralNetwork{
 
 		//dados a enviar para a rede
 		private int selfHP = 10000;
-		private int enemyHP = 10000;
+		private bool selfBusy = false;
 		private int selfSuper = 0;
+
+		private int enemyHP = 10000;
 		private int enemySuper = 0;
+		private bool enemyBusy = false;
+		private bool enemyAttacking = false;
 
 		// Use this for initialization
 		void Start()
@@ -93,20 +98,48 @@ namespace NeuralNetwork{
 				case 13:
 					animationController.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "vanish" }));
 					break;
+
+				default:
+					break;
 			}
 		}
 
-		public void ChangeHP(int characterID, int newHP)
+		public void ChangeHP(int characterID, int newHP, int newSuper)
 		{
 			if(characterID == state.GetPlayerID())
 			{
 				selfHP = newHP;
+				selfSuper = newSuper;
 			}
 			else
 			{
 				enemyHP = newHP;
+				enemySuper = newSuper;
 			}
 			
+		}
+
+		private int OptimalResult(int selfHP, int enemyHP, int selfBar, int enemyBar, float distanceX, int selfHeight, int enemyHeight, bool selfBusy, bool enemyBusy, bool enemyIsAttacking, int time)
+		{
+
+			if (selfBusy)
+			{
+				return 0;
+			}
+			else if (enemyIsAttacking && distanceX < 2)
+			{
+				return 2;
+			}else if(enemyHeight > 1)
+			{
+				return 2;
+			}else
+			{
+				//diferencial vida, timer grande
+
+				//diferencial vida, timer pequeno
+				//vida distancia
+				//selfheight enemyHeight
+			}
 		}
 	}
 

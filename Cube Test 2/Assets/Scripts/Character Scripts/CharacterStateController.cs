@@ -216,22 +216,22 @@ namespace CharacterControl
 			{
 				if (PlayerPrefs.GetInt("Player1") == 2)
 				{
-					GetComponent<NetworkInterface>().ChangeHP(playerID, (int) healthPoints);
+					GetComponent<NetworkInterface>().ChangeHP(playerID, (int) healthPoints, superBar);
 				}
 				if(PlayerPrefs.GetInt("Player2") == 2)
 				{
-					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int) healthPoints);
+					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int) healthPoints, superBar);
 				}
 				ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
 			}
 			if (playerID == 2) {
 				if (PlayerPrefs.GetInt("Player1") == 2)
 				{
-					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int)healthPoints);
+					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int)healthPoints, superBar);
 				}
 				if (PlayerPrefs.GetInt("Player2") == 2)
 				{
-					GetComponent<NetworkInterface>().ChangeHP(playerID, (int)healthPoints);
+					GetComponent<NetworkInterface>().ChangeHP(playerID, (int)healthPoints, superBar);
 				}
 				ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
 			}

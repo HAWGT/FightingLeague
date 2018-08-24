@@ -7,11 +7,13 @@ namespace NeuralNetwork
 	public class Neuron
 	{
 		private double[] x;
+		private int y;
 
 		/*contructor
 		x => entrada
+		y => saida aproximada
 		*/
-		public Neuron(double[] x)
+		public Neuron(double[] x, int y)
 		{
 			int indice = 0;
 			this.x = new double[x.Length];
@@ -32,6 +34,11 @@ namespace NeuralNetwork
 		public double[] GetInstancia()
 		{
 			return x;
+		}
+
+		public int GetSaida()
+		{
+			return y;
 		}
 	}
 

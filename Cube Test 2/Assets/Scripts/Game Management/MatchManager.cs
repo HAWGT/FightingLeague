@@ -60,15 +60,15 @@ public class MatchManager : MonoBehaviour
         return matchEnded;
     }
 
-	public void ChangeAIValue(int playerID, int playerHP)
+	public void ChangeAIValue(int playerID, int playerHP, int playerSuper)
 	{
 		switch (playerID)
 		{
 			case 1:
-				player2.GetComponent<NetworkInterface>().ChangeHP(playerID, playerHP);
+				player2.GetComponent<NetworkInterface>().ChangeHP(playerID, playerHP, playerSuper);
 				break;
 			case 2:
-				player1.GetComponent<NetworkInterface>().ChangeHP(playerID, playerHP);
+				player1.GetComponent<NetworkInterface>().ChangeHP(playerID, playerHP, playerSuper);
 				break;
 		}
 	}

@@ -86,7 +86,7 @@ namespace NeuralNetwork
 			{
 				ForwardPropagation(conjuntoTreino[e].GetInstancia());
 				///re-escrever condição
-				//double forAbs = activationHidden - conjuntoTreino[e].GetSaida();
+				double forAbs = activationHidden - conjuntoTreino[e].GetSaida();
 				if (activationHidden <= 0.5)
 				{
 					return false;
