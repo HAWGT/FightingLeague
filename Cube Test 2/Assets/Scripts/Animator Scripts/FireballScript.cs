@@ -25,7 +25,7 @@ namespace CharacterControl
             if (body == null || body.isKinematic)
             {
                 Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
-                Vector3 pos = body.position;
+                Vector3 pos = gameObject.transform.position;
                 var explosion = (GameObject)Instantiate(explosionPrefab, pos, rot);
                 Destroy(explosion, 0.25f);
                 Destroy(gameObject);
@@ -33,22 +33,34 @@ namespace CharacterControl
             }
             else if (body != creator)
             {
-                Destroy(gameObject);
-                if (body == null) return;
-                if (body.GetComponent<CharacterColliderController>() == null) return;
-                if (StateHelper.GetState(body) != Enums.AnimState.walkingB && !flagged)
+                if (body.GetComponent<CharacterStateController>() != null)
                 {
-                    body.GetComponent<CharacterStateController>().TakeDamage(1000);
-                    body.GetComponent<CharacterStateController>().AddSuperBar(2f);
-                    creator.GetComponent<CharacterStateController>().AddSuperBar(4f);
+                    Destroy(gameObject);
+                    if (body == null) return;
+                    if (body.GetComponent<CharacterColliderController>() == null) return;
+                    if (StateHelper.GetState(body) != Enums.AnimState.walkingB && !flagged)
+                    {
+                        body.GetComponent<CharacterStateController>().TakeDamage(1000);
+                        body.GetComponent<CharacterStateController>().AddSuperBar(2f);
+                        creator.GetComponent<CharacterStateController>().AddSuperBar(4f);
+                        Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
+                        Vector3 pos = body.position;
+                        var explosion = (GameObject)Instantiate(explosionPrefab, pos, rot);
+                        Destroy(explosion, 0.25f);
+                        flagged = true;
+                    }
+                    else if (StateHelper.GetState(body) == Enums.AnimState.walkingB)
+                    {
+                        body.GetComponent<AnimationController>().BlockFX();
+                    }
+                } else
+                {
                     Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
                     Vector3 pos = body.position;
                     var explosion = (GameObject)Instantiate(explosionPrefab, pos, rot);
                     Destroy(explosion, 0.25f);
-                    flagged = true;
-                } else if (StateHelper.GetState(body) == Enums.AnimState.walkingB)
-                {
-                    body.GetComponent<AnimationController>().Block();
+                    Destroy(gameObject);
+                    return;
                 }
             }
         }

@@ -22,6 +22,8 @@ public class CameraScript : MonoBehaviour {
 	public float minDistance = 10.0f;
 	public float maxDistance = 5.0f;
 
+    public float zOffset = -6.5f;
+
 	private float xMin, xMax, yMin, yMax;
 
 	private void LateUpdate(){
@@ -68,6 +70,6 @@ public class CameraScript : MonoBehaviour {
 		else if (distance > maxDistance){
 			distance = maxDistance;
 		}
-		transform.position = new Vector3 (xMiddle, yMiddle, -distance/2);
+		transform.position = new Vector3 (xMiddle, yMiddle, -distance/2 + zOffset);
 	}
 }

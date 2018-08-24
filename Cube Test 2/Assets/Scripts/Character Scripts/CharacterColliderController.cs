@@ -88,7 +88,6 @@ namespace CharacterControl
             fireBall.GetComponent<Rigidbody>().velocity = fireBall.transform.forward * 30;
             fireBall.GetComponent<FireballScript>().SetCreator(myRigidBody);
 
-            // Destroy the bullet after 2 seconds
             Destroy(fireBall, 2.0f);
         }
 
@@ -131,6 +130,7 @@ namespace CharacterControl
 
         private void MidDash()
         {
+
             float x = 7f;
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
             {
@@ -150,6 +150,8 @@ namespace CharacterControl
                 } 
                 myRigidBody.transform.position += new Vector3(-x, 0.33f, 0.0f);
             }
+
+            GetComponent<AnimationController>().HorizontalTeleportFX();
 
             StartCoroutine(UpdateTeleport());
         }
@@ -173,6 +175,7 @@ namespace CharacterControl
            reflectPrefab,
            temp,
            rot);
+            GetComponent<AnimationController>().Shockwave();
             Destroy(reflect, 0.35f);
         }
 
@@ -238,8 +241,10 @@ namespace CharacterControl
             }
         }
 
-        private void Teleport()
+        private void VanishTP()
         {
+
+            GetComponent<AnimationController>().VerticalTeleportFX();
             float x = 1.5f;
             Quaternion rot = Quaternion.Euler(new Vector3(0, 0, 0));
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
@@ -261,13 +266,6 @@ namespace CharacterControl
                 myRigidBody.transform.position = new Vector3(otherPlayer.transform.position.x - x, myRigidBody.transform.position.y + 1.83f, myRigidBody.transform.position.z);
             }
 
-            /*Vector3 temp = new Vector3(myRigidBody.transform.position.x, 0.8f, myRigidBody.transform.position.z);
-            var stand = (GameObject)Instantiate(
-           teleportPrefab,
-           temp,
-           rot);
-
-            Destroy(stand, 0.3f);*/
             StartCoroutine(UpdateTeleport());
             
 
@@ -291,16 +289,18 @@ namespace CharacterControl
             uaright.enabled = true;
             attackingL = true;
             flaggedAtk = false;
-            StartCoroutine(ForceNoAtk());
+            StartCoroutine(ForceNoAtkL());
         }
 
-        IEnumerator ForceNoAtk()
+        IEnumerator ForceNoAtkL()
         {
-            yield return new WaitForSeconds(0.33f);
+            yield return new WaitForSeconds(0.34f);
             DisableL();
             attackingL = false;
             flaggedAtk = true;
         }
+
+
 
         private void EnableM()
         {
@@ -314,6 +314,15 @@ namespace CharacterControl
             uaright.enabled = true;
             attackingM = true;
             flaggedAtk = false;
+            StartCoroutine(ForceNoAtkM());
+        }
+
+        IEnumerator ForceNoAtkM()
+        {
+            yield return new WaitForSeconds(0.4f);
+            DisableL();
+            attackingM = false;
+            flaggedAtk = true;
         }
 
         private void EnableH()
@@ -324,6 +333,15 @@ namespace CharacterControl
             fright.enabled = true;
             attackingH = true;
             flaggedAtk = false;
+            StartCoroutine(ForceNoAtkH());
+        }
+
+        IEnumerator ForceNoAtkH()
+        {
+            yield return new WaitForSeconds(0.34f);
+            DisableL();
+            attackingM = false;
+            flaggedAtk = true;
         }
 
         private void DisableL()
@@ -387,11 +405,8 @@ namespace CharacterControl
             Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;
-            //if((attackingL || attackingM || attackingH) && body.GetComponent<CharacterStateController>().GetCharState() != Enums.CharState.blocking && !flaggedAtk)
             if((attackingL || attackingM || attackingH) && StateHelper.GetState(body) != Enums.AnimState.walkingB && !flaggedAtk)
             {
-                print(attackingL);
-                //print("hit confirmed");
                 float dmg = 0;
                 float bar = 0;
                 if (attackingL)
@@ -419,7 +434,7 @@ namespace CharacterControl
                 flaggedAtk = true;
             }  else if (StateHelper.GetState(body) == Enums.AnimState.walkingB)
             {
-                body.GetComponent<AnimationController>().Block();
+                body.GetComponent<AnimationController>().BlockFX();
             }
         }
     }

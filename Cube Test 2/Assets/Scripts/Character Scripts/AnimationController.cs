@@ -20,6 +20,12 @@ namespace CharacterControl
         [SerializeField]
         private GameObject steamPrefab;
 
+        [SerializeField]
+        private GameObject rayPrefab;
+
+        [SerializeField]
+        private GameObject shockPrefab;
+
         private new Rigidbody rigidbody;
 
         private float maxAirSpeed = 5f;
@@ -185,15 +191,15 @@ namespace CharacterControl
             }
             if ((rigidbody.transform.position.x < -7 || rigidbody.transform.position.x > 7) && dmg > 100)
             {
-                rigidbody.transform.position += new Vector3(0, 2.25f);
+                rigidbody.transform.position += new Vector3(side * 4, 3f);
                 var smoke = (GameObject)Instantiate(smokePrefab, pos + new Vector3(side, 1.25f, 0), rot);
-                Destroy(smoke, 1f);
+                Destroy(smoke, 2f);
             }
             var flare = (GameObject)Instantiate(flarePrefab, pos + new Vector3(side , 0.6f, 0), rot);
             Destroy(flare, 0.25f);
         }
 
-        public void Block()
+        public void BlockFX()
         {
             float side = 0;
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
@@ -208,6 +214,48 @@ namespace CharacterControl
             Vector3 pos = rigidbody.transform.position;
             var steam = (GameObject)Instantiate(steamPrefab, pos + new Vector3(side, 0), Quaternion.Euler(-90, 0, 0 ));
             Destroy(steam, 0.5f);
+        }
+
+        public void VerticalTeleportFX()
+        {
+            float side = 0;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+            {
+                side = 0.5f;
+            }
+            else if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+            {
+                side = -0.5f;
+            }
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
+            Vector3 pos = rigidbody.transform.position;
+            var ray = (GameObject)Instantiate(rayPrefab, pos + new Vector3(side, 0), Quaternion.Euler(-90, 0, 0));
+            Destroy(ray, 0.25f);
+        }
+
+        public void HorizontalTeleportFX()
+        {
+            float side = 0;
+            if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
+            {
+                side = 1f;
+            }
+            else if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
+            {
+                side = -1f;
+            }
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
+            Vector3 pos = rigidbody.transform.position;
+            var ray = (GameObject)Instantiate(rayPrefab, pos + new Vector3(0, 0.7f), Quaternion.Euler(0, -90 * side, 0));
+            Destroy(ray, 0.1f);
+        }
+
+        public void Shockwave()
+        {
+                Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
+                Vector3 pos = rigidbody.transform.position;
+                var shock = (GameObject)Instantiate(shockPrefab, pos , Quaternion.Euler(0, 0, 0));
+                Destroy(shock, 0.35f);
         }
 
         public void Push(float dmg)
