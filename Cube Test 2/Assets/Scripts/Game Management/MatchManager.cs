@@ -82,7 +82,6 @@ public class MatchManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         secondsLeft = initTime;
-        Debug.Log("reset");
         matchEnded = false;
         player1.GetComponent<CharacterStateController>().ResetP();
         player2.GetComponent<CharacterStateController>().ResetP();

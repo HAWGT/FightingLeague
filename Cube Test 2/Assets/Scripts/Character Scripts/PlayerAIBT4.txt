@@ -17,7 +17,7 @@ tree("Root")
                             WalkForward
                         Sequence
                             Special1
-                            Wait 0.59
+                            Wait 0.89
                         Sequence
                             Super
                             Wait 2.24
