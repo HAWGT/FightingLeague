@@ -47,6 +47,9 @@ namespace CharacterControl
         [SerializeField]
         private AudioClip teleport;
 
+        [SerializeField]
+        private AudioClip meter;
+
         public void ResetP()
         {
             healthPoints = 10000;
@@ -186,7 +189,24 @@ namespace CharacterControl
 		public void ReduceSuperBar(int reduction)
 		{
 			superBar -= reduction;
-		}
+            audioSource.volume = 1.0f;
+            audioSource.PlayOneShot(meter);
+            StartCoroutine(ResetVolume());
+            if (playerID == 1)
+            {
+                ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+            }
+            if (playerID == 2)
+            {
+                ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+            }
+        }
+
+        IEnumerator ResetVolume()
+        {
+            yield return new WaitForSeconds(0.625f);
+            audioSource.volume = 0.3f;
+        }
 
 		public void UpdateUI(bool changeSides)
 		{
@@ -285,14 +305,14 @@ namespace CharacterControl
         public void Vanish()
         {
             if (superBar < 10) return;
-            superBar -= 10;
+            ReduceSuperBar(10);
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "vanish" }));
         }
 
         public void Super()
         {
             if (superBar < 50) return;
-            superBar -= 50;
+            ReduceSuperBar(50);
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "super" }));
         }
 

@@ -433,6 +433,7 @@ MonoBehaviour:
   matchManager: {fileID: 515407920}
   hit: {fileID: 8300000, guid: a923c38cab51e0546a67b40b293e32df, type: 3}
   teleport: {fileID: 8300000, guid: fa6931f7822a32949b94ce34fd6f331e, type: 3}
+  meter: {fileID: 8300000, guid: 59c0624a962805945bd31244992aff88, type: 3}
 --- !u!54 &381051711
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2033,7 +2034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 0.7647059, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2732,6 +2733,7 @@ MonoBehaviour:
   matchManager: {fileID: 0}
   hit: {fileID: 8300000, guid: a923c38cab51e0546a67b40b293e32df, type: 3}
   teleport: {fileID: 8300000, guid: fa6931f7822a32949b94ce34fd6f331e, type: 3}
+  meter: {fileID: 8300000, guid: 59c0624a962805945bd31244992aff88, type: 3}
 --- !u!54 &1405563314
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3389,7 +3391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 0.76551723, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

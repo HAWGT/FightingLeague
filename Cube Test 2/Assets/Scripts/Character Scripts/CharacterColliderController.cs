@@ -113,12 +113,12 @@ namespace CharacterControl
             Quaternion rot = Quaternion.Euler(new Vector3(0, 0, 0));
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
             {
-                temp.x += 0.7f;
+                temp.x += 1.1f;
                 //rot = Quaternion.Euler(new Vector3(0, 90, 0));
             }
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
             {
-                temp.x -= 0.7f;
+                temp.x -= 1.1f;
                 //rot = Quaternion.Euler(new Vector3(0, 270, 0));
             }
             var guardBreak = (GameObject)Instantiate(
