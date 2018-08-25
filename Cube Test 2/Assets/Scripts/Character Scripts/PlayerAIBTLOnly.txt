@@ -3,5 +3,5 @@ tree("Root")
         Mute
             Sequence
                 WalkForward
-                Special1
-                Wait 0.9
+                AttackL
+                Wait 0.34
