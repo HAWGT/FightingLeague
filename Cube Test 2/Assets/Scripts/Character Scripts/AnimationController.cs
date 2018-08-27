@@ -31,9 +31,7 @@ namespace CharacterControl
 
         private new Rigidbody rigidbody;
 
-        private float maxAirSpeed = 5f;
-
-        private Vector3 airMovement = new Vector3 (3f, 0, 0);
+        private Vector3 airMovement = new Vector3 (5f, 0, 0);
 
         // Use this for initialization
         void Start()
@@ -280,26 +278,6 @@ namespace CharacterControl
 
         private void AddAirSpeed(Vector3 speed)
         {
-            /*if (rigidbody.velocity.x > -maxAirSpeed && speed.x < 0)
-            {
-                rigidbody.velocity = rigidbody.velocity + speed;
-            }
-            else if (rigidbody.velocity.x < maxAirSpeed && speed.x > 0)
-            {
-                rigidbody.velocity = rigidbody.velocity + speed;
-            }
-            else if (rigidbody.velocity.x > 5f)
-            {
-                rigidbody.velocity = new Vector3(5f, rigidbody.velocity.y);
-            }
-            else if (rigidbody.velocity.x < -5f)
-            {
-                rigidbody.velocity = new Vector3(-5f, rigidbody.velocity.y);
-            }
-            else
-            {
-                rigidbody.velocity = rigidbody.velocity + speed;
-            }*/
 
             rigidbody.velocity = new Vector3(0, rigidbody.velocity.y) + speed;
 
