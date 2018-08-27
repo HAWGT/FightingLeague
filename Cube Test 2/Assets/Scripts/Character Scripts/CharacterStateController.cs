@@ -324,7 +324,12 @@ namespace CharacterControl
             return list;
         }
 
-
+        public void ForwardDash()
+        {
+            if (superBar < 5) return;
+            ReduceSuperBar(5);
+            animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "midDash" }));
+        }
 
         public void Vanish()
         {

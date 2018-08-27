@@ -291,10 +291,6 @@ namespace CharacterControl
 
 							animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "vanish" }));
 						}
-						else
-						{
-							animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "midDash" }));
-						}
 						break;
 
 					case Enums.Inputs.GuardBreak:
@@ -302,7 +298,11 @@ namespace CharacterControl
 						break;
 
 					case Enums.Inputs.Dash:
-						animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "midDash" }));
+                        if (stateController.GetSuperBar() > 4)
+                        {
+                            stateController.ReduceSuperBar(5);
+                            animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "midDash" }));
+                        }
 						break;
 				}
 				animControl.TurnAnimatorParametersOff(animatorParameters.FindAnimatorParameter(new string[] { "walkingForward", "walkingBackward", "crouch" }));

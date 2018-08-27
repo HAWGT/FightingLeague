@@ -188,9 +188,17 @@ namespace CharacterControl
         public void Dash()
         {
             if (Task.current == null) return;
-            animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "midDash" }));
-            counteredBeam = true;
-            Task.current.Succeed();
+            if (GetComponent<CharacterStateController>().GetSB() >= 5f)
+            {
+                GetComponent<CharacterStateController>().ForwardDash();
+                counteredProjectile = true;
+                counteredBeam = true;
+                Task.current.Succeed();
+            }
+            else
+            {
+                Task.current.Fail();
+            }
         }
         [Task]
         public void Vanish()
