@@ -21,7 +21,7 @@ namespace CharacterControl
             if (player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Hitstun")) return Enums.AnimState.hitstun;
             if (player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("WalkingF")) return Enums.AnimState.walkingF;
             if (player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("WalkingB")) return Enums.AnimState.walkingB;
-            if (player.transform.position.y > 0.26) return Enums.AnimState.airborn;
+            if (player.GetComponent<Animator>().GetBool("airborn") == true) return Enums.AnimState.airborn;
             return Enums.AnimState.standing;
         }
     }
