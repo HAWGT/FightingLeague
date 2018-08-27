@@ -26,16 +26,12 @@ namespace CharacterControl
                 Destroy(gameObject);
                 if (body == null) return;
                 if (body.GetComponent<CharacterColliderController>() == null) return;
-                if (StateHelper.GetState(body) != Enums.AnimState.walkingB && !flagged)
+                if (!flagged)
                 {
-                    body.GetComponent<CharacterStateController>().TakeDamage(800);
+                    body.GetComponent<CharacterStateController>().TakeDamage(800, false);
                     body.GetComponent<CharacterStateController>().AddSuperBar(3f);
                     creator.GetComponent<CharacterStateController>().AddSuperBar(6f);
                     flagged = true;
-                }
-                else if (StateHelper.GetState(body) == Enums.AnimState.walkingB)
-                {
-                    body.GetComponent<AnimationController>().BlockFX();
                 }
             }
         }

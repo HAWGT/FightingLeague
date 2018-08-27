@@ -38,9 +38,9 @@ namespace CharacterControl
                     Destroy(gameObject);
                     if (body == null) return;
                     if (body.GetComponent<CharacterColliderController>() == null) return;
-                    if (StateHelper.GetState(body) != Enums.AnimState.walkingB && !flagged)
+                    if (!flagged)
                     {
-                        body.GetComponent<CharacterStateController>().TakeDamage(1000);
+                        body.GetComponent<CharacterStateController>().TakeDamage(1000, false);
                         body.GetComponent<CharacterStateController>().AddSuperBar(2f);
                         creator.GetComponent<CharacterStateController>().AddSuperBar(4f);
                         Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
@@ -48,10 +48,6 @@ namespace CharacterControl
                         var explosion = (GameObject)Instantiate(explosionPrefab, pos, rot);
                         Destroy(explosion, 0.25f);
                         flagged = true;
-                    }
-                    else if (StateHelper.GetState(body) == Enums.AnimState.walkingB)
-                    {
-                        body.GetComponent<AnimationController>().BlockFX();
                     }
                 } else
                 {

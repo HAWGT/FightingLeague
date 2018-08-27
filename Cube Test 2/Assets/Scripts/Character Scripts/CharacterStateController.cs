@@ -239,9 +239,23 @@ namespace CharacterControl
 			attackStates.Add(state);
 		}
 
-		public void TakeDamage(float dmg)
+		public void TakeDamage(float dmg, bool grab)
         {
-            if (StateHelper.GetState(myRigidbody) == Enums.AnimState.super || StateHelper.GetState(myRigidbody) == Enums.AnimState.reflect) return;
+            if (StateHelper.GetState(myRigidbody) == Enums.AnimState.super || StateHelper.GetState(myRigidbody) == Enums.AnimState.reflect)
+            {
+                animControl.BlockFX();
+                return;
+            }
+
+            if (StateHelper.GetState(myRigidbody) == Enums.AnimState.walkingB)
+            {
+                if (grab == false)
+                {
+                    animControl.BlockFX();
+                    return;
+                }
+            }
+
             audioSource.PlayOneShot(hit);
             animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "hitstun" }));
             animControl.Knock(dmg);

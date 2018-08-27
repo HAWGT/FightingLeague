@@ -407,7 +407,7 @@ namespace CharacterControl
             Rigidbody body = collision.collider.attachedRigidbody;
             if (body == null || body.isKinematic)
                 return;
-            if((attackingL || attackingM || attackingH) && StateHelper.GetState(body) != Enums.AnimState.walkingB && !flaggedAtk)
+            if((attackingL || attackingM || attackingH) && !flaggedAtk)
             {
                 float dmg = 0;
                 float bar = 0;
@@ -428,15 +428,12 @@ namespace CharacterControl
                     myRigidBody.GetComponent<AnimationController>().Push(dmg);
                 }
                 stateController.AddSuperBar(bar);
-                body.GetComponent<CharacterStateController>().TakeDamage(dmg);
+                body.GetComponent<CharacterStateController>().TakeDamage(dmg, false);
                 body.GetComponent<CharacterStateController>().AddSuperBar(bar / 2);
                 DisableL();
                 DisableM();
                 DisableH();
                 flaggedAtk = true;
-            }  else if (StateHelper.GetState(body) == Enums.AnimState.walkingB)
-            {
-                body.GetComponent<AnimationController>().BlockFX();
             }
         }
     }

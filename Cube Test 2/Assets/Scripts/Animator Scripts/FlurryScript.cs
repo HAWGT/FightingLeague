@@ -28,7 +28,7 @@ namespace CharacterControl
                 if (body.GetComponent<CharacterColliderController>() == null) return;
                 if (!flagged)
                 {
-                    body.GetComponent<CharacterStateController>().TakeDamage(1000);
+                    body.GetComponent<CharacterStateController>().TakeDamage(1000, true);
                     body.GetComponent<CharacterStateController>().AddSuperBar(10f);
                     creator.GetComponent<CharacterStateController>().AddSuperBar(20f);
                     flagged = true;

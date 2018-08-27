@@ -45,17 +45,8 @@ namespace CharacterControl
         }
         private void RemoveHPTick()
         {
-            if (target == null) return;
-            if (target.GetComponent<CharacterStateController>() == null) return;
-            if (StateHelper.GetState(target) != Enums.AnimState.walkingB)
-            {
-                target.GetComponent<CharacterStateController>().TakeDamage(9);
-                //creator.GetComponent<CharacterStateController>().AddSuperBar(0.08f);
-            }
-            else if (StateHelper.GetState(target) == Enums.AnimState.walkingB)
-            {
-                target.GetComponent<AnimationController>().BlockFX();
-            }
+            if (target == null || target.GetComponent<CharacterStateController>() == null) return;
+            target.GetComponent<CharacterStateController>().TakeDamage(9, false);
         }
     }
 }
