@@ -53,7 +53,7 @@ public class MatchManager : MonoBehaviour
 		}
         selectedMusic = PlayerPrefs.GetInt("Music");
         GetComponent<AudioSource>().clip = musics[selectedMusic];
-        GetComponent<AudioSource>().clip = musics[1];
+        //GetComponent<AudioSource>().clip = musics[1];
         GetComponent<AudioSource>().Play();
         ui.GetComponent<UIManager>().SetTime(secondsLeft);
         InvokeRepeating("TimeTick", 1, 1);

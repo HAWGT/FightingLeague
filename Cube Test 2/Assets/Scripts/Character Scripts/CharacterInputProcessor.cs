@@ -270,11 +270,8 @@ namespace CharacterControl
 					case Enums.Inputs.Super:
 						if (stateController.GetSuperBar() > 49)
 						{
-							stateController.ReduceSuperBar(50);
-
+                            stateController.Super();
 							stateController.UpdateUI(false);
-
-							animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "super" }));
 							stateController.SetLastAtk(Enums.AttackState.super);
 							stateController.SetCharState(Enums.CharState.attacking);
 						}
@@ -287,11 +284,14 @@ namespace CharacterControl
 					case Enums.Inputs.Vanish:
 						if (stateController.GetSuperBar() > 9)
 						{
-							stateController.ReduceSuperBar(10);
-
-							animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "vanish" }));
-						}
-						break;
+                            stateController.Vanish();
+                            stateController.UpdateUI(false);
+                        }
+                        else
+                        {
+                            animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "special2" }));
+                        }
+                        break;
 
 					case Enums.Inputs.GuardBreak:
 						animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "guardBreak" }));
@@ -300,8 +300,8 @@ namespace CharacterControl
 					case Enums.Inputs.Dash:
                         if (stateController.GetSuperBar() > 4)
                         {
-                            stateController.ReduceSuperBar(5);
-                            animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "midDash" }));
+                            stateController.ForwardDash();
+                            stateController.UpdateUI(false);
                         }
 						break;
 				}
