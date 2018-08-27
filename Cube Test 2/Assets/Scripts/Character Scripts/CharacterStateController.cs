@@ -261,7 +261,7 @@ namespace CharacterControl
             animControl.Knock(dmg);
 
             healthPoints -= dmg;
-            superBar += (int) dmg / 200;
+            AddSuperBar(dmg / 200);
 			if (playerID == 1)
 			{
 				if (PlayerPrefs.GetInt("Player1") == 2)
