@@ -39,7 +39,7 @@ tree("Root")
                             Wait 0.59
                         Sequence
                             Special2
-                            Wait 0.75
+                            Wait 1.5
                         Sequence
                             Super
                             Wait 2.24

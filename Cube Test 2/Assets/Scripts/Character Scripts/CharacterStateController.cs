@@ -249,8 +249,18 @@ namespace CharacterControl
 
             if (StateHelper.GetState(myRigidbody) == Enums.AnimState.walkingB)
             {
-                if (grab == false)
+                if (!grab)
                 {
+                    animControl.BlockFX();
+                    return;
+                }
+            }
+
+            if (grab)
+            {
+                if (StateHelper.GetState(myRigidbody) == Enums.AnimState.light || StateHelper.GetState(myRigidbody) == Enums.AnimState.medium || StateHelper.GetState(myRigidbody) == Enums.AnimState.heavy)
+                {
+                    GetComponent<CharacterColliderController>().TechGrab();
                     animControl.BlockFX();
                     return;
                 }

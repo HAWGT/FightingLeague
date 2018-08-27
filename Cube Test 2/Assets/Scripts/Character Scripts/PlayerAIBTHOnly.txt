@@ -1,0 +1,7 @@
+tree("Root")
+    Repeat
+        Mute
+            Sequence
+                WalkForward
+                AttackH
+                Wait 0.34

@@ -103,7 +103,7 @@ namespace CharacterControl
            Quaternion.Euler(new Vector3(0,0,0)) );
            spinKick.GetComponent<SpinKickScript>().SetCreator(myRigidBody);
            GetComponent<AnimationController>().Shockwave();
-           Destroy(spinKick, 0.33f);
+           Destroy(spinKick, 0.1f);
         }
 
         private void GuardBreak()
@@ -127,7 +127,7 @@ namespace CharacterControl
            rot);
             guardBreak.GetComponent<FlurryScript>().SetCreator(myRigidBody);
             GetComponent<AnimationController>().Shockwave();
-            Destroy(guardBreak, 0.75f);
+            Destroy(guardBreak, 0.30f);
         }
 
         private void MidDash()
@@ -157,6 +157,10 @@ namespace CharacterControl
             StartCoroutine(UpdateTeleport());
         }
 
+        public void TechGrab()
+        {
+            ReflectBarrier();
+        }
         private void ReflectBarrier()
         {
             Vector3 temp = myRigidBody.position;

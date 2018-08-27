@@ -2,5 +2,5 @@ tree("Root")
     Repeat
         Mute
             Sequence
-                Special1
-                Wait 0.9
+                SpecialWait 0.6
+                Wait 1.5

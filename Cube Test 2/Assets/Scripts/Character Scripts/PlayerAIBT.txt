@@ -46,7 +46,7 @@ tree("Root")
                             Wait 0.9
                         Sequence
                             Special2
-                            Wait 0.75
+                            Wait 1.5
                         Sequence
                             Super
                             Wait 2.24
@@ -58,7 +58,7 @@ tree("Root")
                             Wait 0.63
                         Sequence
                             Grab
-                            Wait 1.2
+                            Wait 0.6
                         Sequence
                             AttackH
                             Wait 0.34
@@ -80,7 +80,7 @@ tree("Root")
                             Wait 0.9
                         Sequence
                             Special2
-                            Wait 0.75
+                            Wait 1.5
                         Sequence
                             Super
                             Wait 2.24
@@ -93,7 +93,7 @@ tree("Root")
                 While grab
                     Sequence
                         Grab
-                        Wait 1.2
+                        Wait 0.6
                 While defend
                     Random 0.75 0.05 0.20
                         WalkBackward
