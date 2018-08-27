@@ -61,7 +61,7 @@ namespace CharacterControl
 
         private float healthPoints = 10000;
 
-        private int superBar;
+        private float superBar;
 
         private Enums.Inputs lastInput;
 
@@ -181,7 +181,7 @@ namespace CharacterControl
             audioSource.PlayOneShot(teleport);
         }
 
-        public int GetSuperBar()
+        public float GetSuperBar()
 		{
 			return superBar;
 		}
@@ -266,22 +266,22 @@ namespace CharacterControl
 			{
 				if (PlayerPrefs.GetInt("Player1") == 2)
 				{
-					GetComponent<NetworkInterface>().ChangeHP(playerID, (int) healthPoints, superBar);
+					GetComponent<NetworkInterface>().ChangeHP(playerID, (int) healthPoints, (int) superBar);
 				}
 				if(PlayerPrefs.GetInt("Player2") == 2)
 				{
-					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int) healthPoints, superBar);
+					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int) healthPoints, (int) superBar);
 				}
 				ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
 			}
 			if (playerID == 2) {
 				if (PlayerPrefs.GetInt("Player1") == 2)
 				{
-					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int)healthPoints, superBar);
+					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int)healthPoints, (int) superBar);
 				}
 				if (PlayerPrefs.GetInt("Player2") == 2)
 				{
-					GetComponent<NetworkInterface>().ChangeHP(playerID, (int)healthPoints, superBar);
+					GetComponent<NetworkInterface>().ChangeHP(playerID, (int)healthPoints, (int) superBar);
 				}
 				ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
 			}
@@ -346,7 +346,7 @@ namespace CharacterControl
         public void AddSuperBar(float bar)
         {
             if (GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetHP() <= 0) return;
-            superBar += (int) bar;
+            superBar += bar;
             if (superBar > 100) superBar = 100;
 
 			if (playerID == 1)
