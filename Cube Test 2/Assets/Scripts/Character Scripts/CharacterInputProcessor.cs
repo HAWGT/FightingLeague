@@ -304,6 +304,10 @@ namespace CharacterControl
                             stateController.UpdateUI(false);
                         }
 						break;
+
+					case Enums.Inputs.Reflect:
+						animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "reflect" }));
+						break;
 				}
 				animControl.TurnAnimatorParametersOff(animatorParameters.FindAnimatorParameter(new string[] { "walkingForward", "walkingBackward", "crouch" }));
 			}

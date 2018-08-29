@@ -288,6 +288,12 @@ namespace CharacterControl
 					return Enums.Inputs.GuardBreak;
 				}
 
+				if(attacks.Contains(Enums.AttackState.light) && attacks.Contains(Enums.AttackState.medium))
+				{
+					ResetMachine();
+					return Enums.Inputs.Reflect;
+				}
+
 				if (map.ContainsKey(Enums.Transition.FrontToHeavy))
 				{
 					ResetMachine();

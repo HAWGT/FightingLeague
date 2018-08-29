@@ -30,7 +30,7 @@ namespace CharacterControl
             //this ID represents non-existant state in system
             NullStateID = 0, Up,
             Neutral, Down, DownBack, Back, DownFront, Front, Light, Medium, Heavy, Special1, Special2, Super,
-			Vanish, GuardBreak, Dash
+			Vanish, GuardBreak, Dash, Reflect
         }
 
         public enum FacingSide
