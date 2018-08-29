@@ -92,6 +92,11 @@ namespace CharacterControl
             return this.attackStates;
         }
 
+        public void FreezeControls()
+        {
+
+        }
+
         public float GetHP()
         {
             return this.healthPoints;
@@ -105,6 +110,11 @@ namespace CharacterControl
         public Enums.FacingSide GetFacingSide()
         {
             return this.facing;
+        }
+
+        public void UnFreezeControls()
+        {
+
         }
 
         public void SetFacingSide(Enums.FacingSide face)

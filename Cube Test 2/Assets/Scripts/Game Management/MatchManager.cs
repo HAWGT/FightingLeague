@@ -47,13 +47,15 @@ public class MatchManager : MonoBehaviour
 			maxMatches = PlayerPrefs.GetInt("GameRounds");
 		}
 
-		if (currentMatch > maxMatches)
+        player1.GetComponent<CharacterColliderController>().SetS1SColors(PlayerPrefs.GetInt("P1S1"), PlayerPrefs.GetInt("P1S"));
+        player2.GetComponent<CharacterColliderController>().SetS1SColors(PlayerPrefs.GetInt("P2S1"), PlayerPrefs.GetInt("P2S"));
+
+        if (currentMatch > maxMatches)
 		{
 			currentMatch++;
 		}
         selectedMusic = PlayerPrefs.GetInt("Music");
         GetComponent<AudioSource>().clip = musics[selectedMusic];
-        //GetComponent<AudioSource>().clip = musics[1];
         GetComponent<AudioSource>().Play();
         ui.GetComponent<UIManager>().SetTime(secondsLeft);
         InvokeRepeating("TimeTick", 1, 1);
@@ -76,6 +78,8 @@ public class MatchManager : MonoBehaviour
             //TIMEOUT
         }
         StartCoroutine(ResetPlayers());
+        player1.GetComponent<CharacterStateController>().FreezeControls();
+        player2.GetComponent<CharacterStateController>().FreezeControls();
     }
 
     IEnumerator ResetPlayers()
@@ -86,6 +90,8 @@ public class MatchManager : MonoBehaviour
         matchEnded = false;
         player1.GetComponent<CharacterStateController>().ResetP();
         player2.GetComponent<CharacterStateController>().ResetP();
+        player1.GetComponent<CharacterStateController>().UnFreezeControls();
+        player2.GetComponent<CharacterStateController>().UnFreezeControls();
     }
 
     public bool IsMatchOver()

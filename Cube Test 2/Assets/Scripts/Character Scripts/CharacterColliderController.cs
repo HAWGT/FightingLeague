@@ -9,8 +9,20 @@ namespace CharacterControl
 
         private bool flaggedAtk = false;
 
+        private int chosenS1 = 0;
+        private int chosenS = 0;
+
+        public void SetS1SColors(int a, int b)
+        {
+            chosenS1 = a;
+            chosenS = b;
+        }
+
         [SerializeField]
         private GameObject fireBallPrefab;
+
+        [SerializeField]
+        private GameObject fireBallAltPrefab;
 
         [SerializeField]
         private GameObject spinKickPrefab;
@@ -26,6 +38,8 @@ namespace CharacterControl
 
         [SerializeField]
         private GameObject beamPrefab;
+        [SerializeField]
+        private GameObject beamAltPrefab;
 
         [SerializeField]
         private GameObject otherPlayer;
@@ -80,15 +94,32 @@ namespace CharacterControl
             temp.y = temp.y + 0.7f;
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1) temp.x += 0.7f;
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2) temp.x -= 0.7f;
-            var fireBall = (GameObject)Instantiate(
-            fireBallPrefab,
-            temp,
-            myRigidBody.rotation);
 
-            fireBall.GetComponent<Rigidbody>().velocity = fireBall.transform.forward * 30;
-            fireBall.GetComponent<FireballScript>().SetCreator(myRigidBody);
+            if (chosenS1 == 0)
+            {
+                var fireBall = (GameObject)Instantiate(
+                fireBallPrefab,
+                temp,
+                myRigidBody.rotation);
 
-            Destroy(fireBall, 2.0f);
+                fireBall.GetComponent<Rigidbody>().velocity = fireBall.transform.forward * 30;
+                fireBall.GetComponent<FireballScript>().SetCreator(myRigidBody);
+
+                Destroy(fireBall, 2.0f);
+            }
+
+            if (chosenS1 == 1)
+            {
+                var fireBall = (GameObject)Instantiate(
+                fireBallAltPrefab,
+                temp,
+                myRigidBody.rotation);
+
+                fireBall.GetComponent<Rigidbody>().velocity = fireBall.transform.forward * 30;
+                fireBall.GetComponent<FireballScript>().SetCreator(myRigidBody);
+
+                Destroy(fireBall, 2.0f);
+            }
         }
 
         private void SpinKick()
@@ -222,17 +253,35 @@ namespace CharacterControl
                 temp.x -= beamPrefab.transform.localScale.y + .5f;
                 //rot = Quaternion.Euler(new Vector3(0, 270, 0));
             }
-            var beam = (GameObject)Instantiate(
-           beamPrefab,
-           temp,
-           rot);
-            beam.GetComponent<SuperBeamScript>().SetCreator(myRigidBody);
-            Destroy(beam, 1f);
+            if (chosenS == 0)
+            {
+                var beam = (GameObject)Instantiate(
+               beamPrefab,
+               temp,
+               rot);
+                beam.GetComponent<SuperBeamScript>().SetCreator(myRigidBody);
+                Destroy(beam, 1f);
 
-            myRigidBody.constraints = RigidbodyConstraints.FreezeAll;
-            stateController.SetRotLockState(true);
-            StopAllCoroutines();
-            StartCoroutine(FinishBeam());
+                myRigidBody.constraints = RigidbodyConstraints.FreezeAll;
+                stateController.SetRotLockState(true);
+                StopAllCoroutines();
+                StartCoroutine(FinishBeam());
+            }
+
+            if (chosenS == 1)
+            {
+                var beam = (GameObject)Instantiate(
+               beamAltPrefab,
+               temp,
+               rot);
+                beam.GetComponent<SuperBeamScript>().SetCreator(myRigidBody);
+                Destroy(beam, 1f);
+
+                myRigidBody.constraints = RigidbodyConstraints.FreezeAll;
+                stateController.SetRotLockState(true);
+                StopAllCoroutines();
+                StartCoroutine(FinishBeam());
+            }
         }
 
         IEnumerator FinishBeam()

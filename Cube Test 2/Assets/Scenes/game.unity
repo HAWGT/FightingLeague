@@ -510,6 +510,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireBallPrefab: {fileID: 1728083492888628, guid: d7a54093b11d33044a7d8e43713fba45,
     type: 2}
+  fireBallAltPrefab: {fileID: 1728083492888628, guid: 6651c612ec67be444839257c686c21db,
+    type: 2}
   spinKickPrefab: {fileID: 1902222701713442, guid: fc680133376f18248a3bb34edbee0b42,
     type: 2}
   guardBreakPrefab: {fileID: 1624684738911600, guid: f49f96b9ad9836a4fb6eb081a15c4f27,
@@ -519,6 +521,8 @@ MonoBehaviour:
   heavyPrefab: {fileID: 1966688392694240, guid: af5d7dacbb581de4081b7c124522966d,
     type: 2}
   beamPrefab: {fileID: 1756856858513756, guid: 96549e25e3297fc4c91517bd1282b968, type: 2}
+  beamAltPrefab: {fileID: 1756856858513756, guid: 97b93597220689044b9a5c0c2075bf93,
+    type: 2}
   otherPlayer: {fileID: 1405563278}
   groundCheck: {fileID: 2015723166}
   cleft: {fileID: 498483428}
@@ -2484,6 +2488,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireBallPrefab: {fileID: 1728083492888628, guid: d7a54093b11d33044a7d8e43713fba45,
     type: 2}
+  fireBallAltPrefab: {fileID: 1728083492888628, guid: 6651c612ec67be444839257c686c21db,
+    type: 2}
   spinKickPrefab: {fileID: 1902222701713442, guid: fc680133376f18248a3bb34edbee0b42,
     type: 2}
   guardBreakPrefab: {fileID: 1624684738911600, guid: f49f96b9ad9836a4fb6eb081a15c4f27,
@@ -2493,6 +2499,8 @@ MonoBehaviour:
   heavyPrefab: {fileID: 1966688392694240, guid: af5d7dacbb581de4081b7c124522966d,
     type: 2}
   beamPrefab: {fileID: 1756856858513756, guid: 96549e25e3297fc4c91517bd1282b968, type: 2}
+  beamAltPrefab: {fileID: 1756856858513756, guid: 97b93597220689044b9a5c0c2075bf93,
+    type: 2}
   otherPlayer: {fileID: 381051709}
   groundCheck: {fileID: 1952957819}
   cleft: {fileID: 1405563310}
