@@ -8,6 +8,7 @@ namespace CharacterControl
     public class CharacterInputProcessor : MonoBehaviour
     {
         private CharacterStateController stateController;
+		private int charID;
 
         private Rigidbody myRigidbody;
 
@@ -48,14 +49,14 @@ namespace CharacterControl
 			animatorParameters = new AnimatorParameters(animControl.GetAllBoolTriggerAnimatorParameters());
 			motionStateMachine = GetComponent<FiniteStateMachineState>();
 			attackStates = new List<Enums.AttackState>();
-
+			charID = stateController.GetPlayerID();
 		}
 
 		// Update is called once per frame
 		void Update()
         {
-            horizontalInput = Input.GetAxisRaw("Horizontal");
-            verticalInput = Input.GetAxisRaw("Vertical");
+            horizontalInput = Input.GetAxisRaw("HorizontalP" + charID.ToString());
+            verticalInput = Input.GetAxisRaw("VerticalP" + charID.ToString());
 
             switch ((int)horizontalInput)
             {
@@ -107,17 +108,17 @@ namespace CharacterControl
             }
 
             //Attacks
-            if (Input.GetKeyDown("z"))
+            if (Input.GetKeyDown("LightP" + charID.ToString()))
             {
                 stateController.SetCharState(Enums.CharState.attacking);
                 attackStates.Add(Enums.AttackState.light);
             }
-            if (Input.GetKeyDown("x"))
+            if (Input.GetKeyDown("MediumP" + charID.ToString()))
             {
                 stateController.SetCharState(Enums.CharState.attacking);
 				attackStates.Add(Enums.AttackState.medium);
             }
-            if (Input.GetKeyDown("c"))
+            if (Input.GetKeyDown("HeavyP" + charID.ToString()))
             {
                 stateController.SetCharState(Enums.CharState.attacking);
 				attackStates.Add(Enums.AttackState.heavy);
