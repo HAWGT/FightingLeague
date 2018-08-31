@@ -108,17 +108,17 @@ namespace CharacterControl
             }
 
             //Attacks
-            if (Input.GetKeyDown("LightP" + charID.ToString()))
+            if (Input.GetButtonDown("LightP" + charID.ToString()))
             {
                 stateController.SetCharState(Enums.CharState.attacking);
                 attackStates.Add(Enums.AttackState.light);
             }
-            if (Input.GetKeyDown("MediumP" + charID.ToString()))
+            if (Input.GetButtonDown("MediumP" + charID.ToString()))
             {
                 stateController.SetCharState(Enums.CharState.attacking);
 				attackStates.Add(Enums.AttackState.medium);
             }
-            if (Input.GetKeyDown("HeavyP" + charID.ToString()))
+            if (Input.GetButtonDown("HeavyP" + charID.ToString()))
             {
                 stateController.SetCharState(Enums.CharState.attacking);
 				attackStates.Add(Enums.AttackState.heavy);
