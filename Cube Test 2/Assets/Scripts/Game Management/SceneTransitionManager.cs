@@ -91,7 +91,11 @@ public class SceneTransitionManager : MonoBehaviour {
 				PlayerPrefs.SetInt("RoundTime", 30);
 				break;
 		}
-
+		print("Special1 "+PlayerPrefs.GetInt("P1S1"));
+		print("SUper1 "+PlayerPrefs.GetInt("P1S"));
+		print("Special2P"+PlayerPrefs.GetInt("P2S1"));
+		print("Super2" +PlayerPrefs.GetInt("P2S"));
+		
 	}
 
 	public void StartGame()
