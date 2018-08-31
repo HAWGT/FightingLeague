@@ -9,6 +9,11 @@ using UnityEngine.UI;
 
 public class SceneTransitionManager : MonoBehaviour {
 
+	[SerializeField]
+	private Dropdown dropRoundTime;
+	[SerializeField]
+	private InputField textRoundNumber;
+
 	public void ManTree()
 	{
 		PlayerPrefs.SetInt("Player1", 0);
@@ -51,10 +56,25 @@ public class SceneTransitionManager : MonoBehaviour {
 		print(input.text);
 	}
 
-	public void TimerChange(Slider a)
+	public void SaveOptions()
 	{
-        PlayerPrefs.SetInt("RoundTime", (int) a.value);
-		print("RoundTime: " + a.value);
+		PlayerPrefs.SetInt("GameRounds", int.Parse(textRoundNumber.text));
+		switch (dropRoundTime.value)
+		{
+			case 0:
+				PlayerPrefs.SetInt("RoundTime", 30);
+				break;
+			case 1:
+				PlayerPrefs.SetInt("RoundTime", 60);
+				break;
+			case 2:
+				PlayerPrefs.SetInt("RoundTime", 99);
+				break;
+
+			default:
+				PlayerPrefs.SetInt("RoundTime", 30);
+				break;
+		}
 	}
 
 	public void StartGame()

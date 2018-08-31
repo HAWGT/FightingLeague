@@ -42,10 +42,15 @@ public class UIManager : MonoBehaviour {
 
     public void SetTime(int time)
     {
-        timer = time;
-        timerTxt.GetComponent<Text>().text = timer.ToString();
+		if(time < 0)
+		{
+			time = 0;
+		}
+			timer = time;
+			timerTxt.GetComponent<Text>().text = timer.ToString();
     }
-    // Use this for initialization
+
+    
     private void Start () {
         game = GameObject.Find("Game Manager");
 

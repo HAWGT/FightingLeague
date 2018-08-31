@@ -34,7 +34,7 @@ public class MatchManager : MonoBehaviour
 
 	private void Start()
 	{
-        //secondsLeft = PlayerPrefs.GetInt("RoundTime");
+        secondsLeft = PlayerPrefs.GetInt("RoundTime");
         initTime = secondsLeft;
 
 		if(maxMatches != PlayerPrefs.GetInt("GameRounds"))
@@ -68,6 +68,7 @@ public class MatchManager : MonoBehaviour
 
 	public void MatchEnd(int playerID)
     {
+		if (matchEnded) return;
         matchEnded = true;
         currentMatch++;
         if(playerID == 3)
