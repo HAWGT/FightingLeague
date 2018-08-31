@@ -32,11 +32,6 @@ public class MatchManager : MonoBehaviour
 
     private int selectedMusic = 1;
 
-	private void Awake()
-	{
-		DontDestroyOnLoad(this);
-	}
-
 	private void Start()
 	{
         //secondsLeft = PlayerPrefs.GetInt("RoundTime");
