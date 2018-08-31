@@ -82,4 +82,9 @@ public class SceneTransitionManager : MonoBehaviour {
 		SceneManager.LoadScene("game");
 	}
 	
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
 }
