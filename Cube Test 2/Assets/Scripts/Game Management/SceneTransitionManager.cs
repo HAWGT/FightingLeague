@@ -13,6 +13,17 @@ public class SceneTransitionManager : MonoBehaviour {
 	private Dropdown dropRoundTime;
 	[SerializeField]
 	private InputField textRoundNumber;
+	[SerializeField]
+	private Dropdown dropMusic;
+
+	[SerializeField]
+	private Dropdown dropSpecial1;
+	[SerializeField]
+	private Dropdown dropSpecial2;
+	[SerializeField]
+	private Dropdown dropSuper1;
+	[SerializeField]
+	private Dropdown dropSuper2;
 
 	public void ManTree()
 	{
@@ -59,6 +70,11 @@ public class SceneTransitionManager : MonoBehaviour {
 	public void SaveOptions()
 	{
 		PlayerPrefs.SetInt("GameRounds", int.Parse(textRoundNumber.text));
+		PlayerPrefs.SetInt("Music", dropMusic.value);
+		PlayerPrefs.SetInt("P1S1", dropSpecial1.value);
+		PlayerPrefs.SetInt("P1S", dropSuper1.value);
+		PlayerPrefs.SetInt("P2S1", dropSpecial2.value);
+		PlayerPrefs.SetInt("P2S", dropSuper2.value);
 		switch (dropRoundTime.value)
 		{
 			case 0:
@@ -75,6 +91,7 @@ public class SceneTransitionManager : MonoBehaviour {
 				PlayerPrefs.SetInt("RoundTime", 30);
 				break;
 		}
+
 	}
 
 	public void StartGame()

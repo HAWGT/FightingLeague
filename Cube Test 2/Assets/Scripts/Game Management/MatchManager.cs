@@ -70,6 +70,7 @@ public class MatchManager : MonoBehaviour
 
 	public void MatchEnd(int playerID)
     {
+		
 		if (matchEnded) return;
         matchEnded = true;
         currentMatch++;
