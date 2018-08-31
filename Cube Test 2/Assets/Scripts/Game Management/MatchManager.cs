@@ -24,6 +24,9 @@ public class MatchManager : MonoBehaviour
 	private int currentMatch = 0;
 	private int maxMatches = 0;
 
+    private int p1w = 0;
+    private int p2w = 0;
+
     [SerializeField]
     private AudioClip[] musics;
 
@@ -32,7 +35,7 @@ public class MatchManager : MonoBehaviour
 
     private int selectedMusic = 1;
 
-	private void Start()
+    private void Start()
 	{
         secondsLeft = PlayerPrefs.GetInt("RoundTime");
         initTime = secondsLeft;
@@ -46,11 +49,10 @@ public class MatchManager : MonoBehaviour
         player2.GetComponent<CharacterColliderController>().SetS1SColors(PlayerPrefs.GetInt("P2S1"), PlayerPrefs.GetInt("P2S"));
         player1.GetComponent<CharacterStateController>().SetPlayerInputType(PlayerPrefs.GetInt("Player1"));
         player2.GetComponent<CharacterStateController>().SetPlayerInputType(PlayerPrefs.GetInt("Player2"));
+        ui.GetComponent<UIManager>().SetState(0);
+        ui.GetComponent<UIManager>().SetCount(1, p1w);
+        ui.GetComponent<UIManager>().SetCount(2, p2w);
 
-        if (currentMatch > maxMatches)
-		{
-			currentMatch++;
-		}
         selectedMusic = PlayerPrefs.GetInt("Music");
         GetComponent<AudioSource>().clip = musics[selectedMusic];
         GetComponent<AudioSource>().Play();
@@ -71,9 +73,44 @@ public class MatchManager : MonoBehaviour
 		if (matchEnded) return;
         matchEnded = true;
         currentMatch++;
-        if(playerID == 3)
+        if (playerID == 1)
         {
-            //TIMEOUT
+            ui.GetComponent<UIManager>().SetState(2);
+            p2w++;
+            ui.GetComponent<UIManager>().SetCount(2, p2w);
+            player2.GetComponent<AnimationController>().ResetAnim();
+        }
+        if (playerID == 2)
+        {
+            ui.GetComponent<UIManager>().SetState(1);
+            p1w++;
+            ui.GetComponent<UIManager>().SetCount(1, p1w);
+            player1.GetComponent<AnimationController>().ResetAnim();
+        }
+        if (playerID == 3)
+        {
+            if (player1.GetComponent<CharacterStateController>().GetHP() > player2.GetComponent<CharacterStateController>().GetHP())
+            {
+                ui.GetComponent<UIManager>().SetState(1);
+                p1w++;
+                ui.GetComponent<UIManager>().SetCount(1, p1w);
+                player1.GetComponent<AnimationController>().ResetAnim();
+                player2.GetComponent<AnimationController>().ResetAnim();
+            }
+            if (player1.GetComponent<CharacterStateController>().GetHP() < player2.GetComponent<CharacterStateController>().GetHP())
+            {
+                ui.GetComponent<UIManager>().SetState(2);
+                p2w++;
+                ui.GetComponent<UIManager>().SetCount(2, p2w);
+                player1.GetComponent<AnimationController>().ResetAnim();
+                player2.GetComponent<AnimationController>().ResetAnim();
+            }
+            if (player1.GetComponent<CharacterStateController>().GetHP() == player2.GetComponent<CharacterStateController>().GetHP())
+            {
+                ui.GetComponent<UIManager>().SetState(3);
+                player1.GetComponent<AnimationController>().ResetAnim();
+                player2.GetComponent<AnimationController>().ResetAnim();
+            }
         }
         StartCoroutine(ResetPlayers());
         player1.GetComponent<CharacterStateController>().FreezeControls();
@@ -83,9 +120,24 @@ public class MatchManager : MonoBehaviour
     IEnumerator ResetPlayers()
     {
         yield return new WaitForSeconds(5f);
+        if (maxMatches % 2 == 0)
+        {
+            if (p1w >= maxMatches || p2w >= maxMatches)
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+        }
+        else
+        {
+            if (p1w >= maxMatches - 1 || p2w  >= maxMatches - 1)
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+        }
         secondsLeft = initTime;
         ui.GetComponent<UIManager>().SetTime(secondsLeft);
         matchEnded = false;
+        ui.GetComponent<UIManager>().SetState(0);
         player1.GetComponent<CharacterStateController>().ResetP();
         player2.GetComponent<CharacterStateController>().ResetP();
         player1.GetComponent<CharacterStateController>().UnFreezeControls();

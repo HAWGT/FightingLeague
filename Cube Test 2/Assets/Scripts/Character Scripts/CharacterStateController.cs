@@ -213,7 +213,7 @@ namespace CharacterControl
 		{
             reduction = Math.Abs(reduction);
 			superBar -= reduction;
-            audioSource.volume = 1.0f;
+            audioSource.volume = 0.6f;
             audioSource.PlayOneShot(meter);
             StartCoroutine(ResetVolume());
             if (playerID == 1)

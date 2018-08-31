@@ -83,6 +83,13 @@ namespace CharacterControl
         private Rigidbody myRigidBody;
         private CharacterStateController stateController;
 
+        [SerializeField]
+        private AudioClip kick;
+        [SerializeField]
+        private AudioClip mpunch;
+        [SerializeField]
+        private AudioClip lpunch;
+
         public GameObject GetOtherPlayer()
         {
             return otherPlayer;
@@ -470,17 +477,20 @@ namespace CharacterControl
                 {
                     dmg = 500f;
                     bar = 10f;
+                    GetComponent<AudioSource>().PlayOneShot(lpunch);
                 }
                 if (attackingM)
                 {
                     dmg = 700f;
                     bar = 14f;
+                    GetComponent<AudioSource>().PlayOneShot(mpunch);
                 }
                 if (attackingH)
                 {
                     dmg = 400f;
                     bar = 10f;
                     myRigidBody.GetComponent<AnimationController>().Push(dmg);
+                    GetComponent<AudioSource>().PlayOneShot(kick);
                 }
                 stateController.AddSuperBar(bar);
                 body.GetComponent<CharacterStateController>().TakeDamage(dmg, false);

@@ -29,6 +29,9 @@ namespace CharacterControl
         [SerializeField]
         private AudioClip blockSnd;
 
+        [SerializeField]
+        private AudioClip cornerSnd;
+
         private new Rigidbody rigidbody;
 
         private Vector3 airMovement = new Vector3 (5f, 0, 0);
@@ -194,6 +197,7 @@ namespace CharacterControl
             {
                 rigidbody.transform.position += new Vector3(side * 4, 3f);
                 var smoke = (GameObject)Instantiate(smokePrefab, pos + new Vector3(side, 1.25f, 0), rot);
+                GetComponent<AudioSource>().PlayOneShot(cornerSnd);
                 Destroy(smoke, 2f);
             }
             var flare = (GameObject)Instantiate(flarePrefab, pos + new Vector3(side , 0.6f, 0), rot);
@@ -301,6 +305,12 @@ namespace CharacterControl
 			}
 			TurnAnimatorParametersOff(list);
 		}
+
+        private void HitstunReset()
+        {
+            ResetAnim();
+            if (GetComponent<CharacterStateController>().GetHP() <= 0) TriggerAnimatorParameters((GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "death" })));
+        }
 
         public void ResetAnim()
         {

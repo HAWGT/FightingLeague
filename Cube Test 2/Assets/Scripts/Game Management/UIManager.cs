@@ -18,6 +18,14 @@ public class UIManager : MonoBehaviour {
 	private Image superBar2;
     [SerializeField]
     private GameObject timerTxt;
+    [SerializeField]
+    private GameObject statusTxt;
+    [SerializeField]
+    private GameObject P1RC;
+    [SerializeField]
+    private GameObject P2RC;
+
+    private int gameState = 0;
 
 	private float hp1;
     private float sb1;
@@ -46,8 +54,42 @@ public class UIManager : MonoBehaviour {
 		{
 			time = 0;
 		}
-			timer = time;
-			timerTxt.GetComponent<Text>().text = timer.ToString();
+		timer = time;
+		timerTxt.GetComponent<Text>().text = timer.ToString();
+    }
+
+    public void SetState(int state)
+    {
+        if (state != 0 && state != 1 && state != 2 && state != 3) state = 0;
+        if (state == 0)
+        {
+            statusTxt.GetComponent<Text>().text = "";
+        }
+        if (state == 1)
+        {
+            statusTxt.GetComponent<Text>().text = "PLAYER 1 WINS!";
+        }
+        if (state == 2)
+        {
+            statusTxt.GetComponent<Text>().text = "PLAYER 2 WINS!";
+        }
+        if (state == 3)
+        {
+            statusTxt.GetComponent<Text>().text = "DRAW!";
+        }
+    }
+
+    public void SetCount(int a, int b)
+    {
+        if (a != 1 && a != 2) return;
+        if (a == 1)
+        {
+            P1RC.GetComponent<Text>().text = b.ToString();
+        }
+        if (a == 2)
+        {
+            P2RC.GetComponent<Text>().text = b.ToString();
+        }
     }
 
     

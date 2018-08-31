@@ -307,7 +307,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.982808
-        functionName: ResetAnim
+        functionName: HitstunReset
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 3c77805fdb39c934cb647e5726245e52,
           type: 3}
