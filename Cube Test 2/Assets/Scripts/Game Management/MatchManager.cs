@@ -11,17 +11,14 @@ public class MatchManager : MonoBehaviour
 
     // Use this for initialization
     private bool matchEnded = false;
-	//public static GameManager instance = null;
 	[SerializeField]
 	private GameObject player1;
 
 	[SerializeField]
 	private GameObject player2;
 
-    private int secondsLeft = 300;
+    private int secondsLeft = 0;
     private int initTime;
-
-	private int currentMatch = 0;
 	private int maxMatches = 0;
 
     private int p1w = 0;
@@ -59,6 +56,9 @@ public class MatchManager : MonoBehaviour
         ui.GetComponent<UIManager>().SetTime(secondsLeft);
         InvokeRepeating("TimeTick", 1, 1);
 
+        if (maxMatches < 1) maxMatches = 1;
+        if (secondsLeft < 30) secondsLeft = 30;
+
     }
 
     private void TimeTick()
@@ -73,7 +73,6 @@ public class MatchManager : MonoBehaviour
 		
 		if (matchEnded) return;
         matchEnded = true;
-        currentMatch++;
         if (playerID == 1)
         {
             ui.GetComponent<UIManager>().SetState(2);
