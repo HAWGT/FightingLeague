@@ -44,6 +44,8 @@ public class MatchManager : MonoBehaviour
 
         player1.GetComponent<CharacterColliderController>().SetS1SColors(PlayerPrefs.GetInt("P1S1"), PlayerPrefs.GetInt("P1S"));
         player2.GetComponent<CharacterColliderController>().SetS1SColors(PlayerPrefs.GetInt("P2S1"), PlayerPrefs.GetInt("P2S"));
+        player1.GetComponent<CharacterStateController>().SetPlayerInputType(PlayerPrefs.GetInt("Player1"));
+        player2.GetComponent<CharacterStateController>().SetPlayerInputType(PlayerPrefs.GetInt("Player2"));
 
         if (currentMatch > maxMatches)
 		{
