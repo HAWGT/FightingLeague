@@ -14,6 +14,8 @@ namespace CharacterControl
 
         public void SetS1SColors(int a, int b)
         {
+            if (a != 0 && a != 1) a = 0;
+            if (b != 0 && b != 1) b = 0;
             chosenS1 = a;
             chosenS = b;
         }

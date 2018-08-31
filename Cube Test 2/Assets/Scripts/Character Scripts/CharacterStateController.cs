@@ -8,6 +8,15 @@ namespace CharacterControl
 {
     public class CharacterStateController : MonoBehaviour
     {
+        private int playerInputType = 0;
+
+        public void SetPlayerInputType(int a)
+        {
+            if (a != 0 && a != 1 && a != 2) a = 0;
+            playerInputType = a;
+            UnFreezeControls();
+        }
+
         [SerializeField]
         private int playerID;
 
@@ -94,7 +103,9 @@ namespace CharacterControl
 
         public void FreezeControls()
         {
-
+            if (playerInputType == 0) GetComponent<CharacterInputProcessor>().enabled = false;
+            if (playerInputType == 1) GetComponent<Panda.BehaviourTree>().enabled = false;
+            if (playerInputType == 2) GetComponent<NetworkInterface>().enabled = false;
         }
 
         public float GetHP()
@@ -114,7 +125,9 @@ namespace CharacterControl
 
         public void UnFreezeControls()
         {
-
+            if (playerInputType == 0) GetComponent<CharacterInputProcessor>().enabled = true;
+            if (playerInputType == 1) GetComponent<Panda.BehaviourTree>().enabled = true;
+            if (playerInputType == 2) GetComponent<NetworkInterface>().enabled = true;
         }
 
         public void SetFacingSide(Enums.FacingSide face)
@@ -198,6 +211,7 @@ namespace CharacterControl
 
 		public void ReduceSuperBar(int reduction)
 		{
+            reduction = Math.Abs(reduction);
 			superBar -= reduction;
             audioSource.volume = 1.0f;
             audioSource.PlayOneShot(meter);
@@ -251,6 +265,7 @@ namespace CharacterControl
 
 		public void TakeDamage(float dmg, bool grab)
         {
+            dmg = Math.Abs(dmg);
             if (StateHelper.GetState(myRigidbody) == Enums.AnimState.super || StateHelper.GetState(myRigidbody) == Enums.AnimState.reflect)
             {
                 animControl.BlockFX();
@@ -370,6 +385,7 @@ namespace CharacterControl
 
         public void AddSuperBar(float bar)
         {
+            bar = Math.Abs(bar);
             if (GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().GetHP() <= 0) return;
             superBar += bar;
             if (superBar > 100) superBar = 100;
