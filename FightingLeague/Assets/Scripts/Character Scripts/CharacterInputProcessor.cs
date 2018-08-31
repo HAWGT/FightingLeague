@@ -123,6 +123,11 @@ namespace CharacterControl
                 stateController.SetCharState(Enums.CharState.attacking);
 				attackStates.Add(Enums.AttackState.heavy);
             }
+
+            if (Input.GetButtonDown("CancelP" + charID.ToString()))
+            {
+                stateController.CancelSpecial();
+            }
         }
 
 		public void TranslateDirectionalInput(Enums.NumPad xAxis, Enums.NumPad yAxis)

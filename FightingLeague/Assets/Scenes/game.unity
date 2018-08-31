@@ -435,6 +435,7 @@ MonoBehaviour:
   hit: {fileID: 8300000, guid: a923c38cab51e0546a67b40b293e32df, type: 3}
   teleport: {fileID: 8300000, guid: fa6931f7822a32949b94ce34fd6f331e, type: 3}
   meter: {fileID: 8300000, guid: 59c0624a962805945bd31244992aff88, type: 3}
+  cancelSpecial: {fileID: 8300000, guid: dd436f27558754d42a365404096c6308, type: 3}
 --- !u!54 &381051711
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2933,6 +2934,7 @@ MonoBehaviour:
   hit: {fileID: 8300000, guid: a923c38cab51e0546a67b40b293e32df, type: 3}
   teleport: {fileID: 8300000, guid: fa6931f7822a32949b94ce34fd6f331e, type: 3}
   meter: {fileID: 8300000, guid: 59c0624a962805945bd31244992aff88, type: 3}
+  cancelSpecial: {fileID: 8300000, guid: dd436f27558754d42a365404096c6308, type: 3}
 --- !u!54 &1405563314
 Rigidbody:
   m_ObjectHideFlags: 0

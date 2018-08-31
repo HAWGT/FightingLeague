@@ -59,6 +59,9 @@ namespace CharacterControl
         [SerializeField]
         private AudioClip meter;
 
+        [SerializeField]
+        private AudioClip cancelSpecial;
+
         public void ResetP()
         {
             healthPoints = 10000;
@@ -199,6 +202,16 @@ namespace CharacterControl
 
         }
 
+        public void CancelSpecial()
+        {
+            if (superBar < 25f) return;
+            ReduceSuperBarNoSnd(25f);
+            audioSource.volume = 0.6f;
+            audioSource.PlayOneShot(cancelSpecial);
+            StartCoroutine(ResetVolume());
+            animControl.ResetAnim();
+        }
+
         public void TeleportSFX()
         {
             audioSource.PlayOneShot(teleport);
@@ -209,7 +222,21 @@ namespace CharacterControl
 			return superBar;
 		}
 
-		public void ReduceSuperBar(int reduction)
+        public void ReduceSuperBarNoSnd(float reduction)
+        {
+            reduction = Math.Abs(reduction);
+            superBar -= reduction;
+            if (playerID == 1)
+            {
+                ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+            }
+            if (playerID == 2)
+            {
+                ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+            }
+        }
+
+		public void ReduceSuperBar(float reduction)
 		{
             reduction = Math.Abs(reduction);
 			superBar -= reduction;
