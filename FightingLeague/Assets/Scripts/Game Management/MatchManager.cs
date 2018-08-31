@@ -51,6 +51,7 @@ public class MatchManager : MonoBehaviour
         ui.GetComponent<UIManager>().SetCount(2, p2w);
 
         selectedMusic = PlayerPrefs.GetInt("Music");
+        if (selectedMusic != 0 && selectedMusic != 1) selectedMusic = 0;
         GetComponent<AudioSource>().clip = musics[selectedMusic];
         GetComponent<AudioSource>().Play();
         ui.GetComponent<UIManager>().SetTime(secondsLeft);
