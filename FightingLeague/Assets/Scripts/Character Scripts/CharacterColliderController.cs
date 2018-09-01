@@ -476,19 +476,19 @@ namespace CharacterControl
                 if (attackingL)
                 {
                     dmg = 500f;
-                    bar = 4f;
+                    bar = 5f;
                     GetComponent<AudioSource>().PlayOneShot(lpunch);
                 }
                 if (attackingM)
                 {
                     dmg = 700f;
-                    bar = 6f;
+                    bar = 7f;
                     GetComponent<AudioSource>().PlayOneShot(mpunch);
                 }
                 if (attackingH)
                 {
                     dmg = 400f;
-                    bar = 12f;
+                    bar = 4f;
                     myRigidBody.GetComponent<AnimationController>().Push(dmg);
                     GetComponent<AudioSource>().PlayOneShot(kick);
                 }

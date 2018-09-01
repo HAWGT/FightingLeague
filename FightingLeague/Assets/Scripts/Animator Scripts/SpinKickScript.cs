@@ -35,8 +35,8 @@ namespace CharacterControl
                 if (!flagged)
                 {
                     body.GetComponent<CharacterStateController>().TakeDamage(1500, false);
-                    body.GetComponent<CharacterStateController>().AddSuperBar(6f);
-                    creator.GetComponent<CharacterStateController>().AddSuperBar(12f);
+                    body.GetComponent<CharacterStateController>().AddSuperBar(7.5f);
+                    creator.GetComponent<CharacterStateController>().AddSuperBar(15f);
                     ContactPoint contact = collision.contacts[0];
                     Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
                     Vector3 pos = body.position;

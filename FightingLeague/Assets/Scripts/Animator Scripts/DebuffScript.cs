@@ -12,11 +12,14 @@ namespace CharacterControl
         public void SetReceiver(Rigidbody rb)
         {
             this.receiver = rb;
-            InvokeRepeating("RemoveHPTick", 0.0f, 0.02f);
+            InvokeRepeating("RemoveHPTick", 0.0f, 0.5f);
         }
         private void RemoveHPTick()
         {
-            receiver.GetComponent<CharacterStateController>().TakeDamage(1, false);
+            if(!receiver.GetComponent<CharacterStateController>().TakeDamage(25, false))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

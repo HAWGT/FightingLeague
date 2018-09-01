@@ -41,8 +41,8 @@ namespace CharacterControl
                     if (!flagged)
                     {
                         body.GetComponent<CharacterStateController>().TakeDamage(1000, false);
-                        body.GetComponent<CharacterStateController>().AddSuperBar(3f);
-                        creator.GetComponent<CharacterStateController>().AddSuperBar(6f);
+                        body.GetComponent<CharacterStateController>().AddSuperBar(5f);
+                        creator.GetComponent<CharacterStateController>().AddSuperBar(10f);
                         Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
                         Vector3 pos = body.position;
                         var explosion = (GameObject)Instantiate(explosionPrefab, pos, rot);

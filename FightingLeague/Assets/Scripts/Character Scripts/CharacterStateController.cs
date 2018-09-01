@@ -212,15 +212,17 @@ namespace CharacterControl
         {
             if (superBar < 25f) return;
             ReduceSuperBarNoSnd(25f);
-            animControl.FuryFire();
-            var buff = (GameObject)Instantiate(buffPrefab, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
-            buff.GetComponent<BuffScript>().SetCreator(myRigidbody);
-            Destroy(buff, 3f);
-            GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().TakeDamage(0, false);
             audioSource.volume = 0.6f;
             audioSource.PlayOneShot(cancelSpecial);
             StartCoroutine(ResetVolume());
             animControl.ResetAnim();
+            if (GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().TakeDamage(0, false))
+            {
+                animControl.FuryFire();
+                var buff = (GameObject)Instantiate(buffPrefab, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
+                buff.GetComponent<BuffScript>().SetCreator(myRigidbody);
+                Destroy(buff, 3f);
+            }
         }
 
         public void FuryBuff(float a)
@@ -332,13 +334,13 @@ namespace CharacterControl
 			attackStates.Add(state);
 		}
 
-		public void TakeDamage(float dmg, bool grab)
+		public bool TakeDamage(float dmg, bool grab)
         {
             dmg = Math.Abs(dmg);
             if (StateHelper.GetState(myRigidbody) == Enums.AnimState.super || StateHelper.GetState(myRigidbody) == Enums.AnimState.reflect)
             {
                 animControl.BlockFX();
-                return;
+                return false;
             }
 
             if (StateHelper.GetState(myRigidbody) == Enums.AnimState.walkingB)
@@ -346,7 +348,7 @@ namespace CharacterControl
                 if (!grab)
                 {
                     animControl.BlockFX();
-                    return;
+                    return false;
                 }
             }
 
@@ -356,7 +358,7 @@ namespace CharacterControl
                 {
                     GetComponent<CharacterColliderController>().TechGrab();
                     animControl.BlockFX();
-                    return;
+                    return false;
                 }
             }
 
@@ -396,18 +398,14 @@ namespace CharacterControl
 				ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
 			}
 
-           // List<AnimatorControllerParameter> parameter = FindAnimatorParameter(new string[] { "hitstun" });
-
-            //animControl.TriggerAnimatorParameters(parameter);
-            //animControl.Knock(dmg);
-
-
             if (healthPoints <= 0 && game.GetComponent<MatchManager>().IsMatchOver() == false)
             {
                 animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "death" }));
                 game.GetComponent<MatchManager>().MatchEnd(playerID);
 
             }
+
+            return true;
         }
 
         public List<AnimatorControllerParameter> FindAnimatorParameter(String[] names)
