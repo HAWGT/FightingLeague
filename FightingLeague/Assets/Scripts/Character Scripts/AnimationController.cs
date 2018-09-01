@@ -35,6 +35,9 @@ namespace CharacterControl
         [SerializeField]
         private GameObject furyPrefab;
 
+        [SerializeField]
+        private GameObject fireworksPrefab;
+
         private new Rigidbody rigidbody;
 
         private Vector3 airMovement = new Vector3 (5f, 0, 0);
@@ -214,6 +217,15 @@ namespace CharacterControl
             var fury = (GameObject)Instantiate(furyPrefab, pos + new Vector3(0, 1.25f, 0), rot);
             fury.transform.parent = gameObject.transform;
             Destroy(fury, 3f);
+        }
+
+        public void Fireworks()
+        {
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
+            Vector3 pos = rigidbody.transform.position;
+            var fireworks = (GameObject)Instantiate(fireworksPrefab, pos + new Vector3(0, 1.25f, 0), Quaternion.Euler(-90, 0, 0));
+            fireworks.transform.parent = gameObject.transform;
+            Destroy(fireworks, 3f);
         }
 
         public void BlockFX()

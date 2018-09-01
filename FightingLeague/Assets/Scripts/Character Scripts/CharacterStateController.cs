@@ -364,6 +364,7 @@ namespace CharacterControl
 
             if (dmg == 0)
             {
+                animControl.Fireworks();
                 var debuff = (GameObject)Instantiate(debuffPrefab, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
                 debuff.GetComponent<DebuffScript>().SetReceiver(myRigidbody);
                 Destroy(debuff, 3f);
