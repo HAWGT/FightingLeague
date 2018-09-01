@@ -486,6 +486,7 @@ MonoBehaviour:
     type: 2}
   blockSnd: {fileID: 8300000, guid: 8e69d5e349131e64cb019a808d17b381, type: 3}
   cornerSnd: {fileID: 8300000, guid: afc2a6b102de4744b9317a12a933d5c5, type: 3}
+  furyPrefab: {fileID: 100000, guid: 2c32987c2bc01844a94adfb917dd677d, type: 2}
 --- !u!114 &381051715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2913,6 +2914,7 @@ MonoBehaviour:
     type: 2}
   blockSnd: {fileID: 8300000, guid: 8e69d5e349131e64cb019a808d17b381, type: 3}
   cornerSnd: {fileID: 8300000, guid: afc2a6b102de4744b9317a12a933d5c5, type: 3}
+  furyPrefab: {fileID: 100000, guid: 2c32987c2bc01844a94adfb917dd677d, type: 2}
 --- !u!114 &1405563313
 MonoBehaviour:
   m_ObjectHideFlags: 0

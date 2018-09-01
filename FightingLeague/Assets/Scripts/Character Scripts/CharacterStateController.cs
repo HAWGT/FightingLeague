@@ -206,6 +206,7 @@ namespace CharacterControl
         {
             if (superBar < 25f) return;
             ReduceSuperBarNoSnd(25f);
+            animControl.FuryFire();
             audioSource.volume = 0.6f;
             audioSource.PlayOneShot(cancelSpecial);
             StartCoroutine(ResetVolume());

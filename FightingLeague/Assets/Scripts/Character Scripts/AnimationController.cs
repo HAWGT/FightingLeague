@@ -32,6 +32,9 @@ namespace CharacterControl
         [SerializeField]
         private AudioClip cornerSnd;
 
+        [SerializeField]
+        private GameObject furyPrefab;
+
         private new Rigidbody rigidbody;
 
         private Vector3 airMovement = new Vector3 (5f, 0, 0);
@@ -202,6 +205,15 @@ namespace CharacterControl
             }
             var flare = (GameObject)Instantiate(flarePrefab, pos + new Vector3(side , 0.6f, 0), rot);
             Destroy(flare, 0.25f);
+        }
+
+        public void FuryFire()
+        {
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
+            Vector3 pos = rigidbody.transform.position;
+            var fury = (GameObject)Instantiate(furyPrefab, pos + new Vector3(0, 1.25f, 0), rot);
+            fury.transform.parent = gameObject.transform;
+            Destroy(fury, 3f);
         }
 
         public void BlockFX()
