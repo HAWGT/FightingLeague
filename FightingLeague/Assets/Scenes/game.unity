@@ -436,6 +436,7 @@ MonoBehaviour:
   teleport: {fileID: 8300000, guid: fa6931f7822a32949b94ce34fd6f331e, type: 3}
   meter: {fileID: 8300000, guid: 59c0624a962805945bd31244992aff88, type: 3}
   cancelSpecial: {fileID: 8300000, guid: dd436f27558754d42a365404096c6308, type: 3}
+  buffPrefab: {fileID: 1036470265926976, guid: d3abfd2bc7e13964583bb715d21b7d9b, type: 2}
 --- !u!54 &381051711
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2937,6 +2938,7 @@ MonoBehaviour:
   teleport: {fileID: 8300000, guid: fa6931f7822a32949b94ce34fd6f331e, type: 3}
   meter: {fileID: 8300000, guid: 59c0624a962805945bd31244992aff88, type: 3}
   cancelSpecial: {fileID: 8300000, guid: dd436f27558754d42a365404096c6308, type: 3}
+  buffPrefab: {fileID: 1036470265926976, guid: d3abfd2bc7e13964583bb715d21b7d9b, type: 2}
 --- !u!54 &1405563314
 Rigidbody:
   m_ObjectHideFlags: 0

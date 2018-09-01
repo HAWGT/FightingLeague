@@ -62,6 +62,9 @@ namespace CharacterControl
         [SerializeField]
         private AudioClip cancelSpecial;
 
+        [SerializeField]
+        private GameObject buffPrefab;
+
         public void ResetP()
         {
             healthPoints = 10000;
@@ -207,10 +210,44 @@ namespace CharacterControl
             if (superBar < 25f) return;
             ReduceSuperBarNoSnd(25f);
             animControl.FuryFire();
+            var buff = (GameObject)Instantiate(buffPrefab, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
+            buff.GetComponent<BuffScript>().SetCreator(myRigidbody);
+            Destroy(buff, 3f);
             audioSource.volume = 0.6f;
             audioSource.PlayOneShot(cancelSpecial);
             StartCoroutine(ResetVolume());
             animControl.ResetAnim();
+        }
+
+        public void FuryBuff(float a)
+        {
+            healthPoints += a;
+            if (healthPoints > 10000) healthPoints = 10000;
+            if (playerID == 1)
+            {
+                if (PlayerPrefs.GetInt("Player1") == 2)
+                {
+                    GetComponent<NetworkInterface>().ChangeHP(playerID, (int)healthPoints, (int)superBar);
+                }
+                if (PlayerPrefs.GetInt("Player2") == 2)
+                {
+                    matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int)healthPoints, (int)superBar);
+                }
+                ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
+            }
+            if (playerID == 2)
+            {
+                if (PlayerPrefs.GetInt("Player1") == 2)
+                {
+                    matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int)healthPoints, (int)superBar);
+                }
+                if (PlayerPrefs.GetInt("Player2") == 2)
+                {
+                    GetComponent<NetworkInterface>().ChangeHP(playerID, (int)healthPoints, (int)superBar);
+                }
+                ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
+            }
+
         }
 
         public void TeleportSFX()

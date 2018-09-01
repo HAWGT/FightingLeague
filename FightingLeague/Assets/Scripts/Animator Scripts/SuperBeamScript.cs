@@ -14,22 +14,6 @@ namespace CharacterControl
         {
             this.creator = rb;
         }
-        /*private void OnTriggerEnter(Collider other)
-        {
-            Rigidbody body = other.attachedRigidbody;
-            if (body == null || body.isKinematic)
-            {
-                return;
-            }
-            else if (body != creator)
-            {
-                if (!flagged)
-                {
-                    body.GetComponent<CharacterStateController>().TakeDamage(5000);
-                    flagged = true;
-                }
-            }
-        }*/
         private void OnTriggerEnter(Collider other)
         {
             Rigidbody body = other.attachedRigidbody;
