@@ -9,6 +9,8 @@ namespace CharacterControl
 
         private Rigidbody creator;
 
+        private bool flagged = false;
+
         private Rigidbody target;
         public void SetCreator(Rigidbody rb)
         {
@@ -21,17 +23,18 @@ namespace CharacterControl
             {
                 return;
             }
-            else if (body != creator)
+            else if (body != creator && !flagged)
             {
                 target = body;
+                flagged = true;
                 InvokeRepeating("RemoveHPTick", 0.0f, 0.02f);
             }
         }
         private void RemoveHPTick()
         {
             if (target == null || target.GetComponent<CharacterStateController>() == null) return;
-            target.GetComponent<CharacterStateController>().TakeDamage(10, false);
-            target.GetComponent<CharacterStateController>().AddSuperBar(0.05f);
+            target.GetComponent<CharacterStateController>().TakeDamage(60, false);
+            target.GetComponent<CharacterStateController>().AddSuperBar(0.3f);
         }
     }
 }
