@@ -476,25 +476,25 @@ namespace CharacterControl
                 if (attackingL)
                 {
                     dmg = 500f;
-                    bar = 2f;
+                    bar = 4f;
                     GetComponent<AudioSource>().PlayOneShot(lpunch);
                 }
                 if (attackingM)
                 {
                     dmg = 700f;
-                    bar = 3f;
+                    bar = 6f;
                     GetComponent<AudioSource>().PlayOneShot(mpunch);
                 }
                 if (attackingH)
                 {
                     dmg = 400f;
-                    bar = 8f;
+                    bar = 12f;
                     myRigidBody.GetComponent<AnimationController>().Push(dmg);
                     GetComponent<AudioSource>().PlayOneShot(kick);
                 }
                 stateController.AddSuperBar(bar);
                 body.GetComponent<CharacterStateController>().TakeDamage(dmg, false);
-                body.GetComponent<CharacterStateController>().AddSuperBar(bar / 4);
+                body.GetComponent<CharacterStateController>().AddSuperBar(bar / 2);
                 DisableL();
                 DisableM();
                 DisableH();
