@@ -65,6 +65,9 @@ namespace CharacterControl
         [SerializeField]
         private GameObject buffPrefab;
 
+        [SerializeField]
+        private GameObject debuffPrefab;
+
         public void ResetP()
         {
             healthPoints = 10000;
@@ -222,7 +225,6 @@ namespace CharacterControl
 
         public void FuryBuff(float a)
         {
-            GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().TakeDamage(a, false);
             healthPoints += a;
             if (healthPoints > 10000) healthPoints = 10000;
             if (playerID == 1)
@@ -358,12 +360,18 @@ namespace CharacterControl
                 }
             }
 
+            if (dmg == 0)
+            {
+                var debuff = (GameObject)Instantiate(debuffPrefab, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
+                debuff.GetComponent<DebuffScript>().SetReceiver(myRigidbody);
+                Destroy(debuff, 3f);
+            }
+
             audioSource.PlayOneShot(hit);
             animControl.TriggerAnimatorParameters(FindAnimatorParameter(new string[] { "hitstun" }));
             animControl.Knock(dmg);
 
             healthPoints -= dmg;
-            AddSuperBar(dmg / 200);
 			if (playerID == 1)
 			{
 				if (PlayerPrefs.GetInt("Player1") == 2)

@@ -30,7 +30,8 @@ namespace CharacterControl
         private void RemoveHPTick()
         {
             if (target == null || target.GetComponent<CharacterStateController>() == null) return;
-            target.GetComponent<CharacterStateController>().TakeDamage(9, false);
+            target.GetComponent<CharacterStateController>().TakeDamage(10, false);
+            target.GetComponent<CharacterStateController>().AddSuperBar(0.084f);
         }
     }
 }

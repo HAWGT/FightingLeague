@@ -437,6 +437,8 @@ MonoBehaviour:
   meter: {fileID: 8300000, guid: 59c0624a962805945bd31244992aff88, type: 3}
   cancelSpecial: {fileID: 8300000, guid: dd436f27558754d42a365404096c6308, type: 3}
   buffPrefab: {fileID: 1036470265926976, guid: d3abfd2bc7e13964583bb715d21b7d9b, type: 2}
+  debuffPrefab: {fileID: 1036470265926976, guid: f3af1dbe61d7bf04bbe846247b63811a,
+    type: 2}
 --- !u!54 &381051711
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2939,6 +2941,8 @@ MonoBehaviour:
   meter: {fileID: 8300000, guid: 59c0624a962805945bd31244992aff88, type: 3}
   cancelSpecial: {fileID: 8300000, guid: dd436f27558754d42a365404096c6308, type: 3}
   buffPrefab: {fileID: 1036470265926976, guid: d3abfd2bc7e13964583bb715d21b7d9b, type: 2}
+  debuffPrefab: {fileID: 1036470265926976, guid: f3af1dbe61d7bf04bbe846247b63811a,
+    type: 2}
 --- !u!54 &1405563314
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2978,7 +2982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scripts:
-  - {fileID: 4900000, guid: 6215c78fc92f6b04691bce4f7c831803, type: 3}
+  - {fileID: 4900000, guid: c065abe4f4d3b964f99c8f6ff96d58b4, type: 3}
   autoReset: 1
   tickOn: 0
   sourceInfos:

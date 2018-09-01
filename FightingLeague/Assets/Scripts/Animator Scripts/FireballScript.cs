@@ -41,7 +41,7 @@ namespace CharacterControl
                     if (!flagged)
                     {
                         body.GetComponent<CharacterStateController>().TakeDamage(1000, false);
-                        body.GetComponent<CharacterStateController>().AddSuperBar(2f);
+                        body.GetComponent<CharacterStateController>().AddSuperBar(1f);
                         creator.GetComponent<CharacterStateController>().AddSuperBar(4f);
                         Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
                         Vector3 pos = body.position;
