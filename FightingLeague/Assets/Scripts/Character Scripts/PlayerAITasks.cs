@@ -264,5 +264,19 @@ namespace CharacterControl
                 Task.current.Succeed();
             }
         }
+
+        [Task]
+        public void CancelEX()
+        {
+            if (Task.current == null) return;
+            if (GetComponent<CharacterStateController>().GetSB() >= 25f)
+            {
+                stateController.CancelSpecial();
+                Task.current.Succeed();
+            } else
+            {
+                Task.current.Fail();
+            }
+        }
     }
 }
