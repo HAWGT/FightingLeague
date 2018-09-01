@@ -31,7 +31,7 @@ namespace CharacterControl
         {
             if (target == null || target.GetComponent<CharacterStateController>() == null) return;
             target.GetComponent<CharacterStateController>().TakeDamage(10, false);
-            target.GetComponent<CharacterStateController>().AddSuperBar(0.1f);
+            target.GetComponent<CharacterStateController>().AddSuperBar(0.05f);
         }
     }
 }
