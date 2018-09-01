@@ -130,7 +130,7 @@ public class MatchManager : MonoBehaviour
         }
         else
         {
-            if (p1w >= maxMatches - 1 || p2w  >= maxMatches - 1)
+            if (p1w >= Math.Ceiling(maxMatches / 2f) || p2w  >= Math.Ceiling(maxMatches / 2f))
             {
                 SceneManager.LoadScene("MainMenu");
             }

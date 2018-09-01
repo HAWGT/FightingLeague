@@ -16,10 +16,7 @@ namespace CharacterControl
         }
         private void RemoveHPTick()
         {
-            if(!receiver.GetComponent<CharacterStateController>().TakeDamage(25, false))
-            {
-                Destroy(gameObject);
-            }
+            receiver.GetComponent<CharacterStateController>().TakeDamage(25, false);
         }
     }
 }
