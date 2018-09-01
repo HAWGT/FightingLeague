@@ -213,6 +213,7 @@ namespace CharacterControl
             var buff = (GameObject)Instantiate(buffPrefab, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
             buff.GetComponent<BuffScript>().SetCreator(myRigidbody);
             Destroy(buff, 3f);
+            GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().TakeDamage(0, false);
             audioSource.volume = 0.6f;
             audioSource.PlayOneShot(cancelSpecial);
             StartCoroutine(ResetVolume());
