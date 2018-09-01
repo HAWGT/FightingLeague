@@ -26,6 +26,7 @@ namespace CharacterControl
             else if (body != creator && !flagged)
             {
                 target = body;
+                if (target.GetComponent<CharacterStateController>() == null) return;
                 flagged = true;
                 InvokeRepeating("RemoveHPTick", 0.0f, 0.02f);
             }
