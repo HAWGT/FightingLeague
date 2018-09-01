@@ -222,6 +222,7 @@ namespace CharacterControl
 
         public void FuryBuff(float a)
         {
+            GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<CharacterStateController>().TakeDamage(a, false);
             healthPoints += a;
             if (healthPoints > 10000) healthPoints = 10000;
             if (playerID == 1)
