@@ -29,8 +29,7 @@ namespace CharacterControl
                 if (!flagged)
                 {
                     body.GetComponent<CharacterStateController>().TakeDamage(1000, true);
-                    body.GetComponent<CharacterStateController>().AddSuperBar(5f);
-                    creator.GetComponent<CharacterStateController>().AddSuperBar(10f);
+                    creator.GetComponent<CharacterStateController>().AddSuperBar(12.5f);
                     flagged = true;
                 }
             }
