@@ -338,6 +338,7 @@ namespace CharacterControl
             animControl.Knock(dmg);
 
             healthPoints -= dmg;
+            if (healthPoints < 0) healthPoints = 0;
 
 			SendDataToMManager();
 
