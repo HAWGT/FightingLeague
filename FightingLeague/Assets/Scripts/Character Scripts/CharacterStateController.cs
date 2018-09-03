@@ -229,30 +229,7 @@ namespace CharacterControl
         {
             healthPoints += a;
             if (healthPoints > 10000) healthPoints = 10000;
-            if (playerID == 1)
-            {
-                if (PlayerPrefs.GetInt("Player1") == 2)
-                {
-                    GetComponent<NetworkInterface>().ChangeHP(playerID, (int)healthPoints, (int)superBar);
-                }
-                if (PlayerPrefs.GetInt("Player2") == 2)
-                {
-                    matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int)healthPoints, (int)superBar);
-                }
-                ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
-            }
-            if (playerID == 2)
-            {
-                if (PlayerPrefs.GetInt("Player1") == 2)
-                {
-                    matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int)healthPoints, (int)superBar);
-                }
-                if (PlayerPrefs.GetInt("Player2") == 2)
-                {
-                    GetComponent<NetworkInterface>().ChangeHP(playerID, (int)healthPoints, (int)superBar);
-                }
-                ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
-            }
+			SendDataToMManager();
 
         }
 
@@ -270,15 +247,8 @@ namespace CharacterControl
         {
             reduction = Math.Abs(reduction);
             superBar -= reduction;
-            if (playerID == 1)
-            {
-                ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
-            }
-            if (playerID == 2)
-            {
-                ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
-            }
-        }
+			SendDataToMManager();
+		}
 
 		public void ReduceSuperBar(float reduction)
 		{
@@ -287,14 +257,7 @@ namespace CharacterControl
             audioSource.volume = 0.6f;
             audioSource.PlayOneShot(meter);
             StartCoroutine(ResetVolume());
-            if (playerID == 1)
-            {
-                ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
-            }
-            if (playerID == 2)
-            {
-                ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
-            }
+			SendDataToMManager();
         }
 
         IEnumerator ResetVolume()
@@ -375,29 +338,8 @@ namespace CharacterControl
             animControl.Knock(dmg);
 
             healthPoints -= dmg;
-			if (playerID == 1)
-			{
-				if (PlayerPrefs.GetInt("Player1") == 2)
-				{
-					GetComponent<NetworkInterface>().ChangeHP(playerID, (int) healthPoints, (int) superBar);
-				}
-				if(PlayerPrefs.GetInt("Player2") == 2)
-				{
-					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int) healthPoints, (int) superBar);
-				}
-				ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
-			}
-			if (playerID == 2) {
-				if (PlayerPrefs.GetInt("Player1") == 2)
-				{
-					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int)healthPoints, (int) superBar);
-				}
-				if (PlayerPrefs.GetInt("Player2") == 2)
-				{
-					GetComponent<NetworkInterface>().ChangeHP(playerID, (int)healthPoints, (int) superBar);
-				}
-				ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
-			}
+
+			SendDataToMManager();
 
             if (healthPoints <= 0 && game.GetComponent<MatchManager>().IsMatchOver() == false)
             {
@@ -464,19 +406,41 @@ namespace CharacterControl
             superBar += bar;
             if (superBar > 100) superBar = 100;
 
+			SendDataToMManager();
+		}
+
+		public int GetPlayerID()
+		{
+			return playerID;
+		}
+
+		private void SendDataToMManager()
+		{
 			if (playerID == 1)
 			{
+				if (PlayerPrefs.GetInt("Player1") == 2)
+				{
+					GetComponent<NetworkInterface>().ChangeHPSuper(playerID, (int)healthPoints, (int)superBar);
+				}
+				if (PlayerPrefs.GetInt("Player2") == 2)
+				{
+					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int)healthPoints, (int)superBar);
+				}
 				ui.GetComponent<UIManager>().UpdateP1(healthPoints, superBar);
 			}
 			if (playerID == 2)
 			{
+				if (PlayerPrefs.GetInt("Player1") == 2)
+				{
+					matchManager.GetComponent<MatchManager>().ChangeAIValue(playerID, (int)healthPoints, (int)superBar);
+				}
+				if (PlayerPrefs.GetInt("Player2") == 2)
+				{
+					GetComponent<NetworkInterface>().ChangeHPSuper(playerID, (int)healthPoints, (int)superBar);
+				}
 				ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
 			}
 		}
-    public int GetPlayerID()
-    {
-      return playerID;
-    }
   }
 
 }
