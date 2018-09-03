@@ -75,7 +75,9 @@ namespace CharacterControl
                 lastHP = GetComponent<CharacterStateController>().GetHP();
             }
 
-            float dist = System.Math.Abs(GetComponent<Rigidbody>().position.x - GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.x);
+            float distX = System.Math.Abs(GetComponent<Rigidbody>().position.x - GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.x);
+            float distY = System.Math.Abs(GetComponent<Rigidbody>().position.y - GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.y);
+            float dist = Mathf.Sqrt(distX * distX + distY * distY);
             Enums.AnimState enemyState = StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>());
 
             if (StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()) == Enums.AnimState.special1 && enemyState == lastState)
