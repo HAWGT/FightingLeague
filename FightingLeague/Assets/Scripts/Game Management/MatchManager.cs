@@ -155,10 +155,10 @@ public class MatchManager : MonoBehaviour
 		switch (playerID)
 		{
 			case 1:
-				player2.GetComponent<NetworkInterface>().ChangeHP(playerID, playerHP, playerSuper);
+				player2.GetComponent<NetworkInterface>().ChangeHPSuper(playerID, playerHP, playerSuper);
 				break;
 			case 2:
-				player1.GetComponent<NetworkInterface>().ChangeHP(playerID, playerHP, playerSuper);
+				player1.GetComponent<NetworkInterface>().ChangeHPSuper(playerID, playerHP, playerSuper);
 				break;
 		}
 	}
