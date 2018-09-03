@@ -40,7 +40,7 @@ namespace CharacterControl
                     ContactPoint contact = collision.contacts[0];
                     Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
                     Vector3 pos = body.position;
-                    var explosion = (GameObject)Instantiate(explosionPrefab, pos, rot);
+                    var explosion = (GameObject)Instantiate(explosionPrefab, pos + new Vector3(0, 0.6f, 0), rot);
                     Destroy(explosion, 0.25f);
                     flagged = true;
                 }

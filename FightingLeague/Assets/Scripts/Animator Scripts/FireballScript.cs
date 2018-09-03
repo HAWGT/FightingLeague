@@ -26,7 +26,7 @@ namespace CharacterControl
             {
                 Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
                 Vector3 pos = gameObject.transform.position;
-                var explosion = (GameObject)Instantiate(explosionPrefab, pos, rot);
+                var explosion = (GameObject)Instantiate(explosionPrefab, pos + new Vector3(0, 0.6f, 0), rot);
                 Destroy(explosion, 0.25f);
                 Destroy(gameObject);
                 return;
@@ -45,7 +45,7 @@ namespace CharacterControl
                         creator.GetComponent<CharacterStateController>().AddSuperBar(10f);
                         Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
                         Vector3 pos = body.position;
-                        var explosion = (GameObject)Instantiate(explosionPrefab, pos, rot);
+                        var explosion = (GameObject)Instantiate(explosionPrefab, pos + new Vector3(0, 0.6f, 0), rot);
                         Destroy(explosion, 0.25f);
                         flagged = true;
                     }
@@ -53,7 +53,7 @@ namespace CharacterControl
                 {
                     Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
                     Vector3 pos = body.position;
-                    var explosion = (GameObject)Instantiate(explosionPrefab, pos, rot);
+                    var explosion = (GameObject)Instantiate(explosionPrefab, pos + new Vector3(0, 0.6f, 0), rot);
                     Destroy(explosion, 0.25f);
                     Destroy(gameObject);
                     return;
