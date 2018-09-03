@@ -286,7 +286,7 @@ namespace CharacterControl
         {
                 Quaternion rot = Quaternion.FromToRotation(Vector3.up, Vector3.down);
                 Vector3 pos = rigidbody.transform.position;
-                var shock = (GameObject)Instantiate(shockPrefab, pos , Quaternion.Euler(0, 0, 0));
+                var shock = (GameObject)Instantiate(shockPrefab, pos + new Vector3(0, 0.6f, 0), Quaternion.Euler(0, 0, 0));
                 Destroy(shock, 0.35f);
         }
 
