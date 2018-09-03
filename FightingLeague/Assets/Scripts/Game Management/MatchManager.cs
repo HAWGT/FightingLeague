@@ -17,6 +17,12 @@ public class MatchManager : MonoBehaviour
 	[SerializeField]
 	private GameObject player2;
 
+    [SerializeField]
+    private GameObject lightSource;
+
+    [SerializeField]
+    private GameObject camera;
+
     private int secondsLeft = 0;
     private int initTime;
 	private int maxMatches = 0;
@@ -30,7 +36,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField]
     private GameObject ui;
 
-    private int selectedMusic = 1;
+    private int selectedMusic = 0;
 
     private void Start()
 	{
@@ -51,7 +57,13 @@ public class MatchManager : MonoBehaviour
         ui.GetComponent<UIManager>().SetCount(2, p2w);
 
         selectedMusic = PlayerPrefs.GetInt("Music");
-        if (selectedMusic != 0 && selectedMusic != 1) selectedMusic = 0;
+        if (selectedMusic != 0 && selectedMusic != 1 && selectedMusic != 2) selectedMusic = 0;
+        if (selectedMusic == 2)
+        {
+            lightSource.GetComponent<Light>().color = new Color(0.18f, 0.89f, 0.9f);
+            camera.GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
+            camera.GetComponent<Camera>().backgroundColor = new Color(0.15f, 0.08f, 0.28f);
+        }
         GetComponent<AudioSource>().clip = musics[selectedMusic];
         GetComponent<AudioSource>().Play();
         ui.GetComponent<UIManager>().SetTime(secondsLeft);
