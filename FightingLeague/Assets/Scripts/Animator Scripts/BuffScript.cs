@@ -16,7 +16,7 @@ namespace CharacterControl
         }
         private void AddHPTick()
         {
-            creator.GetComponent<CharacterStateController>().FuryBuff(1);
+            creator.GetComponent<CharacterStateController>().Heal(1);
         }
     }
 }

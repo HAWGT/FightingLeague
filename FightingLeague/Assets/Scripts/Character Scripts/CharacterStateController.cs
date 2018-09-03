@@ -225,7 +225,7 @@ namespace CharacterControl
             }
         }
 
-        public void FuryBuff(float a)
+        public void Heal(float a)
         {
             healthPoints += a;
             if (healthPoints > 10000) healthPoints = 10000;
