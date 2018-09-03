@@ -420,7 +420,7 @@ namespace CharacterControl
 			{
 				if (PlayerPrefs.GetInt("Player1") == 2)
 				{
-					GetComponent<NetworkInterface>().ChangeHPSuper(playerID, (int)healthPoints, (int)superBar);
+					//GetComponent<NetworkInterface>().ChangeHPSuper(playerID, (int)healthPoints, (int)superBar);
 				}
 				if (PlayerPrefs.GetInt("Player2") == 2)
 				{
@@ -436,7 +436,7 @@ namespace CharacterControl
 				}
 				if (PlayerPrefs.GetInt("Player2") == 2)
 				{
-					GetComponent<NetworkInterface>().ChangeHPSuper(playerID, (int)healthPoints, (int)superBar);
+					//GetComponent<NetworkInterface>().ChangeHPSuper(playerID, (int)healthPoints, (int)superBar);
 				}
 				ui.GetComponent<UIManager>().UpdateP2(healthPoints, superBar);
 			}

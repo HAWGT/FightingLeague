@@ -1,5 +1,5 @@
 tree("Root")
-    race
+    fallback
         While not enemyClose
             race
                 While canApproach
