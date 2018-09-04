@@ -5,7 +5,6 @@ using CharacterControl;
 using UnityEngine;
 using System;
 using CharacterControl;
-using 
 
 namespace NeuralNetwork{
 
