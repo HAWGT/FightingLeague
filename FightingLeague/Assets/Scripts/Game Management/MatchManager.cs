@@ -38,6 +38,8 @@ public class MatchManager : MonoBehaviour
 
     private int selectedMusic = 0;
 
+    private bool training = false;
+
     private void Start()
 	{
         secondsLeft = PlayerPrefs.GetInt("RoundTime");
@@ -55,6 +57,12 @@ public class MatchManager : MonoBehaviour
         ui.GetComponent<UIManager>().SetState(0);
         ui.GetComponent<UIManager>().SetCount(1, p1w);
         ui.GetComponent<UIManager>().SetCount(2, p2w);
+
+        if(PlayerPrefs.GetInt("TrainingMode") == 1)
+        {
+            training = true;
+            ui.GetComponent<UIManager>().SetState(4);
+        }
 
         selectedMusic = PlayerPrefs.GetInt("Music");
         if (selectedMusic != 0 && selectedMusic != 1 && selectedMusic != 2) selectedMusic = 0;
@@ -128,6 +136,10 @@ public class MatchManager : MonoBehaviour
         StartCoroutine(ResetPlayers());
         player1.GetComponent<CharacterStateController>().FreezeControls();
         player2.GetComponent<CharacterStateController>().FreezeControls();
+        if(training)
+        {
+            FF2Layer.SaveWeights();
+        }
     }
 
     IEnumerator ResetPlayers()
@@ -151,6 +163,7 @@ public class MatchManager : MonoBehaviour
         ui.GetComponent<UIManager>().SetTime(secondsLeft);
         matchEnded = false;
         ui.GetComponent<UIManager>().SetState(0);
+        if (training) ui.GetComponent<UIManager>().SetState(4);
         player1.GetComponent<CharacterStateController>().ResetP();
         player2.GetComponent<CharacterStateController>().ResetP();
         player1.GetComponent<CharacterStateController>().UnFreezeControls();

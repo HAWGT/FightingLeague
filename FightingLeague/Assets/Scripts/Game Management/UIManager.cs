@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour {
 
     public void SetState(int state)
     {
-        if (state != 0 && state != 1 && state != 2 && state != 3) state = 0;
+        if (state != 0 && state != 1 && state != 2 && state != 3 && state != 4) state = 0;
         if (state == 0)
         {
             statusTxt.GetComponent<Text>().text = "";
@@ -76,6 +76,10 @@ public class UIManager : MonoBehaviour {
         if (state == 3)
         {
             statusTxt.GetComponent<Text>().text = "DRAW!";
+        }
+        if (state == 4)
+        {
+            statusTxt.GetComponent<Text>().text = "AI TRANING MODE!";
         }
     }
 
