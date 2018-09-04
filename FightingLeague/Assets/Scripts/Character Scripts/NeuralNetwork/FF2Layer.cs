@@ -46,7 +46,7 @@ namespace NeuralNetwork
 
 		}
 
-		public void TreinoRede(Neuron[] conjuntoTreino, Neuron[] conjuntoTeste, double alfa, double limiteErro)
+		public void TreinoRede(Neuron conjuntoTreino, Neuron conjuntoTeste, double alfa, double limiteErro)
 		{
 			this.alfa = alfa;
 			this.limiteErro = limiteErro;
@@ -70,28 +70,22 @@ namespace NeuralNetwork
 			int iteration = 0;
 			while (!CondicaoParagem(conjuntoTreino, conjuntoTeste) || iteration < interacoesMAX)
 			{
-				for (int i = 0; i < conjuntoTreino.Length; i++)
-				{
-					ForwardPropagation(conjuntoTreino[i].GetInstancia());
-					BackPropagation(conjuntoTreino[i]);
+
+					ForwardPropagation(conjuntoTreino.GetInstancia());
+					BackPropagation(conjuntoTreino);
 				}
 				iteration++;
-
-			}
 		}
 
-		private bool CondicaoParagem(Neuron[] conjuntoTreino, Neuron[] conjuntoTeste)
+		private bool CondicaoParagem(Neuron conjuntoTreino, Neuron conjuntoTeste)
 		{
-			for (int e = 0; e < conjuntoTreino.Length; e++)
-			{
-				ForwardPropagation(conjuntoTreino[e].GetInstancia());
+				ForwardPropagation(conjuntoTreino.GetInstancia());
 				///re-escrever condição
-				double forAbs = activationHidden - conjuntoTreino[e].GetSaida();
+				double forAbs = activationHidden - conjuntoTreino.GetSaida();
 				if (activationHidden <= 0.5)
 				{
 					return false;
 				}
-			}
 			return true;
 		}
 

@@ -13,13 +13,18 @@ namespace NeuralNetwork{
 		// self -> x,y, life, super, airborn, busy(bool), attack(bool), tempo
 		private int numEntradas = 13;
 		private int numSaidas = 1;
-		private int mode;
+		
 		private AnimationController animationController;
 		private AnimatorParameters animatorParameters;
 		private CharacterStateController state;
 		private FF2Layer rede;
+		private NeuronExamples situationExamples;
 
-		private List<Neuron> neurons;
+		private List<Neuron> examples;
+
+		private bool trainingMode;
+
+		private Neuron neuron;
 
 		//dados a enviar para a rede
 		private int selfHP = 10000;
@@ -35,19 +40,28 @@ namespace NeuralNetwork{
 		void Start()
 		{
 			state = GetComponent<CharacterStateController>();
-			rede = new FF2Layer(numEntradas, 5, numSaidas, 1);
-			mode = PlayerPrefs.GetInt("TrainNeurons");
+			rede = new FF2Layer(numEntradas, 14, numSaidas, 1);
+			if (PlayerPrefs.GetInt("TrainNeurons") == 1)
+			{
+				trainingMode = true;
+			}
+			else
+			{
+				trainingMode = false;
+			}
+
 			animationController = GetComponent<AnimationController>();
 			animatorParameters = new AnimatorParameters(animationController.GetAllBoolTriggerAnimatorParameters());
-			neurons = new List<Neuron>();
+			neuron = new Neuron();
 		}
 
 		// Update is called once per frame
 		void Update()
 		{
-			if (mode == 1)
+			
+			if (trainingMode)
 			{
-				
+				rede.TreinoRede(neuron, neuron /*trocar este*/, 0.1, 0.01);
 			}
 			else
 			{
@@ -104,7 +118,7 @@ namespace NeuralNetwork{
 			}
 		}
 
-		public void ChangeHP(int characterID, int newHP, int newSuper)
+		public void ChangeHPSuper(int characterID, int newHP, int newSuper)
 		{
 			if(characterID == state.GetPlayerID())
 			{
@@ -119,7 +133,7 @@ namespace NeuralNetwork{
 			
 		}
 
-		private int OptimalResult(int selfHP, int enemyHP, int selfBar, int enemyBar, float distanceX, int selfHeight, int enemyHeight, bool selfBusy, bool enemyBusy, bool enemyIsAttacking, int time)
+		private int OptimalResult(int selfHP, int enemyHP, int selfBar, int enemyBar, float distanceX, int selfHeight, int enemyHeight, bool selfBusy, bool enemyBusy, bool enemyIsAttacking)
 		{
             
 			if (selfBusy)
@@ -141,6 +155,23 @@ namespace NeuralNetwork{
                 //selfheight enemyHeight
                 return 0;
 			}
+		}
+
+		private Neuron NewNeuron(int selfHP, int enemyHP, int selfBar, int enemyBar, float distanceX, int selfHeight, int enemyHeight, bool selfBusy, bool enemyBusy, bool enemyIsAttacking, int time)
+		{
+			int meBusy;
+			int themBusy;
+			int themAttack;
+			int answer;
+
+			meBusy = (selfBusy) ? 1 : 0;
+			themBusy = (enemyBusy) ? 1 : 0;
+			themAttack = (enemyIsAttacking) ? 1 : 0;
+			answer = OptimalResult(selfHP, enemyHP, selfBar, enemyBar, distanceX, selfHeight, enemyHeight, selfBusy, enemyBusy, enemyIsAttacking);
+
+
+			Neuron neura = new Neuron(new double[] { selfHP, enemyHP, selfBar, enemyBar, distanceX, selfHeight, enemyHeight, meBusy, themBusy, themAttack}, answer);
+			return neura;
 		}
 	}
 
