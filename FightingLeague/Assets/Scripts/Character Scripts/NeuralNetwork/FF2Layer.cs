@@ -149,6 +149,11 @@ namespace NeuralNetwork
 			}
 		}
 
+		public void SaveWeights()
+		{
+			//TODO save on local file
+		}
+
 		public double CalculaResultadoRede(double[] instancia)
 		{
 			return ForwardPropagation(instancia);

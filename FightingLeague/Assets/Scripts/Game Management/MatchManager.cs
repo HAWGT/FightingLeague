@@ -138,7 +138,14 @@ public class MatchManager : MonoBehaviour
         player2.GetComponent<CharacterStateController>().FreezeControls();
         if(training)
         {
-            FF2Layer.SaveWeights();
+            if(PlayerPrefs.GetInt("Player1") == 2)
+			{
+				player1.GetComponent<NetworkInterface>().GetRede().SaveWeights();
+			}
+			if(PlayerPrefs.GetInt("Player2") == 2)
+			{
+				player2.GetComponent<NetworkInterface>().GetRede().SaveWeights();
+			}
         }
     }
 

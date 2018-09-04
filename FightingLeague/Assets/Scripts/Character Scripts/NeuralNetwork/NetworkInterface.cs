@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using CharacterControl;
 using UnityEngine;
 using System;
+using CharacterControl;
+using 
 
 namespace NeuralNetwork{
 
@@ -41,7 +43,11 @@ namespace NeuralNetwork{
 		{
 			state = GetComponent<CharacterStateController>();
 			rede = new FF2Layer(numEntradas, 14, numSaidas, 1);
-			if (PlayerPrefs.GetInt("TrainNeurons") == 1)
+
+			Enums.AnimState playerBody = StateHelper.GetState(GetComponent<Rigidbody>());
+			Enums.AnimState otherPlayerBody = StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>());
+
+			if (PlayerPrefs.GetInt("TrainingMode") == 1)
 			{
 				trainingMode = true;
 			}
@@ -65,7 +71,7 @@ namespace NeuralNetwork{
 			}
 			else
 			{
-
+				//rede.CalculaResultadoRede()
 			}
 		}
 
@@ -172,6 +178,11 @@ namespace NeuralNetwork{
 
 			Neuron neura = new Neuron(new double[] { selfHP, enemyHP, selfBar, enemyBar, distanceX, selfHeight, enemyHeight, meBusy, themBusy, themAttack}, answer);
 			return neura;
+		}
+
+		public FF2Layer GetRede()
+		{
+			return rede;
 		}
 	}
 
