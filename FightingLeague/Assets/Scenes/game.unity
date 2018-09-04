@@ -580,17 +580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85dc5c5234846bc438538815f8a454e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &381051719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 381051709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 943791df89b66064eb6d60f621704dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &381051720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2996,17 +2985,6 @@ MonoBehaviour:
     breakPointStatuses: 
     collapsedLines: 
     btScript: 
---- !u!114 &1405563317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1405563278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 943791df89b66064eb6d60f621704dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1405563318
 MonoBehaviour:
   m_ObjectHideFlags: 0
