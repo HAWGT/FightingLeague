@@ -84,6 +84,7 @@ public class MatchManager : MonoBehaviour
 
     private void TimeTick()
     {
+        if (matchEnded) return;
         secondsLeft--;
         ui.GetComponent<UIManager>().SetTime(secondsLeft);
         if (secondsLeft <= 0) MatchEnd(3);
