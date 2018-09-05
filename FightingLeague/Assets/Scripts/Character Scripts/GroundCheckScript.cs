@@ -40,18 +40,13 @@ namespace CharacterControl
                 {
                     animator.applyRootMotion = false;
                     rigidbody.AddForce(new Vector3(-0.5f, 0), ForceMode.VelocityChange);
-                    //cchar.transform.position = new Vector3(cchar.transform.position.x - 0.25f, cchar.transform.position.y, cchar.transform.position.z);
                 }
 
                 if (cchar.GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
                 {
                     animator.applyRootMotion = false;
                     rigidbody.AddForce(new Vector3(0.5f, 0), ForceMode.VelocityChange);
-                    //cchar.transform.position = new Vector3(cchar.transform.position.x + 0.25f, cchar.transform.position.y, cchar.transform.position.z);
                 }
-
-                //if (cchar.transform.position.x < -7f) cchar.transform.position = new Vector3(-7f, cchar.transform.position.y, cchar.transform.position.z);
-                //if (cchar.transform.position.x > 7f) cchar.transform.position = new Vector3(7f, cchar.transform.position.y, cchar.transform.position.z);
             }
 
         }
