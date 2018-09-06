@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 namespace NeuralNetwork
@@ -151,8 +153,41 @@ namespace NeuralNetwork
 
 		public void SaveWeights()
 		{
-			//TODO save on local file
-		}
+            string file = Application.persistentDataPath + "/weights.dat";
+            FileStream fs;
+            if (File.Exists(file))
+            {
+                fs = File.OpenWrite(file);
+            }
+            else
+            {
+                fs = File.Create(file);
+            }
+            WeightsFile weights = new WeightsFile(weights1, weights2);
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(fs, weights);
+            fs.Close();
+        }
+
+        public void LoadWeights()
+        {
+            string file = Application.persistentDataPath + "/weights.dat";
+            FileStream fs;
+            if (File.Exists(file))
+            {
+                fs = File.OpenRead(file);
+            }
+            else
+            {
+                fs = File.Create(file);
+                return;
+            }
+            BinaryFormatter bf = new BinaryFormatter();
+            WeightsFile weights = (WeightsFile)bf.Deserialize(fs);
+            fs.Close();
+            this.weights1 = weights.weights1;
+            this.weights2 = weights.weights2;
+        }
 
 		public double CalculaResultadoRede(double[] instancia)
 		{
