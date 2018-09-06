@@ -1,10 +1,7 @@
-﻿using NeuralNetwork;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using CharacterControl;
 using UnityEngine;
-using System;
-using CharacterControl;
 
 namespace NeuralNetwork{
 
@@ -26,16 +23,22 @@ namespace NeuralNetwork{
 		private bool trainingMode;
 
 		private Neuron neuron;
+		private Neuron exampleSent;
 
 		//dados a enviar para a rede
 		private int selfHP = 10000;
-		private bool selfBusy = false;
+		private int selfBusy;
 		private int selfSuper = 0;
+		private double selfHeight;
 
 		private int enemyHP = 10000;
 		private int enemySuper = 0;
-		private bool enemyBusy = false;
-		private bool enemyAttacking = false;
+		private int enemyBusy;
+		private double enemyHeight;
+
+		private double distanceX;
+
+		private int recomendedAction;
 
 		// Use this for initialization
 		void Start()
@@ -43,8 +46,7 @@ namespace NeuralNetwork{
 			state = GetComponent<CharacterStateController>();
 			rede = new FF2Layer(numEntradas, 14, numSaidas, 1);
 
-			Enums.AnimState playerBody = StateHelper.GetState(GetComponent<Rigidbody>());
-			Enums.AnimState otherPlayerBody = StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>());
+			
 
 			if (PlayerPrefs.GetInt("TrainingMode") == 1)
 			{
@@ -63,14 +65,69 @@ namespace NeuralNetwork{
 		// Update is called once per frame
 		void Update()
 		{
-			
-			if (trainingMode)
+			if(StateHelper.GetState(GetComponent<Rigidbody>()) == Enums.AnimState.standing || StateHelper.GetState(GetComponent<Rigidbody>()) == Enums.AnimState.airborn ||
+				StateHelper.GetState(GetComponent<Rigidbody>()) == Enums.AnimState.walkingF || StateHelper.GetState(GetComponent<Rigidbody>()) == Enums.AnimState.walkingB)
 			{
-				rede.TreinoRede(neuron, neuron /*trocar este*/, 0.1, 0.01);
+
+				selfBusy = RevertAction(StateHelper.GetState(GetComponent<Rigidbody>()));
+				enemyBusy = RevertAction(StateHelper.GetState(GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>()));
+
+				distanceX = System.Math.Abs(GetComponent<Rigidbody>().position.x - GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.x);
+				selfHeight = GetComponent<Rigidbody>().position.y;
+				enemyHeight = GetComponent<CharacterColliderController>().GetOtherPlayer().GetComponent<Rigidbody>().position.y;
+
+				recomendedAction = OptimalResult(selfHP, enemyHP, selfSuper, enemySuper, distanceX, selfHeight, enemyHeight, selfBusy, enemyBusy);
+
+				neuron = new Neuron(new double[] { selfHP, enemyHP, selfSuper, enemySuper, distanceX, selfHeight, enemyHeight, selfBusy, enemyBusy }, recomendedAction);
+				//Construtor Neuron(new double[] { selfHP, enemyHP, selfBar, enemyBar, distanceX, selfHeight, enemyHeight, meBusy, themBusy, themAttack}, answer);
+
+				exampleSent = situationExamples.SearchExample(selfHP - enemyHP, selfSuper, distanceX, Math.Abs(selfHeight - enemyHeight), enemyBusy);
+
+				if (trainingMode)
+				{
+					rede.TreinoRede(neuron, exampleSent, 0.1, 0.01);
+				}
+				else
+				{
+					rede.CalculaResultadoRede(neuron.GetInstancia());
+				}
 			}
-			else
+
+			
+		}
+
+		private int RevertAction(Enums.AnimState action)
+		{
+			switch (action)
 			{
-				//rede.CalculaResultadoRede()
+				case Enums.AnimState.walkingF:
+					return 1;
+				case Enums.AnimState.walkingB:
+					return 2;
+				case Enums.AnimState.airborn:
+					return 3;
+				case Enums.AnimState.light:
+					return 4;
+				case Enums.AnimState.medium:
+					return 5;
+				case Enums.AnimState.heavy:
+					return 6;
+				case Enums.AnimState.special1:
+					return 7;
+				case Enums.AnimState.special2:
+					return 8;
+				case Enums.AnimState.super:
+					return 9;
+				case Enums.AnimState.grab:
+					return 10;
+				case Enums.AnimState.dash:
+					return 11;
+				case Enums.AnimState.reflect:
+					return 12;
+				case Enums.AnimState.vanish:
+					return 13;
+				default:
+					return 0;
 			}
 		}
 
@@ -78,6 +135,9 @@ namespace NeuralNetwork{
 		{
 			switch (action)
 			{
+				case 0:
+					break;
+
 				case 1:
 					animationController.WalkFwd();
 					break;
@@ -138,45 +198,47 @@ namespace NeuralNetwork{
 			
 		}
 
-		private int OptimalResult(int selfHP, int enemyHP, int selfBar, int enemyBar, float distanceX, int selfHeight, int enemyHeight, bool selfBusy, bool enemyBusy, bool enemyIsAttacking)
+		private int OptimalResult(int selfHP, int enemyHP, int selfBar, int enemyBar, double distanceX, double selfHeight, double enemyHeight, int selfBusy, int enemyBusy)
 		{
-            
-			if (selfBusy)
+
+			if (selfBusy != 0 || selfBusy != 3)
 			{
 				return 0;
 			}
-			else if (enemyIsAttacking && distanceX < 2)
+			else if (enemyBusy != 0 && distanceX < 2 || enemyBusy != 3 && distanceX < 2)
 			{
 				return 2;
-			}else if(enemyHeight > 1)
-			{
-				return 2;
-			}else
-			{
-                //diferencial vida, timer grande
-
-                //diferencial vida, timer pequeno
-                //vida distancia
-                //selfheight enemyHeight
-                return 0;
 			}
-		}
-
-		private Neuron NewNeuron(int selfHP, int enemyHP, int selfBar, int enemyBar, float distanceX, int selfHeight, int enemyHeight, bool selfBusy, bool enemyBusy, bool enemyIsAttacking, int time)
-		{
-			int meBusy;
-			int themBusy;
-			int themAttack;
-			int answer;
-
-			meBusy = (selfBusy) ? 1 : 0;
-			themBusy = (enemyBusy) ? 1 : 0;
-			themAttack = (enemyIsAttacking) ? 1 : 0;
-			answer = OptimalResult(selfHP, enemyHP, selfBar, enemyBar, distanceX, selfHeight, enemyHeight, selfBusy, enemyBusy, enemyIsAttacking);
-
-
-			Neuron neura = new Neuron(new double[] { selfHP, enemyHP, selfBar, enemyBar, distanceX, selfHeight, enemyHeight, meBusy, themBusy, themAttack}, answer);
-			return neura;
+			else if (enemyHeight > 1)
+			{
+				return 2;
+			}
+			else
+			{
+				//diferencial vida, timer grande
+				if (selfHP > enemyHP)
+				{
+					//defensivo
+					return 2;
+				}
+				else
+				{
+					//ofensivo
+					if (distanceX < 1.5)
+					{
+						if (selfSuper < 50)
+						{
+							return 5;
+						}
+						else
+						{
+							return 9;
+						}
+					}
+					
+				}
+			}
+			return 0;
 		}
 
 		public FF2Layer GetRede()

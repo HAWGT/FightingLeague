@@ -21,7 +21,7 @@ namespace NeuralNetwork
 			examples.Add(new Neuron(new double[] { 2000, 1500, 0, 100, 0.5, 0, 0, 0, 1, 0 }, 12));
 		}
 
-		public Neuron SearchExample(int differenceHP, int selfBar, float distanceX, int differenceHeight, bool enemyBusy, bool enemyIsAttacking, int time)
+		public Neuron SearchExample(double differenceHP, double selfBar, double distanceX, double differenceHeight, int enemyBusy)
 		{
 			Neuron toSend = examples[0];
 			UpdateExample(toSend);

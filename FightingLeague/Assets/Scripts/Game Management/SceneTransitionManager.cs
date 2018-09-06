@@ -24,6 +24,8 @@ public class SceneTransitionManager : MonoBehaviour {
 	private Dropdown dropSuper1;
 	[SerializeField]
 	private Dropdown dropSuper2;
+	[SerializeField]
+	private Toggle aiTrainToggle;
 
 	public void ManTree()
 	{
@@ -75,6 +77,15 @@ public class SceneTransitionManager : MonoBehaviour {
 		PlayerPrefs.SetInt("P1S", dropSuper1.value);
 		PlayerPrefs.SetInt("P2S1", dropSpecial2.value);
 		PlayerPrefs.SetInt("P2S", dropSuper2.value);
+		if (aiTrainToggle.isOn)
+		{
+			PlayerPrefs.SetInt("TrainingMode", 1);
+		}
+		else
+		{
+			PlayerPrefs.SetInt("TrainingMode", 0);
+		}
+		
 		switch (dropRoundTime.value)
 		{
 			case 0:
