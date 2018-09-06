@@ -149,26 +149,13 @@ namespace CharacterControl
             }
             if (Input.GetButtonDown("SuperComboP" + charID.ToString()))
             {
-                bool triggered = false;
-                if (stateController.GetSuperBar() > 49 && !triggered)
+                animControl.Jump();
+                if (stateController.GetSuperBar() > 49)
                 {
-                    triggered = true;
                     stateController.Super();
                     stateController.UpdateUI(false);
                     stateController.SetLastAtk(Enums.AttackState.super);
                     stateController.SetCharState(Enums.CharState.attacking);
-                }
-                if (stateController.GetSuperBar() > 9 && !triggered)
-                {
-                    triggered = true;
-                    stateController.Vanish();
-                    stateController.UpdateUI(false);
-                }
-                if (stateController.GetSuperBar() > 4 && !triggered)
-                {
-                    triggered = true;
-                    stateController.ForwardDash();
-                    stateController.UpdateUI(false);
                 }
             }
         }
@@ -358,7 +345,7 @@ namespace CharacterControl
 						animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "reflect" }));
 						break;
 				}
-				animControl.TurnAnimatorParametersOff(animatorParameters.FindAnimatorParameter(new string[] { "walkingForward", "walkingBackward", "crouch" }));
+				animControl.TurnAnimatorParametersOff(animatorParameters.FindAnimatorParameter(new string[] { "walkingForward", "walkingBackward"}));
 			}
 			ResetEnumState();
 		}
