@@ -147,7 +147,7 @@ namespace CharacterControl
                     stateController.SetCharState(Enums.CharState.attacking);
                 }
             }
-            if (Input.GetButtonDown("SuperComboP" + charID.ToString()))
+            if (Input.GetButtonDown("JSCP" + charID.ToString()))
             {
                 animControl.Jump();
                 if (stateController.GetSuperBar() > 49)
