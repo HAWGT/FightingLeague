@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace CharacterControl
 {
-	public class AnimatorParameters : MonoBehaviour
+	public class AnimatorParameters
 	{
 
 		private List<AnimatorControllerParameter> parameters;

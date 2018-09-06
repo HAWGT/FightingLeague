@@ -128,6 +128,49 @@ namespace CharacterControl
             {
                 stateController.CancelSpecial();
             }
+
+            if (Input.GetButtonDown("FireballP" + charID.ToString()))
+            {
+                animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "special1" }));
+            }
+            if (Input.GetButtonDown("SpinKickP" + charID.ToString()))
+            {
+                animControl.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "special2" }));
+            }
+            if (Input.GetButtonDown("SuperP" + charID.ToString()))
+            {
+                if (stateController.GetSuperBar() > 49)
+                {
+                    stateController.Super();
+                    stateController.UpdateUI(false);
+                    stateController.SetLastAtk(Enums.AttackState.super);
+                    stateController.SetCharState(Enums.CharState.attacking);
+                }
+            }
+            if (Input.GetButtonDown("SuperComboP" + charID.ToString()))
+            {
+                bool triggered = false;
+                if (stateController.GetSuperBar() > 49 && !triggered)
+                {
+                    triggered = true;
+                    stateController.Super();
+                    stateController.UpdateUI(false);
+                    stateController.SetLastAtk(Enums.AttackState.super);
+                    stateController.SetCharState(Enums.CharState.attacking);
+                }
+                if (stateController.GetSuperBar() > 9 && !triggered)
+                {
+                    triggered = true;
+                    stateController.Vanish();
+                    stateController.UpdateUI(false);
+                }
+                if (stateController.GetSuperBar() > 4 && !triggered)
+                {
+                    triggered = true;
+                    stateController.ForwardDash();
+                    stateController.UpdateUI(false);
+                }
+            }
         }
 
 		public void TranslateDirectionalInput(Enums.NumPad xAxis, Enums.NumPad yAxis)
