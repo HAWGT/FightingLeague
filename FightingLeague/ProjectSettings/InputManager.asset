@@ -390,7 +390,7 @@ InputManager:
     axis: 1
     joyNum: 2
   - serializedVersion: 3
-    m_Name: SuperComboP1
+    m_Name: JSCP1
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -406,7 +406,7 @@ InputManager:
     axis: 1
     joyNum: 1
   - serializedVersion: 3
-    m_Name: SuperComboP2
+    m_Name: JSCP2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
