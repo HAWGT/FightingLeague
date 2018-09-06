@@ -211,7 +211,7 @@ namespace CharacterControl
         public void CancelSpecial()
         {
             if (superBar < 25f) return;
-            ReduceSuperBarNoSnd(25f);
+            if (!ReduceSuperBarNoSnd(25f)) return;
             audioSource.volume = 0.6f;
             audioSource.PlayOneShot(cancelSpecial);
             StartCoroutine(ResetVolume());
@@ -243,31 +243,33 @@ namespace CharacterControl
 			return superBar;
 		}
 
-        public void ReduceSuperBarNoSnd(float reduction)
+        public bool ReduceSuperBarNoSnd(float reduction)
         {
             reduction = Math.Abs(reduction);
             superBar -= reduction;
             if (superBar < 0 )
             {
                 superBar += reduction;
-                return;
+                return false;
             }
 			SendDataToMManager();
+            return true;
 		}
 
-		public void ReduceSuperBar(float reduction)
+		public bool ReduceSuperBar(float reduction)
 		{
             reduction = Math.Abs(reduction);
 			superBar -= reduction;
             if (superBar < 0)
             {
                 superBar += reduction;
-                return;
+                return false;
             }
             audioSource.volume = 0.6f;
             audioSource.PlayOneShot(meter);
             StartCoroutine(ResetVolume());
 			SendDataToMManager();
+            return true;
         }
 
         IEnumerator ResetVolume()
@@ -379,21 +381,21 @@ namespace CharacterControl
         public void ForwardDash()
         {
             if (superBar < 5) return;
-            ReduceSuperBar(5);
+            if(!ReduceSuperBar(5)) return;
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "midDash" }));
         }
 
         public void Vanish()
         {
             if (superBar < 10) return;
-            ReduceSuperBar(10);
+            if (!ReduceSuperBar(10)) return;
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "vanish" }));
         }
 
         public void Super()
         {
             if (superBar < 50) return;
-            ReduceSuperBar(50);
+            if (!ReduceSuperBar(50)) return;
             animControl.TriggerAnimatorParameters(GetComponent<CharacterStateController>().FindAnimatorParameter(new string[] { "super" }));
         }
 
