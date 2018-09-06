@@ -294,11 +294,11 @@ namespace CharacterControl
         {
             if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P1)
             {
-                rigidbody.transform.position += new Vector3(-0.13f * (dmg / 1000), 0);
+                rigidbody.transform.position += new Vector3(-2f, 0);
             }
             else if (GetComponent<CharacterStateController>().GetFacingSide() == Enums.FacingSide.P2)
             {
-                rigidbody.transform.position += new Vector3(0.13f * (dmg / 1000), 0);
+                rigidbody.transform.position += new Vector3(2f, 0);
             }
         }
 

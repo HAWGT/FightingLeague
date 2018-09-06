@@ -193,7 +193,7 @@ namespace CharacterControl
 
 			foreach (Enums.Inputs attack in localParse)
 			{
-				switch (currentState)
+                switch (currentState)
 				{
 					case Enums.Inputs.Back:
 						switch (attack)
