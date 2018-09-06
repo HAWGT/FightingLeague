@@ -247,6 +247,11 @@ namespace CharacterControl
         {
             reduction = Math.Abs(reduction);
             superBar -= reduction;
+            if (superBar < 0 )
+            {
+                superBar += reduction;
+                return;
+            }
 			SendDataToMManager();
 		}
 
@@ -254,6 +259,11 @@ namespace CharacterControl
 		{
             reduction = Math.Abs(reduction);
 			superBar -= reduction;
+            if (superBar < 0)
+            {
+                superBar += reduction;
+                return;
+            }
             audioSource.volume = 0.6f;
             audioSource.PlayOneShot(meter);
             StartCoroutine(ResetVolume());
