@@ -112,7 +112,11 @@ namespace CharacterControl
 
         public void FreezeControls()
         {
-            if (playerInputType == 0) GetComponent<CharacterInputProcessor>().enabled = false;
+			if (playerInputType == 0)
+			{
+				GetComponent<CharacterInputProcessor>().enabled = false;
+				GetComponent<FiniteStateMachineState>().enabled = false;
+			}
             if (playerInputType == 1) GetComponent<Panda.BehaviourTree>().enabled = false;
             if (playerInputType == 2) GetComponent<NetworkInterface>().enabled = false;
         }
@@ -134,8 +138,12 @@ namespace CharacterControl
 
         public void UnFreezeControls()
         {
-            if (playerInputType == 0) GetComponent<CharacterInputProcessor>().enabled = true;
-            if (playerInputType == 1) GetComponent<Panda.BehaviourTree>().enabled = true;
+			if (playerInputType == 0)
+			{
+				GetComponent<CharacterInputProcessor>().enabled = true;
+				GetComponent<FiniteStateMachineState>().enabled = true;
+			}
+			if (playerInputType == 1) GetComponent<Panda.BehaviourTree>().enabled = true;
             if (playerInputType == 2) GetComponent<NetworkInterface>().enabled = true;
         }
 

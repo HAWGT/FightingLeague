@@ -37,6 +37,9 @@ namespace CharacterControl
 
 		private Enums.AttackState lastAtk = Enums.AttackState.none;
 
+		private String horizontalBtn;
+		private String verticalBtn;
+
 		// Use this for initialization
 		void Start()
         {
@@ -50,13 +53,23 @@ namespace CharacterControl
 			motionStateMachine = GetComponent<FiniteStateMachineState>();
 			attackStates = new List<Enums.AttackState>();
 			charID = stateController.GetPlayerID();
+			if(PlayerPrefs.GetInt("P1Arrows") == 1)
+			{
+				horizontalBtn = "HorizontalArrows";
+				verticalBtn = "VerticalArrows";
+			}
+			else
+			{
+				horizontalBtn = "HorizontalP";
+				verticalBtn = "VerticalP";
+			}
 		}
 
 		// Update is called once per frame
 		void Update()
         {
-            horizontalInput = Input.GetAxisRaw("HorizontalP" + charID.ToString());
-            verticalInput = Input.GetAxisRaw("VerticalP" + charID.ToString());
+            horizontalInput = Input.GetAxisRaw(horizontalBtn + charID.ToString());
+            verticalInput = Input.GetAxisRaw(verticalBtn + charID.ToString());
 
             switch ((int)horizontalInput)
             {
