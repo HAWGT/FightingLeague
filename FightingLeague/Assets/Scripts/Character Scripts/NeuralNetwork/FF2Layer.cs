@@ -143,7 +143,7 @@ namespace NeuralNetwork
 
 		public void SaveWeights()
 		{
-            string file = Application.persistentDataPath + "/weights.dat";
+            string file = Application.dataPath + "/weights.dat";
             FileStream fs;
             if (File.Exists(file))
             {
@@ -161,7 +161,7 @@ namespace NeuralNetwork
 
         private void LoadWeights()
         {
-            string file = Application.persistentDataPath + "/weights.dat";
+            string file = Application.dataPath + "/weights.dat";
             FileStream fs;
             if (File.Exists(file))
             {
