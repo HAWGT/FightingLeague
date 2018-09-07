@@ -5516,7 +5516,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: One player using Keyboard Arrows
+  m_Text: Players use Keyboard Arrows
 --- !u!222 &1079462743
 CanvasRenderer:
   m_ObjectHideFlags: 0
