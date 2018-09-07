@@ -40,6 +40,8 @@ namespace NeuralNetwork{
 
 		private int recomendedAction;
 
+		private int acaoRealizada;
+
 		// Use this for initialization
 		void Start()
 		{
@@ -85,14 +87,14 @@ namespace NeuralNetwork{
 
 				if (trainingMode)
 				{
-					rede.TreinoRede(neuron, exampleSent, 0.1, 0.01);
+					acaoRealizada = rede.TreinoRede(neuron, exampleSent, 0.1, 0.01);
 				}
 				else
 				{
-					rede.CalculaResultadoRede(neuron.GetInstancia());
+					acaoRealizada = rede.CalculaResultadoRede(neuron.GetInstancia());
 				}
 			}
-
+			Act(acaoRealizada);
 			
 		}
 
@@ -244,6 +246,11 @@ namespace NeuralNetwork{
 		public FF2Layer GetRede()
 		{
 			return rede;
+		}
+
+		public void SaveLearningSession()
+		{
+			rede.SaveWeights();
 		}
 	}
 

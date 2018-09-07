@@ -141,11 +141,11 @@ public class MatchManager : MonoBehaviour
         {
             if(PlayerPrefs.GetInt("Player1") == 2)
 			{
-				player1.GetComponent<NetworkInterface>().GetRede().SaveWeights();
+				player1.GetComponent<NetworkInterface>().SaveLearningSession();
 			}
 			if(PlayerPrefs.GetInt("Player2") == 2)
 			{
-				player2.GetComponent<NetworkInterface>().GetRede().SaveWeights();
+				player2.GetComponent<NetworkInterface>().SaveLearningSession();
 			}
         }
     }
@@ -188,10 +188,10 @@ public class MatchManager : MonoBehaviour
 		switch (playerID)
 		{
 			case 1:
-				//player2.GetComponent<NetworkInterface>().ChangeHPSuper(playerID, playerHP, playerSuper);
+				player2.GetComponent<NetworkInterface>().ChangeHPSuper(playerID, playerHP, playerSuper);
 				break;
 			case 2:
-				//player1.GetComponent<NetworkInterface>().ChangeHPSuper(playerID, playerHP, playerSuper);
+				player1.GetComponent<NetworkInterface>().ChangeHPSuper(playerID, playerHP, playerSuper);
 				break;
 		}
 	}

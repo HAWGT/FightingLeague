@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -46,12 +47,15 @@ namespace NeuralNetwork
 			activation1 = new double[tamanhoCamada1 + 1];
 			erroEscondida = new double[tamanhoCamada1 + 1];
 
+			LoadWeights();
 		}
 
-		public void TreinoRede(Neuron conjuntoTreino, Neuron conjuntoTeste, double alfa, double limiteErro)
+		public int TreinoRede(Neuron conjuntoTreino, Neuron conjuntoTeste, double alfa, double limiteErro)
 		{
 			this.alfa = alfa;
 			this.limiteErro = limiteErro;
+			double resultado;
+			int parsedRes;
 
 			//Iniciação dos pesos
 
@@ -68,28 +72,14 @@ namespace NeuralNetwork
 				weights2[i] = (aleatorio.Next(2) == 0 ? aleatorio.NextDouble() : -aleatorio.NextDouble());
 			}
 
-			//Treino da rede
-			int iteration = 0;
-			while (!CondicaoParagem(conjuntoTreino, conjuntoTeste) || iteration < interacoesMAX)
-			{
+			resultado = ForwardPropagation(conjuntoTreino.GetInstancia());
+			BackPropagation(conjuntoTreino);
 
-					ForwardPropagation(conjuntoTreino.GetInstancia());
-					BackPropagation(conjuntoTreino);
-				}
-				iteration++;
+			parsedRes = Convert.ToInt32(Math.Abs(resultado));
+
+			return parsedRes;
 		}
 
-		private bool CondicaoParagem(Neuron conjuntoTreino, Neuron conjuntoTeste)
-		{
-				ForwardPropagation(conjuntoTreino.GetInstancia());
-				///re-escrever condição
-				double forAbs = activationHidden - conjuntoTreino.GetSaida();
-				if (activationHidden <= 0.5)
-				{
-					return false;
-				}
-			return true;
-		}
 
 		//calcula o resultado de uma rede para uma determinada instancia
 		private double ForwardPropagation(double[] instancia)
@@ -126,7 +116,7 @@ namespace NeuralNetwork
 			double soma;
 
 			//calculo do erro para as unidades de saida
-			//erroSaida = SigmoidFn.Derivative(activationHidden) * (exemplo.GetSaida() - activationHidden);
+			erroSaida = SigmoidFn.Derivative(activationHidden) * (exemplo.GetSaida() - activationHidden);
 
 			//calculo do erro para as unidades da camada escondida
 			for (int i = 0; i < tamanhoCamada1; i++)
@@ -169,7 +159,7 @@ namespace NeuralNetwork
             fs.Close();
         }
 
-        public void LoadWeights()
+        private void LoadWeights()
         {
             string file = Application.persistentDataPath + "/weights.dat";
             FileStream fs;
@@ -189,9 +179,9 @@ namespace NeuralNetwork
             this.weights2 = weights.weights2;
         }
 
-		public double CalculaResultadoRede(double[] instancia)
+		public int CalculaResultadoRede(double[] instancia)
 		{
-			return ForwardPropagation(instancia);
+			return Convert.ToInt32(ForwardPropagation(instancia));
 		}
 	}
 
