@@ -37,7 +37,7 @@ namespace CharacterControl
         private Enums.CharState charState;
 
 		[SerializeField]
-		private GameObject matchManager;
+		private MatchManager matchManager;
 
         private List<AnimatorControllerParameter> animatorParameters;
 

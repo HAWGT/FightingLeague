@@ -16,16 +16,9 @@ namespace CharacterControl
 
         private float verticalInput;
 
-		[SerializeField]
-		private AnimationController animControl;
-
-		[SerializeField]
-		private List<Enums.AttackState> attackStates;
+		
 
 		private AnimatorParameters animatorParameters;
-
-		[SerializeField]
-		private FiniteStateMachineState motionStateMachine;
 
 		private Enums.Inputs lastInput;
 
@@ -39,6 +32,14 @@ namespace CharacterControl
 
 		private String horizontalBtn;
 		private String verticalBtn;
+
+		[SerializeField]
+		private AnimationController animControl;
+
+		[SerializeField]
+		private List<Enums.AttackState> attackStates;
+		[SerializeField]
+		private FiniteStateMachineState motionStateMachine;
 
 		// Use this for initialization
 		void Start()

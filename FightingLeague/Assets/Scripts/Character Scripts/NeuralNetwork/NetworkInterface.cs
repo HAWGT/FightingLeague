@@ -9,8 +9,8 @@ namespace NeuralNetwork{
 	{
 		//general interface
 		// self -> x,y, life, super, airborn, busy(bool), attack(bool), tempo
-		private int numEntradas = 13;
-		private int numSaidas = 1;
+		private int numEntradas = 9;
+		private int numSaidas = 13;
 		
 		private AnimationController animationController;
 		private AnimatorParameters animatorParameters;
@@ -46,8 +46,9 @@ namespace NeuralNetwork{
 		void Start()
 		{
 			state = GetComponent<CharacterStateController>();
-			rede = new FF2Layer(numEntradas, 14, numSaidas, 1);
-
+			rede = new FF2Layer(numEntradas, 6, numSaidas, 1);
+			situationExamples = new NeuronExamples();
+			exampleSent = new Neuron();
 			
 
 			if (PlayerPrefs.GetInt("TrainingMode") == 1)
@@ -81,9 +82,9 @@ namespace NeuralNetwork{
 				recomendedAction = OptimalResult(selfHP, enemyHP, selfSuper, enemySuper, distanceX, selfHeight, enemyHeight, selfBusy, enemyBusy);
 
 				neuron = new Neuron(new double[] { selfHP, enemyHP, selfSuper, enemySuper, distanceX, selfHeight, enemyHeight, selfBusy, enemyBusy }, recomendedAction);
-				//Construtor Neuron(new double[] { selfHP, enemyHP, selfBar, enemyBar, distanceX, selfHeight, enemyHeight, meBusy, themBusy, themAttack}, answer);
 
 				exampleSent = situationExamples.SearchExample(selfHP - enemyHP, selfSuper, distanceX, Math.Abs(selfHeight - enemyHeight), enemyBusy);
+				
 
 				if (trainingMode)
 				{
@@ -94,6 +95,7 @@ namespace NeuralNetwork{
 					acaoRealizada = rede.CalculaResultadoRede(neuron.GetInstancia());
 				}
 			}
+			print("Acção: " + acaoRealizada);
 			Act(acaoRealizada);
 			
 		}

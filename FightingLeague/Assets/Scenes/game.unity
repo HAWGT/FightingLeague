@@ -431,7 +431,7 @@ MonoBehaviour:
   attackStates: 
   facing: 0
   charState: 0
-  matchManager: {fileID: 515407920}
+  matchManager: {fileID: 515407922}
   hit: {fileID: 8300000, guid: a923c38cab51e0546a67b40b293e32df, type: 3}
   teleport: {fileID: 8300000, guid: fa6931f7822a32949b94ce34fd6f331e, type: 3}
   meter: {fileID: 8300000, guid: 59c0624a962805945bd31244992aff88, type: 3}
@@ -2924,12 +2924,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 2
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 1952957822}
   animControl: {fileID: 1405563312}
   attackStates: 
   facing: 1
   charState: 0
-  matchManager: {fileID: 0}
+  matchManager: {fileID: 515407922}
   hit: {fileID: 8300000, guid: a923c38cab51e0546a67b40b293e32df, type: 3}
   teleport: {fileID: 8300000, guid: fa6931f7822a32949b94ce34fd6f331e, type: 3}
   meter: {fileID: 8300000, guid: 59c0624a962805945bd31244992aff88, type: 3}

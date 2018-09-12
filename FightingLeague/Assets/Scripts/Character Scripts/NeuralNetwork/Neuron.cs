@@ -22,10 +22,11 @@ namespace NeuralNetwork
 		public Neuron(double[] x, int y)
 		{
 			int indice = 0;
-			this.x = new double[x.Length];
+			this.x = new double[x.Length+1];
 			for (int i = 0; i < x.Length; i++)
 			{
-				this.x[indice++] = x[i];
+				this.x[indice] = x[i];
+				indice++;
 			}
 
 			//Entrada negativa para peso TETA
