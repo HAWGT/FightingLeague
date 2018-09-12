@@ -41,7 +41,7 @@ namespace NeuralNetwork
 			this.numEntradas = numEntradas;
 			this.tamanhoCamada1 = tamanhoCamada1;
 			this.numSaidas = numSaidas;
-			aleatorio = new System.Random();
+			aleatorio = new System.Random(Guid.NewGuid().GetHashCode());
 
 			erroSaida = new double[numSaidas];
 			activationHidden = new double[numSaidas];
