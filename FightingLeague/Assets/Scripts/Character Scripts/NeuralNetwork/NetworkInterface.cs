@@ -46,7 +46,7 @@ namespace NeuralNetwork{
 		void Start()
 		{
 			state = GetComponent<CharacterStateController>();
-			rede = new FF2Layer(numEntradas, 6, numSaidas, state.GetPlayerID(), state.GetPlayerID()); //player ID como seed
+			rede = new FF2Layer(numEntradas, 6, numSaidas, state.GetPlayerID()); //player ID como seed
 			situationExamples = new NeuronExamples();
 			exampleSent = new Neuron();
 			

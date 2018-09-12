@@ -36,7 +36,7 @@ namespace NeuralNetwork
 
         private int playerId = 0;
 
-		public FF2Layer(int numEntradas, int tamanhoCamada1, int numSaidas, int seed, int id)
+		public FF2Layer(int numEntradas, int tamanhoCamada1, int numSaidas, int seed)
 		{
 			this.numEntradas = numEntradas;
 			this.tamanhoCamada1 = tamanhoCamada1;
@@ -47,7 +47,7 @@ namespace NeuralNetwork
 			activationHidden = new double[numSaidas];
 			activation1 = new double[tamanhoCamada1 + 1];
 			erroEscondida = new double[tamanhoCamada1 + 1];
-            playerId = id;
+            playerId = seed;
 
 			LoadWeights();
 		}
