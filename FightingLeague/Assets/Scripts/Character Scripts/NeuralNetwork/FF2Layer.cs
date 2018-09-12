@@ -80,7 +80,6 @@ namespace NeuralNetwork
 			BackPropagation(conjuntoTreino);
 
 
-			Debug.Log("Resposta: " + resultado);
 			parsedRes = Convert.ToInt32(Math.Abs(resultado));
 
 			return parsedRes;

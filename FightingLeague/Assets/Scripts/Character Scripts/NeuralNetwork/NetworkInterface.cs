@@ -95,7 +95,6 @@ namespace NeuralNetwork{
 					acaoRealizada = rede.CalculaResultadoRede(neuron.GetInstancia());
 				}
 			}
-			print("Acção: " + acaoRealizada);
 			Act(acaoRealizada);
 			
 		}
