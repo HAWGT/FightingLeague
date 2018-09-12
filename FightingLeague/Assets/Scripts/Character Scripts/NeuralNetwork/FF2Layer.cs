@@ -36,18 +36,18 @@ namespace NeuralNetwork
 
         private int playerId = 0;
 
-		public FF2Layer(int numEntradas, int tamanhoCamada1, int numSaidas, int seed)
+		public FF2Layer(int numEntradas, int tamanhoCamada1, int numSaidas, int pId)
 		{
 			this.numEntradas = numEntradas;
 			this.tamanhoCamada1 = tamanhoCamada1;
 			this.numSaidas = numSaidas;
-			aleatorio = new System.Random(seed);
+			aleatorio = new System.Random();
 
 			erroSaida = new double[numSaidas];
 			activationHidden = new double[numSaidas];
 			activation1 = new double[tamanhoCamada1 + 1];
 			erroEscondida = new double[tamanhoCamada1 + 1];
-            playerId = seed;
+            playerId = pId;
 
 			LoadWeights();
 		}
