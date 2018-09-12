@@ -166,20 +166,20 @@ namespace NeuralNetwork{
 					animationController.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "special2" }));
 					break;
 				case 9:
-					animationController.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "super" }));
+                    state.Super();
 					break;
 				case 10:
 					animationController.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "guardBreak" }));
 					break;
 				case 11:
-					animationController.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "midDash" }));
+                    state.ForwardDash();
 					break;
 				case 12:
 					animationController.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "reflect" }));
 					break;
 				case 13:
-					animationController.TriggerAnimatorParameters(animatorParameters.FindAnimatorParameter(new string[] { "vanish" }));
-					break;
+                    state.Vanish();
+                    break;
 
 				default:
 					break;
