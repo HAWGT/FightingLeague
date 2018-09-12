@@ -34,7 +34,9 @@ namespace NeuralNetwork
 
 		private int interacoesMAX = 10000;
 
-		public FF2Layer(int numEntradas, int tamanhoCamada1, int numSaidas, int seed)
+        private int playerId = 0;
+
+		public FF2Layer(int numEntradas, int tamanhoCamada1, int numSaidas, int seed, int id)
 		{
 			this.numEntradas = numEntradas;
 			this.tamanhoCamada1 = tamanhoCamada1;
@@ -45,6 +47,7 @@ namespace NeuralNetwork
 			activationHidden = new double[numSaidas];
 			activation1 = new double[tamanhoCamada1 + 1];
 			erroEscondida = new double[tamanhoCamada1 + 1];
+            playerId = id;
 
 			LoadWeights();
 		}
@@ -172,7 +175,7 @@ namespace NeuralNetwork
 
 		public void SaveWeights()
 		{
-            string file = Application.dataPath + "/weights.dat";
+            string file = Application.dataPath + "/weights" + playerId + ".dat";
             FileStream fs;
             if (File.Exists(file))
             {
@@ -190,7 +193,7 @@ namespace NeuralNetwork
 
         private void LoadWeights()
         {
-			string file = Application.dataPath + "/weights.dat";
+			string file = Application.dataPath + "/weights" + playerId + ".dat";
 			FileStream fs;
 			FileInfo info = new FileInfo(file);
 			BinaryFormatter bf = new BinaryFormatter();
