@@ -130,7 +130,7 @@ namespace NeuralNetwork
 				}
 			}
 
-			return (output / 12) * 13;
+			return output + 1;
 		}
 
 		private void BackPropagation(Neuron exemplo)
