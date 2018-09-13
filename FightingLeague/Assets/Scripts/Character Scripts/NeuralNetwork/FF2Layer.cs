@@ -93,7 +93,8 @@ namespace NeuralNetwork
 		private double ForwardPropagation(double[] instancia)
 		{
 			double soma = 0;
-			double resultado =0;
+			double resultado = 0;
+            double output = 0;
 
 			//calculo da primeira camada
 			for (int i = 0; i < tamanhoCamada1; i++)
@@ -125,10 +126,11 @@ namespace NeuralNetwork
 				if(activationHidden[i] > resultado)
 				{
 					resultado = activationHidden[i];
+                    output = i;
 				}
 			}
 
-			return resultado*numSaidas;
+			return output;
 		}
 
 		private void BackPropagation(Neuron exemplo)
