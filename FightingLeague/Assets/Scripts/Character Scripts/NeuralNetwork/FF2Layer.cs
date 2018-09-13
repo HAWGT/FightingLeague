@@ -94,7 +94,7 @@ namespace NeuralNetwork
 		{
 			double soma = 0;
 			double resultado = 0;
-            double output = 0;
+            double output = -1;
 
 			//calculo da primeira camada
 			for (int i = 0; i < tamanhoCamada1; i++)
@@ -130,7 +130,7 @@ namespace NeuralNetwork
 				}
 			}
 
-			return output + 1;
+			return output + 1; //ver melhor
 		}
 
 		private void BackPropagation(Neuron exemplo)
